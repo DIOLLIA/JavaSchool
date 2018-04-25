@@ -18,7 +18,6 @@
         <th width="10%">Number</th>
         <th width="15%">Stations</th>
         <th width="10%">Seats</th>
-        <th width="10%">actions</th>
     </tr>
     </thead>
     <tbody>
