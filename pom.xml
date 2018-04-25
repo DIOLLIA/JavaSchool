@@ -13,6 +13,9 @@
         <javax.servlet-api-version>4.0.0</javax.servlet-api-version>
         <spring.version>4.3.16.RELEASE</spring.version>
         <hibernate.version>5.2.16.Final</hibernate.version>
+       <maven-war-plugin.version>3.2.0</maven-war-plugin.version>
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
@@ -55,6 +58,41 @@
             <version>${hibernate.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
     </dependencies>
+
+    <build>
+    <finalName>${project.artifactId}</finalName>
+
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>${maven-war-plugin.version}</version>
+            <configuration>
+                <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                <warName>sbb</warName>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${maven-compiler-plugin.version}</version>
+            <configuration>
+                <source>${java.version}</source>
+                <target>${java.version}</target>
+                <compilerArgument>-Xlint:all</compilerArgument>
+                <showWarnings>true</showWarnings>
+                <showDeprecation>true</showDeprecation>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 
 </project>

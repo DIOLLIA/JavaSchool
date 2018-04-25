@@ -21,7 +21,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan("shedule")
 @EnableWebMvc
-@PropertySource("application.properties")
+@PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 public class WebAppConfig {
     private static final String DB_DRIVER = "db.driver";
@@ -63,7 +63,7 @@ public class WebAppConfig {
     }
 
     @Bean
-    private LocalSessionFactoryBean sessionFactory() {
+    public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(dataSource());
         localSessionFactoryBean.setPackagesToScan(environment.getRequiredProperty(ENTITYMANAGER_PACKAGES_TO_SCAN));

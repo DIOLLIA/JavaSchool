@@ -15,9 +15,11 @@ public class Train {
     @GeneratedValue
     private int id;
 
+    private int numberOfTrain;
+
     private List<Station> station;
 
-    private int numberOfSeats;
+    private int seats;
 
     public int getId() {
         return id;
@@ -25,6 +27,14 @@ public class Train {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getNumberOfTrain() {
+        return numberOfTrain;
+    }
+
+    public void setNumberOfTrain(int numberOfTrain) {
+        this.numberOfTrain = numberOfTrain;
     }
 
     public List<Station> getStation() {
@@ -35,11 +45,11 @@ public class Train {
         this.station = station;
     }
 
-    public int getNumberOfSeats() {
-        return numberOfSeats;
+    public int getSeats() {
+        return seats;
     }
 
-    public void setNumberOfSeats(int numberOfSeats) {
-        this.numberOfSeats = numberOfSeats;
+    public void setSeats(int seats) {
+        this.seats = seats;
     }
 }
