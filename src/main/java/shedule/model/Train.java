@@ -6,18 +6,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Column;
 
 
 @Entity
 @Table(name = "train")
 public class Train {
     @Id
+    @Column(name = "id")
     @GeneratedValue
     private int id;
 
+    @Column(name = "number_of_train")
     private int numberOfTrain;
 
-    private List<Station> station;
+
+    @Column(name = "station")
+    private String station; //todo возможно стоит использовать коллекции для списка станций, а так же аннотации @CollectionTable и @CollectionTable. Или  использовать связи между сущностями...
 
     private int seats;
 
@@ -37,11 +42,11 @@ public class Train {
         this.numberOfTrain = numberOfTrain;
     }
 
-    public List<Station> getStation() {
+    public String getStation() {
         return station;
     }
 
-    public void setStation(List<Station> station) {
+    public void setStation(String station) {
         this.station = station;
     }
 

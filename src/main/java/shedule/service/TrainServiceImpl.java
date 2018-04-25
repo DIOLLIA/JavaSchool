@@ -1,27 +1,34 @@
 package shedule.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import shedule.dao.TrainDao;
 import shedule.model.Train;
 
-import javax.transaction.Transactional;
-import java.util.List;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 @Transactional
 public class TrainServiceImpl implements TrainService {
 
-    public void addTrain(Train train) {
+    @Autowired
+    private TrainDao trainDao;
 
+    public void addTrain(Train train) {
+        trainDao.addTrain(train);
     }
 
     public void getTrain(int id) {
-
+        trainDao.getTrain(id);
     }
 
     public void deleteTrain(int id) {
-
+        trainDao.deleteTrain(id);
     }
 
     public List<Train> getTrains() {
-        return null;
+        return trainDao.getTrains();
     }
 }
