@@ -24,6 +24,7 @@ public class Train {
     @Column(name = "station")
     private String station; //todo возможно стоит использовать коллекции для списка станций, а так же аннотации @CollectionTable и @CollectionTable. Или  использовать связи между сущностями...
 
+    @Column(name = "seats")
     private int seats;
 
     public int getId() {

@@ -23,7 +23,7 @@
     <tbody>
     <c:forEach var="train" items="${trains}">
         <tr>
-            <td>${train.number}</td>
+            <td>${train.numberOfTrain}</td>
             <td>${train.station}</td>
             <td>${train.seats}</td>
         </tr>
