@@ -1,10 +1,10 @@
-package shedule.service;
+package schedule.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import shedule.dao.TrainDao;
-import shedule.model.Train;
+import schedule.dao.TrainDao;
+import schedule.model.Train;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

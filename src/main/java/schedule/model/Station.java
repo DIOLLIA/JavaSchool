@@ -1,4 +1,4 @@
-package shedule.model;
+package schedule.model;
 
 public class Station {
 }

@@ -11,6 +11,7 @@
     <title>Home page</title>
 </head>
 <body>
-
+go to
+<a href="${pageContext.request.contextPath}/train/list">trainlist</a><br/>
 </body>
 </html>

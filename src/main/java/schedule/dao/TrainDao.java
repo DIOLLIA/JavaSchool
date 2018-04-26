@@ -1,17 +1,15 @@
-package shedule.service;
+package schedule.dao;
 
-import shedule.model.Train;
+import schedule.model.Train;
 
 import java.util.List;
 
-public interface TrainService {
-
+public interface TrainDao {
     public void addTrain(Train train);
 
-    public void getTrain(int id);
+    public Train getTrain(int id);
 
     public void deleteTrain(int id);
 
     public List<Train> getTrains();
-
 }

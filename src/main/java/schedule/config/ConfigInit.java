@@ -1,4 +1,4 @@
-package shedule.config;
+package schedule.config;
 
 
 import org.springframework.web.WebApplicationInitializer;

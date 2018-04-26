@@ -1,11 +1,11 @@
-package shedule.dao;
+package schedule.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import shedule.model.Train;
+import schedule.model.Train;
 
 import java.util.List;
 
@@ -21,17 +21,18 @@ public class TrainDaoImpl implements TrainDao {
 
 
     public void addTrain(Train train) {
-
+        getCurrentSession().save(train);
     }
 
     public Train getTrain(int id) {
-        Train train =  (Train)getCurrentSession().get(Train.class, id);
+        Train train = (Train) getCurrentSession().get(Train.class, id);
         return train;
     }
 
     public void deleteTrain(int id) {
 
     }
+
     @SuppressWarnings("unchecked")
     public List<Train> getTrains() {
 

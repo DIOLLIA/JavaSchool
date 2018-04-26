@@ -1,4 +1,4 @@
-package shedule.config;
+package schedule.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,7 +19,7 @@ import java.util.Properties;
 
 
 @Configuration
-@ComponentScan("shedule")
+@ComponentScan("schedule")
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement

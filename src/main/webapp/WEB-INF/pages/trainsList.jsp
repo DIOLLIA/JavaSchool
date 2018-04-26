@@ -26,9 +26,17 @@
             <td>${train.numberOfTrain}</td>
             <td>${train.station}</td>
             <td>${train.seats}</td>
+
+            <td><a href="${pageContext.request.contextPath}/train/edit/${train.id}.html">Edit</a><br/>
+                <a href="${pageContext.request.contextPath}/train/delete/${train.id}.html">Delete</a><br/></td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+<br/>
+<br>
+<input type="submit" value="add train"
+       onclick="location='add';" />
+
 </body>
 </html>

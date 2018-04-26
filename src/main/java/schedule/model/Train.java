@@ -1,6 +1,4 @@
-package shedule.model;
-
-import java.util.List;
+package schedule.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
