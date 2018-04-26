@@ -39,7 +39,7 @@ public class TrainController {
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public ModelAndView addingTrain(@ModelAttribute Train train) {
 
-        ModelAndView modelAndView = new ModelAndView("home");
+        ModelAndView modelAndView = new ModelAndView("trainsList");
         trainService.addTrain(train);
 
         String message = "Train was successfully added.";

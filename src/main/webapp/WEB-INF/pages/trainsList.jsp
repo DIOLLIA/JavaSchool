@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-    <title>List of trains</title>
+    <title>trains list</title>
 </head>
 <body>
 <h1>List of trains</h1>
@@ -18,6 +18,7 @@
         <th width="10%">Number</th>
         <th width="15%">Stations</th>
         <th width="10%">Seats</th>
+        <th width="10%">actions</th>
     </tr>
     </thead>
     <tbody>
@@ -26,7 +27,6 @@
             <td>${train.numberOfTrain}</td>
             <td>${train.station}</td>
             <td>${train.seats}</td>
-
             <td><a href="${pageContext.request.contextPath}/train/edit/${train.id}.html">Edit</a><br/>
                 <a href="${pageContext.request.contextPath}/train/delete/${train.id}.html">Delete</a><br/></td>
         </tr>
@@ -36,7 +36,7 @@
 <br/>
 <br>
 <input type="submit" value="add train"
-       onclick="location='add';" />
+       onclick="location='add';"/>
 
 </body>
 </html>
