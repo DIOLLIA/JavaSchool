@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMethod;
 import schedule.model.Train;
 import schedule.service.TrainService;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping(value="/train")
+@RequestMapping(value = "/train")
 public class TrainController {
 
     @Autowired
     private TrainService trainService;
 
-    @RequestMapping(value="/list")
+    @RequestMapping(value = "/list")
     public ModelAndView listOfTrains() {
         ModelAndView modelAndView = new ModelAndView("trainsList");
 
@@ -29,18 +30,21 @@ public class TrainController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/add", method= RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addTrainPage() {
-        ModelAndView modelAndView = new ModelAndView("addTrain");
+        ModelAndView modelAndView = new ModelAndView("addStation");
         modelAndView.addObject("train", new Train());
         return modelAndView;
     }
 
-    @RequestMapping(value="/add", method=RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addingTrain(@ModelAttribute Train train) {
 
         ModelAndView modelAndView = new ModelAndView("trainsList");
         trainService.addTrain(train);
+
+        List<Train> trains = trainService.getTrains();
+        modelAndView.addObject("trains", trains);
 
         String message = "Train was successfully added.";
         modelAndView.addObject("message", message);

@@ -10,8 +10,8 @@ import javax.persistence.Column;
 @Table(name = "station")
 public class Station {
     @Id
-    @GeneratedValue
     @Column(name = "id")
+    @GeneratedValue
     private int id;
 
     @Column(name = "name")
@@ -29,6 +29,14 @@ public class Station {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getTime() {

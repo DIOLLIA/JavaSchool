@@ -34,9 +34,11 @@
     </tbody>
 </table>
 <br/>
+<h2>${message}</h2>
 <br>
 <input type="submit" value="add train"
        onclick="location='add';"/>
+<p><a href="${pageContext.request.contextPath}/index.html">Home page</a></p>
 
 </body>
 </html>

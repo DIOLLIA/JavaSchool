@@ -12,6 +12,8 @@
 </head>
 <body>
 go to
-<a href="${pageContext.request.contextPath}/train/list">trainlist</a><br/>
+<a href="${pageContext.request.contextPath}/train/list">train list</a><br/>
+go to
+<a href="${pageContext.request.contextPath}/station/list">station list</a><br/>
 </body>
 </html>

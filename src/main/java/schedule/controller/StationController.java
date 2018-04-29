@@ -40,6 +40,9 @@ public class StationController {
         ModelAndView modelAndView = new ModelAndView("stationsList");
         stationService.addStation(station);
 
+        List<Station> stations = stationService.getStations();
+        modelAndView.addObject("stations", stations);
+
         String message = "Station was successfully added.";
         modelAndView.addObject("message", message);
         return modelAndView;

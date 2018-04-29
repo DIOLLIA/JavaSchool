@@ -18,7 +18,7 @@ public class StationDaoImpl implements StationDao {
     }
 
     @Override
-    public void addTrain(Station station) {
+    public void addStation(Station station) {
         getCurrentSession().save(station);
     }
 
