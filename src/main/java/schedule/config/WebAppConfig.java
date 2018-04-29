@@ -31,6 +31,7 @@ public class WebAppConfig {
 
     private static final String HIBERNATE_DIALECT = "hibernate.dialect";
     private static final String HIBERNATE_SHOW_SQL = "hibernate.show.sql";
+    private static final String HIBERNATE_DDL_SCHEMA = "hibernate.hbm2ddl.auto";
     private static final String ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
 
     @Resource
@@ -39,7 +40,9 @@ public class WebAppConfig {
     private Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.put(HIBERNATE_DIALECT, environment.getRequiredProperty(HIBERNATE_DIALECT));
+        properties.put(HIBERNATE_DDL_SCHEMA, environment.getRequiredProperty(HIBERNATE_DDL_SCHEMA));
         properties.put(HIBERNATE_SHOW_SQL, environment.getRequiredProperty(HIBERNATE_SHOW_SQL));
+
         return properties;
     }
 

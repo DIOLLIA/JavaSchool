@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 
 @Entity
-@Table(name = "station")
+@Table(name = "stations")
 public class Station {
     @Id
     @Column(name = "id")
@@ -17,11 +17,8 @@ public class Station {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "time")
-    private int time;
-
-    @Column(name = "number_of_train")
-    private int numberOfTrain;
+    @Column(name = "coordinate")
+    private double coordinate;
 
     public int getId() {
         return id;
@@ -39,19 +36,11 @@ public class Station {
         this.name = name;
     }
 
-    public int getTime() {
-        return time;
+    public double getCoordinate() {
+        return coordinate;
     }
 
-    public void setTime(int time) {
-        this.time = time;
-    }
-
-    public int getNumberOfTrain() {
-        return numberOfTrain;
-    }
-
-    public void setNumberOfTrain(int numberOfTrain) {
-        this.numberOfTrain = numberOfTrain;
+    public void setCoordinate(double coordinate) {
+        this.coordinate = coordinate;
     }
 }

@@ -1,5 +1,5 @@
 package schedule.model;
-
+/**todo возможно стоит использовать коллекции для списка станций, а так же аннотации @CollectionTable и @CollectionTable. Или  использовать связи между сущностями...*/
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,7 +8,7 @@ import javax.persistence.Column;
 
 
 @Entity
-@Table(name = "train")
+@Table(name = "trains")
 public class Train {
     @Id
     @Column(name = "id")
@@ -17,10 +17,6 @@ public class Train {
 
     @Column(name = "number_of_train")
     private int numberOfTrain;
-
-
-    @Column(name = "station")
-    private String station; //todo возможно стоит использовать коллекции для списка станций, а так же аннотации @CollectionTable и @CollectionTable. Или  использовать связи между сущностями...
 
     @Column(name = "seats")
     private int seats;
@@ -39,14 +35,6 @@ public class Train {
 
     public void setNumberOfTrain(int numberOfTrain) {
         this.numberOfTrain = numberOfTrain;
-    }
-
-    public String getStation() {
-        return station;
-    }
-
-    public void setStation(String station) {
-        this.station = station;
     }
 
     public int getSeats() {
