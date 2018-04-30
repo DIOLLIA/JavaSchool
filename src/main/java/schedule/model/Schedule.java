@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "shedule")
+@Table(name = "schedule")
 public class Schedule {
     @Id
     @GeneratedValue
