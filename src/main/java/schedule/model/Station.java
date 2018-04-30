@@ -1,10 +1,6 @@
 package schedule.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Column;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "stations")
@@ -14,8 +10,8 @@ public class Station {
     @GeneratedValue
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "station_name")
+    private String StationName;
 
     @Column(name = "coordinate")
     private double coordinate;
@@ -28,12 +24,12 @@ public class Station {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getStationName() {
+        return StationName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStationName(String stationName) {
+        StationName = stationName;
     }
 
     public double getCoordinate() {

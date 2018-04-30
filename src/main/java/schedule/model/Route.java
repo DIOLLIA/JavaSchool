@@ -2,6 +2,7 @@ package schedule.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "routes")
@@ -14,8 +15,10 @@ public class Route {
     @Column(name = "route_name")
     private String routeName;
 
-    @Column(name = "stations")
-    private ArrayList<Station> stationsList;
+    @OneToMany
+    @ElementCollection()
+    @Column(name = "station_name")
+    private List<Station> stationsList;
 
     public int getId() {
         return id;
@@ -33,7 +36,7 @@ public class Route {
         this.routeName = routeName;
     }
 
-    public ArrayList<Station> getStationsList() {
+    public List<Station> getStationsList() {
         return stationsList;
     }
 
