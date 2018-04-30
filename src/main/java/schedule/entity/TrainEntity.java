@@ -1,10 +1,20 @@
-package schedule.model;
+package schedule.entity;
 
-public class Train {
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "trains")
+public class TrainEntity {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue
     private int id;
 
+    @Column(name = "train_number")
     private int numberOfTrain;
 
+    @Column(name = "seats")
     private int seats;
 
     public int getId() {

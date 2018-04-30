@@ -1,21 +1,36 @@
-package schedule.model;
+package schedule.entity;
 
+import javax.persistence.*;
 import java.time.LocalTime;
 
-public class Schedule {
+@Entity
+@Table(name = "schedule")
+public class ScheduleEntity {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private int id;
 
+    @Column(name = "arrival_time")
     private LocalTime arrivalTime;
 
+    @Column(name = "departure_time")
     private LocalTime departureTime;
 
-    private Station stationName;
+    @OneToOne
+    @JoinColumn(name = "station_name")
+    private StationEntity stationName;
 
-    private Train trainNumber;
+    @OneToOne
+    @JoinColumn(name = "train_number_id")
+    private TrainEntity trainNumber;
 
+    @Column(name = "interspace")
     private LocalTime interspace;
 
-    private Route routeName;
+    @OneToOne
+    @JoinColumn(name = "route_id")
+    private RouteEntity routeName;
 
     public int getId() {
         return id;
@@ -41,27 +56,27 @@ public class Schedule {
         this.departureTime = departureTime;
     }
 
-    public Station getStationName() {
+    public StationEntity getStationName() {
         return stationName;
     }
 
-    public void setStationName(Station stationName) {
+    public void setStationName(StationEntity stationName) {
         this.stationName = stationName;
     }
 
-    public Train getTrainNumber() {
+    public TrainEntity getTrainNumber() {
         return trainNumber;
     }
 
-    public void setTrainNumber(Train trainNumber) {
+    public void setTrainNumber(TrainEntity trainNumber) {
         this.trainNumber = trainNumber;
     }
 
-    public Route getRouteName() {
+    public RouteEntity getRouteName() {
         return routeName;
     }
 
-    public void setRouteName(Route routeName) {
+    public void setRouteName(RouteEntity routeName) {
         this.routeName = routeName;
     }
 

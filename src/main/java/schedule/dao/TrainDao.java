@@ -1,15 +1,15 @@
 package schedule.dao;
 
-import schedule.model.Train;
+import schedule.entity.TrainEntity;
 
 import java.util.List;
 
 public interface TrainDao {
-    public void addTrain(Train train);
+    public void addTrain(TrainEntity train);
 
-    public Train getTrain(int id);
+    public TrainEntity getTrain(int id);
 
     public void deleteTrain(int id);
 
-    public List<Train> getTrains();
+    public List<TrainEntity> getTrains();
 }

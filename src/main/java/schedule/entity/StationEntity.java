@@ -1,12 +1,19 @@
-package schedule.model;
+package schedule.entity;
 
 import javax.persistence.*;
 
-public class Station {
+@Entity
+@Table(name = "stations")
+public class StationEntity {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue
     private int id;
 
+    @Column(name = "station_name")
     private String StationName;
 
+    @Column(name = "coordinate")
     private double coordinate;
 
     public int getId() {

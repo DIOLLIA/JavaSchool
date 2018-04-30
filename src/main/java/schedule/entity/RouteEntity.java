@@ -1,12 +1,24 @@
-package schedule.model;
+package schedule.entity;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Route {
+@Entity
+@Table(name = "routes")
+public class RouteEntity {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue
     private int id;
+
+    @Column(name = "route_name")
     private String routeName;
-    private List<Station> stationsList;
+
+    @OneToMany
+    @ElementCollection()
+    @Column(name = "station_name")
+    private List<StationEntity> stationsList;
 
     public int getId() {
         return id;
@@ -24,11 +36,11 @@ public class Route {
         this.routeName = routeName;
     }
 
-    public List<Station> getStationsList() {
+    public List<StationEntity> getStationsList() {
         return stationsList;
     }
 
-    public void setStationsList(ArrayList<Station> stationsList) {
+    public void setStationsList(ArrayList<StationEntity> stationsList) {
         this.stationsList = stationsList;
     }
 }

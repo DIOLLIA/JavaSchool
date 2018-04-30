@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import schedule.model.Train;
+import schedule.entity.TrainEntity;
 
 import java.util.List;
 
@@ -20,12 +20,12 @@ public class TrainDaoImpl implements TrainDao {
     }
 
 
-    public void addTrain(Train train) {
+    public void addTrain(TrainEntity train) {
         getCurrentSession().save(train);
     }
 
-    public Train getTrain(int id) {
-        Train train = (Train) getCurrentSession().get(Train.class, id);
+    public TrainEntity getTrain(int id) {
+        TrainEntity train = (TrainEntity) getCurrentSession().get(TrainEntity.class, id);
         return train;
     }
 
@@ -34,8 +34,8 @@ public class TrainDaoImpl implements TrainDao {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Train> getTrains() {
+    public List<TrainEntity> getTrains() {
 
-        return getCurrentSession().createQuery("from Train ").list();
+        return getCurrentSession().createQuery("from TrainEntity ").list();
     }
 }

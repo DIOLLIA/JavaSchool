@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import schedule.model.Station;
+import schedule.entity.StationEntity;
 
 import java.util.List;
 
@@ -18,13 +18,13 @@ public class StationDaoImpl implements StationDao {
     }
 
     @Override
-    public void addStation(Station station) {
+    public void addStation(StationEntity station) {
         getCurrentSession().save(station);
     }
 
     @Override
-    public Station getStation(int id) {
-        Station station = (Station) getCurrentSession().get(Station.class, id);
+    public StationEntity getStation(int id) {
+        StationEntity station = (StationEntity) getCurrentSession().get(StationEntity.class, id);
         return station;
     }
 
@@ -34,7 +34,7 @@ public class StationDaoImpl implements StationDao {
     }
 
     @Override
-    public List<Station> getStations() {
+    public List<StationEntity> getStations() {
         return getCurrentSession().createQuery("from Station").list();
     }
 }

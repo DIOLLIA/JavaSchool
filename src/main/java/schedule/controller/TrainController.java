@@ -2,7 +2,7 @@ package schedule.controller;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMethod;
-import schedule.model.Train;
+import schedule.entity.TrainEntity;
 import schedule.service.TrainService;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class TrainController {
     public ModelAndView listOfTrains() {
         ModelAndView modelAndView = new ModelAndView("trainsList");
 
-        List<Train> trains = trainService.getTrains();
+        List<TrainEntity> trains = trainService.getTrains();
         modelAndView.addObject("trains", trains);
 
         return modelAndView;
@@ -33,20 +33,20 @@ public class TrainController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addTrainPage() {
         ModelAndView modelAndView = new ModelAndView("addStation");
-        modelAndView.addObject("train", new Train());
+        modelAndView.addObject("train", new TrainEntity());
         return modelAndView;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView addingTrain(@ModelAttribute Train train) {
+    public ModelAndView addingTrain(@ModelAttribute TrainEntity train) {
 
         ModelAndView modelAndView = new ModelAndView("trainsList");
         trainService.addTrain(train);
 
-        List<Train> trains = trainService.getTrains();
+        List<TrainEntity> trains = trainService.getTrains();
         modelAndView.addObject("trains", trains);
 
-        String message = "Train was successfully added.";
+        String message = "TrainEntity was successfully added.";
         modelAndView.addObject("message", message);
 
         return modelAndView;

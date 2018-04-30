@@ -1,16 +1,16 @@
 package schedule.dao;
 
-import schedule.model.Station;
+import schedule.entity.StationEntity;
 
 import java.util.List;
 
 public interface StationDao {
-    public void addStation(Station station);
+    public void addStation(StationEntity station);
 
-    public Station getStation(int id);
+    public StationEntity getStation(int id);
 
     public void deleteStation(int id);
 
-    public List<Station> getStations();
+    public List<StationEntity> getStations();
 }
 
