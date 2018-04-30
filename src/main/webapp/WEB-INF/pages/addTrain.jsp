@@ -21,10 +21,6 @@
             <td><form:input path="numberOfTrain"/></td>
         </tr>
         <tr>
-            <td>Stations:</td>
-            <td><form:input path="station"/></td>
-        </tr>
-        <tr>
             <td>Seats:</td>
             <td><form:input path="seats"/></td>
         </tr>

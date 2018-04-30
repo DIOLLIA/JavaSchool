@@ -16,8 +16,6 @@
     <thead>
     <tr>
         <th width="10%">Number</th>
-        <th width="15%">Stations</th>
-        <th width="10%">Seats</th>
         <th width="10%">actions</th>
     </tr>
     </thead>
@@ -25,7 +23,6 @@
     <c:forEach var="train" items="${trains}">
         <tr>
             <td>${train.numberOfTrain}</td>
-            <td>${train.station}</td>
             <td>${train.seats}</td>
             <td><a href="${pageContext.request.contextPath}/train/edit/${train.id}.html">Edit</a><br/>
                 <a href="${pageContext.request.contextPath}/train/delete/${train.id}.html">Delete</a><br/></td>

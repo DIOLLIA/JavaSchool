@@ -15,6 +15,7 @@ public class Route {
     @Column(name = "route_name")
     private String routeName;
 
+    //todo check
     @OneToMany
     @ElementCollection()
     @Column(name = "station_name")
