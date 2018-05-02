@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import schedule.entity.StationEntity;
 import schedule.model.Station;
 import schedule.service.StationService;
 
@@ -31,7 +32,7 @@ public class StationController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addStationPage() {
         ModelAndView modelAndView = new ModelAndView("addStation");
-        modelAndView.addObject("station", new Station());
+        modelAndView.addObject("station", new StationEntity());
         return modelAndView;
     }
 
