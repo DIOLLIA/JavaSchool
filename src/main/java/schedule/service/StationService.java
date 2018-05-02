@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface StationService {
 
-    public void addStation(Station station);
+    Station addStation(Station station);
 
-    public void getStation(int id);
+    void getStation(int id);
 
-    public void deleteStation(int id);
+    void deleteStation(int id);
 
-    public List<Station> getStations();
+    List<Station> getStations();
 
 }
 

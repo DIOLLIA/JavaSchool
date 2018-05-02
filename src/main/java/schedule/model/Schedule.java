@@ -1,37 +1,20 @@
 package schedule.model;
 
-import schedule.entity.TrainEntity;
-
-import javax.persistence.*;
 import java.time.LocalTime;
 
-@Entity
-@Table(name = "schedule")
 public class Schedule {
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "arrival_time")
     private LocalTime arrivalTime;
 
-    @Column(name = "departure_time")
     private LocalTime departureTime;
 
-    @OneToOne
-    @JoinColumn(name = "station_name")
     private Station stationName;
 
-    @OneToOne
-    @JoinColumn(name = "train_number_id")
-    private TrainEntity trainNumber;
+    private Train trainNumber;
 
-    @Column(name = "interspace")
     private LocalTime interspace;
 
-    @OneToOne
-    @JoinColumn(name = "route_id")
     private Route routeName;
 
     public int getId() {
@@ -66,11 +49,11 @@ public class Schedule {
         this.stationName = stationName;
     }
 
-    public TrainEntity getTrainNumber() {
+    public Train getTrainNumber() {
         return trainNumber;
     }
 
-    public void setTrainNumber(TrainEntity trainNumber) {
+    public void setTrainNumber(Train trainNumber) {
         this.trainNumber = trainNumber;
     }
 

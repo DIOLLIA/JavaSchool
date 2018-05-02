@@ -17,15 +17,11 @@
         <tbody>
         <tr>
             <td>Name:</td>
-            <td><form:input path="name"/></td>
+            <td><form:input path="stationName"/></td>
         </tr>
         <tr>
-            <td>Number of train:</td>
-            <td><form:input path="numberOfTrain"/></td>
-        </tr>
-        <tr>
-            <td>time:</td>
-            <td><form:input path="time"/></td>
+            <td>Coordinate</td>
+            <td><form:input path="coordinate"/></td>
         </tr>
         <tr>
             <td><input type="submit" value="Add"/></td>

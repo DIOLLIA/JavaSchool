@@ -1,11 +1,14 @@
 package schedule.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import schedule.dao.StationDao;
+import schedule.entity.StationEntity;
 import schedule.model.Station;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,9 +18,14 @@ public class StationServiceImpl implements StationService {
     @Autowired
     private StationDao stationDao;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     @Override
-    public void addStation(Station station) {
-        stationDao.addStation(station);
+    public Station addStation(Station stationDto) {
+        StationEntity stationEntity = modelMapper.map(stationDto, StationEntity.class);
+        stationDao.addStation(stationEntity);
+        return modelMapper.map(stationEntity, Station.class);
     }
 
     @Override
@@ -32,6 +40,23 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public List<Station> getStations() {
-        return stationDao.getStations();
+        List<StationEntity> allStations = stationDao.getStations();
+        List<Station> stations = new ArrayList<>();
+
+        for (StationEntity stationEntity : allStations) {
+            stations.add(modelMapper.map(stationEntity, Station.class));
+        }
+        return stations;
     }
+
+    /*  public List<Train> getTrains() {
+
+        List<TrainEntity> all = trainDao.getTrains();
+        List<Train> trains = new ArrayList<>();
+
+        for (TrainEntity trainEntity : all) {
+            trains.add(modelMapper.map(trainEntity, Train.class));
+        }
+
+        return trains;*/
 }

@@ -18,17 +18,15 @@
     <thead>
     <tr>
         <th width="10%">Name</th>
-        <th width="15%">Number of train</th>
-        <th width="10%">time</th>
+        <th width="10%">Coordinate</th>
         <th width="10%">actions</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach var="station" items="${stations}">
         <tr>
-            <td>${station.name}</td>
-            <td>${station.numberOfTrain}</td>
-            <td>${station.time}</td>
+            <td>${station.stationName}</td>
+            <td>${station.coordinate}</td>
             <td><a href="${pageContext.request.contextPath}/station/edit/${station.id}.html">Edit</a><br/>
                 <a href="${pageContext.request.contextPath}/station/delete/${station.id}.html">Delete</a><br/></td>
         </tr>

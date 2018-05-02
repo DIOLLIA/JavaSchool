@@ -1,24 +1,11 @@
 package schedule.model;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "routes")
 public class Route {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue
     private int id;
-
-    @Column(name = "route_name")
     private String routeName;
-
-    //todo check
-    @OneToMany
-    @ElementCollection()
-    @Column(name = "station_name")
     private List<Station> stationsList;
 
     public int getId() {

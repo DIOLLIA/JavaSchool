@@ -1,19 +1,10 @@
 package schedule.model;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "stations")
 public class Station {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue
     private int id;
 
-    @Column(name = "station_name")
-    private String StationName;
+    private String stationName;
 
-    @Column(name = "coordinate")
     private double coordinate;
 
     public int getId() {
@@ -25,11 +16,11 @@ public class Station {
     }
 
     public String getStationName() {
-        return StationName;
+        return stationName;
     }
 
     public void setStationName(String stationName) {
-        StationName = stationName;
+        this.stationName = stationName;
     }
 
     public double getCoordinate() {
