@@ -1,13 +1,15 @@
 package schedule.service;
 
-import java.util.List;
-
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import schedule.dao.TrainDao;
-import schedule.model.Train;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import schedule.dao.TrainDao;
+import schedule.entity.TrainEntity;
+import schedule.model.Train;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -16,8 +18,13 @@ public class TrainServiceImpl implements TrainService {
     @Autowired
     private TrainDao trainDao;
 
-    public void addTrain(Train train) {
-        trainDao.addTrain(train);
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public Train addTrain(Train trainDto) {
+        TrainEntity trainEntity = modelMapper.map(trainDto, TrainEntity.class);
+        trainDao.addTrain(trainEntity);
+        return modelMapper.map(trainEntity, Train.class);
     }
 
     public void getTrain(int id) {
@@ -29,6 +36,14 @@ public class TrainServiceImpl implements TrainService {
     }
 
     public List<Train> getTrains() {
-        return trainDao.getTrains();
+
+        List<TrainEntity> all = trainDao.getTrains();
+        List<Train> trains = new ArrayList<>();
+
+        for (TrainEntity trainEntity : all) {
+            trains.add(modelMapper.map(trainEntity, Train.class));
+        }
+
+        return trains;
     }
 }

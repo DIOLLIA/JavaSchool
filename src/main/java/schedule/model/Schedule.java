@@ -1,5 +1,7 @@
 package schedule.model;
 
+import schedule.entity.TrainEntity;
+
 import javax.persistence.*;
 import java.time.LocalTime;
 
@@ -23,7 +25,7 @@ public class Schedule {
 
     @OneToOne
     @JoinColumn(name = "train_number_id")
-    private Train trainNumber;
+    private TrainEntity trainNumber;
 
     @Column(name = "interspace")
     private LocalTime interspace;
@@ -64,11 +66,11 @@ public class Schedule {
         this.stationName = stationName;
     }
 
-    public Train getTrainNumber() {
+    public TrainEntity getTrainNumber() {
         return trainNumber;
     }
 
-    public void setTrainNumber(Train trainNumber) {
+    public void setTrainNumber(TrainEntity trainNumber) {
         this.trainNumber = trainNumber;
     }
 
