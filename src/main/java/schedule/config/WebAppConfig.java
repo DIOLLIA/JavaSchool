@@ -11,6 +11,8 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
@@ -24,7 +26,7 @@ import java.util.Properties;
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
-public class WebAppConfig {
+public class WebAppConfig extends WebMvcConfigurerAdapter {
     private static final String DB_DRIVER = "db.driver";
     private static final String DB_URL = "db.url";
     private static final String DB_PASSWORD = "db.password";
@@ -34,6 +36,9 @@ public class WebAppConfig {
     private static final String HIBERNATE_SHOW_SQL = "hibernate.show.sql";
     private static final String HIBERNATE_DDL_SCHEMA = "hibernate.hbm2ddl.auto";
     private static final String ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
+
+    private static final String WEB_RESOURCES_HANDLER = "/resources/**";
+    private static final String WEB_RESOURCES_LOCATION = "/resources/**";
 
     @Resource
     private Environment environment;
@@ -83,8 +88,18 @@ public class WebAppConfig {
         resolver.setViewClass(JstlView.class);
         return resolver;
     }
+
+@Override
+    public void addResourceHandlers (ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler(WEB_RESOURCES_HANDLER)
+                .addResourceLocations(WEB_RESOURCES_LOCATION);
+    }
+
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
+
 }
