@@ -1,5 +1,7 @@
 package schedule.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalTime;
 
@@ -11,24 +13,28 @@ public class ScheduleEntity {
     @Column(name = "id")
     private int id;
 
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
     @Column(name = "arrival_time")
     private LocalTime arrivalTime;
 
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
     @Column(name = "departure_time")
     private LocalTime departureTime;
 
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name = "station_name")
     private StationEntity stationName;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "train_number_id")
     private TrainEntity trainNumber;
 
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
     @Column(name = "interspace")
     private LocalTime interspace;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "route_id")
     private RouteEntity routeName;
 
