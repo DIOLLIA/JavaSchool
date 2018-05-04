@@ -13,6 +13,7 @@
         <javax.servlet-api-version>4.0.0</javax.servlet-api-version>
         <spring.version>4.3.16.RELEASE</spring.version>
         <hibernate.version>4.3.11.Final</hibernate.version>
+        <hibernate-validator.version>4.3.2.Final</hibernate-validator.version>
         <mysql.connector.version>5.1.21</mysql.connector.version>
         <maven-war-plugin.version>3.2.0</maven-war-plugin.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
@@ -95,6 +96,11 @@
             <version>2.4.0.RELEASE</version>
         </dependency>
 
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>${hibernate-validator.version}</version>
+    </dependency>
 
     </dependencies>
 
