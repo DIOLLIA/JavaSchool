@@ -1,39 +1,45 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Train Search</title>
 
-    <!-- let's add tag srping:url -->
-    <spring:url value="/resources/crunchify.css" var="crunchifyCSS" />
-    <spring:url value="D:\JavaSchool\project\timetable\src\main\webapp\resources\js\crunchify.js" var="crunchifyJS" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link href="${crunchifyCSS}" rel="stylesheet" />
-    <script src="${crunchifyJS}"></script>
-    <!-- Finish adding tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--adding css files-->
+    <link rel="stylesheet" type="text/css" href="../../resources/css/reset.css">
+    <link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker3.standalone.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/style.css?v_1207">
+    <!--adding js files-->
+    <script src="../../resources/js/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="../../resources/js/jquery.twidget.js?v_1207"></script>
 
-    <title>Spring MVC Tutorial by Crunchify - Hello World Spring MVC Example</title>
-    <style type="text/css">
-        body {
-            background-image: url('https://cdn.crunchify.com/bg.png');
-        }
-    </style>
+    <!--adding google font-->
+    <!--<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,600,600italic,700,700italic,800,800italic" rel="stylesheet" type="text/css">-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
 </head>
-<body>${message}
+<body style="margin: 0;background: #a6691d">
+<br><br>
+<p><b>Example of avia search form on Russian</b></p>
+<br><br>
+<div class="twidget-container" id="twidget"></div>
+<br><br>
+<script>
+    $('#twidget').twidget({
+        locale: 'ru',
+        marker: 78606,
+        type: 'avia'
+    });
+</script>
 <br>
-<div
-        style="font-family: verdana; padding: 10px; border-radius: 10px; font-size: 12px; text-align: center;">
-
-    <h2>Checkout this font color. Loaded from 'crunchify.css' file under '/WebContent/resources/' folder</h2>
-
-    <div id="crunchifyMessage"></div>
-
-    <br> Spring MCV Tutorial by <a href="https://crunchify.com">Crunchify</a>.
-
-    <br> <br> Click <a
-        href="https://crunchify.com/category/java-tutorials/"
-        target="_blank">here</a> for all Java and <a
-        href='https://crunchify.com/category/spring-mvc/' target='_blank'>here</a>
-    for all Spring MVC, Web Development examples.<br>
-</div>
+go to
+<a href="${pageContext.request.contextPath}/train/list">train list</a><br/>
+go to
+<a href="${pageContext.request.contextPath}/station/list">station list</a><br/>
+go to
+<a href="${pageContext.request.contextPath}/user/list">station list</a><br/>
 </body>
 </html>

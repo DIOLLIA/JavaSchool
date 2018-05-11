@@ -1,29 +1,35 @@
 package schedule.dao;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import schedule.model.Route;
-import schedule.model.Schedule;
-import schedule.model.Station;
+import schedule.entity.RouteEntity;
+import schedule.entity.ScheduleEntity;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class ScheduleDaoImpl implements ScheduleDao {
+    @Autowired
+    private SessionFactory sessionFactory;
 
-    EntityManager entityManager;
+    private Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
+    }
 
     @Override
-    public List<Schedule> findByStationsAndRoutes(List<Route> routes, Station stationOfDeparture, Station stationOfArrival) {
-        TypedQuery<Schedule> query = entityManager.createQuery("SELECT sch FROM Schedule sch JOIN sch.station st" + "WHERE sch.route IN :routes" + "AND( st.name LIKE :stationOfDeparture OR st.name LIKE :stationOfArrival)",Schedule.class);
-        query.setParameter("routes", routes);
-        query.setParameter("stationOfDeparture",stationOfDeparture);
-        query.setParameter("stationOfArrival",stationOfArrival);
+    public List<ScheduleEntity> findByStationsAndRoutes(List<RouteEntity> routes, String stationOfDeparture, String stationOfArrival) {
+     /*   Query query = getCurrentSession().createQuery("SELECT sch FROM ScheduleEntity sch JOIN sch.stationName st WHERE st.stationName LIKE :stationOfDeparture OR st.stationName LIKE :stationOfArrival)");  */
+        Query query = getCurrentSession().createQuery("SELECT sch FROM ScheduleEntity sch JOIN sch.stationName st WHERE sch.routeName IN :routes AND( st.stationName LIKE :stationOfDeparture OR st.stationName LIKE :stationOfArrival)");
 
-        List<Schedule> resultList = new ArrayList<>();
-        resultList=query.getResultList();
+        query.setParameter("routes", routes);
+        query.setParameter("stationOfDeparture", stationOfDeparture);
+        query.setParameter("stationOfArrival", stationOfArrival);
+
+        List resultList = query.list();
         return resultList;
     }
+
 }

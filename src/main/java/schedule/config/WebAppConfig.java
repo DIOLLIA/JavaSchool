@@ -38,7 +38,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     private static final String ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
 
     private static final String WEB_RESOURCES_HANDLER = "/resources/**";
-    private static final String WEB_RESOURCES_LOCATION = "/resources/**";
+    private static final String WEB_RESOURCES_LOCATION = "/resources/";
 
     @Resource
     private Environment environment;

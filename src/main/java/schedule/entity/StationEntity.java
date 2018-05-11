@@ -11,7 +11,7 @@ public class StationEntity {
     private int id;
 
     @Column(name = "station_name")
-    private String StationName;
+    private String stationName;
 
     @Column(name = "coordinate")
     private double coordinate;
@@ -25,11 +25,11 @@ public class StationEntity {
     }
 
     public String getStationName() {
-        return StationName;
+        return stationName;
     }
 
     public void setStationName(String stationName) {
-        StationName = stationName;
+        this.stationName = stationName;
     }
 
     public double getCoordinate() {

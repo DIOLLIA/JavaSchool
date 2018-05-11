@@ -1,11 +1,10 @@
 package schedule.dao;
 
-import schedule.model.Route;
-import schedule.model.Schedule;
-import schedule.model.Station;
+import schedule.entity.RouteEntity;
+import schedule.entity.ScheduleEntity;
 
 import java.util.List;
 
 public interface ScheduleDao {
-    List<Schedule> findByStationsAndRoutes (List<Route> routes, Station stationOfDeparture, Station stationOfArrival);
+    List<ScheduleEntity> findByStationsAndRoutes(List<RouteEntity> routes, String stationOfDeparture, String stationOfArrival);
 }

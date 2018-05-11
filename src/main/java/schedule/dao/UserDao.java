@@ -9,7 +9,7 @@ public interface UserDao {
 
     void deleteUser(UserEntity userEntity);
 
-    List<UserEntity> listOfUsers(String userName);
+    List<UserEntity> listOfUsers();
 
 
 }

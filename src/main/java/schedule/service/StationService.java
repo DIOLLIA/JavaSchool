@@ -15,6 +15,7 @@ public interface StationService {
 
     List<Station> getStations();
 
+    Station findByName(String name);
 }
 
 

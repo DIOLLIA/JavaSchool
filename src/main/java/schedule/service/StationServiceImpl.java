@@ -49,6 +49,12 @@ public class StationServiceImpl implements StationService {
         return stations;
     }
 
+    @Override
+    public Station findByName(String name) {
+        StationEntity station = stationDao.findByName(name);
+        return modelMapper.map(station, Station.class);
+    }
+
     /*  public List<Train> getTrains() {
 
         List<TrainEntity> all = trainDao.getTrains();

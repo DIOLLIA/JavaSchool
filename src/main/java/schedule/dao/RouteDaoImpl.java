@@ -4,12 +4,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import schedule.entity.UserEntity;
+import schedule.entity.RouteEntity;
+import schedule.model.Route;
 
 import java.util.List;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class RouteDaoImpl implements RouteDao {
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -18,17 +19,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addUser(UserEntity user) {
-
-        getCurrentSession().save(user);
-    }
-
-    @Override
-    public void deleteUser(UserEntity userEntity) {
-    }
-
-    @Override
-    public List<UserEntity> listOfUsers() {
-        return getCurrentSession().createQuery("from UserEntity ").list();
+    public List<RouteEntity> routes() {
+        return getCurrentSession().createQuery("from RouteEntity").list();
     }
 }
