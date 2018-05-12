@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.StationSearch;
-import schedule.dao.RouteDao;
+import schedule.dao.api.RouteDao;
 import schedule.model.Schedule;
 import schedule.model.Station;
-import schedule.service.ScheduleService;
-import schedule.service.StationService;
+import schedule.service.api.ScheduleService;
+import schedule.service.api.StationService;
 
 import java.util.List;
 

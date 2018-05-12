@@ -1,4 +1,4 @@
-package schedule.dao;
+package schedule.dao.api;
 
 import schedule.entity.TrainEntity;
 

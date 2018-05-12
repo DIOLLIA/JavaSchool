@@ -1,9 +1,10 @@
-package schedule.dao;
+package schedule.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import schedule.dao.api.UserDao;
 import schedule.entity.UserEntity;
 
 import java.util.List;

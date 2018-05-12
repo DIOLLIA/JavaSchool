@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.entity.StationEntity;
 import schedule.model.Station;
-import schedule.service.StationService;
+import schedule.service.api.StationService;
 
 import java.util.List;
 

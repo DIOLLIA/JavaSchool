@@ -1,12 +1,13 @@
-package schedule.service;
+package schedule.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import schedule.dao.StationDao;
+import schedule.dao.api.StationDao;
 import schedule.entity.StationEntity;
 import schedule.model.Station;
+import schedule.service.api.StationService;
 
 import java.util.ArrayList;
 import java.util.List;

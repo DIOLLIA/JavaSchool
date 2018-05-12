@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.model.User;
-import schedule.service.UserService;
+import schedule.service.api.UserService;
 
 import java.util.List;
 

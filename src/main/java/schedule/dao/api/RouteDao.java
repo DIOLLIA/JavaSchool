@@ -1,7 +1,6 @@
-package schedule.dao;
+package schedule.dao.api;
 
 import schedule.entity.RouteEntity;
-import schedule.model.Route;
 
 import java.util.List;
 

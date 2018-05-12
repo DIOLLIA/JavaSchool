@@ -1,6 +1,5 @@
-package schedule.service;
+package schedule.service.api;
 
-import schedule.entity.StationEntity;
 import schedule.model.Station;
 
 import java.util.List;

@@ -1,12 +1,11 @@
-package schedule.dao;
+package schedule.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import schedule.dao.api.TrainDao;
 import schedule.entity.TrainEntity;
-import schedule.model.Train;
 
 import java.util.List;
 

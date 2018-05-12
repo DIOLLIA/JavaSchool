@@ -1,18 +1,19 @@
-package schedule.service;
+package schedule.service.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import schedule.dao.RouteDao;
-import schedule.dao.ScheduleDao;
+import schedule.dao.api.RouteDao;
+import schedule.dao.api.ScheduleDao;
 import schedule.entity.RouteEntity;
 import schedule.entity.ScheduleEntity;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Station;
 import schedule.model.Train;
+import schedule.service.api.ScheduleService;
 
 import javax.transaction.Transactional;
 import java.time.LocalTime;

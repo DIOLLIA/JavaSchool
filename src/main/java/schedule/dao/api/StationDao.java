@@ -1,7 +1,6 @@
-package schedule.dao;
+package schedule.dao.api;
 
 import schedule.entity.StationEntity;
-import schedule.model.Station;
 
 import java.util.List;
 

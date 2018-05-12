@@ -1,4 +1,4 @@
-package schedule.service;
+package schedule.service.api;
 
 import schedule.model.Train;
 
