@@ -13,7 +13,7 @@ public class Schedule {
 
     private Train trainNumber;
 
-    private LocalTime interspace;
+    private LocalTime interval;
 
     private Route routeName;
 
@@ -65,11 +65,11 @@ public class Schedule {
         this.routeName = routeName;
     }
 
-    public LocalTime getInterspace() {
-        return interspace;
+    public LocalTime getInterval() {
+        return interval;
     }
 
-    public void setInterspace(LocalTime interspace) {
-        this.interspace = interspace;
+    public void setInterval(LocalTime interval) {
+        this.interval = interval;
     }
 }
