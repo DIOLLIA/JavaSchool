@@ -55,14 +55,4 @@ public class StationServiceImpl implements StationService {
         return modelMapper.map(station, Station.class);
     }
 
-    /*  public List<Train> getTrains() {
-
-        List<TrainEntity> all = trainDao.getTrains();
-        List<Train> trains = new ArrayList<>();
-
-        for (TrainEntity trainEntity : all) {
-            trains.add(modelMapper.map(trainEntity, Train.class));
-        }
-
-        return trains;*/
 }
