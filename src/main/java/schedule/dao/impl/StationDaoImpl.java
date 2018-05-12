@@ -1,9 +1,6 @@
 package schedule.dao.impl;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import schedule.dao.api.StationDao;
 import schedule.entity.StationEntity;
@@ -11,13 +8,7 @@ import schedule.entity.StationEntity;
 import java.util.List;
 
 @Repository
-public class StationDaoImpl implements StationDao {
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    private Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
-    }
+public class StationDaoImpl extends GeneralCrudDaoImpl<StationEntity> implements StationDao {
 
     @Override
     public void addStation(StationEntity station) {

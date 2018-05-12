@@ -4,7 +4,7 @@ import schedule.entity.StationEntity;
 
 import java.util.List;
 
-public interface StationDao {
+public interface StationDao extends GeneralCrudDao<StationEntity> {
     void addStation(StationEntity station);
 
     StationEntity getStation(int id);

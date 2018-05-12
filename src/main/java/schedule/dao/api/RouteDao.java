@@ -4,6 +4,6 @@ import schedule.entity.RouteEntity;
 
 import java.util.List;
 
-public interface RouteDao {
+public interface RouteDao extends GeneralCrudDao<RouteEntity> {
     List<RouteEntity> routes();
 }

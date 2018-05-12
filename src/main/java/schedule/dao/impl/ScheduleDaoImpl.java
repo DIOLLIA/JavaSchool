@@ -1,9 +1,6 @@
 package schedule.dao.impl;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import schedule.dao.api.ScheduleDao;
 import schedule.entity.RouteEntity;
@@ -12,13 +9,7 @@ import schedule.entity.ScheduleEntity;
 import java.util.List;
 
 @Repository
-public class ScheduleDaoImpl implements ScheduleDao {
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    private Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
-    }
+public class ScheduleDaoImpl extends GeneralCrudDaoImpl<ScheduleEntity> implements ScheduleDao {
 
     @Override
     public List<ScheduleEntity> findByStationsAndRoutes(List<RouteEntity> routes, String stationOfDeparture, String stationOfArrival) {

@@ -5,6 +5,6 @@ import schedule.entity.ScheduleEntity;
 
 import java.util.List;
 
-public interface ScheduleDao {
+public interface ScheduleDao extends GeneralCrudDao<ScheduleEntity> {
     List<ScheduleEntity> findByStationsAndRoutes(List<RouteEntity> routes, String stationOfDeparture, String stationOfArrival);
 }

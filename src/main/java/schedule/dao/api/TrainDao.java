@@ -4,7 +4,7 @@ import schedule.entity.TrainEntity;
 
 import java.util.List;
 
-public interface TrainDao {
+public interface TrainDao extends GeneralCrudDao<TrainEntity> {
     void addTrain(TrainEntity train);
 
     TrainEntity getTrain(int id);

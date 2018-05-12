@@ -1,8 +1,5 @@
 package schedule.dao.impl;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import schedule.dao.api.TrainDao;
 import schedule.entity.TrainEntity;
@@ -10,18 +7,10 @@ import schedule.entity.TrainEntity;
 import java.util.List;
 
 @Repository
-public class TrainDaoImpl implements TrainDao {
-
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    private Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
-    }
-
+public class TrainDaoImpl extends GeneralCrudDaoImpl<TrainEntity> implements TrainDao {
 
     public void addTrain(TrainEntity train) {
-         getCurrentSession().save(train);
+        getCurrentSession().save(train);
     }
 
     public TrainEntity getTrain(int id) {
