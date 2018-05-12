@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.StationSearch;
 import schedule.dao.api.RouteDao;
+import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Station;
+import schedule.service.api.RouteService;
 import schedule.service.api.ScheduleService;
 import schedule.service.api.StationService;
 
@@ -25,15 +27,20 @@ public class ScheduleController {
     StationService stationService;
     @Autowired
     RouteDao routeDao;
+    @Autowired
+    RouteService routeService;
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ModelAndView searchStations(@ModelAttribute("stationSearch") StationSearch stationSearch) {
+    public ModelAndView findSchedule(@ModelAttribute("stationSearch") StationSearch stationSearch) {
+        String arrivalStation = stationSearch.getArrivalStation();
+        String departureStation = stationSearch.getDepartureStation();
+        List<Route> routes = routeService.findByStationNames(arrivalStation, departureStation);
 
-        scheduleService.addSchedule(new Schedule());
+       // scheduleService.addSchedule(new Schedule());
         ModelAndView modelAndView = new ModelAndView("searchResult");
-        List<Schedule> schedules = scheduleService.findStations(stationSearch.getArrivalStation(), stationSearch.getDepartureStation());
+        List<Schedule> schedules = scheduleService.findStations(routes, arrivalStation, departureStation);
         modelAndView.addObject("searchResult", schedules);
-        Station station = stationService.findByName(stationSearch.getArrivalStation());
+        Station station = stationService.findByName(arrivalStation);
         return modelAndView;
 
     }

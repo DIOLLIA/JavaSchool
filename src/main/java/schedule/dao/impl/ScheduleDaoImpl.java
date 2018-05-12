@@ -13,12 +13,11 @@ public class ScheduleDaoImpl extends GeneralCrudDaoImpl<ScheduleEntity> implemen
 
     @Override
     public List<ScheduleEntity> findByStationsAndRoutes(List<RouteEntity> routes, String stationOfDeparture, String stationOfArrival) {
-        Query query = getCurrentSession().createQuery(" FROM ScheduleEntity");
-        /*        Query query = getCurrentSession().createQuery("SELECT sch FROM ScheduleEntity sch JOIN sch.stationName st WHERE sch.routeName.id IN :routes AND( st.stationName.id LIKE :stationOfDeparture OR st.stationName.id LIKE :stationOfArrival)");*/
+        Query query = getCurrentSession().createQuery("SELECT sch FROM ScheduleEntity sch JOIN sch.stationName st WHERE sch.routeName.id IN :routes AND( st.stationName.id LIKE :stationOfDeparture OR st.stationName.id LIKE :stationOfArrival)");
 
-        // query.setParameter("routes", routes);
-        // query.setParameter("stationOfDeparture", stationOfDeparture);
-        // query.setParameter("stationOfArrival", stationOfArrival);
+        query.setParameter("routes", routes);
+        query.setParameter("stationOfDeparture", stationOfDeparture);
+        query.setParameter("stationOfArrival", stationOfArrival);
 
         List resultList = query.list();
         return resultList;

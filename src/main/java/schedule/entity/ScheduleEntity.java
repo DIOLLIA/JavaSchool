@@ -1,10 +1,7 @@
 package schedule.entity;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.time.LocalTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "schedule")
@@ -14,33 +11,30 @@ public class ScheduleEntity {
     @Column(name = "id")
     private int id;
 
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
-   // @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
+    //  @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
+    // @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
     @Column(name = "arrival_time")
-    private Date arrivalTime;
-  //  private LocalTime arrivalTime;
+    private LocalTime arrivalTime;
 
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
-  //  @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
+    //@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
+    //  @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
     @Column(name = "departure_time")
     private LocalTime departureTime;
 
-
     @ManyToOne
-   // @JoinColumn(name = "station_name")
+    // @JoinColumn(name = "station_name")
     private StationEntity stationName;
 
     @ManyToOne
-  //  @JoinColumn(name = "train_number_id")
+    //  @JoinColumn(name = "train_number_id")
     private TrainEntity trainNumber;
 
-  //  @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
-    @Column(name = "interspace")
-    private LocalTime interspace;
+    //  @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
+    // @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
+    private Integer timeInterval;
 
     @ManyToOne
-   // @JoinColumn(name = "route_id")
+    // @JoinColumn(name = "route_id")
     private RouteEntity routeName;
 
     public int getId() {
@@ -51,11 +45,11 @@ public class ScheduleEntity {
         this.id = id;
     }
 
-    public Date getArrivalTime() {
+    public LocalTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(Date arrivalTime) {
+    public void setArrivalTime(LocalTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
@@ -91,11 +85,11 @@ public class ScheduleEntity {
         this.routeName = routeName;
     }
 
-    public LocalTime getInterspace() {
-        return interspace;
+    public Integer getTimeInterval() {
+        return timeInterval;
     }
 
-    public void setInterspace(LocalTime interspace) {
-        this.interspace = interspace;
+    public void setTimeInterval(Integer timeInterval) {
+        this.timeInterval = timeInterval;
     }
 }
