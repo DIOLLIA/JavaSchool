@@ -5,7 +5,9 @@ public class Station {
 
     private String stationName;
 
-    private double coordinate;
+    private long latitude;
+
+    private long longitude;
 
     public int getId() {
         return id;
@@ -23,11 +25,19 @@ public class Station {
         this.stationName = stationName;
     }
 
-    public double getCoordinate() {
-        return coordinate;
+    public long getLatitude() {
+        return latitude;
     }
 
-    public void setCoordinate(double coordinate) {
-        this.coordinate = coordinate;
+    public void setLatitude(long latitude) {
+        this.latitude = latitude;
+    }
+
+    public long getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(long longitude) {
+        this.longitude = longitude;
     }
 }

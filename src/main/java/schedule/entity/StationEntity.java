@@ -13,8 +13,11 @@ public class StationEntity {
     @Column(name = "station_name")
     private String stationName;
 
-    @Column(name = "coordinate")
-    private double coordinate;
+    @Column(name = "latitude")
+    private long latitude;
+
+    @Column(name = "longitude")
+    private long longitude;
 
     public int getId() {
         return id;
@@ -32,11 +35,19 @@ public class StationEntity {
         this.stationName = stationName;
     }
 
-    public double getCoordinate() {
-        return coordinate;
+    public long getLatitude() {
+        return latitude;
     }
 
-    public void setCoordinate(double coordinate) {
-        this.coordinate = coordinate;
+    public void setLatitude(long latitude) {
+        this.latitude = latitude;
+    }
+
+    public long getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(long longitude) {
+        this.longitude = longitude;
     }
 }

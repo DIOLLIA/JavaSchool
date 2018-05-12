@@ -13,8 +13,12 @@
             <td><form:input path="stationName"/></td>
         </tr>
         <tr>
-            <td>Coordinate</td>
-            <td><form:input path="coordinate"/></td>
+            <td>Latitude</td>
+            <td><form:input path="latitude"/></td>
+        </tr>
+        <tr>
+            <td>Longitude</td>
+            <td><form:input path="longitude"/></td>
         </tr>
         <tr>
             <td><input type="submit" value="Add"/></td>

@@ -10,7 +10,8 @@
     <thead>
     <tr>
         <th width="10%">Name</th>
-        <th width="10%">Coordinate</th>
+        <th width="10%">Latitude</th>
+        <th width="10%">Longitude</th>
         <th width="10%">actions</th>
     </tr>
     </thead>
@@ -18,7 +19,8 @@
     <c:forEach var="station" items="${stations}">
         <tr>
             <td>${station.stationName}</td>
-            <td>${station.coordinate}</td>
+            <td>${station.latitude}</td>
+            <td>${station.longitude}</td>
             <td><a href="${pageContext.request.contextPath}/station/edit/${station.id}.html">Edit</a><br/>
                 <a href="${pageContext.request.contextPath}/station/delete/${station.id}.html">Delete</a><br/></td>
         </tr>
