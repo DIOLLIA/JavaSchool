@@ -16,7 +16,7 @@ public class RouteEntity {
     private String routeName;
 
     @ManyToMany
-    @ElementCollection()
+   // @ElementCollection()
     @Column(name = "station_name")
     private List<StationEntity> stationsList;
 
