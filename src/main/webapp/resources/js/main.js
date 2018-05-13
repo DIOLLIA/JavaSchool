@@ -1,3 +1,51 @@
+function initFromStations() {
+    var stationsFrom = $("#station_from");
+    stationsFrom.empty();
+
+    $.ajax({
+        type: 'GET',
+        url: '/schedule/get-stations/',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (stations) {
+            stations.forEach(function (item, i) {
+                stationsFrom.append(
+                    '<option value=\"' + item + '\">' + item + '</option>'
+                )
+            });
+            getToStations();
+        },
+        error: function (response) {
+            alert("Something is wrong!")
+        }
+    })
+}
+
+function getToStations() {
+    var stationsFrom = $("#station_from").val();
+    var stationsTo = $("#station_to");
+//todo clear dropdown list from previous values
+    $.ajax({
+        type: 'GET',
+        url: '/schedule/get-stations/' + stationsFrom,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (stations) {
+            stationsTo.empty();
+            stations.forEach(function (item, i) {
+                stationsTo.append(
+                    '<option value=\"' + item + '\">' + item + '</option>'
+                )
+            });
+        },
+        error: function (response) {
+            alert("Something is wrong!")
+
+        }
+    })
+
+}
+
 $(document).ready(function ($) {
 
         "use strict";
@@ -179,28 +227,8 @@ $(document).ready(function ($) {
             });
         };
         datePicker();
-
-        function initFromStations() {
-            var stationsFrom = $("#station_from");
-            stationsFrom.empty();
-            $.ajax({
-                type: 'GET',
-                url: '/schedule/get-stations/',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (stations) {
-                    stations.forEach(function (item, i) {
-                        stationsFrom.append(
-                            '<option value=\"' + item + '\">' + item + '</option>'
-                        )
-                    });
-                },
-                error: function (response) {
-                    alert("Something is wrong!")
-
-                }
-            })
-        }
     }
 );
+
+
 

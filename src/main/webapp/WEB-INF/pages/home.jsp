@@ -91,32 +91,22 @@
                                     <label for="station_from">From</label>
 
                                     <label for="station_from" style="width: 100%;">
-                                        <select class="js-example-basic-single js-states form-control" id="station_from"
+                                        <select class="js-example-basic-single js-states form-control"
+                                                onchange="getToStations()"
+                                                id="station_from"
                                                 style="width: 100%;">
-
                                         </select>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="id_label_single2">To</label>
+                                    <label for="station_to">To</label>
                                     <div class="probootstrap_select-wrap">
-                                        <label for="id_label_single2" style="width: 100%;">
+                                        <label for="station_to" style="width: 100%;">
                                             <select class="js-example-basic-single js-states form-control"
-                                                    id="id_label_single2" style="width: 100%;">
+                                                    id="station_to" style="width: 100%;">
                                                 <%--todo foreach list of Tostations--%>
-                                                <option value="Australia">Australia</option>
-                                                <option value="Japan">Japan</option>
-                                                <option value="United States">United States</option>
-                                                <option value="Brazil">Brazil</option>
-                                                <option value="China">China</option>
-                                                <option value="Israel">Israel</option>
-                                                <option value="Philippines">Philippines</option>
-                                                <option value="Malaysia">Malaysia</option>
-                                                <option value="Canada">Canada</option>
-                                                <option value="Chile">Chile</option>
-                                                <option value="Chile">Zimbabwe</option>
                                             </select>
                                         </label>
                                     </div>

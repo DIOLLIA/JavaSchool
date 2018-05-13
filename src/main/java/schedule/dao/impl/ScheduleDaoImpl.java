@@ -13,7 +13,7 @@ public class ScheduleDaoImpl extends GeneralCrudDaoImpl<ScheduleEntity> implemen
 //todo fix  exceptiou caused by qyery.list(): java.lang.ClassCastException: java.util.ArrayList cannot be cast to java.lang.Integer
     @Override
     public List<ScheduleEntity> findByStationsAndRoutes(List<RouteEntity> routes, String stationOfDeparture, String stationOfArrival) {
-        Query query = getCurrentSession().createQuery("SELECT sch FROM ScheduleEntity sch JOIN sch.stationName st WHERE sch.routeName.id IN :routes AND( st.stationName.id LIKE :stationOfDeparture OR st.stationName.id LIKE :stationOfArrival)");
+        Query query = getCurrentSession().createQuery("SELECT sch FROM ScheduleEntity sch JOIN sch.stationName st WHERE sch.routeName IN :routes AND( st.stationName LIKE :stationOfDeparture OR st.stationName LIKE :stationOfArrival)");
 
         query.setParameter("routes", routes);
         query.setParameter("stationOfDeparture", stationOfDeparture);

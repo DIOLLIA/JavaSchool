@@ -32,7 +32,7 @@ public class ScheduleController {
         String departureStation = stationSearch.getDepartureStation();
         List<Route> routes = routeService.findByStationNames(arrivalStation, departureStation);
 
-       // scheduleService.addSchedule(new Schedule());
+        // scheduleService.addSchedule(new Schedule());
         ModelAndView modelAndView = new ModelAndView("searchResult");
         List<Schedule> schedules = scheduleService.findStations(routes, arrivalStation, departureStation);
         modelAndView.addObject("searchResult", schedules);
@@ -48,11 +48,20 @@ public class ScheduleController {
         modelAndView.addObject("stationSearch", new StationSearch());
         return modelAndView;
     }
-    @GetMapping(value = "/get-stations")
+
+    @GetMapping(value = "/get-stations/")
     @ResponseBody
-    public String getStationsNames(){
+    public String getStationsNames() {
         List<String> stationsNames = stationService.getStationsNames();
 
+        return new Gson().toJson(stationsNames);
+    }
+
+    @GetMapping(value = "/get-stations/{selectedFromStation}")
+    @ResponseBody
+    public String getStationsNamesTest(@PathVariable(value="selectedFromStation") String selectedFromStation) {
+        List<String> stationsNames = stationService.getStationsNames();
+//todo delete selectedFromStation from list
         return new Gson().toJson(stationsNames);
     }
 }
