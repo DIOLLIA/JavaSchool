@@ -37,8 +37,11 @@ public class ScheduleServiceImpl implements ScheduleService {
         return sessionFactory.getCurrentSession();
     }
 
-    public List<Schedule> findStations(List<Route> routes,String stationOfDeparture, String stationOfArrival) {
-        List<RouteEntity> routeEntities = routeDao.routes();
+    public List<Schedule> findStations(List<Route> routes, String stationOfDeparture, String stationOfArrival) {
+        List<RouteEntity> routeEntities = new ArrayList<>();
+        for (Route route : routes) {
+            routeEntities.add(modelMapper.map(route, RouteEntity.class));
+        }
         List<ScheduleEntity> all = scheduleDao.findByStationsAndRoutes(routeEntities, stationOfDeparture, stationOfArrival);
         List<Schedule> searchResult = new ArrayList<>();
 
