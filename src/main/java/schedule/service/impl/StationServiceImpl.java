@@ -56,4 +56,14 @@ public class StationServiceImpl implements StationService {
         return modelMapper.map(station, Station.class);
     }
 
+    @Override
+    public List<String> getStationsNames() {
+        List<Station> stations = getStations();
+        List<String> stationNames = new ArrayList<>();
+
+        for (Station station : stations) {
+            stationNames.add(station.getStationName());
+        }
+        return stationNames;
+    }
 }

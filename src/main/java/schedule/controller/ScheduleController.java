@@ -1,13 +1,11 @@
 package schedule.controller;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.StationSearch;
-import schedule.dao.api.RouteDao;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Station;
@@ -25,8 +23,6 @@ public class ScheduleController {
     ScheduleService scheduleService;
     @Autowired
     StationService stationService;
-    @Autowired
-    RouteDao routeDao;
     @Autowired
     RouteService routeService;
 
@@ -51,5 +47,12 @@ public class ScheduleController {
         ModelAndView modelAndView = new ModelAndView("schedule");
         modelAndView.addObject("stationSearch", new StationSearch());
         return modelAndView;
+    }
+    @GetMapping(value = "/get-stations")
+    @ResponseBody
+    public String getStationsNames(){
+        List<String> stationsNames = stationService.getStationsNames();
+
+        return new Gson().toJson(stationsNames);
     }
 }

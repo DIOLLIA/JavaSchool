@@ -4,28 +4,54 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Kuda Edem HomePage</title>
-    <meta name="description" content="find tickets ob KudaEdem.rus">
+    <title>KudKuda Home page</title>
+    <meta name="description" content="find tickets ob KudKuda.rus">
     <meta name="keywords" content="find tickets, find trains, schedule of trains, stations list">
 
-    <link rel="stylesheet" href="../../resources/css/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="">
-    <link rel="stylesheet" href="../../resources/css/animate.css">
 
-    <link rel="stylesheet" href="../../resources/css/bootstrap-datepicker.css">
+    <!--   <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="../../resources/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../../resources/css/animate.css">
+    <!-- <link rel="stylesheet" href="../../resources/fonts/ionicons/css/ionicons.min.css">  -->
+
+    <!--   <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css"> -->
+    <!-- карусель слайдов http://mel0ne.ru/2016/09/16/owl-carousel-2/ -->
+
+    <!--   <link rel="stylesheet" href="../../resources/fonts/flaticon/font/flaticon.css"> --><!--  иконки для сайта-->
+
+    <!--  <link rel="stylesheet" href="../../resources/fonts/fontawesome/css/font-awesome.min.css">   -->
+    <!--  иконки- увеличение, анимированные икоки-->
+    <link rel="stylesheet" href="../../resources/css/bootstrap-datepicker.css">   <!--ВАЖНО это стиль календаря  -->
     <link rel="stylesheet" href="../../resources/css/select2.css">
+    <!-- ВАЖНО стили для from to полей   и содержащуюся в них изначально информацию-->
+
 
     <!--  -->
     <link rel="stylesheet" href="../../resources/css/helpers.css">
+    <!-- ВАЖНО при выключении мешает фоны на главной странице и не создаёт эфект градиента-->
     <link rel="stylesheet" href="../../resources/css/style.css">
+    <!-- ВАЖНО отвечает за стиль страницы в целом и многом-->
 
 </head>
 <body>
 
+<script src="../../resources/js/jquery.min.js"></script>
+
+<script src="../../resources/js/popper.min.js"></script>
+<script src="../../resources/js/bootstrap.min.js"></script>
+<script src="../../resources/js/owl.carousel.min.js"></script>
+
+<script src="../../resources/js/bootstrap-datepicker.js"></script>
+<script src="../../resources/js/jquery.waypoints.min.js"></script>
+<script src="../../resources/js/jquery.easing.1.3.js"></script>
+
+<script src="../../resources/js/select2.min.js"></script>
+<script src="../../resources/js/main.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
     <div class="container">
-        <a class="navbar-brand" href="index.html">KudaEdem</a>
+        <a class="navbar-brand" href="index.html">KudKuda</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu"
                 aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="ion-navicon"></i></span>
@@ -43,19 +69,18 @@
 <!-- END nav -->  <!--  -->
 
 
-<section class="probootstrap-cover overflow-hidden relative" style="background-image: url('/images/bg_1.jpg');"
-         data-stellar-background-ratio="0.5" id="section-home">
+<section class="probootstrap-cover overflow-hidden relative"
+         style="background-image: url('/resources/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
+         id="section-home">
     <div class="overlay"></div>
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md">
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Kuda Edem?</h2>
-                go to
-                <a href="${pageContext.request.contextPath}/train/list">train list</a><br/>
-                go to
-                <a href="${pageContext.request.contextPath}/station/list">station list</a><br/>
-                go to
-                <a href="${pageContext.request.contextPath}/user/list">station list</a><br/>
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
+                <!--   <p class="lead mb-5 probootstrap-animate">Hope u like it! another free template by <a href="https://uicookies.com/" target="_blank">uicookies.com</a> Under License <a href="https://uicookies.com/license" target="_blank">CC 3.0</a></p>
+                 <p class="probootstrap-animate">
+                   <a href="onepage.html" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-3">See OnePage Verion</a>
+                 </p> -->
             </div>
             <div class="col-md probootstrap-animate">
                 <form action="#" class="probootstrap-form">
@@ -63,26 +88,14 @@
                         <div class="row mb-3">
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="id_label_single">From</label>
+                                    <label for="station_from">From</label>
 
-                                    <label for="id_label_single" style="width: 100%;">
-                                        <select class="js-example-basic-single js-states form-control"
-                                                id="id_label_single" style="width: 100%;">
-                                            <option value="Australia">Australia</option>
-                                            <option value="Japan">Japan</option>
-                                            <option value="United States">United States</option>
-                                            <option value="Brazil">Brazil</option>
-                                            <option value="China">China</option>
-                                            <option value="Israel">Israel</option>
-                                            <option value="Philippines">Philippines</option>
-                                            <option value="Malaysia">Malaysia</option>
-                                            <option value="Canada">Canada</option>
-                                            <option value="Chile">Chile</option>
-                                            <option value="Chile">Zimbabwe</option>
+                                    <label for="station_from" style="width: 100%;">
+                                        <select class="js-example-basic-single js-states form-control" id="station_from"
+                                                style="width: 100%;">
+
                                         </select>
                                     </label>
-
-
                                 </div>
                             </div>
                             <div class="col-md">
@@ -92,6 +105,7 @@
                                         <label for="id_label_single2" style="width: 100%;">
                                             <select class="js-example-basic-single js-states form-control"
                                                     id="id_label_single2" style="width: 100%;">
+                                                <%--todo foreach list of Tostations--%>
                                                 <option value="Australia">Australia</option>
                                                 <option value="Japan">Japan</option>
                                                 <option value="United States">United States</option>
@@ -206,21 +220,5 @@
         </div>
     </div>
 </footer>
-
-
-<script src="../../resources/js/jquery.min.js"></script>
-
-<script src="../../resources/js/popper.min.js"></script>
-<script src="../../resources/js/bootstrap.min.js"></script>
-<script src="../../resources/js/owl.carousel.min.js"></script>
-
-<script src="../../resources/js/bootstrap-datepicker.js"></script>
-<script src="../../resources/js/jquery.waypoints.min.js"></script>
-<script src="../../resources/js/jquery.easing.1.3.js"></script>
-
-<script src="../../resources/js/select2.min.js"></script>
-
-<script src="../../resources/js/main.js"></script>
 </body>
 </html>
-

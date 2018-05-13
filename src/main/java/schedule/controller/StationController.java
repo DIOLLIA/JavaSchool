@@ -37,7 +37,7 @@ public class StationController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView addingStation(@ModelAttribute Station station) {
+    public ModelAndView addStation(@ModelAttribute Station station) {
         ModelAndView modelAndView = new ModelAndView("stationsList");
         stationService.addStation(station);
 
