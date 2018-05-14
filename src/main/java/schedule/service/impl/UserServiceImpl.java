@@ -29,18 +29,6 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(userEntity, User.class);
     }
 
-    /*
-    *  public List<Train> getTrains() {
-
-        List<TrainEntity> all = trainDao.getTrains();
-        List<Train> trains = new ArrayList<>();
-
-        for (TrainEntity trainEntity : all) {
-            trains.add(modelMapper.map(trainEntity, Train.class));
-        }
-
-        return trains;
-    }*/
     @Override
     public List<User> getUsers() {
         List<UserEntity> all = userDao.listOfUsers();
@@ -51,4 +39,17 @@ public class UserServiceImpl implements UserService {
         }
         return users;
     }
+
+    @Override
+    public void editUser(User user) {
+        UserEntity userEntity = modelMapper.map(user, UserEntity.class);
+        userDao.editUser(userEntity);
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        UserEntity userEntity = modelMapper.map(user, UserEntity.class);
+        userDao.deleteUser(userEntity);
+    }
+
 }
