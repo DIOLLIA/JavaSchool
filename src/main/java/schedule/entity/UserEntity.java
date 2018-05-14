@@ -10,11 +10,22 @@ public class UserEntity {
     @GeneratedValue
     private int id;
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "surname")
     private String surname;
+
+    @Column(name = "birthDaY")
     private Date birthDaY;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "role")
     private String role;
 
     public int getId() {

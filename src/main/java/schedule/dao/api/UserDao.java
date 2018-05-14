@@ -9,6 +9,8 @@ public interface UserDao extends GeneralCrudDao<UserEntity> {
 
     void deleteUser(UserEntity userEntity);
 
+    void  editUser(UserEntity userEntity);
+
     List<UserEntity> listOfUsers();
 
 

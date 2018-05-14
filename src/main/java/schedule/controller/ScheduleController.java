@@ -61,7 +61,7 @@ public class ScheduleController {
     @ResponseBody
     public String getStationsNamesTest(@PathVariable(value="selectedFromStation") String selectedFromStation) {
         List<String> stationsNames = stationService.getStationsNames();
-//todo delete selectedFromStation from list
+        stationsNames.remove(selectedFromStation);
         return new Gson().toJson(stationsNames);
     }
 }
