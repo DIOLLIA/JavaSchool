@@ -54,6 +54,7 @@
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.21" level="project" />
     <orderEntry type="library" name="Maven: commons-dbcp:commons-dbcp:1.4" level="project" />
     <orderEntry type="library" name="Maven: commons-pool:commons-pool:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time-hibernate:1.4" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.9" level="project" />
     <orderEntry type="library" name="Maven: org.modelmapper:modelmapper:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.webflow:spring-js:2.4.0.RELEASE" level="project" />
