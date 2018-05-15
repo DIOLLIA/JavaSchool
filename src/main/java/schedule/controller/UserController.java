@@ -31,15 +31,31 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addUserPage() {
         ModelAndView modelAndView = new ModelAndView("addUser");
-        modelAndView.addObject("user", new User());
+        User user = new User();
+        user.setName("hello");
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView addingUser(@ModelAttribute User user) {
+    @RequestMapping(value = "/add2", method = RequestMethod.POST)
+    public ModelAndView addUser(@ModelAttribute(name = "user") User user) {
 
+//        User user = null;
         ModelAndView modelAndView = new ModelAndView("usersList");
         userService.addUser(user);
+
+        List<User> users = userService.getUsers();
+        modelAndView.addObject("users", users);
+
+        String message = "User was successfully added.";
+        modelAndView.addObject("message", message);
+
+        return modelAndView;
+    }
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public ModelAndView deleteUserPage(@ModelAttribute User id) {
+        ModelAndView modelAndView = new ModelAndView("usersList");
+        userService.addUser(id);
 
         List<User> users = userService.getUsers();
         modelAndView.addObject("users", users);

@@ -1,10 +1,12 @@
 package schedule.entity;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
+
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
+@Table(name = "users"/*, uniqueConstraints = {@UniqueConstraint(columnNames = "email")}*/)
 public class UserEntity {
     @Id
     @GeneratedValue
@@ -17,7 +19,9 @@ public class UserEntity {
     private String surname;
 
     @Column(name = "birthDaY")
-    private Date birthDaY;
+//     @Temporal(TemporalType.DATE) //не работает?
+     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDate")
+    private LocalDate birthDaY;
 
     @Column(name = "password")
     private String password;
@@ -52,11 +56,11 @@ public class UserEntity {
         this.surname = surname;
     }
 
-    public Date getBirthDaY() {
+    public LocalDate getBirthDaY() {
         return birthDaY;
     }
 
-    public void setBirthDaY(Date birthDaY) {
+    public void setBirthDaY(LocalDate birthDaY) {
         this.birthDaY = birthDaY;
     }
 
@@ -89,6 +93,8 @@ public class UserEntity {
         return "UserEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", birthDaY='" + birthDaY + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
