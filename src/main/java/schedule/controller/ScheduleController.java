@@ -89,7 +89,6 @@ public class ScheduleController {
     public ModelAndView searchOnStation() {
 
         ModelAndView modelAndView = new ModelAndView("searchTrainOnStation");
-       // modelAndView.addObject("stationSearch", new StationSearch());
         return modelAndView;
     }
 }

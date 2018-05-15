@@ -65,4 +65,14 @@ public class UserController {
 
         return modelAndView;
     }
+    @RequestMapping(value = "/signIn", method = RequestMethod.GET)
+    public ModelAndView login() {
+        ModelAndView modelAndView = new ModelAndView("signIn");
+        return modelAndView;
+    }
+    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
+    public ModelAndView signUp() {
+        ModelAndView modelAndView = new ModelAndView("signUp");
+        return modelAndView;
+    }
 }

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>search trains on station</title>
+    <title>log in page</title>
     <meta name="description" content="find tickets ob KudKuda.rus">
     <meta name="keywords" content="find tickets, find trains, schedule of trains, stations list">
 
@@ -22,7 +22,6 @@
 
     <!--  <link rel="stylesheet" href="../../resources/fonts/fontawesome/css/font-awesome.min.css">   -->
     <!--  иконки- увеличение, анимированные икоки-->
-    <link rel="stylesheet" href="../../resources/css/bootstrap-datepicker.css">   <!--ВАЖНО это стиль календаря  -->
     <link rel="stylesheet" href="../../resources/css/select2.css">
     <!-- ВАЖНО стили для from to полей   и содержащуюся в них изначально информацию-->
 
@@ -51,7 +50,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
     <div class="container">
-        <a class="navbar-brand" href="../../index.html">KudKuda</a>
+        <a class="navbar-brand" href="../../index.html">KudKuda Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu"
                 aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="ion-navicon"></i></span>
@@ -70,35 +69,38 @@
 
 
 <section class="probootstrap-cover overflow-hidden relative"
-         style="background-image: url('/resources/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
+         style="background-image: url('/resources/images/sq_img_1.jpg');" data-stellar-background-ratio="0.5"
          id="section-home">
     <div class="overlay"></div>
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
-
-
-                <p class="lead mb-4 probootstrap-animate">If you want to see the train schedule for the station, please
-                    select the <span style="color:#32CD32;">station </span>
-                    <label for="station_from" style="width: 60%;">
-                        <select class="js-example-basic-single js-states form-control"
-                                id="station_from" style="width: 50%;">
-                        </select>
-                    </label>
-                    <br>
-                    and press:
-
-
-                <p class="probootstrap-animate">
-                    <a href="onepage.html" role="button"
-                       class="btn btn-primary p-3 mr-5 pl-3 pr-3 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-3">station
-                        schedule search</a>
-                </p>
-
+            </div>
+            <div class="col-md-6  probootstrap-animate">
+                <form action="#" method="post" class="probootstrap-form probootstrap-form-box mb60">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <%-- <input type="text" id="usrname" name="usrname" required>--%>
+                                <label for="username" class="sr-only sr-only-focusable">Login</label>
+                                <input type="text" class="form-control" id="username" name="username"
+                                       placeholder="Your login" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password" class="sr-only sr-only-focusable">Password</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                       placeholder="Password" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" id="submit" name="submit" value="LogIn">
+                    </div>
             </div>
         </div>
-
 </section>
 <!-- END section -->
 
@@ -132,3 +134,4 @@
 </footer>
 </body>
 </html>
+

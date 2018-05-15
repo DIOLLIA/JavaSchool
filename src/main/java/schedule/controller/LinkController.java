@@ -16,4 +16,9 @@ public class LinkController {
     public ModelAndView indexPage() {
         return new ModelAndView("home");
     }
+
+    @RequestMapping(value = "/about")
+    public ModelAndView aboutPage() {
+        return new ModelAndView("about");
+    }
 }
