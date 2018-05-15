@@ -18,20 +18,16 @@
 <body>
 
 <script src="../../resources/js/jquery.min.js"></script>
-<%--<script src="../../resources/js/popper.min.js"></script>--%>
 <script src="../../resources/js/bootstrap.min.js"></script>
 <script src="../../resources/js/owl.carousel.min.js"></script>
-
-<%--<script src="../../resources/js/bootstrap-datepicker.js"></script>--%>
 <script src="../../resources/js/jquery.waypoints.min.js"></script>
 <script src="../../resources/js/jquery.easing.1.3.js"></script>
-
 <script src="../../resources/js/select2.min.js"></script>
 <script src="../../resources/js/main.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
     <div class="container">
-        <a class="navbar-brand" href="../index.html"> KudKuda Home page </a>
+        <a class="navbar-brand" href="../index.html"> KudKuda Home </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu"
                 aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="ion-navicon"></i></span>

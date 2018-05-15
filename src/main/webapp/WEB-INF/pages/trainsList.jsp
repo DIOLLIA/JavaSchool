@@ -125,7 +125,7 @@
                 <h3 class="probootstrap_font-18 mb-3">Quick Links</h3>
                 <ul class="list-unstyled">
                     <li><a href="../index.html" target="_blank">Home</a></li>
-                    <li><a href="https://free-template.co" target="_blank">About</a></li>
+                    <li><a href="../about.html" target="_blank">About</a></li>
                     <li><a href="https://free-template.co" target="_blank">Services</a></li>
                     <li><a href="https://free-template.co" target="_blank">Contact</a></li>
                 </ul>
@@ -138,7 +138,7 @@
                     <small> (Don't remove credit link on this footer. See <a href="https://uicookies.com/license/">license</a>)
                     </small>
                 </p>
-                <p class="probootstrap_font-14">Demo Images: <a href="https://unsplash.com/"
+                <p class="probootstrap_font-14">Show sponsor <a href="https://unsplash.com/"
                                                                 target="_blank">Unsplash</a></p>
             </div>
         </div>
