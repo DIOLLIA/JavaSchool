@@ -51,15 +51,15 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
     <div class="container">
-        <a class="navbar-brand" href="index.html">KudKuda</a>
+        <a class="navbar-brand" href="index.html">KudKuda Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu"
                 aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="ion-navicon"></i></span>
         </button>
         <div class="collapse navbar-collapse" id="probootstrap-menu">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="city-guides.html">Contacts</a></li>
+                <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/train/list">Trains list</a></li>
+                <li class="nav-item"><a class="nav-link" href="http://localhost:8080/station/list">Station list</a></li>
                 <li class="nav-item"><a class="nav-link" href="travel.html">Sign in</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Log in</a></li>
             </ul>
@@ -77,10 +77,7 @@
         <div class="row align-items-center">
             <div class="col-md">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
-                <!--   <p class="lead mb-5 probootstrap-animate">Hope u like it! another free template by <a href="https://uicookies.com/" target="_blank">uicookies.com</a> Under License <a href="https://uicookies.com/license" target="_blank">CC 3.0</a></p>
-                 <p class="probootstrap-animate">
-                   <a href="onepage.html" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-3">See OnePage Verion</a>
-                 </p> -->
+                <p class="lead mb-4 probootstrap-animate"> <span style="color:#32CD32;">are you going? </span>
             </div>
             <div class="col-md probootstrap-animate">
                 <form action="#" class="probootstrap-form">
@@ -106,7 +103,6 @@
                                         <label for="station_to" style="width: 100%;">
                                             <select class="js-example-basic-single js-states form-control"
                                                     id="station_to" style="width: 100%;">
-                                                <%--todo foreach list of Tostations--%>
                                             </select>
                                         </label>
                                     </div>
@@ -138,13 +134,8 @@
                         </div>
                         <!-- END row -->
                         <div class="row">
-                            <div class="col-md">
-                                <label for="round" class="mr-5"><input type="radio" id="round" name="direction">
-                                    Round</label>
-                                <label for="oneway"><input type="radio" id="oneway" name="direction"> Oneway</label>
-                            </div>
-                            <div class="col-md">
-                                <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                            <div class="col-auto">
+                                <input type="submit" value="Search" class="btn btn-primary btn-block">
                             </div>
                         </div>
                     </div>

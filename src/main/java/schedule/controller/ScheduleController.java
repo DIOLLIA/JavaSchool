@@ -49,7 +49,6 @@ public class ScheduleController {
                         !stationTwoName.equals(departureStation)) {
                     continue;
                 }
-
                 ScheduleItem scheduleItem = new ScheduleItem();
                 scheduleItem.setDepartureTime(scheduleOne.getDepartureTime());
                 scheduleItem.setArrivalTime(scheduleTwo.getArrivalTime());
@@ -58,11 +57,9 @@ public class ScheduleController {
                 scheduleItem.setTrainNumber(scheduleOne.getTrainNumber().getNumberOfTrain());
                 scheduleItems.add(scheduleItem);
             }
-
         }
         modelAndView.addObject("searchResult", scheduleItems);
         return modelAndView;
-
     }
 
     @RequestMapping(value = "/search2", method = RequestMethod.GET)
@@ -87,5 +84,12 @@ public class ScheduleController {
         List<String> stationsNames = stationService.getStationsNames();
         stationsNames.remove(selectedFromStation);
         return new Gson().toJson(stationsNames);
+    }
+    @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.GET)
+    public ModelAndView searchOnStation() {
+
+        ModelAndView modelAndView = new ModelAndView("searchTrainOnStation");
+       // modelAndView.addObject("stationSearch", new StationSearch());
+        return modelAndView;
     }
 }
