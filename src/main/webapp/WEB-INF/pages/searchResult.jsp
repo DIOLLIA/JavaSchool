@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: KotoSovik
@@ -16,18 +17,20 @@
     <tr>
         <th width="10%">From</th>
         <th width="10%">Where</th>
-        <th width="10%">Route</th>
+        <th width="10%">Train number</th>
         <th width="10%">Departure Time</th>
+        <th width="10%">Arrival Time</th>
         <th width="10%">Actions</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="train" items="${schedules}">
+    <c:forEach var="scheduleItem" items="${searchResult}">
         <tr>
-            <td>${train.stationOfArrival}</td>
-            <td>${train.stationOfDeparture}</td>
-            <td>${train.route}</td>
-            <td>${train.departureTime}</td>
+            <td>${scheduleItem.stationOfDeparture}</td>
+            <td>${scheduleItem.stationOfArrival}</td>
+            <td>${scheduleItem.trainNumber}</td>
+            <td>${scheduleItem.departureTime}</td>
+            <td>${scheduleItem.arrivalTime}</td>
 
             <td><a href="${pageContext.request.contextPath}/train/edit/${train.id}.html">Edit</a><br/>
                 <a href="${pageContext.request.contextPath}/train/delete/${train.id}.html">Delete</a><br/></td>

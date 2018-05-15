@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Add train page</h1>
-<form:form method="POST" commandName="train" action="${pageContext.request.contextPath}/train/add.html">
+<form:form method="POST" commandName="train" action="${pageContext.request.contextPath}/train/add">
     <table>
         <tbody>
         <tr>
