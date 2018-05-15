@@ -5,14 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import schedule.controller.model.ScheduleItem;
 import schedule.controller.model.StationSearch;
 import schedule.model.Route;
 import schedule.model.Schedule;
-import schedule.model.Station;
 import schedule.service.api.RouteService;
 import schedule.service.api.ScheduleService;
 import schedule.service.api.StationService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,8 +36,31 @@ public class ScheduleController {
         // scheduleService.addSchedule(new Schedule());
         ModelAndView modelAndView = new ModelAndView("searchResult");
         List<Schedule> schedules = scheduleService.findStations(routes, arrivalStation, departureStation);
-        modelAndView.addObject("searchResult", schedules);
-        Station station = stationService.findByName(arrivalStation);
+
+        List<ScheduleItem> scheduleItems = new ArrayList<>();
+        for (Schedule scheduleOne : schedules) {
+            String stationOneName = scheduleOne.getStationName().getStationName();
+            if (stationOneName.equals(departureStation)) {
+                continue;
+            }
+            for (Schedule scheduleTwo : schedules) {
+                String stationTwoName = scheduleTwo.getStationName().getStationName();
+                if (scheduleOne.getRouteDailyId() != scheduleTwo.getRouteDailyId() ||
+                        !stationTwoName.equals(departureStation)) {
+                    continue;
+                }
+
+                ScheduleItem scheduleItem = new ScheduleItem();
+                scheduleItem.setDepartureTime(scheduleOne.getDepartureTime());
+                scheduleItem.setArrivalTime(scheduleTwo.getArrivalTime());
+                scheduleItem.setStationOfDeparture(stationOneName);
+                scheduleItem.setStationOfArrival(stationTwoName);
+                scheduleItem.setTrainNumber(scheduleOne.getTrainNumber().getNumberOfTrain());
+                scheduleItems.add(scheduleItem);
+            }
+
+        }
+        modelAndView.addObject("searchResult", scheduleItems);
         return modelAndView;
 
     }
@@ -59,7 +83,7 @@ public class ScheduleController {
 
     @GetMapping(value = "/get-stations/{selectedFromStation}")
     @ResponseBody
-    public String getStationsNamesTest(@PathVariable(value="selectedFromStation") String selectedFromStation) {
+    public String getStationsNamesTest(@PathVariable(value = "selectedFromStation") String selectedFromStation) {
         List<String> stationsNames = stationService.getStationsNames();
         stationsNames.remove(selectedFromStation);
         return new Gson().toJson(stationsNames);

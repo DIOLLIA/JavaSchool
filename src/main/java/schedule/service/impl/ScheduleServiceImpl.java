@@ -16,7 +16,6 @@ import schedule.model.Train;
 import schedule.service.api.ScheduleService;
 
 import javax.transaction.Transactional;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,8 +53,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public void addSchedule(Schedule schedule) {
         Schedule schedule2 = new Schedule();
-        schedule2.setArrivalTime(LocalTime.of(9, 30));
-        schedule2.setDepartureTime(LocalTime.of(10, 10));
+       // schedule2.setArrivalTime(LocalTime.);
+       // schedule2.setDepartureTime(LocalTime.of(10, 10));
         schedule2.setRouteName(new Route());
         schedule2.setTrainNumber(new Train());
         schedule2.setStationName(new Station());

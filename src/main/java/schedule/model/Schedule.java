@@ -1,10 +1,12 @@
 package schedule.model;
 
-import java.time.LocalTime;
+
+import org.joda.time.LocalTime;
 
 public class Schedule {
     private int id;
 
+    private int routeDailyId;
     private LocalTime arrivalTime;
 
     private LocalTime departureTime;
@@ -71,5 +73,13 @@ public class Schedule {
 
     public void setTimeInterval(Integer timeInterval) {
         this.timeInterval = timeInterval;
+    }
+
+    public int getRouteDailyId() {
+        return routeDailyId;
+    }
+
+    public void setRouteDailyId(int routeDailyId) {
+        this.routeDailyId = routeDailyId;
     }
 }

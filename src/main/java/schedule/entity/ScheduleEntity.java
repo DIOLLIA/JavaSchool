@@ -1,7 +1,9 @@
 package schedule.entity;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalTime;
+
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "schedule")
@@ -11,17 +13,21 @@ public class ScheduleEntity {
     @Column(name = "id")
     private int id;
 
-   // @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
-    // @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
-   //@Type(type = " java.time.LocalTime")  // org.hibernate.MappingException: Could not determine type for:  java.time.LocalTime
-    @Column(name = "arrival_time")
-    private Date arrivalTime;
+    private int routeDailyId;
 
-   // @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
+    // @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
+    // @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
+    //@Type(type = " java.time.LocalTime")  // org.hibernate.MappingException: Could not determine type for:  java.time.LocalTime
+    @Column(name = "arrival_time")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
+    private LocalTime arrivalTime;
+
+    // @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
     //  @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
-   // @Type(type = " java.time.LocalTime")  // org.hibernate.MappingException: Could not determine type for:  java.time.LocalTime
+    // @Type(type = " java.time.LocalTime")  // org.hibernate.MappingException: Could not determine type for:  java.time.LocalTime
     @Column(name = "departure_time")
-    private Date departureTime;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
+    private LocalTime departureTime;
 
     @ManyToOne
     // @JoinColumn(name = "station_name")
@@ -46,19 +52,19 @@ public class ScheduleEntity {
         this.id = id;
     }
 
-    public Date getArrivalTime() {
+    public LocalTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(Date arrivalTime) {
+    public void setArrivalTime(LocalTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    public Date getDepartureTime() {
+    public LocalTime getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(Date departureTime) {
+    public void setDepartureTime(LocalTime departureTime) {
         this.departureTime = departureTime;
     }
 
@@ -92,5 +98,13 @@ public class ScheduleEntity {
 
     public void setTimeInterval(Integer timeInterval) {
         this.timeInterval = timeInterval;
+    }
+
+    public int getRouteDailyId() {
+        return routeDailyId;
+    }
+
+    public void setRouteDailyId(int routeDailyId) {
+        this.routeDailyId = routeDailyId;
     }
 }
