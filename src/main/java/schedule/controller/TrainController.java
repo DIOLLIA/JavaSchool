@@ -3,6 +3,7 @@ package schedule.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,6 +47,20 @@ public class TrainController {
         modelAndView.addObject("trains", trains);
 
         String message = "Train was successfully added.";
+        modelAndView.addObject("message", message);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/delete/{train.id}",method = RequestMethod.GET)
+//    public ModelAndView deleteTrain(@ModelAttribute int trainId) {
+    public ModelAndView deleteTrain(@PathVariable(value = "train.id") int trainId) {
+//        trainService.deleteTrain(trainId);
+        trainService.deleteTrain(trainId);
+        String message = "Train was successfully deleted.";
+        ModelAndView modelAndView = new ModelAndView("trainsList");
+        List<Train> trains = trainService.getTrains();
+        modelAndView.addObject("trains", trains);
         modelAndView.addObject("message", message);
 
         return modelAndView;

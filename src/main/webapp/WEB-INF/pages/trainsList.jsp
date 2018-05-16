@@ -100,7 +100,7 @@
                             <td>${train.numberOfTrain}</td>
                             <td>${train.seats}</td>
                             <td><a href="${pageContext.request.contextPath}/train/edit/${train.id}.html">Edit</a>
-                                <a href="${pageContext.request.contextPath}/train/delete/${train.id}.html">Delete</a><br/>
+                                <a href="${pageContext.request.contextPath}/train/delete/${train.id}">Delete</a><br/>
                             </td>
                         </tr>
                     </c:forEach>

@@ -19,7 +19,8 @@ public class TrainDaoImpl extends GeneralCrudDaoImpl<TrainEntity> implements Tra
     }
 
     public void deleteTrain(int id) {
-
+        TrainEntity trainEntity = (TrainEntity) getCurrentSession().get(TrainEntity.class, id);
+        getCurrentSession().delete(trainEntity);
     }
 
     @SuppressWarnings("unchecked")

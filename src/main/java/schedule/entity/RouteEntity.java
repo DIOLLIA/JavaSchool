@@ -15,7 +15,7 @@ public class RouteEntity {
     @Column(name = "route_name")
     private String routeName;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
    // @ElementCollection()
     @Column(name = "station_name")
     private List<StationEntity> stationsList;

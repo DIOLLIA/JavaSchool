@@ -1,5 +1,7 @@
 package schedule.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalTime;
 
@@ -29,18 +31,19 @@ public class ScheduleEntity {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
     private LocalTime departureTime;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     // @JoinColumn(name = "station_name")
     private StationEntity stationName;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     //  @JoinColumn(name = "train_number_id")
     private TrainEntity trainNumber;
 
 
     private Integer timeInterval;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     // @JoinColumn(name = "route_id")
     private RouteEntity routeName;
 
