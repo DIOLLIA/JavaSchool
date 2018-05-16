@@ -17,16 +17,10 @@ public class ScheduleEntity {
 
     private int routeDailyId;
 
-    // @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
-    // @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
-    //@Type(type = " java.time.LocalTime")  // org.hibernate.MappingException: Could not determine type for:  java.time.LocalTime
     @Column(name = "arrival_time")
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
     private LocalTime arrivalTime;
 
-    // @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
-    //  @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalTimeAsTime")
-    // @Type(type = " java.time.LocalTime")  // org.hibernate.MappingException: Could not determine type for:  java.time.LocalTime
     @Column(name = "departure_time")
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
     private LocalTime departureTime;
@@ -39,7 +33,6 @@ public class ScheduleEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     //  @JoinColumn(name = "train_number_id")
     private TrainEntity trainNumber;
-
 
     private Integer timeInterval;
 

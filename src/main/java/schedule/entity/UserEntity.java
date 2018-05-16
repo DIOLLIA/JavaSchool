@@ -19,8 +19,7 @@ public class UserEntity {
     private String surname;
 
     @Column(name = "birthDaY")
-//     @Temporal(TemporalType.DATE) //не работает?
-     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDate")
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDate")
     private LocalDate birthDaY;
 
     @Column(name = "password")
@@ -29,8 +28,8 @@ public class UserEntity {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "role")
-    private String role;
+    @ManyToOne
+    private RoleEntity role;
 
     public int getId() {
         return id;
@@ -80,11 +79,11 @@ public class UserEntity {
         this.email = email;
     }
 
-    public String getRole() {
+    public RoleEntity getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleEntity role) {
         this.role = role;
     }
 

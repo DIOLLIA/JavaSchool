@@ -88,3 +88,10 @@ INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, t
 VALUES (18, '22:00', '22:20', 2, 1, 1, 3, 1);
 INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
 VALUES (19, '23:00', '23:12', 2, 1, 1, 4, 1);
+
+INSERT INTO railways.role (id, role) VALUES (1, 'admin');
+INSERT INTO railways.role (id, role) VALUES (2, 'user');
+
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (1, '1993-05-27', 'sobaka@soboki.net', 'Kotopes', 'kotopes', 'Pesokot', 2);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (2, '1996-09-07', 'netumila@milo.com', 'Vasilii', 'vasilii', 'Katap', 2);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (3, '1993-06-17', 'kakoeto@milo.de', 'admin', 'admin', 'Onjeadmin', 1);
