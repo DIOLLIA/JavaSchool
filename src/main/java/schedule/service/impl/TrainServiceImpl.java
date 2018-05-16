@@ -29,7 +29,8 @@ public class TrainServiceImpl implements TrainService {
     }
 
     public void editTrain(int id) {
-        trainDao.getTrain(id);
+        trainDao.editTrain(id);
+
     }
 
     public void deleteTrain(int id) {
@@ -44,7 +45,14 @@ public class TrainServiceImpl implements TrainService {
         for (TrainEntity trainEntity : all) {
             trains.add(modelMapper.map(trainEntity, Train.class));
         }
-
         return trains;
+    }
+
+    @Override
+    public Train get(int id) {
+        TrainEntity trainEntity = trainDao.getTrain(id);
+        Train train=modelMapper.map(trainEntity, Train.class);
+        return train;
+
     }
 }

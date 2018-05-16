@@ -1,11 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Trains list page</title>
+    <title>Edit train page</title>
     <meta name="description" content="find tickets ob KudKuda.rus">
     <meta name="keywords" content="find tickets, find trains, schedule of trains, stations list">
 
@@ -73,42 +74,30 @@
 
 
 <section class="probootstrap-cover overflow-hidden relative"
-         style="background-image: url('/resources/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
+         style="background-image: url('/resources/images/img_5.jpg');" data-stellar-background-ratio="0.5"
          id="section-home">
     <div class="overlay"></div>
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                    <div>
-                        <h2 class="display-8 probootstrap-section-heading">${message}</h2>
-                    </div>
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Trains</h2>
-                <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="50%">
-                    <thead>
-                    <tr>
-                       <%-- <th width="5%">Number</th>
-                        <th width="7%">Seats</th>
-                        <th width="7%">Actions</th>--%>
-                           <th width="10%">Number</th>
-                           <th width="20%">Seats</th>
-                           <th width="20%">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="train" items="${trains}">
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Edit Train</h2>
+                <form:form method="POST" modelAttribute="train" action="${pageContext.request.contextPath}/train/editsave">
+                    <table class="table_add" border="0px" cellpadding="" cellspacing="0">
+                        <tbody>
                         <tr>
-                            <td>${train.numberOfTrain}</td>
-                            <td>${train.seats}</td>
-                            <td><a href="${pageContext.request.contextPath}/train/edit/${train.id}">Edit</a>
-                                <a href="${pageContext.request.contextPath}/train/delete/${train.id}">Delete</a><br/>
-                            </td>
+                            <td>Number:</td>
+                            <td><form:input path="numberOfTrain" /></td>
                         </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-                <br>
-                <input  type="submit" class="btn btn-primary" value="add train"
-                       onclick="location='add';"/>
+                        <tr>
+                            <td>Seats:</td>
+                            <td><form:input path="seats"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <input  type="submit" class="btn btn-primary" value="modify"
+                            onclick="location='list';"/>
+                </form:form>
             </div>
         </div>
     </div>

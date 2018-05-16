@@ -14,5 +14,7 @@ public interface TrainService {
 
     List<Train> getTrains();
 
+    Train get(int id);
+
 }
 

@@ -14,8 +14,17 @@ public class TrainDaoImpl extends GeneralCrudDaoImpl<TrainEntity> implements Tra
     }
 
     public TrainEntity getTrain(int id) {
-        TrainEntity train = (TrainEntity) getCurrentSession().get(TrainEntity.class, id);
-        return train;
+     TrainEntity trainEntity=(TrainEntity)  getCurrentSession().get(TrainEntity.class,id);
+     return trainEntity;
+    }
+
+    @Override
+    public TrainEntity editTrain(int id) {
+   TrainEntity train=(TrainEntity) getCurrentSession().get(TrainEntity.class,id);
+        TrainEntity existingTrain =train;
+        existingTrain.setNumberOfTrain(train.getNumberOfTrain());
+        existingTrain.setNumberOfTrain(train.getNumberOfTrain());
+        return existingTrain;
     }
 
     public void deleteTrain(int id) {

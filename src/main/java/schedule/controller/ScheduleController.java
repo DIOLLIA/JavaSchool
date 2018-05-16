@@ -85,6 +85,7 @@ public class ScheduleController {
         stationsNames.remove(selectedFromStation);
         return new Gson().toJson(stationsNames);
     }
+
     @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.GET)
     public ModelAndView searchOnStation() {
 

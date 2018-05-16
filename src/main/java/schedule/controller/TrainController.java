@@ -2,10 +2,7 @@ package schedule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.model.Train;
 import schedule.service.api.TrainService;
@@ -52,14 +49,37 @@ public class TrainController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/delete/{train.id}",method = RequestMethod.GET)
-//    public ModelAndView deleteTrain(@ModelAttribute int trainId) {
+    @RequestMapping(value = "/delete/{train.id}")
     public ModelAndView deleteTrain(@PathVariable(value = "train.id") int trainId) {
-//        trainService.deleteTrain(trainId);
         trainService.deleteTrain(trainId);
         String message = "Train was successfully deleted.";
         ModelAndView modelAndView = new ModelAndView("trainsList");
         List<Train> trains = trainService.getTrains();
+        modelAndView.addObject("trains", trains);
+        modelAndView.addObject("message", message);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/edit/{train.id}", method = RequestMethod.GET)
+    public ModelAndView editTrain(@PathVariable(value = "train.id") int trainId) {
+
+        ModelAndView modelAndView = new ModelAndView("editTrain");
+        modelAndView.addObject("train", trainService.get(trainId));
+
+//        modelAndView.addObject("trains", trains);
+
+        return modelAndView;
+    }
+//todo не работает
+    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
+    public ModelAndView editTrainSave(@ModelAttribute("train") Train train ,/*@PathVariable ("id") int trainId*/ @RequestParam ("id") int trainId) {
+        trainService.editTrain(trainId);
+        String message = "Train was successfully modified.";
+
+        ModelAndView modelAndView = new ModelAndView("trainsList");
+        List<Train> trains = trainService.getTrains();
+
         modelAndView.addObject("trains", trains);
         modelAndView.addObject("message", message);
 
