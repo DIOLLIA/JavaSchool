@@ -53,7 +53,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
     <div class="container">
-        <a class="navbar-brand" href="../index.html"> KudKuda Home page </a>
+        <a class="navbar-brand" href="../index.html"> KudKuda Home </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu"
                 aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="ion-navicon"></i></span>
@@ -79,15 +79,19 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                <%--
-                                <h2 class="heading mb-2 display-4 font-light probootstrap-animate fadeInUp probootstrap-animated">Trains</h2>
-                --%> <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Trains</h2>
-                <table class="table_price" border="0px" cellpadding="" cellspacing="0">
+                    <div>
+                        <h2 class="display-8 probootstrap-section-heading">${message}</h2>
+                    </div>
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Trains</h2>
+                <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="50%">
                     <thead>
                     <tr>
-                        <th width="10%">Number</th>
-                        <th width="10%">Seats</th>
-                        <th width="10%">Actions</th>
+                       <%-- <th width="5%">Number</th>
+                        <th width="7%">Seats</th>
+                        <th width="7%">Actions</th>--%>
+                           <th width="10%">Number</th>
+                           <th width="20%">Seats</th>
+                           <th width="20%">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -103,14 +107,9 @@
                     </tbody>
                 </table>
                 <br>
-
-                <h2>${message}</h2>
-                <br>
-                <input type="submit" class="btn btn-primary" value="add train"
+                <input  type="submit" class="btn btn-primary" value="add train"
                        onclick="location='add';"/>
             </div>
-
-
         </div>
     </div>
 
@@ -120,26 +119,39 @@
 
 <footer class="probootstrap_section probootstrap-border-top">
     <div class="container">
+        <h3 class="probootstrap_font-18 mb-3">Links</h3>
         <div class="row mb-5">
             <div class="col-md-3">
-                <h3 class="probootstrap_font-18 mb-3">Quick Links</h3>
+                <h3 class="probootstrap_font-18 mb-3"></h3>
                 <ul class="list-unstyled">
-                    <li><a href="../index.html" target="_blank">Home</a></li>
-                    <li><a href="../about.html" target="_blank">About</a></li>
-                    <li><a href="https://free-template.co" target="_blank">Services</a></li>
-                    <li><a href="https://free-template.co" target="_blank">Contact</a></li>
+                    <li><a href="../index.html">Home</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3">
+                <h3 class="probootstrap_font-18 mb-3"></h3>
+                <ul class="list-unstyled">
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h3 class="probootstrap_font-18 mb-3"></h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://free-template.co" target="_blank">??????????</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h3 class="probootstrap_font-18 mb-3"></h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://free-template.co" target="_blank">??????????</a></li>
                 </ul>
             </div>
         </div>
-        <div class="row pt-5">
+        <div class="row pt-1">
             <div class="col-md-12 text-center">
-                <p class="probootstrap_font-14">&copy; 2017. All Rights Reserved. <br> Designed &amp; Developed by <a
-                        href="https://uicookies.com/" target="_blank">uiCookies</a>
-                    <small> (Don't remove credit link on this footer. See <a href="https://uicookies.com/license/">license</a>)
-                    </small>
-                </p>
-                <p class="probootstrap_font-14">Show sponsor <a href="https://unsplash.com/"
-                                                                target="_blank">Unsplash</a></p>
+                <p class="probootstrap_font-22">Show sponsor <a href="https://t-systems.com/"
+                                                                target="_blank"><span
+                        style="color:#E20074;">T-Systems</span></a></p>
             </div>
         </div>
     </div>
