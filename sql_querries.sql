@@ -95,3 +95,4 @@ INSERT INTO railways.role (id, role) VALUES (2, 'user');
 INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (1, '1993-05-27', 'sobaka@soboki.net', 'Kotopes', 'kotopes', 'Pesokot', 2);
 INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (2, '1996-09-07', 'netumila@milo.com', 'Vasilii', 'vasilii', 'Katap', 2);
 INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (3, '1993-06-17', 'kakoeto@milo.de', 'admin', 'admin', 'Onjeadmin', 1);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (4, '1983-06-17', 'kud@ku.da', 'admin', 'kudkuda', 'Onjeadmin', 1);

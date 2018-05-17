@@ -2,7 +2,10 @@ package schedule.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.model.Train;
 import schedule.service.api.TrainService;
@@ -72,9 +75,12 @@ public class TrainController {
         return modelAndView;
     }
 //todo не работает
+    //todo rename method and url to "save"
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public ModelAndView editTrainSave(@ModelAttribute("train") Train train ,/*@PathVariable ("id") int trainId*/ @RequestParam ("id") int trainId) {
-        trainService.editTrain(trainId);
+    public ModelAndView editTrainSave(@ModelAttribute("train") Train train /*,
+            @PathVariable ("id") int trainId*/
+            /* @RequestParam ("id") int trainId*/) {
+        trainService.editTrain(train.getId());
         String message = "Train was successfully modified.";
 
         ModelAndView modelAndView = new ModelAndView("trainsList");

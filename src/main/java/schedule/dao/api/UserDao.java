@@ -13,5 +13,5 @@ public interface UserDao extends GeneralCrudDao<UserEntity> {
 
     List<UserEntity> listOfUsers();
 
-
+    boolean findUser(String name, String pswd);
 }

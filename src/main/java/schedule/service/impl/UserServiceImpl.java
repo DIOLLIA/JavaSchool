@@ -41,6 +41,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean userExist(String name, String pswd) {
+        boolean validUser = userDao.findUser(name, pswd);
+        return validUser;
+    }
+
+    @Override
     public void editUser(User user) {
         UserEntity userEntity = modelMapper.map(user, UserEntity.class);
         userDao.editUser(userEntity);

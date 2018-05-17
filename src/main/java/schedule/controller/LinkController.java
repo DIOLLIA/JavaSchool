@@ -21,4 +21,5 @@ public class LinkController {
     public ModelAndView aboutPage() {
         return new ModelAndView("about");
     }
+
 }

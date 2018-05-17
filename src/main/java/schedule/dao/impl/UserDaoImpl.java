@@ -1,5 +1,6 @@
 package schedule.dao.impl;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import schedule.dao.api.UserDao;
 import schedule.entity.UserEntity;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Repository
 public class UserDaoImpl extends GeneralCrudDaoImpl<UserEntity> implements UserDao {
+
 
     @Override
     public void addUser(UserEntity user) {
@@ -18,6 +20,24 @@ public class UserDaoImpl extends GeneralCrudDaoImpl<UserEntity> implements UserD
     @Override
     public List<UserEntity> listOfUsers() {
         return getCurrentSession().createQuery("from UserEntity ").list();
+    }
+
+    @Override
+    public boolean findUser(String name, String pswd) {
+        Query query = getCurrentSession().createQuery("from UserEntity ue where ue.email LIKE :name and ue.password LIKE :pswd ");
+        query.setParameter("name", name);
+        query.setParameter("pswd", pswd);
+        boolean userIsFind = false;
+        try {
+            List userObj = query.list();
+            if (userObj != null && userObj.size() > 0) {
+                userIsFind = true;
+            }
+        } catch (Exception e) {
+            userIsFind = false;
+            //logg
+        }
+        return userIsFind;
     }
 
     @Override

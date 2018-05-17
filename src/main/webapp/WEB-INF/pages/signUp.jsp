@@ -57,7 +57,8 @@
         </button>
         <div class="collapse navbar-collapse" id="probootstrap-menu">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/train/list">Trains list</a></li>
+                <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/train/list">Trains list</a>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="http://localhost:8080/station/list">Station list</a></li>
                 <li class="nav-item"><a class="nav-link" href="http://localhost:8080/user/signIn">Sign in</a></li>
                 <li class="nav-item"><a class="nav-link" href="http://localhost:8080/user/signUp">Sign up</a></li>
@@ -75,7 +76,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md">
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda <br> Registration</h2>
             </div>
             <div class="col-md-6  probootstrap-animate">
                 <form action="#" method="post" class="probootstrap-form probootstrap-form-box mb60">
@@ -95,39 +96,84 @@
                                        placeholder="Password" required>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="sr-only sr-only-focusable">First name</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                       placeholder="Name" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="surname" class="sr-only sr-only-focusable">Surname</label>
+                                <input type="text" class="form-control" id="surname" name="surname"
+                                       placeholder="Surname" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email" class="sr-only sr-only-focusable">E-mail</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                       placeholder="email" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="birthDay" class="sr-only sr-only-focusable">Birth Day</label>
+                                <input type="date" class="form-control" id="birthDay" name="birthDay"
+                                       placeholder="Date of Birth
+" required>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                            <input type="submit" class="btn btn-primary" id="submit" name="submit" value="LogIn">
+                        <input type="submit" class="btn btn-primary" id="submit" name="submit" value="LogIn">
                     </div>
+                </form>
             </div>
         </div>
+    </div>
 </section>
 <!-- END section -->
 
-
 <footer class="probootstrap_section probootstrap-border-top">
     <div class="container">
+        <h3 class="probootstrap_font-18 mb-3">Links</h3>
         <div class="row mb-5">
             <div class="col-md-3">
-                <h3 class="probootstrap_font-18 mb-3">Quick Links</h3>
+                <h3 class="probootstrap_font-18 mb-3"></h3>
                 <ul class="list-unstyled">
-                    <li><a href="https://free-template.co" target="_blank">Home</a></li>
-                    <li><a href="https://free-template.co" target="_blank">About</a></li>
-                    <li><a href="https://free-template.co" target="_blank">Services</a></li>
-                    <li><a href="https://free-template.co" target="_blank">Contact</a></li>
+                    <li><a href="../index.html">Home</a></li>
                 </ul>
             </div>
 
+            <div class="col-md-3">
+                <h3 class="probootstrap_font-18 mb-3"></h3>
+                <ul class="list-unstyled">
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h3 class="probootstrap_font-18 mb-3"></h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://free-template.co" target="_blank">??????????</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h3 class="probootstrap_font-18 mb-3"></h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://free-template.co" target="_blank">??????????</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="row pt-5">
+        <div class="row pt-1">
             <div class="col-md-12 text-center">
-                <p class="probootstrap_font-14">&copy; 2017. All Rights Reserved. <br> Designed &amp; Developed by <a
-                        href="https://uicookies.com/" target="_blank">uiCookies</a>
-                    <small> (Don't remove credit link on this footer. See <a href="https://uicookies.com/license/">license</a>)
-                    </small>
-                </p>
-                <p class="probootstrap_font-14">Demo Images: <a href="https://unsplash.com/"
-                                                                target="_blank">Unsplash</a></p>
+                <p class="probootstrap_font-22">Show sponsor <a href="https://t-systems.com/"
+                                                                target="_blank"><span
+                        style="color:#E20074;">T-Systems</span></a></p>
             </div>
         </div>
     </div>

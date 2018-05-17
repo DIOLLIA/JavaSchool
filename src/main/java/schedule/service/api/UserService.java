@@ -13,4 +13,6 @@ public interface UserService {
 
     List<User> getUsers();
 
+    boolean userExist(String name, String pswd);
+
 }
