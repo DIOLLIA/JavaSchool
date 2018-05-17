@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,7 +82,7 @@
                 <p class="lead mb-4 probootstrap-animate"><span style="color:#32CD32;">are you going? </span>
             </div>
             <div class="col-md probootstrap-animate">
-                <form action="#" class="probootstrap-form">
+                <form:form  method="POST" modelAttribute="stationSearch" action="${pageContext.request.contextPath}/result" class="probootstrap-form"> <%-- добавили form: --%>
                     <div class="form-group">
                         <div class="row mb-3">
                             <div class="col-md">
@@ -114,7 +115,7 @@
                         <div class="row mb-5">
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="probootstrap-date-departure">Departure</label>
+                                    <label for="probootstrap-date-departure">Departure date</label>
                                     <div class="probootstrap-date-wrap">
                                         <span class="icon ion-calendar"></span>
                                         <input type="text" id="probootstrap-date-departure" class="form-control"
@@ -124,10 +125,10 @@
                             </div>
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="probootstrap-date-arrival">Arrival</label>
+                                    <label for="departure-time">Departure time</label>
                                     <div class="probootstrap-date-wrap">
                                         <span class="icon ion-calendar"></span>
-                                        <input type="text" id="probootstrap-date-arrival" class="form-control"
+                                        <input type="time" id="departure-time" value="now" class="form-control"
                                                placeholder="">
                                     </div>
                                 </div>
@@ -140,7 +141,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </form:form> <%-- добавили form: --%>
             </div>
         </div>
     </div>

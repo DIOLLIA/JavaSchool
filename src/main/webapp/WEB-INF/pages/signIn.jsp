@@ -87,7 +87,7 @@
                             <div class="form-group">
                                 <label for="username" class="sr-only sr-only-focusable">Login</label>
                                 <input type="text" class="form-control" id="username" name="username"
-                                       placeholder="Login" required>
+                                       placeholder="Login (e-mail)" required>
                             </div>
                         </div>
                         <div class="col-md-6">

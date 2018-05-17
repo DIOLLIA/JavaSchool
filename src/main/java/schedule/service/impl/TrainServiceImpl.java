@@ -28,8 +28,9 @@ public class TrainServiceImpl implements TrainService {
         return modelMapper.map(trainEntity, Train.class);
     }
 
-    public void editTrain(int id) {
-        trainDao.editTrain(id);
+    public void editTrain(Train trainDto) {
+        TrainEntity trainEntity = modelMapper.map(trainDto, TrainEntity.class);
+        trainDao.editTrain(trainEntity);
 
     }
 

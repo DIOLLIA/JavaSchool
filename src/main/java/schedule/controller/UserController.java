@@ -1,6 +1,8 @@
 package schedule.controller;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,18 +71,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam("username")String username, @RequestParam("password")String password) {
+    public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password) {
         boolean isValid;
         String msg;
-        isValid= userService.userExist(username,password);
+        isValid = userService.userExist(username, password);
         if (isValid) {
             msg = "Welcome " + username + "!";
-        }
-        else {
-            msg="Incorrect username or password!";
+        } else {
+            msg = "Incorrect username or password!";
         }
         ModelAndView modelAndView = new ModelAndView("signIn");
-       modelAndView.addObject("msg", msg);
+        modelAndView.addObject("msg", msg);
         return modelAndView;
 
     }
@@ -90,9 +91,24 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("signIn");
         return modelAndView;
     }
+
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     public ModelAndView signIn() {
         ModelAndView modelAndView = new ModelAndView("signUp");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/signUp", method = RequestMethod.POST)
+         public ModelAndView register(@RequestParam("email") String email, @RequestParam("name")String name, @RequestParam("surname")String surname, @RequestParam("password") String password, @RequestParam("birthDay") @DateTimeFormat(pattern = "ddMMyyyy") LocalDate birthDay ) {
+//    public ModelAndView register(@ModelAttribute("user") User user) {
+//        userService.addUser(new User());
+      //  userService.addUser(user);
+        String msg;
+
+  //      msg = "Welcome " + user.getName() + "!";
+
+        ModelAndView modelAndView = new ModelAndView("home");
+    //    modelAndView.addObject("msg", msg);
         return modelAndView;
     }
 }

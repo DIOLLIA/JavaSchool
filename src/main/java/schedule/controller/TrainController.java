@@ -74,13 +74,14 @@ public class TrainController {
 
         return modelAndView;
     }
-//todo не работает
+
+    //todo не работает
     //todo rename method and url to "save"
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
     public ModelAndView editTrainSave(@ModelAttribute("train") Train train /*,
             @PathVariable ("id") int trainId*/
             /* @RequestParam ("id") int trainId*/) {
-        trainService.editTrain(train.getId());
+        trainService.editTrain(train);
         String message = "Train was successfully modified.";
 
         ModelAndView modelAndView = new ModelAndView("trainsList");

@@ -8,7 +8,7 @@ public interface TrainService {
 
     Train addTrain(Train train);
 
-    void editTrain(int id);
+    void editTrain(Train train);
 
     void deleteTrain(int id);
 

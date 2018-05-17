@@ -27,7 +27,7 @@ public class ScheduleController {
     @Autowired
     RouteService routeService;
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @RequestMapping(value = "/result", method = RequestMethod.POST)
     public ModelAndView findSchedule(@ModelAttribute("stationSearch") StationSearch stationSearch) {
         String arrivalStation = stationSearch.getArrivalStation();
         String departureStation = stationSearch.getDepartureStation();
