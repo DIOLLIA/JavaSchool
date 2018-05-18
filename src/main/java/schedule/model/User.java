@@ -6,21 +6,21 @@ public class User {
 
     private int id;
 
-   // @Size(min = 2, max = 20, message = "Name should not be less than 2 symbols")
+    // @Size(min = 2, max = 20, message = "Name should not be less than 2 symbols")
     private String name;
 
     //@Size(min = 2, max = 50, message = "Surname should not be less than 2 symbols")
     private String surname;
 
-   //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDay;
 
-    private String role;
+    private Role role;
 
-   // @Size(min = 6, max = 30, message = "Password should not be less than 6 symbols")
+    // @Size(min = 6, max = 30, message = "Password should not be less than 6 symbols")
     private String password;
 
-   // @Email(message = "Email should be valid")
+    // @Email(message = "Email should be valid")
     private String email;
 
     public int getId() {
@@ -55,11 +55,11 @@ public class User {
         this.birthDay = birthDay;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

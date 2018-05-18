@@ -31,7 +31,6 @@ public class TrainServiceImpl implements TrainService {
     public void editTrain(Train trainDto) {
         TrainEntity trainEntity = modelMapper.map(trainDto, TrainEntity.class);
         trainDao.editTrain(trainEntity);
-
     }
 
     public void deleteTrain(int id) {

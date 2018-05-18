@@ -9,7 +9,7 @@ public interface TrainDao extends GeneralCrudDao<TrainEntity> {
 
     TrainEntity getTrain(int id);
 
-    TrainEntity editTrain(TrainEntity trainEntity);
+    void editTrain(TrainEntity trainEntity);
 
     void deleteTrain(int id);
 

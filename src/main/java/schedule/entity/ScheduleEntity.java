@@ -17,6 +17,8 @@ public class ScheduleEntity {
 
     private int routeDailyId;
 
+    private int routeStationIndex;
+
     @Column(name = "arrival_time")
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
     private LocalTime arrivalTime;
@@ -102,5 +104,13 @@ public class ScheduleEntity {
 
     public void setRouteDailyId(int routeDailyId) {
         this.routeDailyId = routeDailyId;
+    }
+
+    public int getRouteStationIndex() {
+        return routeStationIndex;
+    }
+
+    public void setRouteStationIndex(int routeStationIndex) {
+        this.routeStationIndex = routeStationIndex;
     }
 }

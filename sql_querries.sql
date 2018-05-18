@@ -49,50 +49,54 @@ INSERT INTO railways.routes_stations (routes_id, stationsList_id) VALUES (5, 6);
 INSERT INTO railways.routes_stations (routes_id, stationsList_id) VALUES (5, 7);
 
 
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (1, '09:00', '09:20', 1, 1, 1, 1, 1);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (2, '09:00', '09:20', 1, 1, 1, 2, 1);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (3, '12:00', '12:20', 1, 1, 1, 3, 1);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (4, '16:00', '16:12', 1, 1, 1, 4, 1);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (5, '18:00', '18:20', 3, 1, 2, 9, 2);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (6, '20:00', '20:20', 3, 1, 2, 3, 2);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (7, '22:00', '20:20', 3, 1, 2, 6, 2);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (8, '15:00', '15:20', 4, 1, 3, 11, 3);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (9, '17:00', '17:20', 4, 1, 3, 3, 3);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (10, '19:00', '19:25', 4, 1, 3, 10, 3);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (11, '19:00', '19:25', 5, 1, 4, 8, 4);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (12, '19:00', '19:25', 5, 1, 4, 6, 4);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (13, '19:00', '19:25', 6, 1, 5, 5, 5);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (14, '19:00', '19:25', 6, 1, 5, 6, 5);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (15, '19:00', '19:25', 6, 1, 5, 7, 5);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (1, NULL, '09:20', 1, 1, 1, 1, 1, 1);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (2, '09:00', '09:20', 1, 2, 1, 1, 2, 1);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (3, '12:00', '12:20', 1, 3, 1, 1, 3, 1);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (4, '16:00', NULL, 1, 4, 1, 1, 4, 1);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (5, NULL, '18:20', 3, 1, 1, 2, 9, 2);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (6, '20:00', '20:20', 3, 2, 1, 2, 3, 2);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (7, '22:00', NULL, 3, 3, 1, 2, 6, 2);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (8, NULL, '15:20', 4, 1, 1, 3, 11, 3);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (9, '17:00', '17:20', 4, 2, 1, 3, 3, 3);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (10, '19:00', NULL, 4, 3, 1, 3, 10, 3);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (11, NULL, '19:25', 5, 1, 1, 4, 8, 4);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (12, '19:00', NULL, 5, 2, 1, 4, 6, 4);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (13, NULL, '19:25', 6, 1, 1, 5, 5, 5);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (14, '19:00', '19:25', 6, 2, 1, 5, 6, 5);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (15, '19:00', NULL, 6, 3, 1, 5, 7, 5);
 
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (16, '19:00', '19:20', 2, 1, 1, 1, 1);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
+/*INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId,routeStationIndex, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (16, NULL, '19:20', 2,1, 1, 1, 1, 1);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
 VALUES (17, '19:00', '19:20', 2, 1, 1, 2, 1);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
 VALUES (18, '22:00', '22:20', 2, 1, 1, 3, 1);
-INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, timeInterval, routeName_id, stationName_id, trainNumber_id)
-VALUES (19, '23:00', '23:12', 2, 1, 1, 4, 1);
+INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
+VALUES (19, '23:00', NULL, 2, 1, 1, 4, 1);*/
 
 INSERT INTO railways.role (id, role) VALUES (1, 'admin');
 INSERT INTO railways.role (id, role) VALUES (2, 'user');
 
-INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (1, '1993-05-27', 'sobaka@soboki.net', 'Kotopes', 'kotopes', 'Pesokot', 2);
-INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (2, '1996-09-07', 'netumila@milo.com', 'Vasilii', 'vasilii', 'Katap', 2);
-INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (3, '1993-06-17', 'kakoeto@milo.de', 'admin', 'admin', 'Onjeadmin', 1);
-INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (4, '1983-06-17', 'kud@ku.da', 'admin', 'kudkuda', 'Onjeadmin', 1);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id)
+VALUES (1, '1993-05-27', 'sobaka@soboki.net', 'Kotopes', 'kotopes', 'Pesokot', 2);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id)
+VALUES (2, '1996-09-07', 'netumila@milo.com', 'Vasilii', 'vasilii', 'Katap', 2);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id)
+VALUES (3, '1993-06-17', 'kakoeto@milo.de', 'admin', 'admin', 'Onjeadmin', 1);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id)
+VALUES (4, '1983-06-17', 'kud@ku.da', 'admin', 'kudkuda', 'Onjeadmin', 1);

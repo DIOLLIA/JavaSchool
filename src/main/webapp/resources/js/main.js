@@ -24,7 +24,6 @@ function initFromStations() {
 function getToStations() {
     var stationsFrom = $("#station_from").val();
     var stationsTo = $("#station_to");
-//todo clear dropdown list from previous values
     $.ajax({
         type: 'GET',
         url: '/schedule/get-stations/' + stationsFrom,

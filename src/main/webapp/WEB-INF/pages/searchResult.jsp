@@ -32,8 +32,7 @@
             <td>${scheduleItem.departureTime}</td>
             <td>${scheduleItem.arrivalTime}</td>
 
-            <td><a href="${pageContext.request.contextPath}/train/edit/${train.id}.html">Edit</a><br/>
-                <a href="${pageContext.request.contextPath}/train/delete/${train.id}.html">Delete</a><br/></td>
+            <td><a href="${pageContext.request.contextPath}/train/edit/${train}.html">by ticket</a><br/>
         </tr>
     </c:forEach>
     </tbody>

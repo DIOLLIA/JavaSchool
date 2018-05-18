@@ -19,7 +19,7 @@ public class UserEntity {
     private String surname;
 
     @Column(name = "birthDaY")
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDate")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate birthDaY;
 
     @Column(name = "password")

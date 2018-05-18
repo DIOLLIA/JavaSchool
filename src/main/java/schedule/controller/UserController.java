@@ -2,13 +2,13 @@ package schedule.controller;
 
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import schedule.model.Role;
 import schedule.model.User;
 import schedule.service.api.UserService;
 
@@ -99,16 +99,22 @@ public class UserController {
     }
 
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
-         public ModelAndView register(@RequestParam("email") String email, @RequestParam("name")String name, @RequestParam("surname")String surname, @RequestParam("password") String password, @RequestParam("birthDay") @DateTimeFormat(pattern = "ddMMyyyy") LocalDate birthDay ) {
-//    public ModelAndView register(@ModelAttribute("user") User user) {
-//        userService.addUser(new User());
-      //  userService.addUser(user);
-        String msg;
+    public ModelAndView register(@RequestParam("email") String email, @RequestParam("name") String name, @RequestParam("surname") String surname, @RequestParam("password") String password, @RequestParam("birthDay") String birthDayString) {
 
-  //      msg = "Welcome " + user.getName() + "!";
+        Role role = new Role();
+        role.setId(2);
+
+        User newUser = new User();
+        newUser.setEmail(email);
+        newUser.setName(name);
+        newUser.setSurname(surname);
+        newUser.setPassword(password);
+        newUser.setRole(role);
+        newUser.setBirthDay(LocalDate.parse(birthDayString));
+
+        userService.addUser(newUser);
 
         ModelAndView modelAndView = new ModelAndView("home");
-    //    modelAndView.addObject("msg", msg);
         return modelAndView;
     }
 }

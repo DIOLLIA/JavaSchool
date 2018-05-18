@@ -83,11 +83,13 @@
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Edit Train</h2>
                 <form:form method="POST" modelAttribute="train"
                            action="${pageContext.request.contextPath}/train/editsave">
+                    <form:hidden path="id"/>
                     <table class="table_add" border="0px" cellpadding="" cellspacing="0">
                         <tbody>
                         <tr>
+
                             <td>Number:</td>
-                            <td><form:input path="numberOfTrain" /></td>
+                            <td><form:input path="numberOfTrain"/></td>
                         </tr>
                         <tr>
                             <td>Seats:</td>
@@ -96,8 +98,8 @@
                         </tbody>
                     </table>
                     <br>
-                    <input  type="submit" class="btn btn-primary" value="modify"
-                            onclick="location='list';"/>
+                    <input type="submit" class="btn btn-primary" value="modify"
+                           onclick="location='list';"/>
                 </form:form>
             </div>
         </div>

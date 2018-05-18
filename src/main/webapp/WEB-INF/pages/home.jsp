@@ -82,7 +82,7 @@
                 <p class="lead mb-4 probootstrap-animate"><span style="color:#32CD32;">are you going? </span>
             </div>
             <div class="col-md probootstrap-animate">
-                <form:form  method="POST" modelAttribute="stationSearch" action="${pageContext.request.contextPath}/result" class="probootstrap-form"> <%-- добавили form: --%>
+                <form:form  method="POST" modelAttribute="stationSearch" action="${pageContext.request.contextPath}/schedule/search" class="probootstrap-form">
                     <div class="form-group">
                         <div class="row mb-3">
                             <div class="col-md">
@@ -92,7 +92,7 @@
                                     <label for="station_from" style="width: 100%;">
                                         <select class="js-example-basic-single js-states form-control"
                                                 onchange="getToStations()"
-                                                id="station_from"
+                                                id="station_from" name="stationFrom"
                                                 style="width: 100%;">
                                         </select>
                                     </label>
@@ -104,7 +104,7 @@
                                     <div class="probootstrap_select-wrap">
                                         <label for="station_to" style="width: 100%;">
                                             <select class="js-example-basic-single js-states form-control"
-                                                    id="station_to" style="width: 100%;">
+                                                    id="station_to" style="width: 100%;" name="stationTo">
                                             </select>
                                         </label>
                                     </div>

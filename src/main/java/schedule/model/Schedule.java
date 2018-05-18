@@ -7,6 +7,7 @@ public class Schedule {
     private int id;
 
     private int routeDailyId;
+    private int routeStationIndex;
     private LocalTime arrivalTime;
 
     private LocalTime departureTime;
@@ -29,6 +30,14 @@ public class Schedule {
 
     public LocalTime getArrivalTime() {
         return arrivalTime;
+    }
+
+    public int getRouteStationIndex() {
+        return routeStationIndex;
+    }
+
+    public void setRouteStationIndex(int routeStationIndex) {
+        this.routeStationIndex = routeStationIndex;
     }
 
     public void setArrivalTime(LocalTime arrivalTime) {

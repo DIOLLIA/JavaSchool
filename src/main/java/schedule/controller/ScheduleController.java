@@ -27,26 +27,24 @@ public class ScheduleController {
     @Autowired
     RouteService routeService;
 
-    @RequestMapping(value = "/result", method = RequestMethod.POST)
-    public ModelAndView findSchedule(@ModelAttribute("stationSearch") StationSearch stationSearch) {
-        String arrivalStation = stationSearch.getArrivalStation();
-        String departureStation = stationSearch.getDepartureStation();
-        List<Route> routes = routeService.findByStationNames(arrivalStation, departureStation);
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public ModelAndView findSchedule(@RequestParam(name = "stationFrom") String stationFrom, @RequestParam(name = "stationTo") String stationTo) {
+        List<Route> routes = routeService.findByStationNames(stationFrom, stationTo);
 
         // scheduleService.addSchedule(new Schedule());
         ModelAndView modelAndView = new ModelAndView("searchResult");
-        List<Schedule> schedules = scheduleService.findStations(routes, arrivalStation, departureStation);
+        List<Schedule> schedules = scheduleService.findStations(routes, stationTo, stationFrom);
 
         List<ScheduleItem> scheduleItems = new ArrayList<>();
         for (Schedule scheduleOne : schedules) {
             String stationOneName = scheduleOne.getStationName().getStationName();
-            if (stationOneName.equals(departureStation)) {
+            if (stationOneName.equals(stationFrom)) {
                 continue;
             }
             for (Schedule scheduleTwo : schedules) {
                 String stationTwoName = scheduleTwo.getStationName().getStationName();
                 if (scheduleOne.getRouteDailyId() != scheduleTwo.getRouteDailyId() ||
-                        !stationTwoName.equals(departureStation)) {
+                        scheduleOne.getRouteStationIndex() >= scheduleTwo.getRouteStationIndex()) {
                     continue;
                 }
                 ScheduleItem scheduleItem = new ScheduleItem();
