@@ -79,19 +79,16 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                    <div>
-                        <h2 class="display-8 probootstrap-section-heading">${message}</h2>
-                    </div>
+                <div>
+                    <h2 class="display-8 probootstrap-section-heading">${message}</h2>
+                </div>
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Trains</h2>
                 <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="50%">
                     <thead>
                     <tr>
-                       <%-- <th width="5%">Number</th>
-                        <th width="7%">Seats</th>
-                        <th width="7%">Actions</th>--%>
-                           <th width="10%">Number</th>
-                           <th width="20%">Seats</th>
-                           <th width="20%">Actions</th>
+                        <th width="10%">Number</th>
+                        <th width="20%">Seats</th>
+                        <th width="20%">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -107,7 +104,7 @@
                     </tbody>
                 </table>
                 <br>
-                <input  type="submit" class="btn btn-primary" value="add train"
+                <input type="submit" class="btn btn-primary" value="add train"
                        onclick="location='add';"/>
             </div>
         </div>
