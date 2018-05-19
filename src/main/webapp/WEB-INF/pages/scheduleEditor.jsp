@@ -1,12 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Search result page</title>
+    <title>Trains list page</title>
     <meta name="description" content="find tickets ob KudKuda.rus">
     <meta name="keywords" content="find tickets, find trains, schedule of trains, stations list">
 
@@ -54,7 +53,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
     <div class="container">
-        <a class="navbar-brand" href="../index.html">KudKuda Home</a>
+        <a class="navbar-brand" href="../index.html"> KudKuda Home </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu"
                 aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="ion-navicon"></i></span>
@@ -70,6 +69,7 @@
         </div>
     </div>
 </nav>
+<!-- END nav -->
 
 
 <section class="probootstrap-cover overflow-hidden relative"
@@ -79,49 +79,39 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
-                <p class="lead mb-4 probootstrap-animate"><span style="color:#32CD32;">Search result </span>
-                <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="100%">
+                <div>
+                    <h2 class="display-8 probootstrap-section-heading">${message}</h2>
+                </div>
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Trains</h2>
+                <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="50%">
                     <thead>
                     <tr>
-                        <th width="15%">From</th>
-                        <th width="15%">Where</th>
-                        <th width="10%">Train number</th>
-                        <th width="10%">Departure Time</th>
-                        <th width="10%">Arrival Time</th>
-                        <th width="10%">Action</th>
+                        <th width="10%">Number</th>
+                        <th width="20%">Seats</th>
+                        <th width="20%">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="scheduleItem" items="${searchResult}">
+                    <c:forEach var="train" items="${trains}">
                         <tr>
-                            <td>${scheduleItem.stationOfDeparture}</td>
-                            <td>${scheduleItem.stationOfArrival}</td>
-                            <td>${scheduleItem.trainNumber}</td>
-                            <td>${scheduleItem.departureTime}</td>
-                            <td>${scheduleItem.arrivalTime}</td>
-                            <td><a href="${pageContext.request.contextPath}/train/edit/${train}.html">by ticket</a><br/>
+                            <td>${train.numberOfTrain}</td>
+                            <td>${train.seats}</td>
+                            <td><a href="${pageContext.request.contextPath}/train/edit/${train.id}">Edit</a>
+                                <a href="${pageContext.request.contextPath}/train/delete/${train.id}">Delete</a><br/>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-                <div class="row">
-                    <div class="col-md-4">
-                        <p>&nbsp;</p>
-                    </div>
-                    <div class="col-md-4">
-                        <p>&nbsp;</p>
-                    </div>
-                    <div class="col-md-3">
-                        <br>
-                        <a href="../index.html" value="New Search" class="btn btn-primary btn-block">New Search</a>
-                    </div>
-                </div>
+                <br>
+                <input type="submit" class="btn btn-primary" value="add train"
+                       onclick="location='add';"/>
             </div>
         </div>
     </div>
-    </div>
+
 </section>
+<!-- END section -->
 
 
 <footer class="probootstrap_section probootstrap-border-top">

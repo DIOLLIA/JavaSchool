@@ -24,11 +24,11 @@ public class UserDaoImpl extends GeneralCrudDaoImpl<UserEntity> implements UserD
 
     @Override
     public boolean findUser(String name, String pswd) {
-        Query query = getCurrentSession().createQuery("from UserEntity ue where ue.email LIKE :name and ue.password LIKE :pswd ");
-        query.setParameter("name", name);
-        query.setParameter("pswd", pswd);
+        Query query = getCurrentSession().createQuery("from UserEntity ue where ue.email LIKE :name AND ue.password LIKE :pswd");
+      query.setParameter("name", name);
+          query.setParameter("pswd", pswd);
         boolean userIsFind = false;
-        try {
+   try {
             List userObj = query.list();
             if (userObj != null && userObj.size() > 0) {
                 userIsFind = true;

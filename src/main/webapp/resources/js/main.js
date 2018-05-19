@@ -39,7 +39,6 @@ function getToStations() {
         },
         error: function (response) {
             alert("Something is wrong!")
-
         }
     })
 

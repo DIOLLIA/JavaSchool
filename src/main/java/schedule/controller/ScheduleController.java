@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.ScheduleItem;
-import schedule.controller.model.StationSearch;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.service.api.RouteService;
@@ -31,7 +30,6 @@ public class ScheduleController {
     public ModelAndView findSchedule(@RequestParam(name = "stationFrom") String stationFrom, @RequestParam(name = "stationTo") String stationTo) {
         List<Route> routes = routeService.findByStationNames(stationFrom, stationTo);
 
-        // scheduleService.addSchedule(new Schedule());
         ModelAndView modelAndView = new ModelAndView("searchResult");
         List<Schedule> schedules = scheduleService.findStations(routes, stationTo, stationFrom);
 
@@ -60,14 +58,6 @@ public class ScheduleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/search2", method = RequestMethod.GET)
-    public ModelAndView searchStations2() {
-
-        ModelAndView modelAndView = new ModelAndView("schedule");
-        modelAndView.addObject("stationSearch", new StationSearch());
-        return modelAndView;
-    }
-
     @GetMapping(value = "/get-stations/")
     @ResponseBody
     public String getStationsNames() {
@@ -88,6 +78,21 @@ public class ScheduleController {
     public ModelAndView searchOnStation() {
 
         ModelAndView modelAndView = new ModelAndView("searchTrainOnStation");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.POST)
+    public ModelAndView searchOnStationResult(@RequestParam(name = "stationFrom") String station) {
+
+        ModelAndView modelAndView = new ModelAndView("searchTrainOnStation");
+
+        List<Schedule> listOfTrainsByStation = scheduleService.findByStation(stationService.findByName(station));
+
+        List<Schedule> scheduleItems = new ArrayList<>(listOfTrainsByStation);
+        String msg = "Results for "+ station + " :";
+
+        modelAndView.addObject("scheduleItems",scheduleItems);
+        modelAndView.addObject("msg",msg);
         return modelAndView;
     }
 }

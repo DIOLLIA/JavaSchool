@@ -9,6 +9,7 @@ import schedule.dao.api.RouteDao;
 import schedule.dao.api.ScheduleDao;
 import schedule.entity.RouteEntity;
 import schedule.entity.ScheduleEntity;
+import schedule.entity.StationEntity;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Station;
@@ -51,10 +52,19 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public List<Schedule> findByStation(Station station) {
+
+        List<Schedule> searchResult=new ArrayList<>();
+        List<ScheduleEntity> result= scheduleDao.findByStation(modelMapper.map(station, StationEntity.class));
+        for (ScheduleEntity results: result             ) {
+            searchResult.add(modelMapper.map(results,Schedule.class));
+        }
+       return  searchResult;
+    }
+
+    @Override
     public void addSchedule(Schedule schedule) {
         Schedule schedule2 = new Schedule();
-        // schedule2.setArrivalTime(LocalTime.);
-        // schedule2.setDepartureTime(LocalTime.of(10, 10));
         schedule2.setRouteName(new Route());
         schedule2.setTrainNumber(new Train());
         schedule2.setStationName(new Station());

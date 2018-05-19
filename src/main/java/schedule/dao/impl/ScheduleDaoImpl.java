@@ -5,16 +5,15 @@ import org.springframework.stereotype.Repository;
 import schedule.dao.api.ScheduleDao;
 import schedule.entity.RouteEntity;
 import schedule.entity.ScheduleEntity;
+import schedule.entity.StationEntity;
 
 import java.util.List;
 
 @Repository
 public class ScheduleDaoImpl extends GeneralCrudDaoImpl<ScheduleEntity> implements ScheduleDao {
-//todo fix  exceptiou caused by qyery.list(): java.lang.ClassCastException: java.util.ArrayList cannot be cast to java.lang.Integer
     @Override
     public List<ScheduleEntity> findByStationsAndRoutes(List<RouteEntity> routes, String stationOfDeparture, String stationOfArrival) {
         Query query = getCurrentSession().createQuery("SELECT sch FROM ScheduleEntity sch JOIN sch.stationName st WHERE sch.routeName IN :routes AND( st.stationName LIKE :stationOfDeparture OR st.stationName LIKE :stationOfArrival)");
-
 
         query.setParameterList("routes", routes);
         query.setParameter("stationOfDeparture", stationOfDeparture);
@@ -23,5 +22,14 @@ public class ScheduleDaoImpl extends GeneralCrudDaoImpl<ScheduleEntity> implemen
         List resultList = query.list();
         return resultList;
     }
+
+    @Override
+    public List<ScheduleEntity> findByStation(StationEntity station) {
+        Query query = getCurrentSession().createQuery("SELECT sch from ScheduleEntity sch JOIN sch.stationName st WHERE  st.stationName LIKE :station");
+        query.setParameter("station",station.getStationName());
+        List resultList = query.list();
+        return resultList;
+    }
+
 
 }
