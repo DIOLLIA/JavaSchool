@@ -12,6 +12,8 @@ public class Passenger {
 
     private DateTime birthDate;
 
+    private Ticket ticket;
+
     public int getId() {
         return id;
     }
@@ -42,5 +44,13 @@ public class Passenger {
 
     public void setBirthDate(DateTime birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 }

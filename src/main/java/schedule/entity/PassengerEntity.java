@@ -53,4 +53,5 @@ public class PassengerEntity {
     public void setBirthDate(DateTime birthDate) {
         this.birthDate = birthDate;
     }
+
 }

@@ -1,5 +1,6 @@
 package schedule.model;
 
+
 public class Train {
 
     private int id;
@@ -7,6 +8,8 @@ public class Train {
     private int numberOfTrain;
 
     private int seats;
+
+    private Ticket ticket;
 
     public int getId() {
         return id;
@@ -30,5 +33,13 @@ public class Train {
 
     public void setSeats(int seats) {
         this.seats = seats;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 }

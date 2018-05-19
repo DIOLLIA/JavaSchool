@@ -36,7 +36,7 @@ public class ScheduleController {
         List<ScheduleItem> scheduleItems = new ArrayList<>();
         for (Schedule scheduleOne : schedules) {
             String stationOneName = scheduleOne.getStationName().getStationName();
-            if (stationOneName.equals(stationFrom)) {
+            if (stationOneName.equals(stationTo)) {
                 continue;
             }
             for (Schedule scheduleTwo : schedules) {
@@ -89,10 +89,10 @@ public class ScheduleController {
         List<Schedule> listOfTrainsByStation = scheduleService.findByStation(stationService.findByName(station));
 
         List<Schedule> scheduleItems = new ArrayList<>(listOfTrainsByStation);
-        String msg = "Results for "+ station + " :";
+        String msg = "Results for " + station + " :";
 
-        modelAndView.addObject("scheduleItems",scheduleItems);
-        modelAndView.addObject("msg",msg);
+        modelAndView.addObject("scheduleItems", scheduleItems);
+        modelAndView.addObject("msg", msg);
         return modelAndView;
     }
 }
