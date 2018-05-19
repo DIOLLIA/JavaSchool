@@ -12,8 +12,10 @@ public class TicketEntity {
     private int id;
 
     @ManyToOne
-  //  @Column(name = "passenger")
-    private PassengerEntity passengerEntity;
+    private TrainEntity trainEntity;
+
+    @ManyToOne
+    private UserEntity userEntity;
 
     public int getId() {
         return id;
@@ -23,12 +25,19 @@ public class TicketEntity {
         this.id = id;
     }
 
-    public PassengerEntity getPassengerEntity() {
-        return passengerEntity;
+    public UserEntity getUserEntity() {
+        return userEntity;
     }
 
-    public void setPassengerEntity(PassengerEntity passengerEntity) {
-        this.passengerEntity = passengerEntity;
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
+    public TrainEntity getTrainEntity() {
+        return trainEntity;
+    }
+
+    public void setTrainEntity(TrainEntity trainEntity) {
+        this.trainEntity = trainEntity;
+    }
 }

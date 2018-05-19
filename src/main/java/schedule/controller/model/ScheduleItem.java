@@ -9,7 +9,6 @@ public class ScheduleItem {
     private String stationOfDeparture;
     private String stationOfArrival;
 
-
     public LocalTime getDepartureTime() {
         return departureTime;
     }

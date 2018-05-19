@@ -1,7 +1,6 @@
 package schedule.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @Entity
@@ -17,10 +16,6 @@ public class TrainEntity {
 
     @Column(name = "seats")
     private int seats;
-
-    @ManyToMany  // todo !проверить
-    @Column(name = "ticket")
-    private List<TicketEntity> ticketEntity; //todo map?
 
     public int getId() {
         return id;
@@ -46,11 +41,4 @@ public class TrainEntity {
         this.seats = seats;
     }
 
-    public List<TicketEntity> getTicketEntity() {
-        return ticketEntity;
-    }
-
-    public void setTicketEntity(List<TicketEntity> ticketEntity) {
-        this.ticketEntity = ticketEntity;
-    }
 }
