@@ -1,11 +1,12 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Trains list page</title>
+    <title>Trains and routes by date page</title>
     <meta name="description" content="find tickets ob KudKuda.rus">
     <meta name="keywords" content="find tickets, find trains, schedule of trains, stations list">
 
@@ -44,7 +45,7 @@
 <script src="../../resources/js/bootstrap.min.js"></script>
 <script src="../../resources/js/owl.carousel.min.js"></script>
 
-<%--<script src="../../resources/js/bootstrap-datepicker.js"></script>--%>
+<script src="../../resources/js/bootstrap-datepicker.js"></script>
 <script src="../../resources/js/jquery.waypoints.min.js"></script>
 <script src="../../resources/js/jquery.easing.1.3.js"></script>
 
@@ -53,7 +54,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
     <div class="container">
-        <a class="navbar-brand" href="../index.html"> KudKuda Home </a>
+        <a class="navbar-brand" href="../index.html">KudKuda Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu"
                 aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="ion-navicon"></i></span>
@@ -69,54 +70,60 @@
         </div>
     </div>
 </nav>
-<!-- END nav -->
-
 
 <section class="probootstrap-cover overflow-hidden relative"
-         style="background-image: url('/resources/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
+         style="background-image: url('/resources/images/img_4.jpg');" data-stellar-background-ratio="0.5"
          id="section-home">
     <div class="overlay"></div>
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                <div>
-                    <h2 class="display-8 probootstrap-section-heading">${message}</h2>
-                </div>
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Trains</h2>
-                <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="60%">
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
+                <p class="lead mb-4 probootstrap-animate">Select <span style="color:#32CD32;">station </span> for daily
+                    schedule</p>
+                <form:form method="POST" modelAttribute="stationSearch"
+                           action="${pageContext.request.contextPath}/schedule/searchTrainOnStation">
+                    <label for="station_from" style="width: 60%;">
+                        <select class="js-example-basic-single js-states form-control"
+                                id="station_from" id="station_from" name="stationFrom" style="width: 50%;">
+                        </select>
+                    </label>
+                    <br>
+                    <div class="row">
+                        <div class="col-auto">
+                            <input type="submit" value="Show trains on station" class="btn btn-primary btn-block">
+                        </div>
+                    </div>
+                    <br>
+                    <h3 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
+                            style="color:#e0e139;">${msg}</span></h3>
+                </form:form>
+                <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th width="10%">Number</th>
-                        <th width="10%">Seats</th>
-                        <th width="10%">Schedule</th>
-                        <th width="20%">Actions</th>
+                        <th width="5%">Train №</th>
+                        <th width="15%">Route</th>
+                        <th width="10%">Date of Departure</th>
+                        <th width="5%">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="train" items="${trains}">
+                    <c:forEach var="scheduleItems" items="${scheduleItems}">
                         <tr>
-                            <td>${train.numberOfTrain}</td>
-                            <td>${train.seats}</td>
-                            <td><a href="${pageContext.request.contextPath}/train/schedule/${train.id}">Show</a><br/>
-                            </td>
-                            <td>
-                                <a href="${pageContext.request.contextPath}/train/edit/${train.id}">Edit</a>
-                                <a href="${pageContext.request.contextPath}/train/delete/${train.id}">Delete</a><br/>
-                            </td>
+                            <td>${scheduleItems.trainNumber.getNumberOfTrain()}</td>
+                            <td>${scheduleItems.routeName.routeName}</td>
+                            <td>${scheduleItems.arrivalTime}</td>
+                            <td>${scheduleItems.departureTime}</td>
+                            <td><a href="${pageContext.request.contextPath}/train/edit/${train}.html">by ticket</a><br/>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-                <br>
-                <input type="submit" class="btn btn-primary" value="add train"
-                       onclick="location='add';"/>
             </div>
         </div>
     </div>
-
+    </div>
 </section>
-<!-- END section -->
-
 
 <footer class="probootstrap_section probootstrap-border-top">
     <div class="container">

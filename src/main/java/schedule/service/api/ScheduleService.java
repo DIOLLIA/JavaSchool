@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface ScheduleService {
     List<Schedule> findStations(List<Route> route, String stationOfDeparture, String stationOfArrival);
-    List<Schedule> findByStation (Station station);
+
+    List<Schedule> findByStation(Station station);
 
     void addSchedule(Schedule schedule);
 }

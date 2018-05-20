@@ -7,10 +7,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import schedule.controller.model.ScheduleItem;
+import schedule.model.Schedule;
 import schedule.model.Train;
 import schedule.service.api.TrainService;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -89,6 +94,50 @@ public class TrainController {
 
         modelAndView.addObject("trains", trains);
         modelAndView.addObject("message", message);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/schedule/{train.id}", method = RequestMethod.GET)
+    public ModelAndView trainSchedule(@PathVariable(value = "train.id") int trainId) {
+
+        ModelAndView modelAndView = new ModelAndView("trainsAndRoutesByDate");
+        modelAndView.addObject("train", trainService.get(trainId));
+        List<Schedule> schedules = trainService.getScheduleByTrainId(trainId);
+
+        Map<Integer, List<Schedule>> scheduleMap = new HashMap<>();
+        for (Schedule element : schedules) {
+            int dayliRouteId = element.getRouteDailyId();
+            if (scheduleMap.containsKey(dayliRouteId)) {
+                scheduleMap.get(dayliRouteId).add(element);
+            } else {
+                List<Schedule> list = new ArrayList<>();
+                list.add(element);
+                scheduleMap.put(dayliRouteId, list);
+            }
+        }
+        List<ScheduleItem> resultScheduleList = new ArrayList<>();
+
+        for (List<Schedule> scheduleList : scheduleMap.values()) {
+            Schedule firstStationInSchedule = null;
+            Schedule lastStationInSchedule = null;
+            for (Schedule scheduleElement : scheduleList) {
+                if (scheduleElement.getRouteStationIndex() == 1) {
+                    firstStationInSchedule = scheduleElement;
+                } else if (scheduleElement.getRouteStationIndex() == scheduleList.size()) {
+                    lastStationInSchedule = scheduleElement;
+                }
+            }
+            ScheduleItem scheduleItem = new ScheduleItem();
+            scheduleItem.setTrainNumber(firstStationInSchedule.getTrainNumber().getNumberOfTrain());
+            scheduleItem.setStationOfDeparture(firstStationInSchedule.getStationName().getStationName());
+            scheduleItem.setStationOfArrival(lastStationInSchedule.getStationName().getStationName());
+            scheduleItem.setDepartureTime(firstStationInSchedule.getDepartureTime());
+            scheduleItem.setArrivalTime(lastStationInSchedule.getArrivalTime());
+            resultScheduleList.add(scheduleItem);
+        }
+
+        modelAndView.addObject("scheduleByTrainId", resultScheduleList);
 
         return modelAndView;
     }

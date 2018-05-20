@@ -26,7 +26,7 @@ public class ScheduleDaoImpl extends GeneralCrudDaoImpl<ScheduleEntity> implemen
     @Override
     public List<ScheduleEntity> findByStation(StationEntity station) {
         Query query = getCurrentSession().createQuery("SELECT sch from ScheduleEntity sch JOIN sch.stationName st WHERE  st.stationName LIKE :station");
-        query.setParameter("station",station.getStationName());
+        query.setParameter("station", station.getStationName());
         List resultList = query.list();
         return resultList;
     }

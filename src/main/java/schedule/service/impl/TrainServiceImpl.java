@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import schedule.dao.api.TrainDao;
+import schedule.entity.ScheduleEntity;
 import schedule.entity.TrainEntity;
+import schedule.model.Schedule;
 import schedule.model.Train;
 import schedule.service.api.TrainService;
 
@@ -51,8 +53,18 @@ public class TrainServiceImpl implements TrainService {
     @Override
     public Train get(int id) {
         TrainEntity trainEntity = trainDao.getTrain(id);
-        Train train=modelMapper.map(trainEntity, Train.class);
+        Train train = modelMapper.map(trainEntity, Train.class);
         return train;
 
+    }
+
+    @Override
+    public List<Schedule> getScheduleByTrainId(int id) {
+        List<Schedule> schedules = new ArrayList<>();
+        List<ScheduleEntity> scheduleEntities = trainDao.getScheduleByTrainId(id);
+        for (ScheduleEntity scheduleEntity : scheduleEntities) {
+            schedules.add(modelMapper.map(scheduleEntity, Schedule.class));
+        }
+        return schedules;
     }
 }

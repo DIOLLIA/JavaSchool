@@ -1,5 +1,8 @@
 package schedule.entity;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +13,10 @@ public class TicketEntity {
     @GeneratedValue
     @Column(name = "id")
     private int id;
+
+    @Column(name = "ticketDateTime")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime ticketDateTime;
 
     @ManyToOne
     private TrainEntity trainEntity;
@@ -39,5 +46,13 @@ public class TicketEntity {
 
     public void setTrainEntity(TrainEntity trainEntity) {
         this.trainEntity = trainEntity;
+    }
+
+    public DateTime getTicketDateTime() {
+        return ticketDateTime;
+    }
+
+    public void setTicketDateTime(DateTime ticketDateTime) {
+        this.ticketDateTime = ticketDateTime;
     }
 }

@@ -1,7 +1,9 @@
 package schedule.dao.impl;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import schedule.dao.api.TrainDao;
+import schedule.entity.ScheduleEntity;
 import schedule.entity.TrainEntity;
 
 import java.util.List;
@@ -32,5 +34,14 @@ public class TrainDaoImpl extends GeneralCrudDaoImpl<TrainEntity> implements Tra
     public List<TrainEntity> getTrains() {
 
         return getCurrentSession().createQuery("from TrainEntity ").list();
+    }
+
+    @Override
+    public List<ScheduleEntity> getScheduleByTrainId(int id) {
+        Query query = getCurrentSession().createQuery("SELECT sch FROM ScheduleEntity sch WHERE sch.trainNumber.id =:id ");
+
+        query.setParameter("id", id);
+
+        return query.list();
     }
 }
