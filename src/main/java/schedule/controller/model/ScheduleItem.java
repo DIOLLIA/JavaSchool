@@ -8,6 +8,7 @@ public class ScheduleItem {
     private int trainNumber;
     private String stationOfDeparture;
     private String stationOfArrival;
+    private int scheduleDailyRouteId;
 
     public LocalTime getDepartureTime() {
         return departureTime;
@@ -49,5 +50,11 @@ public class ScheduleItem {
         this.stationOfArrival = stationOfArrival;
     }
 
+    public int getScheduleDailyRouteId() {
+        return scheduleDailyRouteId;
+    }
 
+    public void setScheduleDailyRouteId(int scheduleDailyRouteId) {
+        this.scheduleDailyRouteId = scheduleDailyRouteId;
+    }
 }

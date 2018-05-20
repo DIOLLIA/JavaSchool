@@ -1,5 +1,6 @@
 package schedule.service.impl;
 
+import org.joda.time.LocalDateTime;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,16 @@ public class UserServiceImpl implements UserService {
     public boolean userExist(String name, String pswd) {
         boolean validUser = userDao.findUser(name, pswd);
         return validUser;
+    }
+
+    @Override
+    public List<User> findPassengersOfTrain(int routeDailyId, LocalDateTime startTime) {
+        List<UserEntity> passengeersOnTrainEntity = userDao.findPassengersOfTrain(routeDailyId, startTime);
+        List<User> passengersOnTrain = new ArrayList<>();
+        for (UserEntity passenger : passengeersOnTrainEntity) {
+            passengersOnTrain.add(modelMapper.map(passenger, User.class));
+        }
+        return passengersOnTrain;
     }
 
     @Override

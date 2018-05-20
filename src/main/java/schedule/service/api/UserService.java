@@ -1,5 +1,6 @@
 package schedule.service.api;
 
+import org.joda.time.LocalDateTime;
 import schedule.model.User;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface UserService {
 
     boolean userExist(String name, String pswd);
 
+    List<User> findPassengersOfTrain(int routeDailyId, LocalDateTime startTime);
 }

@@ -1,3 +1,10 @@
+function showRoutePassengersByDate(trainId, dailyRouteId, startTime) {
+
+    var departureDate = $("#probootstrap-date-departure").val();
+    console.log("hello " + trainId + " " + dailyRouteId + " " + departureDate);
+    $.get('/train/schedule/' + trainId + '/passengers/' + dailyRouteId + '?date=' + departureDate + '&startTime=' + startTime);
+}
+
 function initFromStations() {
     var stationsFrom = $("#station_from");
     stationsFrom.empty();

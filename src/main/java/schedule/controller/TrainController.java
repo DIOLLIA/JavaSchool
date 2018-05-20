@@ -1,16 +1,19 @@
 package schedule.controller;
 
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.ScheduleItem;
 import schedule.model.Schedule;
 import schedule.model.Train;
 import schedule.service.api.TrainService;
+import schedule.service.api.UserService;
 
 import java.util.*;
 
@@ -21,6 +24,9 @@ public class TrainController {
 
     @Autowired
     private TrainService trainService;
+
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value = "/list")
     public ModelAndView listOfTrains() {
@@ -128,13 +134,33 @@ public class TrainController {
             scheduleItem.setStationOfArrival(lastStationInSchedule.getStationName().getStationName());
             scheduleItem.setDepartureTime(firstStationInSchedule.getDepartureTime());
             scheduleItem.setArrivalTime(lastStationInSchedule.getArrivalTime());
+            scheduleItem.setScheduleDailyRouteId(firstStationInSchedule.getRouteDailyId());
             resultScheduleList.add(scheduleItem);
         }
-
         modelAndView.addObject("scheduleByTrainId", resultScheduleList);
 
         return modelAndView;
     }
+
+    @RequestMapping(value = "/schedule/{train.id}/passengers/{route.id}", method = RequestMethod.GET)
+    public ModelAndView showPassangersOnTrain(@PathVariable(name = "train.id") String trainId,
+                                              @PathVariable(name = "route.id") String routeIdAsString,
+                                              @RequestParam(name = "date") String dateAsString,
+                                              @RequestParam(name = "startTime") String startTimeAsString) {
+
+        DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+        LocalDate date = LocalDate.parse(dateAsString, dateFormatter);
+        LocalTime time = LocalTime.parse(startTimeAsString);
+        LocalDateTime startDateTime = date.toLocalDateTime(time);
+
+        int routeId = Integer.parseInt(routeIdAsString);
+
+        userService.findPassengersOfTrain(routeId, startDateTime);
+        return new ModelAndView();
+
+
+    }
+
 
     private class RouteStationIdComparator implements Comparator<Schedule> {
         @Override

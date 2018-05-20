@@ -1,6 +1,7 @@
 package schedule.dao.impl;
 
 import org.hibernate.Query;
+import org.joda.time.LocalDateTime;
 import org.springframework.stereotype.Repository;
 import schedule.dao.api.UserDao;
 import schedule.entity.UserEntity;
@@ -41,9 +42,9 @@ public class UserDaoImpl extends GeneralCrudDaoImpl<UserEntity> implements UserD
     }
 
     @Override
-    public List<UserEntity> findPassengersOfTrain(int trainId) {
-        getCurrentSession().createQuery("FROM TicketEntity t WHERE t.trainEntity.id = trainId");
-        return null;
+    public List<UserEntity> findPassengersOfTrain(int routeDailyId, LocalDateTime startTime) {
+        Query query = getCurrentSession().createQuery("SELECT t.userEntity FROM TicketEntity t");
+        return query.list();
     }
 
     @Override

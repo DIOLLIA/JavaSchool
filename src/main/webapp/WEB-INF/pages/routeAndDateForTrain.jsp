@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="header.jsp" %>
 <link rel="stylesheet" href="../../resources/css/tables.css">
+<script src="../../resources/js/main.js"></script>
 
 <section class="probootstrap-cover overflow-hidden relative"
          style="background-image: url('/resources/images/img_4.jpg');" data-stellar-background-ratio="0.5"
@@ -12,23 +13,16 @@
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
                 <p class="lead mb-4 probootstrap-animate">Select <span style="color:#32CD32;">station </span> for daily
                     schedule</p>
-                <form:form method="POST" modelAttribute="stationSearch"
-                           action="${pageContext.request.contextPath}/schedule/searchTrainOnStation">
-                    <label for="station_from" style="width: 60%;">
-                        <select class="js-example-basic-single js-states form-control"
-                                id="station_from" id="station_from" name="stationFrom" style="width: 50%;">
-                        </select>
-                    </label>
-                    <br>
-                    <div class="row">
-                        <div class="col-auto">
-                            <input type="submit" value="Show trains on station" class="btn btn-primary btn-block">
-                        </div>
-                    </div>
-                    <br>
-                    <h3 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
-                            style="color:#e0e139;">${msg}</span></h3>
-                </form:form>
+
+                <label for="probootstrap-date-departure">Departure date</label>
+                <div class="probootstrap-date-wrap">
+                    <span class="icon ion-calendar"></span>
+                    <input type="text" id="probootstrap-date-departure" class="form-control"
+                           placeholder="">
+                </div>
+                <h3 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
+                        style="color:#e0e139;">${msg}</span></h3>
+
                 <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="100%">
                     <thead>
                     <tr>
@@ -46,7 +40,10 @@
                             <td>${scheduleItem.stationOfArrival}</td>
                             <td>${scheduleItem.departureTime}</td>
                             <td>${scheduleItem.arrivalTime}</td>
-                            <td>hello</td>
+                            <td><a href="#"
+                                   onclick="showRoutePassengersByDate('${train.id}','${scheduleItem.scheduleDailyRouteId}', '${scheduleItem.departureTime}')">Show</a><br/>
+                            </td>
+
                         </tr>
                     </c:forEach>
                     </tbody>
