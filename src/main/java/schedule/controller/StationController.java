@@ -33,6 +33,7 @@ public class StationController {
     public ModelAndView addStationPage() {
         ModelAndView modelAndView = new ModelAndView("addStation");
         modelAndView.addObject("station", new StationEntity());
+        modelAndView.addObject("pageTitle", "Add station");
         return modelAndView;
     }
 
@@ -46,6 +47,7 @@ public class StationController {
 
         String message = "Station was successfully added.";
         modelAndView.addObject("message", message);
+
         return modelAndView;
     }
 }

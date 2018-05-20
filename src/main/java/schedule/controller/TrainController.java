@@ -12,10 +12,7 @@ import schedule.model.Schedule;
 import schedule.model.Train;
 import schedule.service.api.TrainService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -39,6 +36,7 @@ public class TrainController {
     public ModelAndView addTrainPage() {
         ModelAndView modelAndView = new ModelAndView("addTrain");
         modelAndView.addObject("train", new Train());
+        modelAndView.addObject("pageTitle", "Add train");
         return modelAndView;
     }
 
@@ -74,8 +72,7 @@ public class TrainController {
 
         ModelAndView modelAndView = new ModelAndView("editTrain");
         modelAndView.addObject("train", trainService.get(trainId));
-
-//        modelAndView.addObject("trains", trains);
+        modelAndView.addObject("pageTitle", "Edit train");
 
         return modelAndView;
     }
@@ -102,32 +99,29 @@ public class TrainController {
     public ModelAndView trainSchedule(@PathVariable(value = "train.id") int trainId) {
 
         ModelAndView modelAndView = new ModelAndView("routeAndDateForTrain");
+        modelAndView.addObject("pageTitle", "Train routes");
+
         modelAndView.addObject("train", trainService.get(trainId));
         List<Schedule> schedules = trainService.getScheduleByTrainId(trainId);
 
         Map<Integer, List<Schedule>> scheduleMap = new HashMap<>();
         for (Schedule element : schedules) {
             int dayliRouteId = element.getRouteDailyId();
-            if (scheduleMap.containsKey(dayliRouteId)) {
-                scheduleMap.get(dayliRouteId).add(element);
-            } else {
-                List<Schedule> list = new ArrayList<>();
-                list.add(element);
-                scheduleMap.put(dayliRouteId, list);
+            if (!scheduleMap.containsKey(dayliRouteId)) {
+                scheduleMap.put(dayliRouteId, new ArrayList<>());
             }
+            scheduleMap.get(dayliRouteId).add(element);
         }
         List<ScheduleItem> resultScheduleList = new ArrayList<>();
 
         for (List<Schedule> scheduleList : scheduleMap.values()) {
-            Schedule firstStationInSchedule = null;
-            Schedule lastStationInSchedule = null;
-            for (Schedule scheduleElement : scheduleList) {
-                if (scheduleElement.getRouteStationIndex() == 1) {
-                    firstStationInSchedule = scheduleElement;
-                } else if (scheduleElement.getRouteStationIndex() == scheduleList.size()) {
-                    lastStationInSchedule = scheduleElement;
-                }
-            }
+
+
+            scheduleList.sort(new RouteStationIdComparator());
+
+            Schedule firstStationInSchedule = scheduleList.get(0);
+            Schedule lastStationInSchedule = scheduleList.get(scheduleList.size() - 1);
+
             ScheduleItem scheduleItem = new ScheduleItem();
             scheduleItem.setTrainNumber(firstStationInSchedule.getTrainNumber().getNumberOfTrain());
             scheduleItem.setStationOfDeparture(firstStationInSchedule.getStationName().getStationName());
@@ -141,4 +135,18 @@ public class TrainController {
 
         return modelAndView;
     }
+
+    private class RouteStationIdComparator implements Comparator<Schedule> {
+        @Override
+        public int compare(Schedule o1, Schedule o2) {
+            if (o1.getRouteStationIndex() == o2.getRouteStationIndex()) {
+                return 0;
+            } else if (o1.getRouteStationIndex() > o2.getRouteStationIndex()) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    }
 }
+

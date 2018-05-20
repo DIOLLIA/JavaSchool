@@ -22,6 +22,7 @@ public class TicketController {
         ModelAndView modelAndView = new ModelAndView("byTicket");
         modelAndView.addObject("ticket", new User());
         //modelAndView.addObject("byTicket", trainService.get(trainId));
+        modelAndView.addObject("pageTitle", "By ticket");
 
         return modelAndView;
     }

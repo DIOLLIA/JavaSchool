@@ -78,6 +78,8 @@ public class ScheduleController {
     public ModelAndView searchOnStation() {
 
         ModelAndView modelAndView = new ModelAndView("searchTrainOnStation");
+        modelAndView.addObject("pageTitle", "On station");
+
         return modelAndView;
     }
 

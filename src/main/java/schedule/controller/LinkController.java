@@ -9,17 +9,23 @@ public class LinkController {
 
     @RequestMapping(value = "/")
     public ModelAndView mainPage() {
-        return new ModelAndView("home");
+        ModelAndView modelAndView = new ModelAndView("home");
+        modelAndView.addObject("pageTitle", "KudKuda Home Page");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/index")
     public ModelAndView indexPage() {
-        return new ModelAndView("home");
+        ModelAndView modelAndView = new ModelAndView("home");
+        modelAndView.addObject("pageTitle", "KudKuda Home");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/about")
     public ModelAndView aboutPage() {
-        return new ModelAndView("about");
+        ModelAndView modelAndView = new ModelAndView("about");
+        modelAndView.addObject("pageTitle", "About");
+        return modelAndView;
     }
 
 }
