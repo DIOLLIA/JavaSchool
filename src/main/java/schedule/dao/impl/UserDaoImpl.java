@@ -19,16 +19,16 @@ public class UserDaoImpl extends GeneralCrudDaoImpl<UserEntity> implements UserD
 
     @Override
     public List<UserEntity> listOfUsers() {
-        return getCurrentSession().createQuery("from UserEntity ").list();
+        return getCurrentSession().createQuery("FROM UserEntity ").list();
     }
 
     @Override
     public boolean findUser(String name, String pswd) {
-        Query query = getCurrentSession().createQuery("from UserEntity ue where ue.email LIKE :name AND ue.password LIKE :pswd");
-      query.setParameter("name", name);
-          query.setParameter("pswd", pswd);
+        Query query = getCurrentSession().createQuery("FROM UserEntity ue WHERE ue.email LIKE :name AND ue.password LIKE :pswd");
+        query.setParameter("name", name);
+        query.setParameter("pswd", pswd);
         boolean userIsFind = false;
-   try {
+        try {
             List userObj = query.list();
             if (userObj != null && userObj.size() > 0) {
                 userIsFind = true;
@@ -38,6 +38,12 @@ public class UserDaoImpl extends GeneralCrudDaoImpl<UserEntity> implements UserD
             //logg
         }
         return userIsFind;
+    }
+
+    @Override
+    public List<UserEntity> findPassengersOfTrain(int trainId) {
+        getCurrentSession().createQuery("FROM TicketEntity t WHERE t.trainEntity.id = trainId");
+        return null;
     }
 
     @Override
