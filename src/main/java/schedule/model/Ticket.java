@@ -1,6 +1,8 @@
 package schedule.model;
 
 
+import org.joda.time.DateTime;
+
 public class Ticket {
 
     private int id;
@@ -8,6 +10,8 @@ public class Ticket {
     private User user;
 
     private Train train;
+
+    private DateTime ticketDateTime;
 
     public int getId() {
         return id;
@@ -31,5 +35,13 @@ public class Ticket {
 
     public void setTrain(Train train) {
         this.train = train;
+    }
+
+    public DateTime getTicketDateTime() {
+        return ticketDateTime;
+    }
+
+    public void setTicketDateTime(DateTime ticketDateTime) {
+        this.ticketDateTime = ticketDateTime;
     }
 }

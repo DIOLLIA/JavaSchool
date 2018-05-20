@@ -101,7 +101,7 @@ public class TrainController {
     @RequestMapping(value = "/schedule/{train.id}", method = RequestMethod.GET)
     public ModelAndView trainSchedule(@PathVariable(value = "train.id") int trainId) {
 
-        ModelAndView modelAndView = new ModelAndView("trainsAndRoutesByDate");
+        ModelAndView modelAndView = new ModelAndView("routeAndDateForTrain");
         modelAndView.addObject("train", trainService.get(trainId));
         List<Schedule> schedules = trainService.getScheduleByTrainId(trainId);
 
