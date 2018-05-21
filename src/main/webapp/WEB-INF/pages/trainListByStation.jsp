@@ -1,5 +1,5 @@
 <%@ include file="header.jsp" %>
-<link rel="stylesheet" href="../../resources/css/tables.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <section class="probootstrap-cover overflow-hidden relative"

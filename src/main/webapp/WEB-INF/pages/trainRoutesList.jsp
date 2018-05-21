@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="header.jsp" %>
-<link rel="stylesheet" href="../../resources/css/tables.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 <script src="../../resources/js/main.js"></script>
 
 <section class="probootstrap-cover overflow-hidden relative"
@@ -40,7 +40,7 @@
                             <td>${scheduleItem.stationOfArrival}</td>
                             <td>${scheduleItem.departureTime}</td>
                             <td>${scheduleItem.arrivalTime}</td>
-                            <td><a href="/train/schedule/${train.id}/passengers/${"1"}"
+                            <td><a href="#"
                                    onclick="showRoutePassengersByDate('${train.id}','${scheduleItem.scheduleDailyRouteId}', '${scheduleItem.departureTime}')">Show</a><br/>
                             </td>
                         </tr>

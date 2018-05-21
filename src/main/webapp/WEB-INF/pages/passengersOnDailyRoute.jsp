@@ -1,4 +1,5 @@
 <%@ include file="header.jsp" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 
 <section class="probootstrap-cover overflow-hidden relative"
          style="background-image: url('/resources/images/img_4.jpg');" data-stellar-background-ratio="0.5"
@@ -13,7 +14,7 @@
                 <br>
                 <div class="row">
                     <div class="col-auto">
-                        <input type="submit" value="Show trains on station" class="btn btn-primary btn-block">
+                        <input type="submit" value="Show trains on station" class="btn btn-primary btn-block" onclick="location='../';"/>
                     </div>
                 </div>
                 <br>
@@ -34,7 +35,7 @@
                         <tr>
                             <td>${passengersOnRoute.getSurname()}</td>
                             <td>${passengersOnRoute.getName()}</td>
-                            <td>${passengersOnRoute.birthDaY}</td>
+                            <td>${passengersOnRoute.getBirthDay()}</td>
                             <td><a href="${pageContext.request.contextPath}/train/edit/${train}.html">Nothing</a><br/>
                         </tr>
                     </c:forEach>

@@ -7,10 +7,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.ScheduleItem;
 import schedule.model.Schedule;
@@ -20,7 +17,6 @@ import schedule.service.api.TrainService;
 import schedule.service.api.UserService;
 
 import java.util.*;
-
 
 @Controller
 @RequestMapping(value = "/train")
@@ -151,11 +147,11 @@ public class TrainController {
 
     @RequestMapping(value = "/schedule/{train.id}/passengers/{route.id}", method = RequestMethod.GET)
     public ModelAndView showPassangersOnTrain(@PathVariable(name = "train.id") String trainId,
-                                              @PathVariable(name = "route.id") String routeIdAsString
-                                             /* @RequestParam(name = "date") String dateAsString,*/
-                                              /*@RequestParam(name = "startTime") String startTimeAsString*/) {
-        String dateAsString="05/20/2018";
-        String startTimeAsString="09:20:00.000";
+                                              @PathVariable(name = "route.id") String routeIdAsString,
+                                              @RequestParam(name = "date") String dateAsString,
+                                              @RequestParam(name = "startTime") String startTimeAsString) {
+//        String dateAsString="05/20/2018";
+//        String startTimeAsString="09:20:00.000";
 
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
         LocalDate date = LocalDate.parse(dateAsString, dateFormatter);
@@ -163,10 +159,10 @@ public class TrainController {
         LocalDateTime startDateTime = date.toLocalDateTime(time);
 
         int routeId = Integer.parseInt(routeIdAsString);
-        String msg="Passengers list on train №" + trainService.get(Integer.parseInt(trainId)).getNumberOfTrain()+ " " + dateAsString + ":";
-        List<User> passengersOnRoute=userService.findPassengersOfTrain(routeId, startDateTime);
-        ModelAndView modelAndView = new ModelAndView("passengersOnDailyRoute").addObject("passengersOnRoute",passengersOnRoute);
-        modelAndView.addObject("msg",msg);
+        String msg = "Passengers list on train №" + trainService.get(Integer.parseInt(trainId)).getNumberOfTrain() + " " + dateAsString + ":";
+        List<User> passengersOnRoute = userService.findPassengersOfTrain(routeId, startDateTime);
+        ModelAndView modelAndView = new ModelAndView("passengersOnDailyRoute").addObject("passengersOnRoute", passengersOnRoute);
+        modelAndView.addObject("msg", msg);
         return modelAndView;
 
     }

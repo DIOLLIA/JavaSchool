@@ -49,7 +49,7 @@
                                     <div class="probootstrap-date-wrap">
                                         <span class="icon ion-calendar"></span>
                                         <input type="text" id="probootstrap-date-departure" class="form-control"
-                                               placeholder="">
+                                               placeholder="click and pick">
                                     </div>
                                 </div>
                             </div>
@@ -64,14 +64,14 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- END row -->
+
                         <div class="row">
                             <div class="col-auto">
                                 <input type="submit" value="Search" class="btn btn-primary btn-block">
                             </div>
                         </div>
                     </div>
-                </form:form> <%-- добавили form: --%>
+                </form:form>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <%@ include file="header.jsp" %>
-<link rel="stylesheet" href="../../resources/css/tables.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 
 <section class="probootstrap-cover overflow-hidden relative"
          style="background-image: url('/resources/images/bg_1.jpg');" data-stellar-background-ratio="0.5"

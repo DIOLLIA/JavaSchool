@@ -1,4 +1,5 @@
 <%@ include file="header.jsp" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 
 <table border="1px" cellpadding="0" cellspacing="0">
     <thead>
