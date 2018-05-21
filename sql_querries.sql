@@ -100,3 +100,12 @@ INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_i
 VALUES (3, '1993-06-17', 'kakoeto@milo.de', 'admin', 'admin', 'Onjeadmin', 1);
 INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id)
 VALUES (4, '1983-06-17', 'kud@ku.da', 'admin', 'kudkuda', 'Onjeadmin', 1);
+
+INSERT INTO railways.ticketentity (id, ticketDateTime, departureSchedule_id, trainEntity_id, userEntity_id)
+VALUES (1, '2018-05-20 17:47:17', 1, 1, 1);
+INSERT INTO railways.ticketentity (id, ticketDateTime, departureSchedule_id, trainEntity_id, userEntity_id)
+VALUES (2, '2018-05-21 17:43:48', 1, 1, 2);
+INSERT INTO railways.ticketentity (id, ticketDateTime, departureSchedule_id, trainEntity_id, userEntity_id)
+VALUES (3, '2018-05-20 15:48:07', 2, 1, 3);
+INSERT INTO railways.ticketentity (id, ticketDateTime, departureSchedule_id, trainEntity_id, userEntity_id)
+VALUES (4, '2018-05-20 11:48:34', 3, 1, 4);

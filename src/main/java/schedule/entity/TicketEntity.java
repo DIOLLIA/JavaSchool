@@ -1,7 +1,7 @@
 package schedule.entity;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -15,14 +15,17 @@ public class TicketEntity {
     private int id;
 
     @Column(name = "ticketDateTime")
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime ticketDateTime;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private LocalDateTime departureDateTime;
 
     @ManyToOne
     private TrainEntity trainEntity;
 
     @ManyToOne
     private UserEntity userEntity;
+
+    @OneToOne
+    private ScheduleEntity departureSchedule;
 
     public int getId() {
         return id;
@@ -48,11 +51,19 @@ public class TicketEntity {
         this.trainEntity = trainEntity;
     }
 
-    public DateTime getTicketDateTime() {
-        return ticketDateTime;
+    public LocalDateTime getDepartureDateTime() {
+        return departureDateTime;
     }
 
-    public void setTicketDateTime(DateTime ticketDateTime) {
-        this.ticketDateTime = ticketDateTime;
+    public void setDepartureDateTime(LocalDateTime departureDateTime) {
+        this.departureDateTime = departureDateTime;
+    }
+
+    public ScheduleEntity getDepartureSchedule() {
+        return departureSchedule;
+    }
+
+    public void setDepartureSchedule(ScheduleEntity departureSchedule) {
+        this.departureSchedule = departureSchedule;
     }
 }

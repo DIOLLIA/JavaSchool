@@ -1,7 +1,6 @@
 package schedule.model;
 
-
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 public class Ticket {
 
@@ -11,7 +10,9 @@ public class Ticket {
 
     private Train train;
 
-    private DateTime ticketDateTime;
+    private LocalDateTime departureDateTime;
+
+    private Schedule departureSchedule;
 
     public int getId() {
         return id;
@@ -37,11 +38,19 @@ public class Ticket {
         this.train = train;
     }
 
-    public DateTime getTicketDateTime() {
-        return ticketDateTime;
+    public LocalDateTime getDepartureDateTime() {
+        return departureDateTime;
     }
 
-    public void setTicketDateTime(DateTime ticketDateTime) {
-        this.ticketDateTime = ticketDateTime;
+    public void setDepartureDateTime(LocalDateTime departureDateTime) {
+        this.departureDateTime = departureDateTime;
+    }
+
+    public Schedule getDepartureSchedule() {
+        return departureSchedule;
+    }
+
+    public void setDepartureSchedule(Schedule departureSchedule) {
+        this.departureSchedule = departureSchedule;
     }
 }

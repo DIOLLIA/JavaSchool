@@ -43,7 +43,10 @@ public class UserDaoImpl extends GeneralCrudDaoImpl<UserEntity> implements UserD
 
     @Override
     public List<UserEntity> findPassengersOfTrain(int routeDailyId, LocalDateTime startTime) {
-        Query query = getCurrentSession().createQuery("SELECT t.userEntity FROM TicketEntity t");
+        Query query = getCurrentSession().createQuery("SELECT t.userEntity FROM TicketEntity t WHERE t.departureDateTime >= :startTime AND t.departureDateTime < :endTime AND t.departureSchedule.routeDailyId =:routeDailyId");
+        query.setParameter("startTime", startTime);
+        query.setParameter("endTime", startTime.plusDays(1));
+        query.setParameter("routeDailyId", routeDailyId);
         return query.list();
     }
 

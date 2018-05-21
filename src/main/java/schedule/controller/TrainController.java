@@ -104,6 +104,8 @@ public class TrainController {
     @RequestMapping(value = "/schedule/{train.id}", method = RequestMethod.GET)
     public ModelAndView trainSchedule(@PathVariable(value = "train.id") int trainId) {
 
+        String msg = "Routes for train №"+trainService.get(trainId).getNumberOfTrain();
+
         ModelAndView modelAndView = new ModelAndView("routeAndDateForTrain");
         modelAndView.addObject("pageTitle", "Train routes");
 
@@ -138,6 +140,7 @@ public class TrainController {
             resultScheduleList.add(scheduleItem);
         }
         modelAndView.addObject("scheduleByTrainId", resultScheduleList);
+        modelAndView.addObject("msg", msg);
 
         return modelAndView;
     }
@@ -157,7 +160,6 @@ public class TrainController {
 
         userService.findPassengersOfTrain(routeId, startDateTime);
         return new ModelAndView();
-
 
     }
 
