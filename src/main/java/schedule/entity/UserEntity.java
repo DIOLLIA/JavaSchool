@@ -20,7 +20,7 @@ public class UserEntity {
 
     @Column(name = "birthDaY")
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    private LocalDate birthDaY;
+    private LocalDate birthDay;
 
     @Column(name = "password")
     private String password;
@@ -55,12 +55,12 @@ public class UserEntity {
         this.surname = surname;
     }
 
-    public LocalDate getBirthDaY() {
-        return birthDaY;
+    public LocalDate getBirthDay() {
+        return birthDay;
     }
 
-    public void setBirthDaY(LocalDate birthDaY) {
-        this.birthDaY = birthDaY;
+    public void setBirthDay(LocalDate birthDay) {
+        this.birthDay = birthDay;
     }
 
     public String getPassword() {
@@ -93,7 +93,7 @@ public class UserEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", birthDaY='" + birthDaY + '\'' +
+                ", birthDaY='" + birthDay + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +

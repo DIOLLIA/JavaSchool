@@ -14,28 +14,28 @@
     <meta name="keywords" content="find tickets, find trains, schedule of trains, stations list">
 
 
-    <link rel="stylesheet" href="../../resources/css/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="../../resources/css/animate.css">
-    <link rel="stylesheet" href="../../resources/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="../../resources/css/select2.css">
-    <link rel="stylesheet" href="../../resources/css/helpers.css">
-    <link rel="stylesheet" href="../../resources/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/select2.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/helpers.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 
 </head>
 <body>
 
-<script src="../../resources/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
 
-<script src="../../resources/js/popper.min.js"></script>
-<script src="../../resources/js/bootstrap.min.js"></script>
-<script src="../../resources/js/owl.carousel.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
 
-<script src="../../resources/js/bootstrap-datepicker.js"></script>
-<script src="../../resources/js/jquery.waypoints.min.js"></script>
-<script src="../../resources/js/jquery.easing.1.3.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.waypoints.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script>
 
-<script src="../../resources/js/select2.min.js"></script>
-<script src="../../resources/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/select2.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
     <div class="container">

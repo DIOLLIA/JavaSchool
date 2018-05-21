@@ -77,7 +77,7 @@ public class ScheduleController {
     @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.GET)
     public ModelAndView searchOnStation() {
 
-        ModelAndView modelAndView = new ModelAndView("searchTrainOnStation");
+        ModelAndView modelAndView = new ModelAndView("trainListByStation");
         modelAndView.addObject("pageTitle", "On station");
 
         return modelAndView;
@@ -86,7 +86,7 @@ public class ScheduleController {
     @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.POST)
     public ModelAndView searchOnStationResult(@RequestParam(name = "stationFrom") String station) {
 
-        ModelAndView modelAndView = new ModelAndView("searchTrainOnStation");
+        ModelAndView modelAndView = new ModelAndView("trainListByStation");
 
         List<Schedule> listOfTrainsByStation = scheduleService.findByStation(stationService.findByName(station));
 

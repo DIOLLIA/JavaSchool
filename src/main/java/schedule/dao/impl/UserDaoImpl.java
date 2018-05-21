@@ -56,7 +56,7 @@ public class UserDaoImpl extends GeneralCrudDaoImpl<UserEntity> implements UserD
         UserEntity existUserEntity = (UserEntity) getCurrentSession().get(UserEntity.class, userEntity.getId());
         existUserEntity.setName(userEntity.getName());
         existUserEntity.setSurname(userEntity.getSurname());
-        existUserEntity.setBirthDaY(userEntity.getBirthDaY());
+        existUserEntity.setBirthDay(userEntity.getBirthDay());
         existUserEntity.setEmail(userEntity.getEmail());
         existUserEntity.setRole(userEntity.getRole());
         getCurrentSession().save(existUserEntity);
