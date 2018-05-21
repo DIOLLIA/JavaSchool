@@ -1,5 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,32 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title><c:out value="${pageTitle}"></c:out></title>
+
     <meta name="description" content="find tickets ob KudKuda.rus">
     <meta name="keywords" content="find tickets, find trains, schedule of trains, stations list">
 
 
-    <!--   <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet"> -->
-
     <link rel="stylesheet" href="../../resources/css/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="../../resources/css/animate.css">
-    <!-- <link rel="stylesheet" href="../../resources/fonts/ionicons/css/ionicons.min.css">  -->
-
-    <!--   <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css"> -->
-    <!-- карусель слайдов http://mel0ne.ru/2016/09/16/owl-carousel-2/ -->
-
-    <!--   <link rel="stylesheet" href="../../resources/fonts/flaticon/font/flaticon.css"> --><!--  иконки для сайта-->
-
-    <!--  <link rel="stylesheet" href="../../resources/fonts/fontawesome/css/font-awesome.min.css">   -->
-    <!--  иконки- увеличение, анимированные икоки-->
-    <link rel="stylesheet" href="../../resources/css/bootstrap-datepicker.css">   <!--ВАЖНО это стиль календаря  -->
+    <link rel="stylesheet" href="../../resources/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="../../resources/css/select2.css">
-    <!-- ВАЖНО стили для from to полей   и содержащуюся в них изначально информацию-->
-
-    <!--  -->
     <link rel="stylesheet" href="../../resources/css/helpers.css">
-    <!-- ВАЖНО при выключении мешает фоны на главной странице и не создаёт эфект градиента-->
     <link rel="stylesheet" href="../../resources/css/style.css">
-    <!-- ВАЖНО отвечает за стиль страницы в целом и многом-->
 
 </head>
 <body>

@@ -25,6 +25,8 @@ public class StationController {
 
         List<Station> stations = stationService.getStations();
         modelAndView.addObject("stations", stations);
+        modelAndView.addObject("pageTitle", "Stations list");
+
 
         return modelAndView;
     }

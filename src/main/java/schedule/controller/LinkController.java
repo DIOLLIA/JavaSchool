@@ -10,7 +10,7 @@ public class LinkController {
     @RequestMapping(value = "/")
     public ModelAndView mainPage() {
         ModelAndView modelAndView = new ModelAndView("home");
-        modelAndView.addObject("pageTitle", "KudKuda Home Page");
+        modelAndView.addObject("pageTitle", "KudKuda Home");
         return modelAndView;
     }
 

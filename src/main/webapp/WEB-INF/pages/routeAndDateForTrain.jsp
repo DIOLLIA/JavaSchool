@@ -16,9 +16,8 @@
                 <div class="col-md-2"> <h5><span style="color:white;">Departure date: </span> </h5></div>
             <div class="col-md-2">
                 <div class="probootstrap-date-wrap">
-                    <span class="icon ion-calendar"></span>
                     <input type="text" id="probootstrap-date-departure" class="form-control"
-                           placeholder="click and pick" >
+                           placeholder="click and pick" style="background-color: white; color: black"  >
                 </div>
             </div>
             <h3 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span

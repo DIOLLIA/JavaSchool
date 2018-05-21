@@ -34,6 +34,8 @@ public class TrainController {
 
         List<Train> trains = trainService.getTrains();
         modelAndView.addObject("trains", trains);
+        modelAndView.addObject("pageTitle", "Trains list");
+
 
         return modelAndView;
     }
@@ -83,8 +85,6 @@ public class TrainController {
         return modelAndView;
     }
 
-    //todo не работает
-    //todo rename method and url to "save"
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
     public ModelAndView editTrainSave(@ModelAttribute("train") Train train /*,
             @PathVariable ("id") int trainId*/
@@ -104,7 +104,7 @@ public class TrainController {
     @RequestMapping(value = "/schedule/{train.id}", method = RequestMethod.GET)
     public ModelAndView trainSchedule(@PathVariable(value = "train.id") int trainId) {
 
-        String msg = "Routes for train №"+trainService.get(trainId).getNumberOfTrain();
+        String msg = "Routes for train №" + trainService.get(trainId).getNumberOfTrain();
 
         ModelAndView modelAndView = new ModelAndView("routeAndDateForTrain");
         modelAndView.addObject("pageTitle", "Train routes");
@@ -177,4 +177,3 @@ public class TrainController {
         }
     }
 }
-

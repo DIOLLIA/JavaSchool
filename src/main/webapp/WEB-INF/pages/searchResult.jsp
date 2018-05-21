@@ -1,4 +1,5 @@
 <%@ include file="header.jsp" %>
+<link rel="stylesheet" href="../../resources/css/tables.css">
 
 <section class="probootstrap-cover overflow-hidden relative"
          style="background-image: url('/resources/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
@@ -42,7 +43,7 @@
                     </div>
                     <div class="col-md-3">
                         <br>
-                        <a href="../index.html" value="New Search" class="btn btn-primary btn-block">New Search</a>
+                        <a href="/index" value="New Search" class="btn btn-primary btn-block">New Search</a>
                     </div>
                 </div>
             </div>
@@ -51,45 +52,4 @@
     </div>
 </section>
 
-
-<footer class="probootstrap_section probootstrap-border-top">
-    <div class="container">
-        <h3 class="probootstrap_font-18 mb-3">Links</h3>
-        <div class="row mb-5">
-            <div class="col-md-3">
-                <h3 class="probootstrap_font-18 mb-3"></h3>
-                <ul class="list-unstyled">
-                    <li><a href="../index.html">Home</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-3">
-                <h3 class="probootstrap_font-18 mb-3"></h3>
-                <ul class="list-unstyled">
-                    <li><a href="../about.html">About</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h3 class="probootstrap_font-18 mb-3"></h3>
-                <ul class="list-unstyled">
-                    <li><a href="https://free-template.co" target="_blank">??????????</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h3 class="probootstrap_font-18 mb-3"></h3>
-                <ul class="list-unstyled">
-                    <li><a href="https://free-template.co" target="_blank">??????????</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="row pt-1">
-            <div class="col-md-12 text-center">
-                <p class="probootstrap_font-22">Show sponsor <a href="https://t-systems.com/"
-                                                                target="_blank"><span
-                        style="color:#E20074;">T-Systems</span></a></p>
-            </div>
-        </div>
-    </div>
-</footer>
-</body>
-</html>
+<%@ include file="footer.jsp" %>
