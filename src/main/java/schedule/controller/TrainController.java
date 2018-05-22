@@ -1,5 +1,6 @@
 package schedule.controller;
 
+import com.google.gson.Gson;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
@@ -23,7 +24,7 @@ import java.util.*;
 public class TrainController {
 
     @Autowired
-    private TrainService trainService;
+    TrainService trainService;
 
     @Autowired
     UserService userService;
@@ -150,8 +151,6 @@ public class TrainController {
                                               @PathVariable(name = "route.id") String routeIdAsString,
                                               @RequestParam(name = "date") String dateAsString,
                                               @RequestParam(name = "startTime") String startTimeAsString) {
-//        String dateAsString="05/20/2018";
-//        String startTimeAsString="09:20:00.000";
 
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
         LocalDate date = LocalDate.parse(dateAsString, dateFormatter);
@@ -167,6 +166,13 @@ public class TrainController {
 
     }
 
+    @GetMapping(value = "/get-train/")
+    @ResponseBody
+    public String getTrainsListForDepartureStation() {
+        List<String> trainsList = trainService.trainsList();
+
+        return new Gson().toJson(trainsList);
+    }
 
     private class RouteStationIdComparator implements Comparator<Schedule> {
         @Override

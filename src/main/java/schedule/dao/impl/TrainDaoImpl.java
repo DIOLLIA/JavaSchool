@@ -44,4 +44,6 @@ public class TrainDaoImpl extends GeneralCrudDaoImpl<TrainEntity> implements Tra
 
         return query.list();
     }
+
+
 }

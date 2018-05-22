@@ -63,9 +63,11 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="train">Train №</label>
-                                    <div class="form-group">
-                                        <input type="text" id="train" class="form-control">
-                                    </div>
+                                    <select class="js-example-basic-single js-states form-control"
+                                            id="train" name="train"
+                                            style="width: 100%;">
+                                    </select>
+
                                 </div>
                             </div>
                         </div>

@@ -67,4 +67,15 @@ public class TrainServiceImpl implements TrainService {
         }
         return schedules;
     }
+
+    @Override
+    public List<String> trainsList() {
+        List<TrainEntity> trainEntityList = trainDao.getTrains();
+        List<String> trainsList = new ArrayList<>();
+        for (TrainEntity trainNumber : trainEntityList) {
+            String trainNumberString = String.valueOf(trainNumber.getNumberOfTrain());
+            trainsList.add(trainNumberString);
+        }
+        return trainsList;
+    }
 }

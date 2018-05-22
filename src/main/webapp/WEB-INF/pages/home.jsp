@@ -18,14 +18,12 @@
                         <div class="row mb-3">
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="station_from">From</label>
-                                    <label for="station_from" style="width: 100%;">
-                                        <select class="js-example-basic-single js-states form-control"
-                                                onchange="getToStations()"
-                                                id="station_from" name="stationFrom"
-                                                style="width: 100%;">
-                                        </select>
-                                    </label>
+                                    <label for="station_from" style="width: 100%;">From</label>
+                                    <select class="js-example-basic-single js-states form-control"
+                                            onchange="getToStations()"
+                                            id="station_from" name="stationFrom"
+                                            style="width: 100%;">
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md">

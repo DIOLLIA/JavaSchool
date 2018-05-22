@@ -31,6 +31,7 @@ public class StationDaoImpl extends GeneralCrudDaoImpl<StationEntity> implements
         return getCurrentSession().createQuery("from StationEntity").list();
     }
 
+    //todo research usability this method
     @Override
     public StationEntity findByName(String name) {
         Query query = getCurrentSession().createQuery("SELECT sch FROM StationEntity sch WHERE sch.stationName = ?");

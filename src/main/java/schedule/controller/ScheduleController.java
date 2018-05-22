@@ -26,6 +26,7 @@ public class ScheduleController {
     @Autowired
     RouteService routeService;
 
+
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ModelAndView findSchedule(@RequestParam(name = "stationFrom") String stationFrom, @RequestParam(name = "stationTo") String stationTo) {
         List<Route> routes = routeService.findByStationNames(stationFrom, stationTo);
@@ -97,4 +98,5 @@ public class ScheduleController {
         modelAndView.addObject("msg", msg);
         return modelAndView;
     }
+
 }
