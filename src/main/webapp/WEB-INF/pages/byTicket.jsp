@@ -91,16 +91,16 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="birth_date">Click and take it</label>
-                                <input type="submit" value="Search" class="btn btn-primary btn-block">
-                        </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="birth_date">Birth date</label>
                                 <input type="number" class="form-control" id="birth_date" name="surname"
-                                       placeholder="format ddmmyyyy" required>
+                                placeholder="format ddmmyyyy" required>
                             </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="birth_date">Click and take it</label>
+                            <input type="submit" value="Get IT!" class="btn btn-primary btn-block">
                         </div>
                     </div>
                 </div>

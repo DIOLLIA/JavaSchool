@@ -43,7 +43,6 @@ public class UserController {
     @RequestMapping(value = "/add2", method = RequestMethod.POST)
     public ModelAndView addUser(@ModelAttribute(name = "user") User user) {
 
-//        User user = null;
         ModelAndView modelAndView = new ModelAndView("usersList");
         userService.addUser(user);
 

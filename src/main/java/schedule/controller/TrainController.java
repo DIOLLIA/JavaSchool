@@ -43,7 +43,7 @@ public class TrainController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addTrainPage() {
-        ModelAndView modelAndView = new ModelAndView("addTrain");
+        ModelAndView modelAndView = new ModelAndView("addTicket");
         modelAndView.addObject("train", new Train());
         modelAndView.addObject("pageTitle", "Add train");
         return modelAndView;
