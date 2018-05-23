@@ -18,7 +18,6 @@ public class TicketController {
     @Autowired
     private TrainService trainService;
 
-    //todo вешать номер поезда в соотв поле
     @RequestMapping(value = "/by", method = RequestMethod.GET)
     public ModelAndView byTicket(/*@PathVariable(value = "train.id") int trainId*/) {
         ModelAndView modelAndView = new ModelAndView("byTicket");
@@ -29,7 +28,6 @@ public class TicketController {
         return modelAndView;
     }
 
-    //todo вешать номер поезда в соотв поле
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView saveTicket(@ModelAttribute(name = "ticket") Ticket ticket) {
 

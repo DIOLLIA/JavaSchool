@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.ScheduleItem;
 import schedule.controller.model.StationsFromTo;
+import schedule.controller.model.TrainAndDepTime;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Train;
@@ -190,11 +191,32 @@ public class TrainController {
         treeSchedules.addAll(schedules);
         for (Schedule element : treeSchedules) {
             trainsNumberList.add(element.getTrainNumber().getNumberOfTrain());
-            trainsNumberList.add(element.getDepartureTime().getHourOfDay());
         }
 
         return new Gson().toJson(trainsNumberList);
     }
+
+    @RequestMapping(value = "/get-train-and-time/", method = RequestMethod.POST)
+    public @ResponseBody
+    String getTrainsListForDepartureStation2(@RequestBody StationsFromTo stations) {
+        String selectedFromStation = stations.getStationFrom();
+        String selectedToStation = stations.getStationTo();
+
+        List<TrainAndDepTime> trainsNumberAndDepTimeList = new ArrayList<>();
+        List<Route> routes = routeService.findByStationNames(selectedFromStation, selectedToStation);
+
+        List<Schedule> schedules = scheduleService.findStations(routes, selectedToStation, selectedFromStation);
+        Set<Schedule> treeSchedules = new TreeSet(new RouteDaylyIdComparator());
+        treeSchedules.addAll(schedules);
+        for (Schedule element : treeSchedules) {
+            TrainAndDepTime trainAndDepTime = new TrainAndDepTime();
+            trainAndDepTime.setDepartureTime(element.getDepartureTime().toString());
+            trainAndDepTime.setTrainNumber(element.getTrainNumber().getNumberOfTrain());
+            trainsNumberAndDepTimeList.add(trainAndDepTime);
+        }
+        return new Gson().toJson(trainsNumberAndDepTimeList);
+    }
+
 
     private class RouteStationIdComparator implements Comparator<Schedule> {
         @Override

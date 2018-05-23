@@ -1,23 +1,47 @@
-function fillingTime() {
-    var train =  $("#train")
+function fillingTrainAndTime() {
+    var stationsFrom = $("#station_from").val();
+    var stationsTo = $("#station_to").val();
+    //todo rename to trains-selector
+    var train = $("#train");
+    train.empty();
+    var departure_time = $("#departure_time");
+    departure_time.empty();
 
+    var stations = {};
+    stations["stationFrom"] = stationsFrom;
+    stations["stationTo"] = stationsTo;
+
+    $.ajax({
+        type: 'POST',
+        url: '/train/get-train-and-time/',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify(stations),
+        success: function (trainsAndTime) {
+            trainsAndTime.forEach(function (item) {
+                train.append(
+                    '<option value=\"' + item['trainNumber'] + '\">' + item['trainNumber'] + '</option>'
+                );
+                departure_time.append(
+                    '<option value=\"' + item['departureTime'] + '\">' + item['departureTime'] + '</option>'
+                )
+            });
+        },
+        error: function (response) {
+            alert("Something is wrong!")
+        }
+    });
 }
 
 function selectTrainNumber() {
-    var stationsFrom = $("#station_from").val();
-    var stationsTo = $("#station_to").val();
     var train = $("#train");
+    var stations = {};
 
-    var stations = {
-        "stationsFrom": stationsFrom,
-        "stationsTo": stationsTo
-    }
-    stations["stationFrom"] = stationsFrom;
-    stations["stationTo"] = stationsTo;
+    stations["stationFrom"] = $("#station_from").val();
+    stations["stationTo"] = $("#station_to").val();
     train.empty();
+
     $.ajax({
-
-
         type: 'POST',
         url: '/train/get-train/',
         contentType: "application/json; charset=utf-8",
@@ -38,7 +62,6 @@ function selectTrainNumber() {
 
 
 function showRoutePassengersByDate(trainId, dailyRouteId, startTime) {
-
     var departureDate = $("#probootstrap-date-departure").val();
 
     window.location.replace('/train/schedule/' + trainId + '/passengers/' + dailyRouteId + '?date=' + departureDate + '&startTime=' + startTime)

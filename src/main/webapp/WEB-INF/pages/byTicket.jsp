@@ -52,36 +52,32 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="departure-time">Departure time</label>
-                                    <div class="probootstrap-date-wrap">
-                                        <span class="icon ion-calendar"></span>
-                                        <input type="time" id="departure-time" value="now" class="form-control"
-                                               placeholder="">
-                                    </div>
+                                    <label for="departure_time">Train №</label>
+                                    <select class="js-example-basic-single js-states form-control"
+                                            id="departure_time" name="departure_time"
+                                            style="width: 100%;">
+                                    </select>
                                 </div>
                             </div>
-
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="birth_date">Find trains on route</label>
-                                    <input type="button" onclick="selectTrainNumber()" value="REFRESH" class="btn btn-primary btn-block">
+                                    <input type="button" onclick="fillingTrainAndTime()" value="REFRESH"
+                                           class="btn btn-primary btn-block">
                                 </div>
                             </div>
-
-
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="train">Train №</label>
-                                    <select class="js-example-basic-single js-states form-control" onchange="getToStations();initFromStations()"
+                                    <select class="js-example-basic-single js-states form-control"
                                             id="train" name="train"
                                             style="width: 100%;">
                                     </select>
-
                                 </div>
                             </div>
                         </div>
                     </div>
-                                     <h4 style="text-align: center"> Personal data: </h4>
+                    <h4 style="text-align: center"> Personal data: </h4>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -104,7 +100,7 @@
                             <div class="form-group">
                                 <label for="birth_date">Birth date</label>
                                 <input type="number" class="form-control" id="birth_date" name="surname"
-                                placeholder="format ddmmyyyy" required>
+                                       placeholder="format ddmmyyyy" required>
                             </div>
                         </div>
                         <div class="col-md-3">
