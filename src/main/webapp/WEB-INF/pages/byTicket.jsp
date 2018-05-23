@@ -60,10 +60,19 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="birth_date">Find trains on route</label>
+                                    <input type="button" onclick="selectTrainNumber()" value="REFRESH" class="btn btn-primary btn-block">
+                                </div>
+                            </div>
+
+
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="train">Train №</label>
-                                    <select class="js-example-basic-single js-states form-control"
+                                    <select class="js-example-basic-single js-states form-control" onchange="getToStations();initFromStations()"
                                             id="train" name="train"
                                             style="width: 100%;">
                                     </select>
