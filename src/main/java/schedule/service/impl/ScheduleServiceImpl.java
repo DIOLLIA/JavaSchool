@@ -2,6 +2,7 @@ package schedule.service.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.joda.time.LocalTime;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,12 +55,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public List<Schedule> findByStation(Station station) {
 
-        List<Schedule> searchResult=new ArrayList<>();
-        List<ScheduleEntity> result= scheduleDao.findByStation(modelMapper.map(station, StationEntity.class));
-        for (ScheduleEntity results: result             ) {
-            searchResult.add(modelMapper.map(results,Schedule.class));
+        List<Schedule> searchResult = new ArrayList<>();
+        List<ScheduleEntity> result = scheduleDao.findByStation(modelMapper.map(station, StationEntity.class));
+        for (ScheduleEntity results : result) {
+            searchResult.add(modelMapper.map(results, Schedule.class));
         }
-       return  searchResult;
+        return searchResult;
     }
 
     @Override
@@ -73,5 +74,13 @@ public class ScheduleServiceImpl implements ScheduleService {
         ScheduleEntity map = mp.map(schedule2, ScheduleEntity.class);
         getCurrentSession().save(map);
 
+    }
+
+    @Override
+    public Schedule findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime) {
+        ScheduleEntity scheduleEntity = scheduleDao.findScheduleByStationsAndDepartureTime(stationFrom, stationTo, departureTime);
+
+        Schedule schedule = modelMapper.map(scheduleEntity, Schedule.class);
+        return schedule;
     }
 }

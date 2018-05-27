@@ -27,6 +27,7 @@ public class ScheduleEntity {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
     private LocalTime departureTime;
 
+
     @ManyToOne(cascade = CascadeType.ALL)
     // @JoinColumn(name = "station_name")
     private StationEntity stationName;

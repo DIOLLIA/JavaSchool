@@ -1,6 +1,7 @@
 package schedule.dao.impl;
 
 import org.hibernate.Query;
+import org.joda.time.LocalTime;
 import org.springframework.stereotype.Repository;
 import schedule.dao.api.ScheduleDao;
 import schedule.entity.RouteEntity;
@@ -28,9 +29,19 @@ public class ScheduleDaoImpl extends GeneralCrudDaoImpl<ScheduleEntity> implemen
 
     @Override
     public List<ScheduleEntity> findByStation(StationEntity station) {
-        Query query = getCurrentSession().createQuery("SELECT sch from ScheduleEntity sch JOIN sch.stationName st WHERE  st.stationName LIKE :station");
+        Query query = getCurrentSession().createQuery("SELECT sch FROM ScheduleEntity sch JOIN sch.stationName st WHERE  st.stationName LIKE :station");
         query.setParameter("station", station.getStationName());
         List resultList = query.list();
         return resultList;
+    }
+
+    @Override
+    public ScheduleEntity findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime) {
+        Query query = getCurrentSession().createQuery("FROM ScheduleEntity sch JOIN sch.stationName st WHERE st.stationName LIKE :stationFrom");
+        //query.setParameter("stationFrom", stationFrom);
+        query.setParameter("stationTo", stationTo);
+       // query.setParameter("departureTime", departureTime);
+        ScheduleEntity scheduleEntity = (ScheduleEntity) query.uniqueResult();
+        return scheduleEntity;
     }
 }

@@ -88,6 +88,7 @@ public class ScheduleController {
     public ModelAndView searchOnStationResult(@RequestParam(name = "stationFrom") String station) {
 
         ModelAndView modelAndView = new ModelAndView("trainListByStation");
+        modelAndView.addObject("pageTitle", "On station");
 
         List<Schedule> listOfTrainsByStation = scheduleService.findByStation(stationService.findByName(station));
 
@@ -96,6 +97,7 @@ public class ScheduleController {
 
         modelAndView.addObject("scheduleItems", scheduleItems);
         modelAndView.addObject("msg", msg);
+
         return modelAndView;
     }
 
