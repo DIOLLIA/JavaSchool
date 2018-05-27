@@ -1,7 +1,6 @@
-function fillingTrainAndTime() {
+function trainsAndDateSelector() {
     var stationsFrom = $("#station_from").val();
     var stationsTo = $("#station_to").val();
-    //todo rename to trains-selector
     var train = $("#train");
     train.empty();
     var departure_time = $("#departure_time");
