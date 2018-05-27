@@ -17,6 +17,8 @@ public interface TrainService {
 
     Train get(int id);
 
+    Train findByNumber(int number);
+
     List<Schedule> getScheduleByTrainId(int id);
 
     List<String> trainsList();

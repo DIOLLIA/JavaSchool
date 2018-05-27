@@ -11,6 +11,8 @@ public interface TrainDao extends GeneralCrudDao<TrainEntity> {
 
     TrainEntity getTrain(int id);
 
+    TrainEntity findByNumber(int number);
+
     void editTrain(TrainEntity trainEntity);
 
     void deleteTrain(int id);

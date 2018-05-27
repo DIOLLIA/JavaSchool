@@ -21,6 +21,15 @@ public class TrainDaoImpl extends GeneralCrudDaoImpl<TrainEntity> implements Tra
     }
 
     @Override
+    public TrainEntity findByNumber(int number) {
+        Query query = getCurrentSession().createQuery("FROM TrainEntity WHERE numberOfTrain =:number");
+        query.setParameter("number", number);
+        TrainEntity trainEntity = (TrainEntity) query.uniqueResult();
+
+        return trainEntity;
+    }
+
+    @Override
     public void editTrain(TrainEntity trainEntity) {
         getCurrentSession().update(trainEntity);
     }
