@@ -9,11 +9,13 @@
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">By ticket</h2>
+                <h3 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
+                        style="color:#e0e139;">${message}</span></h3>
                 <div class="col-md probootstrap-animate">
                     <form:form method="POST" modelAttribute="ticket"
-                               action="${pageContext.request.contextPath}/index" class="probootstrap-form">
+                               action="${pageContext.request.contextPath}/ticket/save" class="probootstrap-form">
                     <div class="form-group">
-                        <h5 style="text-align: center"> Your route data: </h5>
+                        <h4 style="text-align: center"> Your route data: </h4>
                         <div class="row mb-3">
                             <div class="col-md">
                                 <div class="form-group">
@@ -46,15 +48,15 @@
                                     <div class="probootstrap-date-wrap">
                                         <span class="icon ion-calendar"></span>
                                         <input type="text" id="probootstrap-date-departure" class="form-control"
-                                               placeholder="click and pick">
+                                               placeholder="click and pick" name="departureDate">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="departure_time">Train №</label>
+                                    <label for="departure_time">Departure time</label>
                                     <select class="js-example-basic-single js-states form-control"
-                                            id="departure_time" name="departure_time"
+                                            id="departure_time" name="departureTime"
                                             style="width: 100%;">
                                     </select>
                                 </div>
@@ -62,7 +64,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="birth_date">Find trains on route</label>
-                                    <input type="button" onclick="fillingTrainAndTime()" value="REFRESH"
+                                    <input type="button" onclick="trainsAndDateSelector()" value="REFRESH"
                                            class="btn btn-primary btn-block">
                                 </div>
                             </div>
@@ -70,7 +72,7 @@
                                 <div class="form-group">
                                     <label for="train">Train №</label>
                                     <select class="js-example-basic-single js-states form-control"
-                                            id="train" name="train"
+                                            id="train" name="trainNumber"
                                             style="width: 100%;">
                                     </select>
                                 </div>
@@ -90,7 +92,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="surname">Surname</label>
-                                <input type="text" class="form-control" id="surname" name="surname"
+                                <input type="text" class="form-control" id="surname" name="surName"
                                        placeholder="Surname" required>
                             </div>
                         </div>
@@ -99,13 +101,13 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="birth_date">Birth date</label>
-                                <input type="number" class="form-control" id="birth_date" name="surname"
+                                <input type="date" class="form-control" id="birth_date" name="birthDay"
                                        placeholder="format ddmmyyyy" required>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="birth_date">Click and take it</label>
-                            <input type="submit" value="Get IT!" class="btn btn-primary btn-block">
+                            <label for="birth_date"></label>
+                            <input type="submit" value="Get IT! FREE" class="btn btn-primary btn-block">
                         </div>
                     </div>
                 </div>
