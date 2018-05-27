@@ -1,22 +1,28 @@
 package schedule.controller;
 
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import schedule.model.Ticket;
+import schedule.controller.model.TicketItem;
 import schedule.model.User;
+import schedule.service.api.TicketService;
 import schedule.service.api.TrainService;
 
 @Controller
 @RequestMapping(value = "/ticket")
 public class TicketController {
-    /*@Autowired
-    private TicketService trainService;*/
+    @Autowired
+    private TicketService ticketService;
     @Autowired
     private TrainService trainService;
+
 
     @RequestMapping(value = "/by", method = RequestMethod.GET)
     public ModelAndView byTicket(/*@PathVariable(value = "train.id") int trainId*/) {
@@ -29,13 +35,30 @@ public class TicketController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView saveTicket(@ModelAttribute(name = "ticket") Ticket ticket) {
+    public ModelAndView saveTicket(@RequestParam("stationFrom") String stationFrom, @RequestParam("stationTo") String stationTo, @RequestParam("departureDate") String departureDate, @RequestParam("departureTime") String departureTime, @RequestParam("trainNumber") int trainNumber, @RequestParam("name") String name, @RequestParam("surName") String surName, @RequestParam("birthDay") String birthDay) {
 
+        DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+        LocalDate departureDateFormatted = LocalDate.parse(departureDate, dateFormatter);
+        LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
+        DateTimeFormatter birthDayDateFormatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+        LocalDate birthDayFormatted = LocalDate.parse(birthDay, birthDayDateFormatter);
+
+        TicketItem ticketItem = new TicketItem();
+        ticketItem.setBirthDay(birthDayFormatted);
+        ticketItem.setDepartureDate(departureDateFormatted);
+        ticketItem.setDepartureTime(departureTimeFormatted);
+        ticketItem.setName(name);
+        ticketItem.setSurName(surName);
+        ticketItem.setTrainNumber(trainNumber);
+        ticketItem.setStationFrom(stationFrom);
+        ticketItem.setStationTo(stationTo);
+        //todo: if user exist { addUserTicket } else  {addGuestTicket}
+
+        ticketService.addGuestTicket(ticketItem);
+        String message="You get the ticket";
         ModelAndView modelAndView = new ModelAndView("byTicket");
-        modelAndView.addObject("ticket", new User());
-        //modelAndView.addObject("byTicket", trainService.get(trainId));
         modelAndView.addObject("pageTitle", "By ticket");
-
+        modelAndView.addObject("message", message);
 
         return modelAndView;
     }
