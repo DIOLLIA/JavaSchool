@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">By ticket</h2>
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Buy ticket</h2>
                 <h3 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
                         style="color:#e0e139;">${message}</span></h3>
                 <div class="col-md probootstrap-animate">

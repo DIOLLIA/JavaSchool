@@ -186,7 +186,7 @@ public class TrainController {
         List<Integer> trainsNumberList = new ArrayList<>();
         List<Route> routes = routeService.findByStationNames(selectedFromStation, selectedToStation);
 
-        List<Schedule> schedules = scheduleService.findStations(routes, selectedToStation, selectedFromStation);
+        List<Schedule> schedules = scheduleService.findScheduleByStations(routes, selectedToStation, selectedFromStation);
         Set<Schedule> treeSchedules = new TreeSet(new RouteDaylyIdComparator());
         treeSchedules.addAll(schedules);
         for (Schedule element : treeSchedules) {
@@ -205,7 +205,7 @@ public class TrainController {
         List<TrainAndDepTime> trainsNumberAndDepTimeList = new ArrayList<>();
         List<Route> routes = routeService.findByStationNames(selectedFromStation, selectedToStation);
 
-        List<Schedule> schedules = scheduleService.findStations(routes, selectedToStation, selectedFromStation);
+        List<Schedule> schedules = scheduleService.findScheduleByStations(routes, selectedToStation, selectedFromStation);
         Set<Schedule> treeSchedules = new TreeSet(new RouteDaylyIdComparator());
         treeSchedules.addAll(schedules);
         for (Schedule element : treeSchedules) {

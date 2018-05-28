@@ -17,7 +17,6 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-
     @Autowired
     private UserDao userDao;
     @Autowired
@@ -58,6 +57,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findByLoginOrSurname(String loginOrSurname) {
+        List<UserEntity> userEntity = userDao.findUserByLoginOrSurname(loginOrSurname);
+        List<User> userArrayList = new ArrayList<>();
+        for (UserEntity userEntityList : userEntity) {
+            userArrayList.add(modelMapper.map(userEntityList, User.class));
+        }
+        return userArrayList;
+    }
+
+    @Override
     public void editUser(User user) {
         UserEntity userEntity = modelMapper.map(user, UserEntity.class);
         userDao.editUser(userEntity);
@@ -68,5 +77,4 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = modelMapper.map(user, UserEntity.class);
         userDao.deleteUser(userEntity);
     }
-
 }

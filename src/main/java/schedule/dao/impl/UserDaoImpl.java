@@ -67,4 +67,19 @@ public class UserDaoImpl extends GeneralCrudDaoImpl<UserEntity> implements UserD
         getCurrentSession().delete(userEntity);
     }
 
+    public List<UserEntity> findUserByLoginOrSurname(String loginOrSurname) {
+        Query query;
+        boolean itsLogin = loginOrSurname.contains("@");
+        if (itsLogin) {
+            query = getCurrentSession().createQuery("FROM UserEntity ue WHERE ue.email =:loginOrSurname");
+            query.setParameter("loginOrSurname", loginOrSurname);
+        } else {
+            query = getCurrentSession().createQuery("FROM UserEntity ue WHERE ue.surname =:loginOrSurname ");
+            query.setParameter("loginOrSurname", loginOrSurname);
+        }
+
+        return query.list();
+    }
+
+
 }

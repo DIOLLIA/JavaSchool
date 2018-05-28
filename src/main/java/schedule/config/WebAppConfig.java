@@ -98,7 +98,17 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public ModelMapper modelMapper() {
-        return new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
+
+        //todo see lesha)
+/*        modelMapper.addMappings(new PropertyMap<Ticket, TicketEntity>() {
+            @Override
+            protected void configure() {
+                map().setUserEntity(modelMapper.map(source.getUser(), UserEntity.class));
+                map().setTrainEntity(modelMapper.map(source.getTrain(), TrainEntity.class));
+            }
+        });*/
+        return modelMapper;
     }
 
 

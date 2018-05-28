@@ -16,9 +16,9 @@ import java.util.List;
 @Service
 @Transactional
 public class StationServiceImpl implements StationService {
+
     @Autowired
     private StationDao stationDao;
-
     @Autowired
     ModelMapper modelMapper;
 

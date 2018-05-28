@@ -31,7 +31,7 @@
                     </div>
                 </form:form>
                 <h4 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
-                        style="color:#e0e139;">Users list</span></h4>
+                        style="color:#e0e139;">${message}</span></h4>
                 <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="100%">
                     <thead>
                     <tr>
@@ -43,7 +43,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="user" items="${users}">
+                    <c:forEach var="user" items="${user}">
                         <tr>
                             <td>${user.name}</td>
                             <td>${user.surname}</td>
@@ -56,9 +56,10 @@
                     </tbody>
                 </table>
                 <br>
-                <input type="submit" class="btn btn-primary" value="add new user"
-                       onclick="location='add';"/>
-
+                <div class="form-group">
+                    <input type="submit" value="Return to user list" class="btn btn-primary btn-block"
+                           style="width: 20%;" onclick="location='list';" >
+                </div>
             </div>
         </div>
     </div>

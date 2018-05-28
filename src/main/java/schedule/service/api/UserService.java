@@ -17,4 +17,6 @@ public interface UserService {
     boolean userExist(String name, String pswd);
 
     List<User> findPassengersOfTrain(int routeDailyId, LocalDateTime startTime);
+
+    List<User> findByLoginOrSurname(String loginOrSurname);
 }

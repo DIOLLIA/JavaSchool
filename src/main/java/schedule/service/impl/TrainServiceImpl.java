@@ -20,7 +20,6 @@ public class TrainServiceImpl implements TrainService {
 
     @Autowired
     private TrainDao trainDao;
-
     @Autowired
     private ModelMapper modelMapper;
 
@@ -84,6 +83,4 @@ public class TrainServiceImpl implements TrainService {
         }
         return trainsList;
     }
-
-
 }

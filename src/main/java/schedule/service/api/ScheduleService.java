@@ -8,12 +8,11 @@ import schedule.model.Station;
 import java.util.List;
 
 public interface ScheduleService {
-    List<Schedule> findStations(List<Route> route, String stationOfDeparture, String stationOfArrival);
+    List<Schedule> findScheduleByStations(List<Route> route, String stationOfDeparture, String stationOfArrival);
 
-    List<Schedule> findByStation(Station station);
+    List<Schedule> findScheduleByStation(Station station);
 
     void addSchedule(Schedule schedule);
 
     Schedule findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime);
-
 }

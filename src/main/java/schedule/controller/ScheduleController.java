@@ -32,7 +32,7 @@ public class ScheduleController {
         List<Route> routes = routeService.findByStationNames(stationFrom, stationTo);
 
         ModelAndView modelAndView = new ModelAndView("searchResult");
-        List<Schedule> schedules = scheduleService.findStations(routes, stationTo, stationFrom);
+        List<Schedule> schedules = scheduleService.findScheduleByStations(routes, stationTo, stationFrom);
 
         List<ScheduleItem> scheduleItems = new ArrayList<>();
         for (Schedule scheduleOne : schedules) {
@@ -90,7 +90,7 @@ public class ScheduleController {
         ModelAndView modelAndView = new ModelAndView("trainListByStation");
         modelAndView.addObject("pageTitle", "On station");
 
-        List<Schedule> listOfTrainsByStation = scheduleService.findByStation(stationService.findByName(station));
+        List<Schedule> listOfTrainsByStation = scheduleService.findScheduleByStation(stationService.findByName(station));
 
         List<Schedule> scheduleItems = new ArrayList<>(listOfTrainsByStation);
         String msg = "Results for " + station + " :";

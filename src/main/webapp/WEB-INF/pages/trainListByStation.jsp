@@ -46,7 +46,7 @@
                             <td>${scheduleItems.routeName.routeName}</td>
                             <td>${scheduleItems.arrivalTime}</td>
                             <td>${scheduleItems.departureTime}</td>
-                            <td><a href="${pageContext.request.contextPath}/ticket/by/">by ticket</a><br/>
+                            <td><a href="${pageContext.request.contextPath}/ticket/buy/">buy ticket</a><br/>
                         </tr>
                     </c:forEach>
                     </tbody>

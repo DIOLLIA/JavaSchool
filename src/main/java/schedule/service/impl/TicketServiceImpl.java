@@ -52,19 +52,15 @@ public class TicketServiceImpl implements TicketService {
         LocalDate departureDate = ticketItem.getDepartureDate();
         LocalDateTime departureDateTime = departureDate.toLocalDateTime(departureTime);
 
-
-        // найти shcedule по станциям, времени отправления и поезду,
-
         List<Route> routes = routeService.findByStationNames(ticketItem.getStationFrom(), ticketItem.getStationTo());
-        List<Schedule> schedules = scheduleService.findStations(routes, ticketItem.getStationTo(), ticketItem.getStationFrom());
+        List<Schedule> schedules = scheduleService.findScheduleByStations(routes, ticketItem.getStationTo(), ticketItem.getStationFrom());
         int departureScheduleId = 0;
         Schedule departureSchedule = null;
         for (Schedule item : schedules) {
-            if (item.getDepartureTime().toString().equals(departureTime.toString())) ;
-            {
+            if (item.getDepartureTime().equals(departureTime)) {
                 departureScheduleId = item.getId();
                 departureSchedule = item;
-                break;
+                break;///todo bad
             }
         }
         if (departureScheduleId == 0) {
@@ -74,12 +70,13 @@ public class TicketServiceImpl implements TicketService {
         Ticket ticket = new Ticket();
         ticket.setUser(user);
         ticket.setDepartureDateTime(departureDateTime);
-        Train departureTrainId = trainService.findByNumber(ticketItem.getTrainNumber());
-        ticket.setTrain(departureTrainId);
+        //Train departureTrain = trainService.findByNumber(ticketItem.getTrainNumber());
+        Train departureTrain = new Train();
+        ticket.setTrain(departureTrain);
         ticket.setDepartureSchedule(departureSchedule);
 
-       // TicketEntity ticketEntity = modelMapper.map(ticket, TicketEntity.class);
-      // ticketDao.addTicket(ticketEntity);
-        ticketDao.addModelTicket(ticket);
+        TicketEntity ticketEntity = modelMapper.map(ticket, TicketEntity.class);
+        ticketDao.addTicket(ticketEntity);
+        // ticketDao.addModelTicket(ticket);
     }
 }

@@ -17,4 +17,6 @@ public interface UserDao extends GeneralCrudDao<UserEntity> {
     boolean findUser(String name, String pswd);
 
     List<UserEntity> findPassengersOfTrain(int routeDailyId, LocalDateTime startTime);
+
+    List<UserEntity> findUserByLoginOrSurname(String loginOrSurname);
 }

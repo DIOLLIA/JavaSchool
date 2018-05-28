@@ -17,9 +17,9 @@ import java.util.List;
 @Service
 @Transactional
 public class RouteServiceImpl implements RouteService {
+
     @Autowired
     private RouteDao routeDao;
-
     @Autowired
     ModelMapper modelMapper;
 
@@ -42,11 +42,9 @@ public class RouteServiceImpl implements RouteService {
         for (RouteEntity re : routesEntityList) {
             routeList.add(modelMapper.map(re, Route.class));
         }
-
         return routeList;
     }
 
-    //filter routes where station list has all given stations
     private List<RouteEntity> filterList(List<RouteEntity> routesEntityList, String[] stationNames) {
         List<RouteEntity> resultList = new ArrayList<>();
         for (RouteEntity routeEntity : routesEntityList) {

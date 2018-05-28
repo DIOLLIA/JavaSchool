@@ -12,6 +12,7 @@ import schedule.model.Role;
 import schedule.model.User;
 import schedule.service.api.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -37,6 +38,7 @@ public class UserController {
         User user = new User();
         user.setName("hello");
         modelAndView.addObject("user", user);
+
         return modelAndView;
     }
 
@@ -83,7 +85,6 @@ public class UserController {
         modelAndView.addObject("msg", msg);
 
         return modelAndView;
-
     }
 
     @RequestMapping(value = "/signIn", method = RequestMethod.GET)
@@ -113,8 +114,32 @@ public class UserController {
         newUser.setBirthDay(LocalDate.parse(birthDayString));
 
         userService.addUser(newUser);
-
         ModelAndView modelAndView = new ModelAndView("home");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/findUser", method = RequestMethod.POST)
+    public ModelAndView findByLoginOrSurname(@RequestParam("loginOrSurname") String loginOrSurname) {
+        List<User> list = userService.findByLoginOrSurname(loginOrSurname);
+        ArrayList<User> searchResult = new ArrayList<>(list);
+        String message = "";
+        String elementForSearch = "";
+        ModelAndView modelAndView = new ModelAndView("usersSearchResult");
+        if (loginOrSurname.contains("@")) {
+            elementForSearch = "Login";
+        } else {
+            elementForSearch = "Surname";
+        }
+        if (searchResult.size() == 0) {
+
+            message = "Nobody found with " + elementForSearch + " \"" + loginOrSurname + "\"." + " Check correctness of the entered information and try again.";
+
+        } else {
+            message = "Result for " + elementForSearch + " \"" + loginOrSurname + "\".";
+        }
+        modelAndView.addObject("message", message);
+        modelAndView.addObject("user", searchResult);
+
         return modelAndView;
     }
 }

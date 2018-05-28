@@ -24,12 +24,11 @@ public class TicketController {
     private TrainService trainService;
 
 
-    @RequestMapping(value = "/by", method = RequestMethod.GET)
-    public ModelAndView byTicket(/*@PathVariable(value = "train.id") int trainId*/) {
-        ModelAndView modelAndView = new ModelAndView("byTicket");
+    @RequestMapping(value = "/buy", method = RequestMethod.GET)
+    public ModelAndView buyTicket() {
+        ModelAndView modelAndView = new ModelAndView("buyTicket");
         modelAndView.addObject("ticket", new User());
-        //modelAndView.addObject("byTicket", trainService.get(trainId));
-        modelAndView.addObject("pageTitle", "By ticket");
+        modelAndView.addObject("pageTitle", "Buy ticket");
 
         return modelAndView;
     }
@@ -55,9 +54,9 @@ public class TicketController {
         //todo: if user exist { addUserTicket } else  {addGuestTicket}
 
         ticketService.addGuestTicket(ticketItem);
-        String message="You get the ticket";
-        ModelAndView modelAndView = new ModelAndView("byTicket");
-        modelAndView.addObject("pageTitle", "By ticket");
+        String message = "You get the ticket";
+        ModelAndView modelAndView = new ModelAndView("buyTicket");
+        modelAndView.addObject("pageTitle", "Buy ticket");
         modelAndView.addObject("message", message);
 
         return modelAndView;

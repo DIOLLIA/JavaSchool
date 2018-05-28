@@ -6,7 +6,6 @@ import org.joda.time.LocalTime;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import schedule.dao.api.RouteDao;
 import schedule.dao.api.ScheduleDao;
 import schedule.entity.RouteEntity;
 import schedule.entity.ScheduleEntity;
@@ -24,13 +23,11 @@ import java.util.List;
 @Service
 @Transactional
 public class ScheduleServiceImpl implements ScheduleService {
+
     @Autowired
     ScheduleDao scheduleDao;
     @Autowired
-    RouteDao routeDao;
-    @Autowired
     ModelMapper modelMapper;
-
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -38,7 +35,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         return sessionFactory.getCurrentSession();
     }
 
-    public List<Schedule> findStations(List<Route> routes, String stationOfDeparture, String stationOfArrival) {
+    public List<Schedule> findScheduleByStations(List<Route> routes, String stationOfDeparture, String stationOfArrival) {
         List<RouteEntity> routeEntities = new ArrayList<>();
         for (Route route : routes) {
             routeEntities.add(modelMapper.map(route, RouteEntity.class));
@@ -53,7 +50,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> findByStation(Station station) {
+    public List<Schedule> findScheduleByStation(Station station) {
 
         List<Schedule> searchResult = new ArrayList<>();
         List<ScheduleEntity> result = scheduleDao.findByStation(modelMapper.map(station, StationEntity.class));
@@ -70,6 +67,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         schedule2.setTrainNumber(new Train());
         schedule2.setStationName(new Station());
 
+        //todo autowire model mapper
         ModelMapper mp = new ModelMapper();
         ScheduleEntity map = mp.map(schedule2, ScheduleEntity.class);
         getCurrentSession().save(map);
