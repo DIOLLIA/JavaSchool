@@ -42,20 +42,31 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add2", method = RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute(name = "user") User user) {
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ModelAndView createUser(@RequestParam("email") String email, @RequestParam("name") String name, @RequestParam("surname") String surname, @RequestParam("password") String password, @RequestParam("birthDay") String birthDayString, @RequestParam("role") String role) {
 
-        ModelAndView modelAndView = new ModelAndView("usersList");
-        userService.addUser(user);
+        Role role1 = new Role();
 
-        List<User> users = userService.getUsers();
-        modelAndView.addObject("users", users);
+        if (role.equals("Admin")) {
+            role1.setId(1);
+        } else {
+            role1.setId(2);
+        }
+        User newUser = new User();
+        newUser.setEmail(email);
+        newUser.setName(name);
+        newUser.setSurname(surname);
+        newUser.setPassword(password);
+        newUser.setRole(role1);
+        newUser.setBirthDay(LocalDate.parse(birthDayString));
 
-        String message = "User was successfully added.";
+        userService.addUser(newUser);
+        String message = " new user with " + role + "'s rights successfully created";
+        ModelAndView modelAndView = new ModelAndView("addUser");
         modelAndView.addObject("message", message);
-
         return modelAndView;
     }
+
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public ModelAndView deleteUserPage(@ModelAttribute User id) {
