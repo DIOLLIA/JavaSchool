@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import schedule.controller.model.TicketItem;
 import schedule.dao.impl.TicketDaoImpl;
 import schedule.entity.TicketEntity;
+import schedule.entity.TrainEntity;
+import schedule.entity.UserEntity;
 import schedule.model.*;
 import schedule.service.api.RouteService;
 import schedule.service.api.ScheduleService;
@@ -70,13 +72,14 @@ public class TicketServiceImpl implements TicketService {
         Ticket ticket = new Ticket();
         ticket.setUser(user);
         ticket.setDepartureDateTime(departureDateTime);
-        //Train departureTrain = trainService.findByNumber(ticketItem.getTrainNumber());
-        Train departureTrain = new Train();
+        Train departureTrain = trainService.findByNumber(ticketItem.getTrainNumber());
+        //Train departureTrain = new Train();
         ticket.setTrain(departureTrain);
         ticket.setDepartureSchedule(departureSchedule);
 
         TicketEntity ticketEntity = modelMapper.map(ticket, TicketEntity.class);
+        ticketEntity.setTrainEntity(modelMapper.map(ticket.getTrain(), TrainEntity.class));
+        ticketEntity.setUserEntity(modelMapper.map(ticket.getUser(), UserEntity.class));
         ticketDao.addTicket(ticketEntity);
-        // ticketDao.addModelTicket(ticket);
     }
 }

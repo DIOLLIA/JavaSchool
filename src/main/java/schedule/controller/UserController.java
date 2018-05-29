@@ -67,7 +67,6 @@ public class UserController {
         return modelAndView;
     }
 
-
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public ModelAndView deleteUserPage(@ModelAttribute User id) {
         ModelAndView modelAndView = new ModelAndView("usersList");

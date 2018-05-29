@@ -21,7 +21,7 @@ public class TicketEntity {
     @ManyToOne
     private TrainEntity trainEntity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private UserEntity userEntity;
 
     @OneToOne
