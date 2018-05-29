@@ -46,11 +46,11 @@
         </button>
         <div class="collapse navbar-collapse" id="probootstrap-menu">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/train/list">Trains list</a>
+                <li class="nav-item active"><a class="nav-link" href="/train/list">Trains list</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="http://localhost:8080/station/list">Station list</a></li>
-                <li class="nav-item"><a class="nav-link" href="http://localhost:8080/user/signIn">Sign in</a></li>
-                <li class="nav-item"><a class="nav-link" href="http://localhost:8080/user/signUp">Sign up</a></li>
+                <li class="nav-item"><a class="nav-link" href="/station/list">Station list</a></li>
+                <li class="nav-item"><a class="nav-link" href="/user/signIn">Sign in</a></li>
+                <li class="nav-item"><a class="nav-link" href="/user/signUp">Sign up</a></li>
             </ul>
         </div>
     </div>
