@@ -9,6 +9,7 @@
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Stations</h2>
+                <h2>${message}</h2>
                 <table class="table_price" border="0px" cellpadding="" cellspacing="0">
                     <thead>
                     <tr>
@@ -20,15 +21,15 @@
                     <c:forEach var="station" items="${stations}">
                         <tr>
                             <td>${station.stationName}</td>
-                            <td><a href="${pageContext.request.contextPath}/station/edit/${station.id}.html">Edit</a>
-                                <a href="${pageContext.request.contextPath}/station/delete/${station.id}.html">Delete</a><br/>
+                            <td><a href="${pageContext.request.contextPath}/station/edit/${station.id}">Edit</a>
+                                <a href="${pageContext.request.contextPath}/station/delete/${station.id}">Delete</a><br/>
                             </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
                 <br>
-                <h2>${message}</h2>
+
                 <br>
                 <input type="submit" class="btn btn-primary" value="add station"
                        onclick="location='add';"/>

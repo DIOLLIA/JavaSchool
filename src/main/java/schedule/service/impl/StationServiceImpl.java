@@ -30,13 +30,19 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public void getStation(int id) {
-        stationDao.getStation(id);
+    public Station getStation(int id) {
+        return modelMapper.map(stationDao.getStation(id), Station.class);
     }
 
     @Override
     public void deleteStation(int id) {
         stationDao.deleteStation(id);
+    }
+
+    @Override
+    public void editStation(Station station) {
+        stationDao.editStation(modelMapper.map(station, StationEntity.class));
+
     }
 
     @Override

@@ -8,9 +8,11 @@ public interface StationService {
 
     Station addStation(Station station);
 
-    void getStation(int id);
+    Station getStation(int id);
 
     void deleteStation(int id);
+
+    void editStation(Station station);
 
     List<Station> getStations();
 

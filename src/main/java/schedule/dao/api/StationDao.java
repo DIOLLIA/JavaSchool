@@ -14,5 +14,8 @@ public interface StationDao extends GeneralCrudDao<StationEntity> {
     List<StationEntity> getStations();
 
     StationEntity findByName(String name);
+
+    void editStation(StationEntity stationEntity);
+
 }
 

@@ -29,6 +29,7 @@ public class ScheduleEntity {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     // @JoinColumn(name = "station_name")
     private StationEntity stationName;
 
