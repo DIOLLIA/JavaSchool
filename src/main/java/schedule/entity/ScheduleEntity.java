@@ -29,13 +29,11 @@ public class ScheduleEntity {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    // @JoinColumn(name = "station_name")
+   // @OnDelete(action = OnDeleteAction.CASCADE) //todo не работает так как данная сущность есть в нескольких табах
     private StationEntity stationName;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    //  @JoinColumn(name = "train_number_id")
     private TrainEntity trainNumber;
 
     private Integer timeInterval;

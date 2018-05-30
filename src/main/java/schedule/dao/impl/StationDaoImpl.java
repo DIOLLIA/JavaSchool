@@ -22,7 +22,10 @@ public class StationDaoImpl extends GeneralCrudDaoImpl<StationEntity> implements
     }
 
     @Override
-    public void deleteStation(int id) {}
+    public void deleteStation(int id) {
+        StationEntity stationEntity = (StationEntity) getCurrentSession().get(StationEntity.class, id);
+        getCurrentSession().delete(stationEntity);
+    }
 
     @Override
     public void editStation(StationEntity stationEntity) {

@@ -77,4 +77,16 @@ public class StationController {
 
         return modelAndView;
     }
+
+    @RequestMapping(value = "/delete/{station.id}")
+    public ModelAndView deleteStation(@PathVariable(value = "station.id") int stationId) {
+        stationService.deleteStation(stationId);
+        String message = "Station was successfully deleted.";
+        ModelAndView modelAndView = new ModelAndView("stationsList");
+        List<Station> stations = stationService.getStations();
+        modelAndView.addObject("stations", stations);
+        modelAndView.addObject("message", message);
+
+        return modelAndView;
+    }
 }
