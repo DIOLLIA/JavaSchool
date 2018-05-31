@@ -32,9 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-// hasRole('ROLE_ADMIN') заменено на hasRole('1')
         http.authorizeRequests()
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')").antMatchers("/station/**").access("hasRole('ROLE_ADMIN')").antMatchers("/train/**").access("hasRole('ROLE_ADMIN')").antMatchers("/user/**").access("hasRole('ROLE_ADMIN')").antMatchers("/ticket/**").access("hasRole('ROLE_USER')")
+
+                .antMatchers("/searchForUser/**").access("hasRole('ROLE_USER')").antMatchers("/station/**").access("hasRole('ROLE_ADMIN')").antMatchers("/train/**").access("hasRole('ROLE_ADMIN')").antMatchers("/user/**").access("hasRole('ROLE_ADMIN')").antMatchers("/ticket/**").access("hasRole('ROLE_USER')")
                 .and()
                 .formLogin().loginPage("/signIn").failureUrl("/signIn?error")
                 .usernameParameter("username").passwordParameter("password")

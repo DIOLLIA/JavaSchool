@@ -16,7 +16,7 @@ function trainsAndDateSelector() {
 
     $.ajax({
         type: 'POST',
-        url: '/train/get-train-and-time/',
+        url: '/searchForUser/get-train-and-time/',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(stations),
@@ -36,7 +36,7 @@ function trainsAndDateSelector() {
     });
 }
 
-function selectTrainNumber() {
+/*function selectTrainNumber() {
     var train = $("#train");
     var stations = {};
 
@@ -46,7 +46,7 @@ function selectTrainNumber() {
 
     $.ajax({
         type: 'POST',
-        url: '/train/get-train/',
+        url: '/searchForUser/get-train/',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(stations),
@@ -61,7 +61,7 @@ function selectTrainNumber() {
             alert("Something is wrong!")
         }
     })
-}
+}*/
 
 
 function showRoutePassengersByDate(trainId, dailyRouteId, startTime) {

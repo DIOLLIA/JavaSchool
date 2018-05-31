@@ -1,6 +1,5 @@
 package schedule.controller;
 
-import com.google.gson.Gson;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
@@ -11,14 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.ScheduleItem;
-import schedule.controller.model.StationsFromTo;
-import schedule.controller.model.TrainAndDepTime;
-import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Train;
 import schedule.model.User;
-import schedule.service.api.RouteService;
-import schedule.service.api.ScheduleService;
 import schedule.service.api.TrainService;
 import schedule.service.api.UserService;
 
@@ -30,15 +24,8 @@ public class TrainController {
 
     @Autowired
     TrainService trainService;
-
     @Autowired
     UserService userService;
-
-    @Autowired
-    RouteService routeService;
-
-    @Autowired
-    ScheduleService scheduleService;
 
     @RequestMapping(value = "/list")
     public ModelAndView listOfTrains() {
@@ -48,7 +35,6 @@ public class TrainController {
         modelAndView.addObject("trains", trains);
         modelAndView.addObject("pageTitle", "Trains list");
 
-
         return modelAndView;
     }
 
@@ -57,6 +43,7 @@ public class TrainController {
         ModelAndView modelAndView = new ModelAndView("addTicket");
         modelAndView.addObject("train", new Train());
         modelAndView.addObject("pageTitle", "Add train");
+
         return modelAndView;
     }
 
@@ -136,7 +123,6 @@ public class TrainController {
 
         for (List<Schedule> scheduleList : scheduleMap.values()) {
 
-
             scheduleList.sort(new RouteStationIdComparator());
 
             Schedule firstStationInSchedule = scheduleList.get(0);
@@ -177,47 +163,6 @@ public class TrainController {
 
     }
 
-    @RequestMapping(value = "/get-train/", method = RequestMethod.POST)
-    public @ResponseBody
-    String getTrainsListForDepartureStation(@RequestBody StationsFromTo stations) {
-        String selectedFromStation = stations.getStationFrom();
-        String selectedToStation = stations.getStationTo();
-
-        List<Integer> trainsNumberList = new ArrayList<>();
-        List<Route> routes = routeService.findByStationNames(selectedFromStation, selectedToStation);
-
-        List<Schedule> schedules = scheduleService.findScheduleByStations(routes, selectedToStation, selectedFromStation);
-        Set<Schedule> treeSchedules = new TreeSet(new RouteDaylyIdComparator());
-        treeSchedules.addAll(schedules);
-        for (Schedule element : treeSchedules) {
-            trainsNumberList.add(element.getTrainNumber().getNumberOfTrain());
-        }
-
-        return new Gson().toJson(trainsNumberList);
-    }
-
-    @RequestMapping(value = "/get-train-and-time/", method = RequestMethod.POST)
-    public @ResponseBody
-    String getTrainsListForDepartureStation2(@RequestBody StationsFromTo stations) {
-        String selectedFromStation = stations.getStationFrom();
-        String selectedToStation = stations.getStationTo();
-
-        List<TrainAndDepTime> trainsNumberAndDepTimeList = new ArrayList<>();
-        List<Route> routes = routeService.findByStationNames(selectedFromStation, selectedToStation);
-
-        List<Schedule> schedules = scheduleService.findScheduleByStations(routes, selectedToStation, selectedFromStation);
-        Set<Schedule> treeSchedules = new TreeSet(new RouteDaylyIdComparator());
-        treeSchedules.addAll(schedules);
-        for (Schedule element : treeSchedules) {
-            TrainAndDepTime trainAndDepTime = new TrainAndDepTime();
-            trainAndDepTime.setDepartureTime(element.getDepartureTime().toString());
-            trainAndDepTime.setTrainNumber(element.getTrainNumber().getNumberOfTrain());
-            trainsNumberAndDepTimeList.add(trainAndDepTime);
-        }
-        return new Gson().toJson(trainsNumberAndDepTimeList);
-    }
-
-
     private class RouteStationIdComparator implements Comparator<Schedule> {
         @Override
         public int compare(Schedule o1, Schedule o2) {
@@ -230,18 +175,4 @@ public class TrainController {
             }
         }
     }
-
-    private class RouteDaylyIdComparator implements Comparator<Schedule> {
-        @Override
-        public int compare(Schedule o1, Schedule o2) {
-            if (o1.getRouteDailyId() == o2.getRouteDailyId()) {
-                return 0;
-            } else if (o1.getRouteDailyId() > o2.getRouteDailyId()) {
-                return 1;
-            } else {
-                return -1;
-            }
-        }
-    }
-
 }
