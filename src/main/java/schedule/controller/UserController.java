@@ -24,7 +24,7 @@ public class UserController {
 
     @RequestMapping(value = "/list")
     public ModelAndView listOfUsers() {
-        ModelAndView modelAndView = new ModelAndView("usersList");
+        ModelAndView modelAndView = new ModelAndView("users-list");
 
         List<User> users = userService.getUsers();
         modelAndView.addObject("users", users);
@@ -34,7 +34,7 @@ public class UserController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addUserPage() {
-        ModelAndView modelAndView = new ModelAndView("addUser");
+        ModelAndView modelAndView = new ModelAndView("add-user");
         User user = new User();
         user.setName("hello");
         modelAndView.addObject("user", user);
@@ -62,14 +62,14 @@ public class UserController {
 
         userService.addUser(newUser);
         String message = " new user with " + role + "'s rights successfully created";
-        ModelAndView modelAndView = new ModelAndView("addUser");
+        ModelAndView modelAndView = new ModelAndView("add-user");
         modelAndView.addObject("message", message);
         return modelAndView;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public ModelAndView deleteUserPage(@ModelAttribute User id) {
-        ModelAndView modelAndView = new ModelAndView("usersList");
+        ModelAndView modelAndView = new ModelAndView("users-list");
         userService.addUser(id);
 
         List<User> users = userService.getUsers();
@@ -81,52 +81,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/signIn", method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password) {
-        boolean isValid;
-        String msg;
-        isValid = userService.userExist(username, password);
-        if (isValid) {
-            msg = "Welcome " + username + "!";
-        } else {
-            msg = "Incorrect username or password!";
-        }
-        ModelAndView modelAndView = new ModelAndView("signIn");
-        modelAndView.addObject("msg", msg);
 
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/signIn", method = RequestMethod.GET)
-    public ModelAndView signUp() {
-        ModelAndView modelAndView = new ModelAndView("signIn");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
-    public ModelAndView signIn() {
-        ModelAndView modelAndView = new ModelAndView("signUp");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/signUp", method = RequestMethod.POST)
-    public ModelAndView register(@RequestParam("email") String email, @RequestParam("name") String name, @RequestParam("surname") String surname, @RequestParam("password") String password, @RequestParam("birthDay") String birthDayString) {
-
-        Role role = new Role();
-        role.setId(2);
-
-        User newUser = new User();
-        newUser.setEmail(email);
-        newUser.setName(name);
-        newUser.setSurname(surname);
-        newUser.setPassword(password);
-        newUser.setRole(role);
-        newUser.setBirthDay(LocalDate.parse(birthDayString));
-
-        userService.addUser(newUser);
-        ModelAndView modelAndView = new ModelAndView("home");
-        return modelAndView;
-    }
 
     @RequestMapping(value = "/findUser", method = RequestMethod.POST)
     public ModelAndView findByLoginOrSurname(@RequestParam("loginOrSurname") String loginOrSurname) {
@@ -134,7 +89,7 @@ public class UserController {
         ArrayList<User> searchResult = new ArrayList<>(list);
         String message = "";
         String elementForSearch = "";
-        ModelAndView modelAndView = new ModelAndView("usersSearchResult");
+        ModelAndView modelAndView = new ModelAndView("users-search-result");
         if (loginOrSurname.contains("@")) {
             elementForSearch = "Login";
         } else {

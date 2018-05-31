@@ -22,7 +22,7 @@ public class StationController {
 
     @RequestMapping(value = "/list")
     public ModelAndView listOfStations() {
-        ModelAndView modelAndView = new ModelAndView("stationsList");
+        ModelAndView modelAndView = new ModelAndView("stations-list");
 
         List<Station> stations = stationService.getStations();
         modelAndView.addObject("stations", stations);
@@ -34,7 +34,7 @@ public class StationController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addStationPage() {
-        ModelAndView modelAndView = new ModelAndView("addStation");
+        ModelAndView modelAndView = new ModelAndView("add-station");
         modelAndView.addObject("station", new StationEntity());
         modelAndView.addObject("pageTitle", "Add station");
         return modelAndView;
@@ -42,7 +42,7 @@ public class StationController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addStation(@ModelAttribute Station station) {
-        ModelAndView modelAndView = new ModelAndView("stationsList");
+        ModelAndView modelAndView = new ModelAndView("stations-list");
         stationService.addStation(station);
 
         List<Station> stations = stationService.getStations();
@@ -57,9 +57,9 @@ public class StationController {
     @RequestMapping(value = "/edit/{station.id}", method = RequestMethod.GET)
     public ModelAndView editStation(@PathVariable(value = "station.id") int stationId) {
 
-        ModelAndView modelAndView = new ModelAndView("editStation");
+        ModelAndView modelAndView = new ModelAndView("edit-station");
         modelAndView.addObject("station", stationService.getStation(stationId));
-        modelAndView.addObject("pageTitle", "Edit train");
+        modelAndView.addObject("pageTitle", "Edit station");
 
         return modelAndView;
     }
@@ -69,7 +69,7 @@ public class StationController {
         stationService.editStation(station);
         String message = "Station was successfully modified.";
 
-        ModelAndView modelAndView = new ModelAndView("stationsList");
+        ModelAndView modelAndView = new ModelAndView("stations-list");
         List<Station> stations = stationService.getStations();
 
         modelAndView.addObject("stations", stations);
@@ -82,7 +82,7 @@ public class StationController {
     public ModelAndView deleteStation(@PathVariable(value = "station.id") int stationId) {
         stationService.deleteStation(stationId);
         String message = "Station was successfully deleted.";
-        ModelAndView modelAndView = new ModelAndView("stationsList");
+        ModelAndView modelAndView = new ModelAndView("stations-list");
         List<Station> stations = stationService.getStations();
         modelAndView.addObject("stations", stations);
         modelAndView.addObject("message", message);

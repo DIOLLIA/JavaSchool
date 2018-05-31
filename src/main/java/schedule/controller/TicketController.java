@@ -26,7 +26,7 @@ public class TicketController {
 
     @RequestMapping(value = "/buy", method = RequestMethod.GET)
     public ModelAndView buyTicket() {
-        ModelAndView modelAndView = new ModelAndView("buyTicket");
+        ModelAndView modelAndView = new ModelAndView("buy-ticket");
         modelAndView.addObject("ticket", new User());
         modelAndView.addObject("pageTitle", "Buy ticket");
 
@@ -55,7 +55,7 @@ public class TicketController {
 
         ticketService.addGuestTicket(ticketItem);
         String message = "You get the ticket";
-        ModelAndView modelAndView = new ModelAndView("buyTicket");
+        ModelAndView modelAndView = new ModelAndView("buy-ticket");
         modelAndView.addObject("pageTitle", "Buy ticket");
         modelAndView.addObject("message", message);
 

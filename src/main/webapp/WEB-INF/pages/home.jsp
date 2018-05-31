@@ -73,16 +73,5 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6 probootstrap-animate">
-
-        </div>
-        <div class="col-md-6  probootstrap-animate">
-            <p class="display-4  mb-4 probootstrap-animate">
-                <a>go to search<br></a>
-                <a href="../schedule/searchTrainOnStation">Station schedule</a></p>
-        </div>
-    </div>
 </section>
-
 <%@ include file="footer.jsp" %>

@@ -40,15 +40,13 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
     <div class="container">
-        <a class="navbar-brand" href="/index">KudKuda Home</a>
+        <a class="navbar-brand" href="/index">KudKuda Master Home Page</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu"
                 aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="ion-navicon"></i></span>
         </button>
         <div class="collapse navbar-collapse" id="probootstrap-menu">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link" href="/schedule/searchTrainOnStation">Station schedule</a></li>
-                <li class="nav-item"><a class="nav-link" href="/ticket/buy">Buy ticket</a></li>
 
                 <sec:authorize access="isAuthenticated()">
                     <c:url value="/logout" var="logoutUrl"/>

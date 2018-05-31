@@ -1,4 +1,4 @@
-<%@ include file="header.jsp" %>
+<%@ include file="header-admin.jsp" %>
 
 <section class="probootstrap-cover overflow-hidden relative"
          style="background-image: url('/resources/images/sq_img_1.jpg');" data-stellar-background-ratio="0.5"

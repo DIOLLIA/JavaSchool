@@ -1,3 +1,7 @@
+function formSubmit() {
+    document.getElementById("logoutForm").submit();
+}
+
 function trainsAndDateSelector() {
     var stationsFrom = $("#station_from").val();
     var stationsTo = $("#station_to").val();

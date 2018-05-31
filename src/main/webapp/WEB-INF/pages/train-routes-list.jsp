@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp" %>
+<%@ include file="header-admin.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 <script src="../../resources/js/main.js"></script>
 

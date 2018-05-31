@@ -31,7 +31,7 @@ public class ScheduleController {
     public ModelAndView findSchedule(@RequestParam(name = "stationFrom") String stationFrom, @RequestParam(name = "stationTo") String stationTo) {
         List<Route> routes = routeService.findByStationNames(stationFrom, stationTo);
 
-        ModelAndView modelAndView = new ModelAndView("searchResult");
+        ModelAndView modelAndView = new ModelAndView("search-result");
         List<Schedule> schedules = scheduleService.findScheduleByStations(routes, stationTo, stationFrom);
 
         List<ScheduleItem> scheduleItems = new ArrayList<>();
@@ -78,7 +78,7 @@ public class ScheduleController {
     @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.GET)
     public ModelAndView searchOnStation() {
 
-        ModelAndView modelAndView = new ModelAndView("trainListByStation");
+        ModelAndView modelAndView = new ModelAndView("train-list-by-station");
         modelAndView.addObject("pageTitle", "On station");
 
         return modelAndView;
@@ -87,7 +87,7 @@ public class ScheduleController {
     @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.POST)
     public ModelAndView searchOnStationResult(@RequestParam(name = "stationFrom") String station) {
 
-        ModelAndView modelAndView = new ModelAndView("trainListByStation");
+        ModelAndView modelAndView = new ModelAndView("train-list-by-station");
         modelAndView.addObject("pageTitle", "On station");
 
         List<Schedule> listOfTrainsByStation = scheduleService.findScheduleByStation(stationService.findByName(station));

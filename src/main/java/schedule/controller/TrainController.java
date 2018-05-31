@@ -42,7 +42,7 @@ public class TrainController {
 
     @RequestMapping(value = "/list")
     public ModelAndView listOfTrains() {
-        ModelAndView modelAndView = new ModelAndView("trainsList");
+        ModelAndView modelAndView = new ModelAndView("trains-list");
 
         List<Train> trains = trainService.getTrains();
         modelAndView.addObject("trains", trains);
@@ -63,7 +63,7 @@ public class TrainController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addTrain(@ModelAttribute Train train) {
 
-        ModelAndView modelAndView = new ModelAndView("trainsList");
+        ModelAndView modelAndView = new ModelAndView("trains-list");
         trainService.addTrain(train);
 
         List<Train> trains = trainService.getTrains();
@@ -79,7 +79,7 @@ public class TrainController {
     public ModelAndView deleteTrain(@PathVariable(value = "train.id") int trainId) {
         trainService.deleteTrain(trainId);
         String message = "Train was successfully deleted.";
-        ModelAndView modelAndView = new ModelAndView("trainsList");
+        ModelAndView modelAndView = new ModelAndView("trains-list");
         List<Train> trains = trainService.getTrains();
         modelAndView.addObject("trains", trains);
         modelAndView.addObject("message", message);
@@ -90,7 +90,7 @@ public class TrainController {
     @RequestMapping(value = "/edit/{train.id}", method = RequestMethod.GET)
     public ModelAndView editTrain(@PathVariable(value = "train.id") int trainId) {
 
-        ModelAndView modelAndView = new ModelAndView("editTrain");
+        ModelAndView modelAndView = new ModelAndView("edit-train");
         modelAndView.addObject("train", trainService.get(trainId));
         modelAndView.addObject("pageTitle", "Edit train");
 
@@ -104,7 +104,7 @@ public class TrainController {
         trainService.editTrain(train);
         String message = "Train was successfully modified.";
 
-        ModelAndView modelAndView = new ModelAndView("trainsList");
+        ModelAndView modelAndView = new ModelAndView("trains-list");
         List<Train> trains = trainService.getTrains();
 
         modelAndView.addObject("trains", trains);
@@ -118,7 +118,7 @@ public class TrainController {
 
         String msg = "Routes for train №" + trainService.get(trainId).getNumberOfTrain();
 
-        ModelAndView modelAndView = new ModelAndView("trainRoutesList");
+        ModelAndView modelAndView = new ModelAndView("train-routes-list");
         modelAndView.addObject("pageTitle", "Train routes");
 
         modelAndView.addObject("train", trainService.get(trainId));
@@ -171,7 +171,7 @@ public class TrainController {
         int routeId = Integer.parseInt(routeIdAsString);
         String msg = "Passengers list on train №" + trainService.get(Integer.parseInt(trainId)).getNumberOfTrain() + " " + dateAsString + ":";
         List<User> passengersOnRoute = userService.findPassengersOfTrain(routeId, startDateTime);
-        ModelAndView modelAndView = new ModelAndView("passengersOnDailyRoute").addObject("passengersOnRoute", passengersOnRoute);
+        ModelAndView modelAndView = new ModelAndView("passengers-on-daily-route").addObject("passengersOnRoute", passengersOnRoute);
         modelAndView.addObject("msg", msg);
         return modelAndView;
 
