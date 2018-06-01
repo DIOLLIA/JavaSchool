@@ -15,6 +15,7 @@ function trainsAndDateSelector() {
     stations["stationTo"] = stationsTo;
 
     $.ajax({
+        headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
         type: 'POST',
         url: '/searchForUser/get-train-and-time/',
         contentType: "application/json; charset=utf-8",

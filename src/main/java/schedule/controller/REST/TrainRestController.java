@@ -2,12 +2,12 @@ package schedule.controller.REST;
 
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import schedule.controller.model.StationsFromTo;
+import schedule.controller.model.TrainAndDepTime;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.service.api.RouteService;
@@ -15,9 +15,7 @@ import schedule.service.api.ScheduleService;
 
 import java.util.*;
 
-//@RestController
-@Controller
-
+@RestController
 @RequestMapping(value = "/searchForUser")
 public class TrainRestController {
     @Autowired
@@ -25,7 +23,7 @@ public class TrainRestController {
     @Autowired
     ScheduleService scheduleService;
 
-    @RequestMapping(value = "/get-train-and-time/", method = RequestMethod.POST)
+  /*  @RequestMapping(value = "/get-train-and-time/", method = RequestMethod.POST)
     public @ResponseBody
     String getTrainsListForDepartureStation(@RequestBody StationsFromTo stations) {
         String selectedFromStation = stations.getStationFrom();
@@ -42,9 +40,9 @@ public class TrainRestController {
         }
 
         return new Gson().toJson(trainsNumberList);
-    }
+    }*/
 
-  /*  @RequestMapping(value = "/get-train-and-time/", method = RequestMethod.POST)
+    @RequestMapping(value = "/get-train-and-time/", method = RequestMethod.POST)
     String getTrainsListForDepartureStation2(@RequestBody StationsFromTo stations) {
         String selectedFromStation = stations.getStationFrom();
         String selectedToStation = stations.getStationTo();
@@ -62,8 +60,8 @@ public class TrainRestController {
             trainsNumberAndDepTimeList.add(trainAndDepTime);
         }
 
-        return new Gson().toJson(trainsNumberAndDepTimeList);
-    }*/
+            return new Gson().toJson(trainsNumberAndDepTimeList);
+    }
 
     private class RouteDailyIdComparator implements Comparator<Schedule> {
         @Override

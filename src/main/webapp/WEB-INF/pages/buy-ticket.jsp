@@ -117,5 +117,5 @@
     </div>
     </div>
 </section>
-
+<sec:csrfMetaTags />
 <%@ include file="footer.jsp" %>
