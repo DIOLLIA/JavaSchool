@@ -37,33 +37,6 @@ function trainsAndDateSelector() {
     });
 }
 
-/*function selectTrainNumber() {
-    var train = $("#train");
-    var stations = {};
-
-    stations["stationFrom"] = $("#station_from").val();
-    stations["stationTo"] = $("#station_to").val();
-    train.empty();
-
-    $.ajax({
-        type: 'POST',
-        url: '/searchForUser/get-train/',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify(stations),
-        success: function (trains) {
-            trains.forEach(function (item, i) {
-                train.append(
-                    '<option value=\"' + item + '\">' + item + '</option>'
-                )
-            });
-        },
-        error: function (response) {
-            alert("Something is wrong!")
-        }
-    })
-}*/
-
 
 function showRoutePassengersByDate(trainId, dailyRouteId, startTime) {
     var departureDate = $("#probootstrap-date-departure").val();
