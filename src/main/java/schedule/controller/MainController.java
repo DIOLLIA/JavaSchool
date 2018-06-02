@@ -92,7 +92,6 @@ public class MainController {
         return modelAndView;
     }
 
-    //for 403 access denied page
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public ModelAndView accesssDenied() {
 

@@ -21,16 +21,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery(
-                        "SELECT email,password,enable FROM users WHERE email=?")
+                        "SELECT email,password,true FROM users WHERE email=?")
                 .authoritiesByUsernameQuery(
-                        "SELECT email, role FROM users WHERE email=?");
+                        "SELECT email, role FROM users u LEFT join role ON u.role_id = role.id WHERE email=?");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
 
-                .antMatchers("/searchForUser/**").access("hasRole('ROLE_USER')").antMatchers("/station/**").access("hasRole('ROLE_ADMIN')").antMatchers("/train/**").access("hasRole('ROLE_ADMIN')").antMatchers("/user/**").access("hasRole('ROLE_ADMIN')").antMatchers("/ticket/**").access("hasRole('ROLE_USER')")
+                .antMatchers("/searchForUser/**").access("hasRole('ROLE_USER')").antMatchers("/mainSearch/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_ANONYMOUS')").antMatchers("/station/**").access("hasRole('ROLE_ADMIN')").antMatchers("/train/**").access("hasRole('ROLE_ADMIN')").antMatchers("/user/**").access("hasRole('ROLE_ADMIN')").antMatchers("/ticket/**").access("hasRole('ROLE_USER')")
                 .and()
                 .formLogin().loginPage("/signIn").failureUrl("/signIn?error")
                 .usernameParameter("username").passwordParameter("password")

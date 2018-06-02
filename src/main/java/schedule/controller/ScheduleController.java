@@ -1,9 +1,10 @@
 package schedule.controller;
 
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.ScheduleItem;
 import schedule.model.Route;
@@ -59,22 +60,6 @@ public class ScheduleController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/get-stations/")
-    @ResponseBody
-    public String getStationsNames() {
-        List<String> stationsNames = stationService.getStationsNames();
-
-        return new Gson().toJson(stationsNames);
-    }
-
-    @GetMapping(value = "/get-stations/{selectedFromStation}")
-    @ResponseBody
-    public String getStationsNamesTest(@PathVariable(value = "selectedFromStation") String selectedFromStation) {
-        List<String> stationsNames = stationService.getStationsNames();
-        stationsNames.remove(selectedFromStation);
-        return new Gson().toJson(stationsNames);
-    }
-
     @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.GET)
     public ModelAndView searchOnStation() {
 
@@ -100,5 +85,4 @@ public class ScheduleController {
 
         return modelAndView;
     }
-
 }

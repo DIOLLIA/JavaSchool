@@ -89,17 +89,15 @@ VALUES (18, '22:00', '22:20', 2, 1, 1, 3, 1);
 INSERT INTO railways.schedule (id, arrival_time, departure_time, routeDailyId, routeStationIndex, timeInterval, routeName_id, stationName_id, trainNumber_id)
 VALUES (19, '23:00', NULL, 2, 1, 1, 4, 1);*/
 
-INSERT INTO railways.role (id, role) VALUES (1, 'admin');
-INSERT INTO railways.role (id, role) VALUES (2, 'user');
+INSERT INTO railways.role (id, role) VALUES (1, 'ROLE_ADMIN');
+INSERT INTO railways.role (id, role) VALUES (2, 'ROLE_USER');
 
-INSERT INTO railways.users (id, birthDay, email, name, password, surname, role_id)
-VALUES (1, '1993-05-27', 'sobaka@soboki.net', 'Kotopes', 'kotopes', 'Pesokot', 2);
-INSERT INTO railways.users (id, birthDay, email, name, password, surname, role_id)
-VALUES (2, '1996-09-07', 'netumila@milo.com', 'Vasilii', 'vasilii', 'Katap', 2);
-INSERT INTO railways.users (id, birthDay, email, name, password, surname, role_id)
-VALUES (3, '1993-06-17', 'kakoeto@milo.de', 'admin', 'admin', 'Onjeadmin', 1);
-INSERT INTO railways.users (id, birthDay, email, name, password, surname, role_id)
-VALUES (4, '1983-06-17', 'kud@ku.da', 'admin', 'kudkuda', 'Onjeadmin', 1);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (1, '1993-05-27', 'sobaka@soboki.net', 'Kotopes', 'kotopes', 'Pesokot', 2);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (2, '1996-09-07', 'netumila@milo.com', 'Vasilii', 'vasilii', 'Katap', 2);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (3, '1993-06-17', 'kakoeto@milo.de', 'admin', 'admin', 'Onjeadmin', 1);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (4, '1983-06-17', 'kud@ku.da', 'admin', 'kudkuda', 'Onjeadmin', 1);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (5, '2018-06-02', 'root', 'root', 'root', 'root', 1);
+INSERT INTO railways.users (id, birthDaY, email, name, password, surname, role_id) VALUES (6, '2018-06-02', 'user', 'user', 'user', 'user', 2);
 
 INSERT INTO railways.ticketentity (id, ticketDateTime, departureSchedule_id, trainEntity_id, userEntity_id)
 VALUES (1, '2018-05-20 17:47:17', 1, 1, 1);
