@@ -22,10 +22,9 @@ import java.util.*;
 @RequestMapping(value = "/train")
 public class TrainController {
 
-    @Autowired
-    TrainService trainService;
-    @Autowired
-    UserService userService;
+    private TrainService trainService;
+
+    private UserService userService;
 
     @RequestMapping(value = "/list")
     public ModelAndView listOfTrains() {
@@ -174,5 +173,15 @@ public class TrainController {
                 return -1;
             }
         }
+    }
+
+    @Autowired
+    public void setTrainService(TrainService trainService) {
+        this.trainService = trainService;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

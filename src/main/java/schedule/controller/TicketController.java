@@ -18,11 +18,10 @@ import schedule.service.api.TrainService;
 @Controller
 @RequestMapping(value = "/ticket")
 public class TicketController {
-    @Autowired
-    private TicketService ticketService;
-    @Autowired
-    private TrainService trainService;
 
+    private TicketService ticketService;
+
+    private TrainService trainService;
 
     @RequestMapping(value = "/buy", method = RequestMethod.GET)
     public ModelAndView buyTicket() {
@@ -51,7 +50,6 @@ public class TicketController {
         ticketItem.setTrainNumber(trainNumber);
         ticketItem.setStationFrom(stationFrom);
         ticketItem.setStationTo(stationTo);
-        //todo: if user exist { addUserTicket } else  {addGuestTicket}
 
         ticketService.addGuestTicket(ticketItem);
         String message = "You get the ticket";
@@ -60,5 +58,15 @@ public class TicketController {
         modelAndView.addObject("message", message);
 
         return modelAndView;
+    }
+
+    @Autowired
+    public void setTicketService(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
+
+    @Autowired
+    public void setTrainService(TrainService trainService) {
+        this.trainService = trainService;
     }
 }

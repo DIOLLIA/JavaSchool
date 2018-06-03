@@ -19,8 +19,7 @@ import schedule.service.api.UserService;
 @Controller
 public class MainController {
 
-    @Autowired
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping(value = {"/", "/index"})
     public ModelAndView mainPage() {
@@ -87,7 +86,9 @@ public class MainController {
         newUser.setBirthDay(LocalDate.parse(birthDayString));
 
         userService.addUser(newUser);
-        ModelAndView modelAndView = new ModelAndView("home");
+        String message = " new account successfully created";
+        ModelAndView modelAndView = new ModelAndView("sign-in");
+        modelAndView.addObject("msg", message);
         return modelAndView;
     }
 
@@ -97,7 +98,7 @@ public class MainController {
         Object principal = auth.getPrincipal();
         Object authorities = auth.getAuthorities();
 
-        if (principal.toString().contains("anonymousUser")&&authorities.toString().equals("[ROLE_ANONYMOUS]")){
+        if (principal.toString().contains("anonymousUser") && authorities.toString().equals("[ROLE_ANONYMOUS]")) {
             return new ModelAndView("home");
         }
         User user = userService.findByLoginOrSurname(((UserDetails) principal).getUsername()).get(0);
@@ -120,6 +121,10 @@ public class MainController {
 
         model.setViewName("403");
         return model;
+    }
 
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

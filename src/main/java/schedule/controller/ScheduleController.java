@@ -20,12 +20,11 @@ import java.util.List;
 @RequestMapping(value = "/schedule")
 public class ScheduleController {
 
-    @Autowired
-    ScheduleService scheduleService;
-    @Autowired
-    StationService stationService;
-    @Autowired
-    RouteService routeService;
+    private ScheduleService scheduleService;
+
+    private StationService stationService;
+
+    private RouteService routeService;
 
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
@@ -84,5 +83,20 @@ public class ScheduleController {
         modelAndView.addObject("msg", msg);
 
         return modelAndView;
+    }
+
+    @Autowired
+    public void setScheduleService(ScheduleService scheduleService) {
+        this.scheduleService = scheduleService;
+    }
+
+    @Autowired
+    public void setStationService(StationService stationService) {
+        this.stationService = stationService;
+    }
+
+    @Autowired
+    public void setRouteService(RouteService routeService) {
+        this.routeService = routeService;
     }
 }

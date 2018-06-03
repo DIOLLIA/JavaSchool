@@ -19,7 +19,6 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
 
-    @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/list")
@@ -61,7 +60,7 @@ public class UserController {
         newUser.setBirthDay(LocalDate.parse(birthDayString));
 
         userService.addUser(newUser);
-        String message = " new user with " + role + "'s rights successfully created";
+        String message = " new account with " + role + "'s rights successfully created";
         ModelAndView modelAndView = new ModelAndView("add-user");
         modelAndView.addObject("message", message);
         return modelAndView;
@@ -104,5 +103,11 @@ public class UserController {
         modelAndView.addObject("user", searchResult);
 
         return modelAndView;
+    }
+
+    @Autowired
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

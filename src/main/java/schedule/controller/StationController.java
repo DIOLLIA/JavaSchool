@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping(value = "/station")
 public class StationController {
 
-    @Autowired
     private StationService stationService;
 
     @RequestMapping(value = "/list")
@@ -27,7 +26,6 @@ public class StationController {
         List<Station> stations = stationService.getStations();
         modelAndView.addObject("stations", stations);
         modelAndView.addObject("pageTitle", "Stations list");
-
 
         return modelAndView;
     }
@@ -88,5 +86,10 @@ public class StationController {
         modelAndView.addObject("message", message);
 
         return modelAndView;
+    }
+
+    @Autowired
+    public void setStationService(StationService stationService) {
+        this.stationService = stationService;
     }
 }

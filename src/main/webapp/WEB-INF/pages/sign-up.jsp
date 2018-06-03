@@ -12,7 +12,7 @@
             <div class="col-md-6  probootstrap-animate">
                 <h5 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
                         style="color:#e0e139;">${msg}</span></h5>
-                <form action="#" method="POST" modelAttribute="user"
+                <form:form action="${pageContext.request.contextPath}/signUp" method="POST" modelAttribute="user"
                       class="probootstrap-form probootstrap-form-box mb60">
                     <div class="row mb-3">
                         <div class="col-md-6">
@@ -52,15 +52,17 @@
                             <div class="form-group">
                                 <label for="birthDay" class="sr-only sr-only-focusable">Birth Day</label>
                                 <input type="date" class="form-control" id="birthDay" name="birthDay"
-                                       placeholder="Date of Birth
-                                    " required>
+                                       placeholder="Date of Birth" required>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Sign Up">
                     </div>
-                </form>
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
+                </form:form>
             </div>
         </div>
     </div>

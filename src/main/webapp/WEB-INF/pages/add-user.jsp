@@ -10,7 +10,7 @@
                 <h3 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
                         style="color:#e0e139;">${message}</span></h3>
                 <form:form method="POST" modelAttribute="user" action="${pageContext.request.contextPath}/user/add"
-                           class="probootstrap-form probootstrap-form-box mb60" >
+                           class="probootstrap-form probootstrap-form-box mb60">
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -49,8 +49,7 @@
                             <div class="form-group">
                                 <label for="name" style="width: 100%;">Birth day</label>
                                 <input type="date" class="form-control" id="birthDay" name="birthDay"
-                                       placeholder="Date of Birth
-                                     " required>
+                                       placeholder="Date of Birth" required>
                             </div>
                         </div>
 
