@@ -22,7 +22,6 @@ public class MainController {
     @Autowired
     UserService userService;
 
-
     @RequestMapping(value = {"/", "/index"})
     public ModelAndView mainPage() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -37,9 +36,9 @@ public class MainController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/admin")
+    @RequestMapping(value = "/map")
     public ModelAndView indexPage() {
-        ModelAndView modelAndView = new ModelAndView("admin-home");
+        ModelAndView modelAndView = new ModelAndView("map");
         modelAndView.addObject("pageTitle", "KudKuda Home");
         return modelAndView;
     }
@@ -89,6 +88,21 @@ public class MainController {
 
         userService.addUser(newUser);
         ModelAndView modelAndView = new ModelAndView("home");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/userInfo")
+    public ModelAndView userInfo() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = auth.getPrincipal();
+        Object authorities = auth.getAuthorities();
+
+        if (principal.toString().contains("anonymousUser")&&authorities.toString().equals("[ROLE_ANONYMOUS]")){
+            return new ModelAndView("home");
+        }
+        User user = userService.findByLoginOrSurname(((UserDetails) principal).getUsername()).get(0);
+        ModelAndView modelAndView = new ModelAndView("personal-data");
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
 

@@ -7,6 +7,8 @@ import java.util.List;
 public interface StationDao extends GeneralCrudDao<StationEntity> {
     void addStation(StationEntity station);
 
+    void addStation(String stationName, double latitude, double longetude);
+
     StationEntity getStation(int id);
 
     void deleteStation(int id);

@@ -16,6 +16,16 @@ public class StationDaoImpl extends GeneralCrudDaoImpl<StationEntity> implements
     }
 
     @Override
+    public void addStation(String stationName, double latitude, double longitude) {
+        StationEntity stationEntity = new StationEntity();
+        stationEntity.setLatitude(latitude);
+        stationEntity.setStationName(stationName);
+        stationEntity.setLongitude(longitude);
+
+        addStation(stationEntity);
+    }
+
+    @Override
     public StationEntity getStation(int id) {
         StationEntity station = (StationEntity) getCurrentSession().get(StationEntity.class, id);
         return station;

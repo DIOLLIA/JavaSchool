@@ -30,6 +30,12 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
+    public void addStation(String stationName, double latitude, double longitude) {
+
+        stationDao.addStation(stationName, latitude, longitude);
+    }
+
+    @Override
     public Station getStation(int id) {
         return modelMapper.map(stationDao.getStation(id), Station.class);
     }

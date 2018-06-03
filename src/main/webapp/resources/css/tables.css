@@ -98,3 +98,45 @@ input[type="text"], textarea {
     background-color: transparent;
 
 }
+
+.table_user_info {
+    border-collapse: collapse; !important;
+    border-bottom: 3px solid #32CD32;  !important;
+    font-family: "Lucida Grande", sans-serif;  !important;
+    color: white;
+    width: 50%;
+}
+.table_user_info tr {
+    padding: 10px 8px;
+    background: transparent;
+    border-bottom: 3px solid #32CD32;  !important;
+}
+.table_user_info td{
+    border-top: 0px solid #00CA4C;
+    color: #00CA4C;
+    padding: 8px;
+}
+.table_user_info th{
+    color:#00CA4C;
+    padding: 10px 8px;
+    background: transparent;
+}
+.table_user_info td {
+    padding: 26px;
+    color: white;
+
+}
+.table_user_info a {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #00CA4C;
+    box-shadow: 2px 2px 0 0 #585454;
+    position: relative;
+    color: white;
+}
+
+.table_user_info a:hover {
+    box-shadow: none;
+    top: 2px;
+    left: 2px;
+}

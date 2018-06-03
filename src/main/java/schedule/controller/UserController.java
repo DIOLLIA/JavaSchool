@@ -81,8 +81,6 @@ public class UserController {
         return modelAndView;
     }
 
-
-
     @RequestMapping(value = "/findUser", method = RequestMethod.POST)
     public ModelAndView findByLoginOrSurname(@RequestParam("loginOrSurname") String loginOrSurname) {
         List<User> list = userService.findByLoginOrSurname(loginOrSurname);
