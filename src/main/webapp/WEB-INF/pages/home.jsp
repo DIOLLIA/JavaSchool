@@ -47,7 +47,7 @@
                                     <div class="probootstrap-date-wrap">
                                         <span class="icon ion-calendar"></span>
                                         <input type="text" id="probootstrap-date-departure" class="form-control"
-                                               placeholder="click and pick">
+                                               placeholder="click and pick" name="searchDate">
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                     <div class="probootstrap-date-wrap">
                                         <span class="icon ion-calendar"></span>
                                         <input type="time" id="departure-time" value="now" class="form-control"
-                                               placeholder="">
+                                                   name="searchTime">
                                     </div>
                                 </div>
                             </div>

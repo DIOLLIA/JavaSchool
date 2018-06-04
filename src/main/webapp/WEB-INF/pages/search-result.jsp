@@ -9,7 +9,7 @@
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
-                <p class="lead mb-4 probootstrap-animate"><span style="color:#32CD32;">Search result </span>
+                <p class="lead mb-4 probootstrap-animate"><span style="color:#32CD32;"> ${message} </span>
                 <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="100%">
                     <thead>
                     <tr>

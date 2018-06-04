@@ -1,5 +1,9 @@
 package schedule.controller;
 
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +32,13 @@ public class ScheduleController {
 
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ModelAndView findSchedule(@RequestParam(name = "stationFrom") String stationFrom, @RequestParam(name = "stationTo") String stationTo) {
+    public ModelAndView findSchedule(@RequestParam(name = "stationFrom") String stationFrom, @RequestParam(name = "stationTo") String stationTo, @RequestParam(name = "searchDate") String searchDate, @RequestParam(name = "searchTime") String searchTime)
+    {
+        DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+        LocalDate date = LocalDate.parse(searchDate, dateFormatter);
+
+        LocalTime requestTime = LocalTime.parse(searchTime);
+        String message;
         List<Route> routes = routeService.findByStationNames(stationFrom, stationTo);
 
         ModelAndView modelAndView = new ModelAndView("search-result");
@@ -46,15 +56,27 @@ public class ScheduleController {
                         scheduleOne.getRouteStationIndex() >= scheduleTwo.getRouteStationIndex()) {
                     continue;
                 }
-                ScheduleItem scheduleItem = new ScheduleItem();
-                scheduleItem.setDepartureTime(scheduleOne.getDepartureTime());
-                scheduleItem.setArrivalTime(scheduleTwo.getArrivalTime());
-                scheduleItem.setStationOfDeparture(stationOneName);
-                scheduleItem.setStationOfArrival(stationTwoName);
-                scheduleItem.setTrainNumber(scheduleOne.getTrainNumber().getNumberOfTrain());
-                scheduleItems.add(scheduleItem);
+                if (!requestTime.isBefore(scheduleOne.getDepartureTime())) {
+                    break;
+                } else {
+                    ScheduleItem scheduleItem = new ScheduleItem();
+                    scheduleItem.setDepartureTime(scheduleOne.getDepartureTime());
+                    scheduleItem.setArrivalTime(scheduleTwo.getArrivalTime());
+
+                    scheduleItem.setStationOfDeparture(stationOneName);
+                    scheduleItem.setStationOfArrival(stationTwoName);
+                    scheduleItem.setTrainNumber(scheduleOne.getTrainNumber().getNumberOfTrain());
+                    scheduleItems.add(scheduleItem);
+                }
             }
         }
+        if (scheduleItems.isEmpty()){
+         message = "No trains found from " + searchTime + " on " + searchDate+".";
+        }
+        else {
+            message = "Search result for departure date " + date;
+        }
+        modelAndView.addObject("message", message);
         modelAndView.addObject("searchResult", scheduleItems);
         return modelAndView;
     }
