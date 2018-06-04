@@ -34,7 +34,13 @@
 * google map
 * выбор язака
 
-
+посмотри на кодировку!!!
+public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
+    private static final String VIEWS_PATH = "/WEB-INF/views/";
+    private static final String JSP_SUFFIX = ".jsp";
+    private static final String MESSAGES_PATH = "/content/language";
+    private static final String DEFAULT_ENCODING = "UTF-8";
+    private static final String DEFAULT_LANGUAGE = "en";
 
 
  

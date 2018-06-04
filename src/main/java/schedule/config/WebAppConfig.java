@@ -7,14 +7,17 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.util.Locale;
 import java.util.Properties;
 
 
@@ -109,5 +112,11 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         return modelMapper;
     }
 
+    @Bean
+    public LocaleResolver localeResolver(){
+        SessionLocaleResolver resolver = new SessionLocaleResolver();
+        resolver.setDefaultLocale(new Locale("en"));
 
+        return resolver;
+    }
 }

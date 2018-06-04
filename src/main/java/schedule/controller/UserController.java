@@ -2,6 +2,7 @@ package schedule.controller;
 
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ import java.util.List;
 public class UserController {
 
     private UserService userService;
+
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/list")
     public ModelAndView listOfUsers() {
@@ -55,7 +58,7 @@ public class UserController {
         newUser.setEmail(email);
         newUser.setName(name);
         newUser.setSurname(surname);
-        newUser.setPassword(password);
+        newUser.setPassword(passwordEncoder.encode(password));
         newUser.setRole(role1);
         newUser.setBirthDay(LocalDate.parse(birthDayString));
 
@@ -110,4 +113,10 @@ public class UserController {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
 }
