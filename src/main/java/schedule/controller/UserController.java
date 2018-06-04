@@ -46,27 +46,32 @@ public class UserController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView createUser(@RequestParam("email") String email, @RequestParam("name") String name, @RequestParam("surname") String surname, @RequestParam("password") String password, @RequestParam("birthDay") String birthDayString, @RequestParam("role") String role) {
-
-        Role role1 = new Role();
-
-        if (role.equals("Admin")) {
-            role1.setId(1);
+        String message;
+        if (!userService.findByLoginOrSurname(email).isEmpty()) {
+            message = "User with login \"" + email + "\" is already exist!";
+            return new ModelAndView("add-user").addObject("msg", message);
         } else {
-            role1.setId(2);
-        }
-        User newUser = new User();
-        newUser.setEmail(email);
-        newUser.setName(name);
-        newUser.setSurname(surname);
-        newUser.setPassword(passwordEncoder.encode(password));
-        newUser.setRole(role1);
-        newUser.setBirthDay(LocalDate.parse(birthDayString));
+            Role role1 = new Role();
 
-        userService.addUser(newUser);
-        String message = " new account with " + role + "'s rights successfully created";
-        ModelAndView modelAndView = new ModelAndView("add-user");
-        modelAndView.addObject("message", message);
-        return modelAndView;
+            if (role.equals("Admin")) {
+                role1.setId(1);
+            } else {
+                role1.setId(2);
+            }
+            User newUser = new User();
+            newUser.setEmail(email);
+            newUser.setName(name);
+            newUser.setSurname(surname);
+            newUser.setPassword(passwordEncoder.encode(password));
+            newUser.setRole(role1);
+            newUser.setBirthDay(LocalDate.parse(birthDayString));
+
+            userService.addUser(newUser);
+            message = " new account with " + role + "'s rights successfully created";
+            ModelAndView modelAndView = new ModelAndView("add-user");
+            modelAndView.addObject("message", message);
+            return modelAndView;
+        }
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)

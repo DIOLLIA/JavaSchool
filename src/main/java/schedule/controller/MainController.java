@@ -59,7 +59,7 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView("sign-in");
 
         if (error != null) {
-            modelAndView.addObject("error", "Invalid username and password!");
+            modelAndView.addObject("error", "Invalid username or password!");
         }
 
         if (logout != null) {
@@ -76,23 +76,28 @@ public class MainController {
 
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     public ModelAndView register(@RequestParam("email") String email, @RequestParam("name") String name, @RequestParam("surname") String surname, @RequestParam("password") String password, @RequestParam("birthDay") String birthDayString) {
+        String message;
+        if ( !userService.findByLoginOrSurname(email).isEmpty()) {
+            message = "User with login \"" + email + "\" is already exist!";
+            return new ModelAndView("sign-up").addObject("msg", message);
+        } else {
+            Role role = new Role();
+            role.setId(2);
 
-        Role role = new Role();
-        role.setId(2);
+            User newUser = new User();
+            newUser.setEmail(email);
+            newUser.setName(name);
+            newUser.setSurname(surname);
+            newUser.setPassword(passwordEncoder.encode(password));
+            newUser.setRole(role);
+            newUser.setBirthDay(LocalDate.parse(birthDayString));
 
-        User newUser = new User();
-        newUser.setEmail(email);
-        newUser.setName(name);
-        newUser.setSurname(surname);
-        newUser.setPassword(passwordEncoder.encode(password));
-        newUser.setRole(role);
-        newUser.setBirthDay(LocalDate.parse(birthDayString));
-
-        userService.addUser(newUser);
-        String message = " new account successfully created";
-        ModelAndView modelAndView = new ModelAndView("sign-in");
-        modelAndView.addObject("msg", message);
-        return modelAndView;
+            userService.addUser(newUser);
+            message = " new account successfully created";
+            ModelAndView modelAndView = new ModelAndView("sign-in");
+            modelAndView.addObject("msg", message);
+            return modelAndView;
+        }
     }
 
     @RequestMapping(value = "/userInfo")
