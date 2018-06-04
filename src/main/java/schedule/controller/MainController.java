@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,8 @@ import schedule.service.api.UserService;
 public class MainController {
 
     private UserService userService;
+
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = {"/", "/index"})
     public ModelAndView mainPage() {
@@ -36,7 +39,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/map")
-    public ModelAndView indexPage() {
+    public ModelAndView mapPage() {
         ModelAndView modelAndView = new ModelAndView("map");
         modelAndView.addObject("pageTitle", "KudKuda Home");
         return modelAndView;
@@ -81,7 +84,7 @@ public class MainController {
         newUser.setEmail(email);
         newUser.setName(name);
         newUser.setSurname(surname);
-        newUser.setPassword(password);
+        newUser.setPassword(passwordEncoder.encode(password));
         newUser.setRole(role);
         newUser.setBirthDay(LocalDate.parse(birthDayString));
 
@@ -121,6 +124,11 @@ public class MainController {
 
         model.setViewName("403");
         return model;
+    }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Autowired

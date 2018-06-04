@@ -1,11 +1,16 @@
 package schedule.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -16,14 +21,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
-    @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery(
-                        "SELECT email,password,true FROM users WHERE email=?")
-                .authoritiesByUsernameQuery(
-                        "SELECT email, role FROM users u LEFT join role ON u.role_id = role.id WHERE email=?");
+    @Bean(name="userDetailsService")
+    public UserDetailsService userDetailsService(){
+        JdbcDaoImpl jdbcImpl = new JdbcDaoImpl();
+        jdbcImpl.setDataSource(dataSource);
+        jdbcImpl.setUsersByUsernameQuery("SELECT email,password,true FROM users WHERE email=?");
+        jdbcImpl.setAuthoritiesByUsernameQuery("SELECT email, role FROM users u LEFT join role ON u.role_id = role.id WHERE email=?");
+        return jdbcImpl;
     }
 
     @Override
@@ -40,5 +44,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedPage("/403")
                 .and()
                 .csrf();
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    @Autowired
+    UserDetailsService userDetailsService;
+
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+
     }
 }
