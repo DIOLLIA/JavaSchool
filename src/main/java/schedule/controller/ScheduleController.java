@@ -41,7 +41,7 @@ public class ScheduleController {
         String message;
         List<Route> routes = routeService.findByStationNames(stationFrom, stationTo);
 
-        ModelAndView modelAndView = new ModelAndView("search-result");
+        ModelAndView modelAndView = new ModelAndView("home");
         List<Schedule> schedules = scheduleService.findScheduleByStations(routes, stationTo, stationFrom);
 
         List<ScheduleItem> scheduleItems = new ArrayList<>();

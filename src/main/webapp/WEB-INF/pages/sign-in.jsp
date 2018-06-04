@@ -53,7 +53,7 @@
                                 <input type="submit" class="btn btn-primary" id="submit" name="submit" value="LogIn">
                             </div>
                         </div>
-                        <div class="col-md-6" style="margin: auto; padding: auto;">
+                        <div class="col-md-6" style="margin: auto; padding: auto;" onmouseover = "this.style.backgroundColor='#00CA4C';" onmouseout="this.style.backgroundColor='#fff';">
                             <a href="/signUp">Click to create new account</a>
                         </div>
                     </div>

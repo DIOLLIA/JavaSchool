@@ -49,7 +49,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active"><a class="nav-link" href="/schedule/searchTrainOnStation">Station
                     schedule</a></li>
-                <li class="nav-item"><a class="nav-link" href="/ticket/buy">Buy ticket</a></li>
+
 
                 <sec:authorize access="isAuthenticated()">
                     <c:url value="/logout" var="logoutUrl"/>
@@ -58,6 +58,7 @@
                                value="${_csrf.token}"/>
                     </form>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
+                        <li class="nav-item"><a class="nav-link" href="/ticket/buy">Buy ticket</a></li>
                         <li class="nav-item "><a class="nav-link"
                                                  href="/userInfo"> ${pageContext.request.userPrincipal.name}
                             profile</a></li>

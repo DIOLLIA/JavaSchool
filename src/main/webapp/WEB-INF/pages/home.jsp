@@ -1,5 +1,5 @@
 <%@ include file="header.jsp" %>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 <section class="probootstrap-cover overflow-hidden relative"
          style="background-image: url('/resources/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
          id="section-home">
@@ -45,9 +45,9 @@
                                 <div class="form-group">
                                     <label for="probootstrap-date-departure">Departure date</label>
                                     <div class="probootstrap-date-wrap">
-                                        <span class="icon ion-calendar"></span>
+                                            <%--<span class="icon ion-calendar"></span>--%>
                                         <input type="text" id="probootstrap-date-departure" class="form-control"
-                                               placeholder="click and pick" name="searchDate">
+                                               placeholder="click and pick" name="searchDate" style="color: black" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -55,9 +55,9 @@
                                 <div class="form-group">
                                     <label for="departure-time">Departure time</label>
                                     <div class="probootstrap-date-wrap">
-                                        <span class="icon ion-calendar"></span>
+                                        <%--<span class="icon ion-calendar"></span>--%>
                                         <input type="time" id="departure-time" value="now" class="form-control"
-                                                   name="searchTime">
+                                               name="searchTime">
                                     </div>
                                 </div>
                             </div>
@@ -71,6 +71,37 @@
                     </div>
                 </form:form>
             </div>
+
+            <c:if test="${searchResult != null}">
+                <div class="row-md probootstrap-animate">
+                    <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th width="15%">From</th>
+                            <th width="15%">Where</th>
+                            <th width="10%">Train number</th>
+                            <th width="10%">Departure Time</th>
+                            <th width="10%">Arrival Time</th>
+                            <th width="10%">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="scheduleItem" items="${searchResult}">
+                            <tr>
+                                <td>${scheduleItem.stationOfDeparture}</td>
+                                <td>${scheduleItem.stationOfArrival}</td>
+                                <td>${scheduleItem.trainNumber}</td>
+                                <td>${scheduleItem.departureTime}</td>
+                                <td>${scheduleItem.arrivalTime}</td>
+                                <td><a href="${pageContext.request.contextPath}/ticket/buy/">buy ticket</a><br/>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </c:if>
+
+
         </div>
     </div>
 </section>
