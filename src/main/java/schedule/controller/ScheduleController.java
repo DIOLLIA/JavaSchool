@@ -22,7 +22,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/schedule")
-public class ScheduleController {
+public class ScheduleController extends BaseController {
 
     private ScheduleService scheduleService;
 
@@ -85,7 +85,8 @@ public class ScheduleController {
     public ModelAndView searchOnStation() {
 
         ModelAndView modelAndView = new ModelAndView("train-list-by-station");
-        modelAndView.addObject("pageTitle", "On station");
+        modelAndView.addObject("pageTitle",
+                getMessage("page.title.search-by-station", DEFAULT_LOCALE));
 
         return modelAndView;
     }
@@ -94,9 +95,11 @@ public class ScheduleController {
     public ModelAndView searchOnStationResult(@RequestParam(name = "stationFrom") String station) {
 
         ModelAndView modelAndView = new ModelAndView("train-list-by-station");
-        modelAndView.addObject("pageTitle", "On station");
+        modelAndView.addObject("pageTitle",
+                getMessage("page.title.search-by-station", DEFAULT_LOCALE));
 
-        List<Schedule> listOfTrainsByStation = scheduleService.findScheduleByStation(stationService.findByName(station));
+        List<Schedule> listOfTrainsByStation = scheduleService.findScheduleByStation(
+                stationService.findByName(station));
 
         List<Schedule> scheduleItems = new ArrayList<>(listOfTrainsByStation);
         String msg = "Results for " + station + " :";

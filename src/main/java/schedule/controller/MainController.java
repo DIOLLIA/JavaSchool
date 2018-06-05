@@ -18,7 +18,8 @@ import schedule.model.User;
 import schedule.service.api.UserService;
 
 @Controller
-public class MainController {
+//todo rename
+public class MainController extends BaseController {
 
     private UserService userService;
 
@@ -30,10 +31,10 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView();
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             modelAndView.setViewName("admin-home");
-            modelAndView.addObject("pageTitle", "KudKuda-Master");
+            modelAndView.addObject("pageTitle", getMessage("page.title.admin", DEFAULT_LOCALE));
         } else {
             modelAndView.setViewName("home");
-            modelAndView.addObject("pageTitle", "KudKuda Home");
+            modelAndView.addObject("pageTitle", getMessage("page.title.user", DEFAULT_LOCALE));
         }
         return modelAndView;
     }
@@ -41,30 +42,31 @@ public class MainController {
     @RequestMapping(value = "/map")
     public ModelAndView mapPage() {
         ModelAndView modelAndView = new ModelAndView("map");
-        modelAndView.addObject("pageTitle", "KudKuda Home");
+        modelAndView.addObject("pageTitle", getMessage("page.title.user", DEFAULT_LOCALE));
         return modelAndView;
     }
 
     @RequestMapping(value = "/about")
     public ModelAndView aboutPage() {
         ModelAndView modelAndView = new ModelAndView("about");
-        modelAndView.addObject("pageTitle", "About");
+        modelAndView.addObject("pageTitle", getMessage("page.title.about", DEFAULT_LOCALE));
         return modelAndView;
     }
 
     @RequestMapping(value = "/signIn", method = RequestMethod.GET)
     public ModelAndView signIn(@RequestParam(value = "error", required = false) String error,
                                @RequestParam(value = "logout", required = false) String logout) {
-
         ModelAndView modelAndView = new ModelAndView("sign-in");
 
         if (error != null) {
-            modelAndView.addObject("error", "Invalid username or password!");
+            modelAndView.addObject("error",
+                    getMessage("message.login.error.invalid-username-or-pswd", DEFAULT_LOCALE));
         }
 
         if (logout != null) {
-            modelAndView.addObject("msg", "You've been logout successfully.");
+            modelAndView.addObject("msg", getMessage("message.logout.success", DEFAULT_LOCALE));
         }
+
         return modelAndView;
     }
 
@@ -75,11 +77,14 @@ public class MainController {
     }
 
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
-    public ModelAndView register(@RequestParam("email") String email, @RequestParam("name") String name, @RequestParam("surname") String surname, @RequestParam("password") String password, @RequestParam("birthDay") String birthDayString) {
-        String message;
-        if ( !userService.findByLoginOrSurname(email).isEmpty()) {
-            message = "User with login \"" + email + "\" is already exist!";
-            return new ModelAndView("sign-up").addObject("msg", message);
+    public ModelAndView register(@RequestParam("email") String email,
+                                 @RequestParam("name") String name,
+                                 @RequestParam("surname") String surname,
+                                 @RequestParam("password") String password,
+                                 @RequestParam("birthDay") String birthDayString) {
+        if (!userService.findByLoginOrSurname(email).isEmpty()) {
+            return new ModelAndView("sign-up").addObject("msg",
+                    getMessage("message.user.create.error.username-exist", DEFAULT_LOCALE, email));
         } else {
             Role role = new Role();
             role.setId(2);
@@ -93,9 +98,9 @@ public class MainController {
             newUser.setBirthDay(LocalDate.parse(birthDayString));
 
             userService.addUser(newUser);
-            message = " new account successfully created";
             ModelAndView modelAndView = new ModelAndView("sign-in");
-            modelAndView.addObject("msg", message);
+            modelAndView.addObject("msg", getMessage("message.user.create.success", DEFAULT_LOCALE));
+
             return modelAndView;
         }
     }
@@ -107,17 +112,17 @@ public class MainController {
         Object authorities = auth.getAuthorities();
 
         if (principal.toString().contains("anonymousUser") && authorities.toString().equals("[ROLE_ANONYMOUS]")) {
-            return new ModelAndView("home");
+            return new ModelAndView("home").addObject("msg", getMessage("message.anunymous.profile", DEFAULT_LOCALE));
         }
         User user = userService.findByLoginOrSurname(((UserDetails) principal).getUsername()).get(0);
         ModelAndView modelAndView = new ModelAndView("personal-data");
         modelAndView.addObject("user", user);
+
         return modelAndView;
     }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public ModelAndView accesssDenied() {
-
         ModelAndView model = new ModelAndView();
 
         //check if user is login

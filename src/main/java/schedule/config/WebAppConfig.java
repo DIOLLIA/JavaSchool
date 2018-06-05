@@ -1,7 +1,9 @@
 package schedule.config;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
@@ -24,7 +26,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan("schedule")
 @EnableWebMvc
-@Import({ SecurityConfig.class })// todo чекнуть полезность этого импорта
+@Import({SecurityConfig.class})// todo чекнуть полезность этого импорта
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 public class WebAppConfig extends WebMvcConfigurerAdapter {
@@ -40,6 +42,12 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 
     private static final String WEB_RESOURCES_HANDLER = "/resources/**";
     private static final String WEB_RESOURCES_LOCATION = "/resources/";
+
+    private static final String VIEWS_PATH = "/WEB-INF/pages/";
+    private static final String JSP_SUFFIX = ".jsp";
+    private static final String MESSAGES_PATH = "/content/language";
+    private static final String DEFAULT_ENCODING = "UTF-8";
+    private static final String DEFAULT_LANGUAGE = "en";
 
     @Resource
     private Environment environment;
@@ -84,14 +92,14 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public UrlBasedViewResolver setupViewResolver() {
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-        resolver.setPrefix("/WEB-INF/pages/");
-        resolver.setSuffix(".jsp");
+        resolver.setPrefix(VIEWS_PATH);
+        resolver.setSuffix(JSP_SUFFIX);
         resolver.setViewClass(JstlView.class);
         return resolver;
     }
 
-@Override
-    public void addResourceHandlers (ResourceHandlerRegistry registry) {
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler(WEB_RESOURCES_HANDLER)
                 .addResourceLocations(WEB_RESOURCES_LOCATION);
@@ -113,9 +121,18 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public LocaleResolver localeResolver(){
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename(MESSAGES_PATH);
+        messageSource.setDefaultEncoding(DEFAULT_ENCODING);
+
+        return messageSource;
+    }
+
+    @Bean
+    public LocaleResolver localeResolver() {
         SessionLocaleResolver resolver = new SessionLocaleResolver();
-        resolver.setDefaultLocale(new Locale("en"));
+        resolver.setDefaultLocale(new Locale(DEFAULT_LANGUAGE));
 
         return resolver;
     }

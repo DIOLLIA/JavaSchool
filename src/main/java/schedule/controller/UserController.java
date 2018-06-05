@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/user")
-public class UserController {
+public class UserController extends BaseController {
 
     private UserService userService;
 
@@ -37,6 +37,7 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addUserPage() {
         ModelAndView modelAndView = new ModelAndView("add-user");
+        //todo why do you need it? think and rename if it's used.
         User user = new User();
         user.setName("hello");
         modelAndView.addObject("user", user);
@@ -45,12 +46,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView createUser(@RequestParam("email") String email, @RequestParam("name") String name, @RequestParam("surname") String surname, @RequestParam("password") String password, @RequestParam("birthDay") String birthDayString, @RequestParam("role") String role) {
+    public ModelAndView createUser(@RequestParam("email") String email,
+                                   @RequestParam("name") String name,
+                                   @RequestParam("surname") String surname,
+                                   @RequestParam("password") String password,
+                                   @RequestParam("birthDay") String birthDayString,
+                                   @RequestParam("role") String role) {
         String message;
         if (!userService.findByLoginOrSurname(email).isEmpty()) {
-            message = "User with login \"" + email + "\" is already exist!";
-            return new ModelAndView("add-user").addObject("msg", message);
+            return new ModelAndView("add-user")
+                    .addObject("msg",
+                            getMessage("message.user.create.error.username-exist", DEFAULT_LOCALE, email));
         } else {
+            //todo rename with appropriate name? What exactly the role? You created this var to store what role?
             Role role1 = new Role();
 
             if (role.equals("Admin")) {
@@ -67,23 +75,23 @@ public class UserController {
             newUser.setBirthDay(LocalDate.parse(birthDayString));
 
             userService.addUser(newUser);
-            message = " new account with " + role + "'s rights successfully created";
+
             ModelAndView modelAndView = new ModelAndView("add-user");
-            modelAndView.addObject("message", message);
+            modelAndView.addObject("message",
+                    getMessage("message.admin.create-user.success", DEFAULT_LOCALE, role));
+
             return modelAndView;
         }
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public ModelAndView deleteUserPage(@ModelAttribute User id) {
-        ModelAndView modelAndView = new ModelAndView("users-list");
         userService.addUser(id);
-
         List<User> users = userService.getUsers();
-        modelAndView.addObject("users", users);
 
-        String message = "User was successfully added.";
-        modelAndView.addObject("message", message);
+        ModelAndView modelAndView = new ModelAndView("users-list");
+        modelAndView.addObject("users", users);
+        modelAndView.addObject("message", getMessage("message.admin.delete-user.success", DEFAULT_LOCALE));
 
         return modelAndView;
     }
@@ -92,29 +100,28 @@ public class UserController {
     public ModelAndView findByLoginOrSurname(@RequestParam("loginOrSurname") String loginOrSurname) {
         List<User> list = userService.findByLoginOrSurname(loginOrSurname);
         ArrayList<User> searchResult = new ArrayList<>(list);
-        String message = "";
-        String elementForSearch = "";
+        String elementForSearch;
         ModelAndView modelAndView = new ModelAndView("users-search-result");
         if (loginOrSurname.contains("@")) {
-            elementForSearch = "Login";
+            elementForSearch = "login";
         } else {
-            elementForSearch = "Surname";
+            elementForSearch = "surname";
         }
         if (searchResult.size() == 0) {
-
-            message = "Nobody found with " + elementForSearch + " \"" + loginOrSurname + "\"." + " Check correctness of the entered information and try again.";
-
+            modelAndView.addObject("message",
+                    getMessage("message.admin.search-user-by-login.no-result", DEFAULT_LOCALE,
+                            elementForSearch, loginOrSurname));
         } else {
-            message = "Result for " + elementForSearch + " \"" + loginOrSurname + "\".";
+            //todo redundant message. Don't delete search request from search input
+            modelAndView.addObject("message",
+                    getMessage("message.admin.search-user-by-login.result", DEFAULT_LOCALE, elementForSearch, loginOrSurname));
         }
-        modelAndView.addObject("message", message);
         modelAndView.addObject("user", searchResult);
 
         return modelAndView;
     }
 
     @Autowired
-
     public void setUserService(UserService userService) {
         this.userService = userService;
     }

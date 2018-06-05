@@ -17,17 +17,16 @@ import schedule.service.api.TrainService;
 
 @Controller
 @RequestMapping(value = "/ticket")
-public class TicketController {
+public class TicketController extends BaseController {
 
     private TicketService ticketService;
-
     private TrainService trainService;
 
     @RequestMapping(value = "/buy", method = RequestMethod.GET)
     public ModelAndView buyTicket() {
         ModelAndView modelAndView = new ModelAndView("buy-ticket");
         modelAndView.addObject("ticket", new User());
-        modelAndView.addObject("pageTitle", "Buy ticket");
+        modelAndView.addObject("pageTitle", getMessage("page.title.buy-ticket", DEFAULT_LOCALE));
 
         return modelAndView;
     }
@@ -52,10 +51,9 @@ public class TicketController {
         ticketItem.setStationTo(stationTo);
 
         ticketService.addGuestTicket(ticketItem);
-        String message = "You get the ticket";
         ModelAndView modelAndView = new ModelAndView("buy-ticket");
-        modelAndView.addObject("pageTitle", "Buy ticket");
-        modelAndView.addObject("message", message);
+        modelAndView.addObject("pageTitle", getMessage("page.title.buy-ticket", DEFAULT_LOCALE));
+        modelAndView.addObject("message", getMessage("message.ticket.buy", DEFAULT_LOCALE));
 
         return modelAndView;
     }

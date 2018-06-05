@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import schedule.controller.BaseController;
 import schedule.controller.model.StationsFromTo;
 import schedule.controller.model.TrainAndDepTime;
 import schedule.model.Route;
@@ -17,7 +18,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping(value = "/searchForUser")
-public class TrainRestController {
+public class TrainRestController extends BaseController {
     @Autowired
     RouteService routeService;
     @Autowired
@@ -60,7 +61,7 @@ public class TrainRestController {
             trainsNumberAndDepTimeList.add(trainAndDepTime);
         }
 
-            return new Gson().toJson(trainsNumberAndDepTimeList);
+        return new Gson().toJson(trainsNumberAndDepTimeList);
     }
 
     private class RouteDailyIdComparator implements Comparator<Schedule> {

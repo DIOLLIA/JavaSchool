@@ -20,19 +20,18 @@ import java.util.*;
 
 @Controller
 @RequestMapping(value = "/train")
-public class TrainController {
+public class TrainController extends BaseController {
 
     private TrainService trainService;
-
     private UserService userService;
 
     @RequestMapping(value = "/list")
     public ModelAndView listOfTrains() {
-        ModelAndView modelAndView = new ModelAndView("trains-list");
-
         List<Train> trains = trainService.getTrains();
+
+        ModelAndView modelAndView = new ModelAndView("trains-list");
         modelAndView.addObject("trains", trains);
-        modelAndView.addObject("pageTitle", "Trains list");
+        modelAndView.addObject("pageTitle", getMessage("page.title.trains-list", DEFAULT_LOCALE));
 
         return modelAndView;
     }
@@ -41,22 +40,19 @@ public class TrainController {
     public ModelAndView addTrainPage() {
         ModelAndView modelAndView = new ModelAndView("addTicket");
         modelAndView.addObject("train", new Train());
-        modelAndView.addObject("pageTitle", "Add train");
+        modelAndView.addObject("pageTitle", getMessage("page.title.add-train", DEFAULT_LOCALE));
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addTrain(@ModelAttribute Train train) {
+        trainService.addTrain(train);
+        List<Train> trains = trainService.getTrains();
 
         ModelAndView modelAndView = new ModelAndView("trains-list");
-        trainService.addTrain(train);
-
-        List<Train> trains = trainService.getTrains();
         modelAndView.addObject("trains", trains);
-
-        String message = "Train was successfully added.";
-        modelAndView.addObject("message", message);
+        modelAndView.addObject("message", getMessage("message.train.create.success", DEFAULT_LOCALE));
 
         return modelAndView;
     }
@@ -64,11 +60,11 @@ public class TrainController {
     @RequestMapping(value = "/delete/{train.id}")
     public ModelAndView deleteTrain(@PathVariable(value = "train.id") int trainId) {
         trainService.deleteTrain(trainId);
-        String message = "Train was successfully deleted.";
-        ModelAndView modelAndView = new ModelAndView("trains-list");
         List<Train> trains = trainService.getTrains();
+
+        ModelAndView modelAndView = new ModelAndView("trains-list");
         modelAndView.addObject("trains", trains);
-        modelAndView.addObject("message", message);
+        modelAndView.addObject("message", getMessage("message.train.delete.success", DEFAULT_LOCALE));
 
         return modelAndView;
     }
@@ -78,7 +74,7 @@ public class TrainController {
 
         ModelAndView modelAndView = new ModelAndView("edit-train");
         modelAndView.addObject("train", trainService.get(trainId));
-        modelAndView.addObject("pageTitle", "Edit train");
+        modelAndView.addObject("pageTitle", getMessage("page.title.edit-train", DEFAULT_LOCALE));
 
         return modelAndView;
     }
@@ -88,26 +84,17 @@ public class TrainController {
             @PathVariable ("id") int trainId*/
             /* @RequestParam ("id") int trainId*/) {
         trainService.editTrain(train);
-        String message = "Train was successfully modified.";
-
-        ModelAndView modelAndView = new ModelAndView("trains-list");
         List<Train> trains = trainService.getTrains();
 
+        ModelAndView modelAndView = new ModelAndView("trains-list");
         modelAndView.addObject("trains", trains);
-        modelAndView.addObject("message", message);
+        modelAndView.addObject("message", getMessage("message.train.modify.success", DEFAULT_LOCALE));
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/schedule/{train.id}", method = RequestMethod.GET)
     public ModelAndView trainSchedule(@PathVariable(value = "train.id") int trainId) {
-
-        String msg = "Routes for train №" + trainService.get(trainId).getNumberOfTrain();
-
-        ModelAndView modelAndView = new ModelAndView("train-routes-list");
-        modelAndView.addObject("pageTitle", "Train routes");
-
-        modelAndView.addObject("train", trainService.get(trainId));
         List<Schedule> schedules = trainService.getScheduleByTrainId(trainId);
 
         Map<Integer, List<Schedule>> scheduleMap = new HashMap<>();
@@ -136,8 +123,16 @@ public class TrainController {
             scheduleItem.setScheduleDailyRouteId(firstStationInSchedule.getRouteDailyId());
             resultScheduleList.add(scheduleItem);
         }
+
+        Train train = trainService.get(trainId);
+        int trainNumber = train.getNumberOfTrain();
+
+        ModelAndView modelAndView = new ModelAndView("train-routes-list");
+        modelAndView.addObject("pageTitle", getMessage("page.title.train-routes", DEFAULT_LOCALE));
+        modelAndView.addObject("train", train);
         modelAndView.addObject("scheduleByTrainId", resultScheduleList);
-        modelAndView.addObject("msg", msg);
+        modelAndView.addObject("msg", getMessage("message.train.routes-for-train",
+                DEFAULT_LOCALE, String.valueOf(trainNumber)));
 
         return modelAndView;
     }
@@ -154,12 +149,27 @@ public class TrainController {
         LocalDateTime startDateTime = date.toLocalDateTime(time);
 
         int routeId = Integer.parseInt(routeIdAsString);
-        String msg = "Passengers list on train №" + trainService.get(Integer.parseInt(trainId)).getNumberOfTrain() + " " + dateAsString + ":";
+        int trainNumber = trainService.get(Integer.parseInt(trainId))
+                .getNumberOfTrain();
         List<User> passengersOnRoute = userService.findPassengersOfTrain(routeId, startDateTime);
-        ModelAndView modelAndView = new ModelAndView("passengers-on-daily-route").addObject("passengersOnRoute", passengersOnRoute);
-        modelAndView.addObject("msg", msg);
+
+        ModelAndView modelAndView = new ModelAndView("passengers-on-daily-route")
+                .addObject("passengersOnRoute", passengersOnRoute);
+        modelAndView.addObject("msg", getMessage("message.train.passengers-list", DEFAULT_LOCALE,
+                String.valueOf(trainNumber), dateAsString));
+
         return modelAndView;
 
+    }
+
+    @Autowired
+    public void setTrainService(TrainService trainService) {
+        this.trainService = trainService;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
     private class RouteStationIdComparator implements Comparator<Schedule> {
@@ -173,15 +183,5 @@ public class TrainController {
                 return -1;
             }
         }
-    }
-
-    @Autowired
-    public void setTrainService(TrainService trainService) {
-        this.trainService = trainService;
-    }
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
     }
 }

@@ -6,15 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import schedule.controller.BaseController;
 import schedule.service.api.StationService;
 
 import java.util.List;
 
 @RequestMapping(value = "/mainSearch")
 @RestController
-public class ScheduleRestController {
+public class ScheduleRestController extends BaseController {
     @Autowired
     StationService stationService;
+
     @GetMapping(value = "/get-stations/")
     public String getStationsNames() {
         List<String> stationsNames = stationService.getStationsNames();

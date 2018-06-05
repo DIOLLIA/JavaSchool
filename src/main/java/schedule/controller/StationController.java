@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/station")
-public class StationController {
+public class StationController extends BaseController {
 
     private StationService stationService;
 
@@ -25,7 +25,7 @@ public class StationController {
 
         List<Station> stations = stationService.getStations();
         modelAndView.addObject("stations", stations);
-        modelAndView.addObject("pageTitle", "Stations list");
+        modelAndView.addObject("pageTitle", getMessage("page.title.stations-list", DEFAULT_LOCALE));
 
         return modelAndView;
     }
@@ -34,30 +34,29 @@ public class StationController {
     public ModelAndView addStationPage() {
         ModelAndView modelAndView = new ModelAndView("add-station");
         modelAndView.addObject("station", new StationEntity());
-        modelAndView.addObject("pageTitle", "Add station");
+        modelAndView.addObject("pageTitle", getMessage("page.title.add-station", DEFAULT_LOCALE));
+
         return modelAndView;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addStation(@ModelAttribute Station station) {
-        ModelAndView modelAndView = new ModelAndView("stations-list");
         stationService.addStation(station);
 
         List<Station> stations = stationService.getStations();
-        modelAndView.addObject("stations", stations);
 
-        String message = "Station was successfully added.";
-        modelAndView.addObject("message", message);
+        ModelAndView modelAndView = new ModelAndView("stations-list");
+        modelAndView.addObject("stations", stations);
+        modelAndView.addObject("message", getMessage("message.stations.create.success", DEFAULT_LOCALE));
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/edit/{station.id}", method = RequestMethod.GET)
     public ModelAndView editStation(@PathVariable(value = "station.id") int stationId) {
-
         ModelAndView modelAndView = new ModelAndView("edit-station");
         modelAndView.addObject("station", stationService.getStation(stationId));
-        modelAndView.addObject("pageTitle", "Edit station");
+        modelAndView.addObject("pageTitle", getMessage("page.title.edit-station", DEFAULT_LOCALE));
 
         return modelAndView;
     }
@@ -65,13 +64,12 @@ public class StationController {
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
     public ModelAndView editTrainSave(@ModelAttribute("station") Station station) {
         stationService.editStation(station);
-        String message = "Station was successfully modified.";
 
-        ModelAndView modelAndView = new ModelAndView("stations-list");
         List<Station> stations = stationService.getStations();
 
+        ModelAndView modelAndView = new ModelAndView("stations-list");
         modelAndView.addObject("stations", stations);
-        modelAndView.addObject("message", message);
+        modelAndView.addObject("message", getMessage("message.stations.modify.success", DEFAULT_LOCALE));
 
         return modelAndView;
     }
@@ -79,11 +77,12 @@ public class StationController {
     @RequestMapping(value = "/delete/{station.id}")
     public ModelAndView deleteStation(@PathVariable(value = "station.id") int stationId) {
         stationService.deleteStation(stationId);
-        String message = "Station was successfully deleted.";
-        ModelAndView modelAndView = new ModelAndView("stations-list");
+
         List<Station> stations = stationService.getStations();
+
+        ModelAndView modelAndView = new ModelAndView("stations-list");
         modelAndView.addObject("stations", stations);
-        modelAndView.addObject("message", message);
+        modelAndView.addObject("message", getMessage("message.stations.delete.success", DEFAULT_LOCALE));
 
         return modelAndView;
     }
