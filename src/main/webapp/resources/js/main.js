@@ -37,7 +37,6 @@ function trainsAndDateSelector() {
     });
 }
 
-
 function showRoutePassengersByDate(trainId, dailyRouteId, startTime) {
     var departureDate = $("#probootstrap-date-departure").val();
 
@@ -92,8 +91,7 @@ function getToStations() {
 
 $(document).ready(function ($) {
 
-        "use strict";
-        initFromStations();
+    initFromStations();
 
         var scrollWindow = function () {
             var lastScrollTop = 0;

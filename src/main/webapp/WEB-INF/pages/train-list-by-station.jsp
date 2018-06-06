@@ -1,3 +1,4 @@
+<%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 <%@ include file="header.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -44,8 +45,8 @@
                         <tr>
                             <td>${scheduleItems.trainNumber.getNumberOfTrain()}</td>
                             <td>${scheduleItems.routeName.routeName}</td>
-                            <td>${scheduleItems.arrivalTime}</td>
-                            <td>${scheduleItems.departureTime}</td>
+                            <td><joda:format pattern="HH:mm" value="${scheduleItems.arrivalTime}"/></td>
+                            <td><joda:format pattern="HH:mm" value="${scheduleItems.departureTime}"/></td>
                             <td><a href="${pageContext.request.contextPath}/ticket/buy/">buy ticket</a><br/>
                         </tr>
                     </c:forEach>

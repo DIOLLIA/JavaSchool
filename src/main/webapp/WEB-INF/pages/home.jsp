@@ -1,3 +1,5 @@
+<%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
+
 <%@ include file="header.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 <section class="probootstrap-cover overflow-hidden relative"
@@ -93,8 +95,8 @@
                                 <td>${scheduleItem.stationOfDeparture}</td>
                                 <td>${scheduleItem.stationOfArrival}</td>
                                 <td>${scheduleItem.trainNumber}</td>
-                                <td>${scheduleItem.departureTime}</td>
-                                <td>${scheduleItem.arrivalTime}</td>
+                                <td><joda:format pattern="HH:mm" value="${scheduleItem.departureTime}"/></td>
+                                <td><joda:format pattern="HH:mm" value="${scheduleItem.arrivalTime}"/></td>
                                 <td><a href="${pageContext.request.contextPath}/ticket/buy/">buy ticket</a><br/>
                             </tr>
                         </c:forEach>

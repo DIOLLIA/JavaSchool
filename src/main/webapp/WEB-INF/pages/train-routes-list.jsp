@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 <%@ include file="header-admin.jsp" %>
+<%@ page pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
-<script src="../../resources/js/main.js"></script>
 
 <section class="probootstrap-cover overflow-hidden relative"
          style="background-image: url('/resources/images/img_4.jpg');" data-stellar-background-ratio="0.5"
@@ -17,7 +17,7 @@
                 <div class="col-md-2">
                     <div class="probootstrap-date-wrap">
                         <input type="text" id="probootstrap-date-departure" class="form-control"
-                               placeholder="click and pick" style="background-color: white; color: black">
+                               placeholder="click and pick" style="background-color: white; color: black" autocomplete="off">
                     </div>
                 </div>
                 <h3 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
@@ -38,8 +38,8 @@
                         <tr>
                             <td>${scheduleItem.stationOfDeparture}</td>
                             <td>${scheduleItem.stationOfArrival}</td>
-                            <td>${scheduleItem.departureTime}</td>
-                            <td>${scheduleItem.arrivalTime}</td>
+                            <td><joda:format pattern="HH:mm" value="${scheduleItem.departureTime}"/></td>
+                            <td><joda:format pattern="HH:mm" value="${scheduleItem.arrivalTime}"/></td>
                             <td><a href="#"
                                    onclick="showRoutePassengersByDate('${train.id}','${scheduleItem.scheduleDailyRouteId}', '${scheduleItem.departureTime}')">Show</a><br/>
                             </td>

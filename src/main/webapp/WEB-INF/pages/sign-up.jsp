@@ -8,7 +8,7 @@
         <div class="row align-items-center">
             <div class="col-md-4">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
-                <h3 class="heading mb-2 display-4 font-light probootstrap-animate"><span
+                <h3 class="heading mb-2 display-4 font-light probootstrap-animate"><br><span
                         style="color:#32CD32;">Registration</span></h3>
             </div>
             <div class="col-md-8  probootstrap-animate">

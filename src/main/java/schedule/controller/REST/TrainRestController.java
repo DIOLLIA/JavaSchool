@@ -36,8 +36,9 @@ public class TrainRestController extends BaseController {
         Set<Schedule> treeSchedules = new TreeSet(new RouteDailyIdComparator());
         treeSchedules.addAll(schedules);
         for (Schedule element : treeSchedules) {
+            String depTimeString = element.getDepartureTime().toString();
             TrainAndDepTime trainAndDepTime = new TrainAndDepTime();
-            trainAndDepTime.setDepartureTime(element.getDepartureTime().toString());
+            trainAndDepTime.setDepartureTime(depTimeString.substring(0, depTimeString.lastIndexOf(':')));
             trainAndDepTime.setTrainNumber(element.getTrainNumber().getNumberOfTrain());
             trainsNumberAndDepTimeList.add(trainAndDepTime);
         }

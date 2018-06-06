@@ -1,4 +1,5 @@
 <%@ include file="header.jsp" %>
+<%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <section class="probootstrap-cover overflow-hidden relative"
@@ -40,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- END row -->
+
                         <div class="row mb-3">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -58,6 +59,7 @@
                                     <select class="js-example-basic-single js-states form-control"
                                             id="departure_time" name="departureTime"
                                             style="width: 100%;">
+                                        <td><joda:format pattern="HH:mm" value="${scheduleItem.departureTime}"/></td>
                                     </select>
                                 </div>
                             </div>
