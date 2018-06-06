@@ -12,8 +12,9 @@
                     <span style="color:#32CD32;">are you going?</span>
             </div>
             <div class="col-md probootstrap-animate">
-                <form:form method="POST" modelAttribute="stationSearch"
-                           action="${pageContext.request.contextPath}/schedule/search" class="probootstrap-form">
+                <form:form name='mainSearch' method="POST" modelAttribute="stationSearch"
+                           action="${pageContext.request.contextPath}/schedule/search" class="probootstrap-form"
+                           onsubmit="return main_search_validation();">
                     <div class="form-group">
                         <div class="row mb-3">
                             <div class="col-md">
@@ -39,15 +40,16 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- END row -->
+
                         <div class="row mb-5">
                             <div class="col-md">
                                 <div class="form-group">
                                     <label for="probootstrap-date-departure">Departure date</label>
                                     <div class="probootstrap-date-wrap">
-                                            <%--<span class="icon ion-calendar"></span>--%>
                                         <input type="text" id="probootstrap-date-departure" class="form-control"
-                                               placeholder="click and pick" name="searchDate" style="color: black" autocomplete="off">
+                                               placeholder="click and pick" name="searchDate" style="color: black"
+                                               autocomplete="off">
+                                        <span id="dateloc" style="color: red"></span></td></tr>
                                     </div>
                                 </div>
                             </div>
@@ -55,9 +57,9 @@
                                 <div class="form-group">
                                     <label for="departure-time">Departure time</label>
                                     <div class="probootstrap-date-wrap">
-                                        <%--<span class="icon ion-calendar"></span>--%>
                                         <input type="time" id="departure-time" value="now" class="form-control"
                                                name="searchTime">
+                                        <span id="timeloc" style="color: red"></span></td></tr>
                                     </div>
                                 </div>
                             </div>

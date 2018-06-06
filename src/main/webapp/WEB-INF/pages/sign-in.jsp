@@ -27,7 +27,7 @@
                 </c:if>
 
 
-                <form name='loginForm'
+                <form name='signInForm' onsubmit="return validate()"
                       action="<c:url value='/signIn' />" method='POST'
                       class="probootstrap-form probootstrap-form-box mb60">
                     <div class="row mb-3">
@@ -35,14 +35,16 @@
                             <div class="form-group">
                                 <label for="username" style="width: 100%;">Login (your E-mail)</label>
                                 <input type="text" class="form-control" id="username" name="username"
-                                       placeholder="Login (e-mail)" required>
+                                       placeholder="Login (e-mail)">
+                                <span id="nameloc" style="color: red"></span></td></tr>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="password" style="width: 100%;">Password</label>
                                 <input type="password" class="form-control" id="password" name="password"
-                                       placeholder="Password" required>
+                                       placeholder="Password">
+                                <span id="passwordloc" style="color: red"></span></td></tr>
                             </div>
                         </div>
                     </div>
@@ -50,10 +52,13 @@
                     <div class="row mb-6">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary" id="submit" name="submit" value="LogIn">
+                                <input type="submit" class="btn btn-primary" id="submit" name="submit"
+                                       value="LogIn">
                             </div>
                         </div>
-                        <div class="col-md-6" style="margin: auto; padding: auto;" onmouseover = "this.style.backgroundColor='#00CA4C';" onmouseout="this.style.backgroundColor='#fff';">
+                        <div class="col-md-6" style="margin: auto; padding: auto;"
+                             onmouseover="this.style.backgroundColor='#00CA4C';"
+                             onmouseout="this.style.backgroundColor='#fff';">
                             <a href="/signUp">Click to create new account</a>
                         </div>
                     </div>

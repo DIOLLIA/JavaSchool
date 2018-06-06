@@ -24,23 +24,11 @@
                          
                          
                            questions
-* мы получили ticketItem. в нем нет всех данных schedule & users. делать поиск в БД и по результатам вытаскивать элементы, а если нет таких юзеров- создавать их, но обрезанных????
-* Почему modelMapper превращает объект в null?? (ticketService) потому что смотри таблицу тикетов.!!!
-
 
                             featch
 * двойная валидация
-* spring security
 * google map
 * выбор язака
-
-посмотри на кодировку!!!
-public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
-    private static final String VIEWS_PATH = "/WEB-INF/views/";
-    private static final String JSP_SUFFIX = ".jsp";
-    private static final String MESSAGES_PATH = "/content/language";
-    private static final String DEFAULT_ENCODING = "UTF-8";
-    private static final String DEFAULT_LANGUAGE = "en";
 
 
  

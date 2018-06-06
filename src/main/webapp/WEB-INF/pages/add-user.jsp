@@ -6,56 +6,69 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-6  probootstrap-animate">
+            <div class="col-md-9  probootstrap-animate">
                 <h3 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
                         style="color:#e0e139;">${message}</span></h3>
-                <form:form method="POST" modelAttribute="user" action="${pageContext.request.contextPath}/user/add"
+                <form:form name='signUpForm' onsubmit="return reg_validate()" method="POST" modelAttribute="user"
+                           action="${pageContext.request.contextPath}/user/add"
                            class="probootstrap-form probootstrap-form-box mb60">
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="email" style="width: 100%;">Login (your E-mail)</label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                       placeholder="E-mail only" required>
+                                <label for="email" style="width: 100%;font-size: 120%">Login (your E-mail)</label>
+                                <input type="text" class="form-control" id="email" name="email"
+                                       placeholder="Your email">
+                                <span id="emailloc" style="color: red"></span></td></tr>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="password" style="width: 100%;">Password</label>
+                                <label for="password" style="width: 100%;font-size: 120%">Password</label>
                                 <input type="password" class="form-control" id="password" name="password"
-                                       placeholder="Password" required>
+                                       placeholder="Password">
+                                <span id="passwordloc" style="color: red"></span></td></tr>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="passwordConf" style="width: 100%;font-size: 120%">Confirm password</label>
+                                <input type="password" class="form-control" id="passwordConf" name="passwordConf"
+                                       placeholder="Confirm password">
+                                <span id="passwordConfloc" style="color: red"></span></td></tr>
                             </div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name" style="width: 100%;">First name</label>
+                                <label for="name" style="width: 100%;font-size: 120%">First name</label>
                                 <input type="text" class="form-control" id="name" name="name"
-                                       placeholder="Name" required>
+                                       placeholder="Name">
+                                <span id="nameloc" style="color: red"></span></td></tr>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="surname" style="width: 100%;">Second name</label>
+                                <label for="surname" style="width: 100%;font-size: 120%">Surname</label>
                                 <input type="text" class="form-control" id="surname" name="surname"
-                                       placeholder="Surname" required>
+                                       placeholder="Surname">
+                                <span id="surnameloc" style="color: red"></span></td></tr>
                             </div>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label for="name" style="width: 100%;">Birth day</label>
+                                <label for="birthDay" style="width: 100%;font-size: 120%">Birth day</label>
                                 <input type="date" class="form-control" id="birthDay" name="birthDay"
-                                       placeholder="Date of Birth" required>
+                                       placeholder="Date of Birth">
+                                <span id="birthdayloc" style="color: red"></span></td></tr>
                             </div>
                         </div>
-
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label for="role" style="width: 100%;">Role</label>
+                                <label for="role" style="width: 100%;font-size: 120% ">Role</label>
                                 <select id="role" name="role"
                                         required class="js-example-basic-single js-states form-control"
                                         style="width: 100%;">
@@ -64,9 +77,12 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Create">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="birthDay" style="width: 100%;font-size: 120%"> &nbsp;</label>
+                                <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Sign Up">
+                            </div>
+                        </div>
                     </div>
                 </form:form>
             </div>

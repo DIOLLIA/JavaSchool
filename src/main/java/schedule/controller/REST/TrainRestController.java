@@ -24,27 +24,8 @@ public class TrainRestController extends BaseController {
     @Autowired
     ScheduleService scheduleService;
 
-  /*  @RequestMapping(value = "/get-train-and-time/", method = RequestMethod.POST)
-    public @ResponseBody
-    String getTrainsListForDepartureStation(@RequestBody StationsFromTo stations) {
-        String selectedFromStation = stations.getStationFrom();
-        String selectedToStation = stations.getStationTo();
-
-        List<Integer> trainsNumberList = new ArrayList<>();
-        List<Route> routes = routeService.findByStationNames(selectedFromStation, selectedToStation);
-
-        List<Schedule> schedules = scheduleService.findScheduleByStations(routes, selectedToStation, selectedFromStation);
-        Set<Schedule> treeSchedules = new TreeSet(new RouteDailyIdComparator());
-        treeSchedules.addAll(schedules);
-        for (Schedule element : treeSchedules) {
-            trainsNumberList.add(element.getTrainNumber().getNumberOfTrain());
-        }
-
-        return new Gson().toJson(trainsNumberList);
-    }*/
-
     @RequestMapping(value = "/get-train-and-time/", method = RequestMethod.POST)
-    String getTrainsListForDepartureStation2(@RequestBody StationsFromTo stations) {
+    String getTrainsListForDepartureStation(@RequestBody StationsFromTo stations) {
         String selectedFromStation = stations.getStationFrom();
         String selectedToStation = stations.getStationTo();
 
