@@ -33,23 +33,22 @@ public class TicketController extends BaseController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView saveTicket(@RequestParam("stationFrom") String stationFrom, @RequestParam("stationTo") String stationTo, @RequestParam("departureDate") String departureDate, @RequestParam("departureTime") String departureTime, @RequestParam("trainNumber") int trainNumber, @RequestParam("name") String name, @RequestParam("surName") String surName, @RequestParam("birthDay") String birthDay) {
 
-        boolean routeValid = ticketService.simpleRouteValidation(stationFrom, stationTo, departureDate, departureTime, trainNumber);
-        boolean userValid = userService.simpleUserValidation(name, surName, birthDay);
+        boolean routeNotEmpty = ticketService.simpleRouteValidation(stationFrom, stationTo, departureDate, departureTime, trainNumber);
+        boolean userNotEmpty = userService.simpleUserValidation(name, surName, birthDay);
 
-        if (userValid) {
+        boolean timeEnough = ticketService.weHaveTenMinutes(departureDate, departureTime);
+
+        if (userNotEmpty) {
             User ticketHolder = userService.findUserByNameSurnameBirthDay(name, surName, birthDay);
 
-            if (null == ticketHolder && routeValid) {
+            if (null == ticketHolder && routeNotEmpty) {
                 TicketItem ticketItem = ticketService.createTicketItem(departureDate, departureTime, birthDay, name, surName, trainNumber, stationFrom, stationTo);
-               ticketService.addGuestTicket(ticketItem);
-            }
-            else
-                {
+                ticketService.addGuestTicket(ticketItem);
+            } else {
                 Ticket ticket = ticketService.createTicket(departureDate, departureTime, trainNumber, stationFrom, stationTo, ticketHolder);
 //                ticketService.addUserTicket(ticket);
             }
-        }
-        else {
+        } else {
             //throw exception
         }
      /*   DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
@@ -86,6 +85,7 @@ public class TicketController extends BaseController {
     public void setTrainService(TrainService trainService) {
         this.trainService = trainService;
     }
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;

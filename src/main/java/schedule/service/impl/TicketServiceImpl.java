@@ -40,7 +40,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public void addUserTicket(Ticket ticket) {
 //        TicketEntity ticketEntity = modelMapper.map(ticket, TicketEntity.class);
-        ticketDao.addTicket(modelMapper.map(ticket,TicketEntity.class));
+        ticketDao.addTicket(modelMapper.map(ticket, TicketEntity.class));
 //        ticketDao.addTicket(ticketEntity);
 //        return modelMapper.map(ticketEntity, Ticket.class);
     }
@@ -171,9 +171,32 @@ public class TicketServiceImpl implements TicketService {
         ticket.setDepartureSchedule(departureSchedule);
 
         TicketEntity ticketEntity = modelMapper.map(ticket, TicketEntity.class);
-       ticketEntity.setTrainEntity(modelMapper.map(ticket.getTrain(), TrainEntity.class));
+        ticketEntity.setTrainEntity(modelMapper.map(ticket.getTrain(), TrainEntity.class));
         ticketEntity.setUserEntity(modelMapper.map(ticket.getUser(), UserEntity.class));
         ticketDao.addTicket(ticketEntity);
         return ticket;
+    }
+
+    /**
+     * Method take two parameters
+     *
+     * @param departureDate departure date of train in ticket
+     * @param departureTime departure time of train in ticket
+     *           and compares it with current date and time, to check that:
+     *           date is today or Farther;
+     *           user have 10 minutes before train depart.
+     * @return {@code boolean true} if departure date and time more than 10 minutes of today and Farther
+     */
+    @Override
+    public boolean weHaveTenMinutes(String departureDate, String departureTime) {
+
+        DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+        LocalDate departureDateFormatted = LocalDate.parse(departureDate, dateFormatter);
+        LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
+        if (departureDateFormatted.isAfter(LocalDate.now()) || departureDateFormatted.isEqual(LocalDate.now())) {
+
+            return departureTimeFormatted.isAfter(LocalTime.now().plusMinutes(10));
+        }
+        return false;
     }
 }

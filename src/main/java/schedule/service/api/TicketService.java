@@ -14,5 +14,7 @@ public interface TicketService {
 
     TicketItem createTicketItem(String departureDate, String departureTime, String birthDay, String name, String surName, int trainNumber, String stationFrom, String stationTo);
 
-    Ticket createTicket (String departureDate, String departureTime, int trainNumber, String stationFrom, String stationTo, User user);
+    Ticket createTicket(String departureDate, String departureTime, int trainNumber, String stationFrom, String stationTo, User user);
+
+    boolean weHaveTenMinutes(String departureDate, String departureTime);
 }
