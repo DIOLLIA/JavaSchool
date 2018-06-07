@@ -11,7 +11,7 @@
             <div class="col-md">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
                 <p class="lead mb-4 probootstrap-animate">
-                    <span style="color:#32CD32;">are you going?</span>
+                    <span style="color:#32CD32;font-size: 140%">are you going?</span>
             </div>
             <div class="col-md probootstrap-animate">
                 <form:form name='mainSearch' method="POST" modelAttribute="stationSearch"
@@ -21,7 +21,7 @@
                         <div class="row mb-3">
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="station_from" style="width: 100%;">From</label>
+                                    <label for="station_from" style="width: 100%;font-size: 120%">From</label>
                                     <select class="js-example-basic-single js-states form-control"
                                             onchange="getToStations()"
                                             id="station_from" name="stationFrom"
@@ -31,13 +31,11 @@
                             </div>
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="station_to">To</label>
+                                    <label for="station_to" style="width: 100%;font-size: 120%">To</label>
                                     <div class="probootstrap_select-wrap">
-                                        <label for="station_to" style="width: 100%;">
-                                            <select class="js-example-basic-single js-states form-control"
-                                                    id="station_to" style="width: 100%;" name="stationTo">
-                                            </select>
-                                        </label>
+                                        <select class="js-example-basic-single js-states form-control"
+                                                id="station_to" style="width: 100%;" name="stationTo">
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -46,22 +44,23 @@
                         <div class="row mb-5">
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="probootstrap-date-departure">Departure date</label>
+                                    <label for="probootstrap-date-departure" style="font-size: 120%">Departure
+                                        date</label>
                                     <div class="probootstrap-date-wrap">
                                         <input type="text" id="probootstrap-date-departure" class="form-control"
                                                placeholder="click and pick" name="searchDate" style="color: black"
                                                autocomplete="off">
-                                        <span id="dateloc" style="color: red"></span></td></tr>
+                                        <span id="dateloc" style="color: red"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="departure-time">Departure time</label>
+                                    <label for="departure-time" style="font-size: 120%">Departure time</label>
                                     <div class="probootstrap-date-wrap">
                                         <input type="time" id="departure-time" value="now" class="form-control"
                                                name="searchTime">
-                                        <span id="timeloc" style="color: red"></span></td></tr>
+                                        <span id="timeloc" style="color: red"></span>
                                     </div>
                                 </div>
                             </div>

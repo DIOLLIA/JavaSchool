@@ -27,7 +27,7 @@
                 </c:if>
 
 
-                <form name='signInForm' onsubmit="return validate()"
+                <form name='signInForm' onsubmit="return login_validation()"
                       action="<c:url value='/signIn' />" method='POST'
                       class="probootstrap-form probootstrap-form-box mb60">
                     <div class="row mb-3">
@@ -36,7 +36,7 @@
                                 <label for="username" style="width: 100%;">Login (your E-mail)</label>
                                 <input type="text" class="form-control" id="username" name="username"
                                        placeholder="Login (e-mail)">
-                                <span id="nameloc" style="color: red"></span></td></tr>
+                                <span id="nameloc" style="color: red"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -44,7 +44,7 @@
                                 <label for="password" style="width: 100%;">Password</label>
                                 <input type="password" class="form-control" id="password" name="password"
                                        placeholder="Password">
-                                <span id="passwordloc" style="color: red"></span></td></tr>
+                                <span id="passwordloc" style="color: red"></span>
                             </div>
                         </div>
                     </div>

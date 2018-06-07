@@ -1,6 +1,7 @@
 package schedule.dao.impl;
 
 import org.hibernate.Query;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.springframework.stereotype.Repository;
 import schedule.dao.api.UserDao;
@@ -79,6 +80,16 @@ public class UserDaoImpl extends GeneralCrudDaoImpl<UserEntity> implements UserD
         }
 
         return query.list();
+    }
+
+    @Override
+    public UserEntity findUserByNameSurnameBirthDay(String name, String surName, LocalDate birthDay) {
+        Query query = sessionFactory.getCurrentSession().createQuery("FROM UserEntity ue WHERE ue.name =:name AND ue.surname =:surName AND ue.birthDay =:birthDay ");
+        query.setParameter("name",name);
+        query.setParameter("surName",surName);
+        query.setParameter("birthDay",birthDay);
+        return (UserEntity) query.uniqueResult();
+
     }
 
 

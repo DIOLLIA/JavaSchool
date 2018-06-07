@@ -1,5 +1,6 @@
 package schedule.dao.api;
 
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import schedule.entity.UserEntity;
 
@@ -19,4 +20,6 @@ public interface UserDao extends GeneralCrudDao<UserEntity> {
     List<UserEntity> findPassengersOfTrain(int routeDailyId, LocalDateTime startTime);
 
     List<UserEntity> findUserByLoginOrSurname(String loginOrSurname);
+
+    UserEntity findUserByNameSurnameBirthDay(String name, String surName, LocalDate birthDay);
 }

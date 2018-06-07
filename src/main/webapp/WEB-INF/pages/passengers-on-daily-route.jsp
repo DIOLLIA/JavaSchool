@@ -1,4 +1,5 @@
 <%@ include file="header-admin.jsp" %>
+<%@ page pageEncoding="UTF-8" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 
 <section class="probootstrap-cover overflow-hidden relative"
@@ -9,12 +10,12 @@
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
-                <p class="lead mb-4 probootstrap-animate">Select <span style="color:#32CD32;">station </span> for daily
-                    schedule</p>
+                <p class="lead mb-4 probootstrap-animate"><span style="color:#32CD32; font-size: 120%">Passengers </span>list are on the train
                 <br>
                 <div class="row">
                     <div class="col-auto">
-                        <input type="submit" value="Show trains on station" class="btn btn-primary btn-block" onclick="location='../';"/>
+                        <input type="submit" value="Show trains on station" class="btn btn-primary btn-block"
+                               onclick="location='../';"/>
                     </div>
                 </div>
                 <br>

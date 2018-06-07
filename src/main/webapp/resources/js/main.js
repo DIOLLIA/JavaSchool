@@ -91,7 +91,7 @@ function getToStations() {
 
 $(document).ready(function ($) {
 
-    initFromStations();
+        initFromStations();
 
         var scrollWindow = function () {
             var lastScrollTop = 0;
@@ -265,31 +265,31 @@ $(document).ready(function ($) {
     }
 );
 
-function validate() {
+function login_validation() {
     var name = document.signInForm.username.value;
     var password = document.signInForm.password.value;
     var status = false;
 
     if (name.length < 2) {
         document.getElementById("nameloc").innerHTML =
-            " <img src='resources/images/Close-2-icon.png'/> Please enter your name";
+            " <img src='resources/images/Close-2-icon.png'alt=''/> enter your login";
         status = false;
     } else {
-        document.getElementById("nameloc").innerHTML = " <img src='resources/images/check_sign_icon_green.png'/>";
+        document.getElementById("nameloc").innerHTML = " <img src='resources/images/check_sign_icon_green.png'alt=''/>";
         status = true;
     }
     if (password.length < 4) {
         document.getElementById("passwordloc").innerHTML =
-            " <img src='resources/images/Close-2-icon.png'/> Password must be at least 4 char long";
+            " <img src='resources/images/Close-2-icon.png'alt=''/> enter your password";
         status = false;
     } else {
-        document.getElementById("passwordloc").innerHTML = " <img src='resources/images/check_sign_icon_green.png'/>";
+        document.getElementById("passwordloc").innerHTML = " <img src='resources/images/check_sign_icon_green.png'alt=''/>";
     }
     return status;
 }
 
 
-function reg_validate() {
+function registration_validation() {
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     var email = document.signUpForm.email.value;
     var password = document.signUpForm.password.value;
@@ -302,56 +302,56 @@ function reg_validate() {
 
     if (email.length === "" || email === null || reg.test(email) === false) {
         document.getElementById("emailloc").innerHTML =
-            " <img src='../resources/images/Close-2-icon.png'> Please enter valid email";
+            " <img src='../resources/images/Close-2-icon.png' alt=''> Please enter valid email";
     }
     else {
-        document.getElementById("emailloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png'/>";
+        document.getElementById("emailloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png' alt=''/>";
         counter_fields++;
     }
 
     if (password.length < 4) {
         document.getElementById("passwordloc").innerHTML =
-            " <img src='../resources/images/Close-2-icon.png'> Password must be at least 4 char long";
+            " <img src='../resources/images/Close-2-icon.png' alt=''> Password must be at least 4 char long";
     } else {
-        document.getElementById("passwordloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png'/>";
+        document.getElementById("passwordloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png' alt=''/>";
         counter_fields++;
     }
 
     if (passwordConf.length > 3) {
         if (password !== passwordConf) {
             document.getElementById("passwordConfloc").innerHTML =
-                " <img src='../resources/images/Close-2-icon.png'>Passwords do not match";
+                " <img src='../resources/images/Close-2-icon.png' alt=''>Passwords do not match";
         }
         else {
-            document.getElementById("passwordConfloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png'/>";
+            document.getElementById("passwordConfloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png' alt=''/>";
             counter_fields++;
         }
     } else {
         document.getElementById("passwordConfloc").innerHTML =
-            " <img src='../resources/images/Close-2-icon.png'>Password must be at least 4 char long";
+            " <img src='../resources/images/Close-2-icon.png' alt=''>Password must be at least 4 char long";
     }
 
     if (name.length < 2) {
         document.getElementById("nameloc").innerHTML =
-            " <img src='../resources/images/Close-2-icon.png'> Name can't be least 2 chars";
+            " <img src='../resources/images/Close-2-icon.png' alt=''> Name can't be least 2 chars";
     } else {
-        document.getElementById("nameloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png'/>";
+        document.getElementById("nameloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png' alt=''/>";
         counter_fields++;
     }
 
     if (surname.length < 2) {
         document.getElementById("surnameloc").innerHTML =
-            " <img src='../resources/images/Close-2-icon.png'> Surname can't be least 2 chars";
+            " <img src='../resources/images/Close-2-icon.png' alt=''> Surname can't be least 2 chars";
     } else {
-        document.getElementById("surnameloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png'/>";
+        document.getElementById("surnameloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png' alt=''/>";
         counter_fields++;
     }
 
     if (birthday == null || birthday === "") {
         document.getElementById("birthdayloc").innerHTML =
-            " <img src='../resources/images/Close-2-icon.png'> select date";
+            " <img src='../resources/images/Close-2-icon.png' alt=''> select date";
     } else {
-        document.getElementById("birthdayloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png'/>";
+        document.getElementById("birthdayloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png' alt=''/>";
         counter_fields++;
     }
     if (counter_fields === fields_variables) {
@@ -371,19 +371,96 @@ function main_search_validation() {
 
     if (departure_time === null || departure_time === "") {
         document.getElementById("timeloc").innerHTML =
-            " <img src='../resources/images/Close-2-icon.png'> Please, enter the time";
+            " <img src='../resources/images/Close-2-icon.png' alt=''> Please, enter the time";
     } else {
-        document.getElementById("timeloc").innerHTML = "<img src='../resources/images/check_sign_icon_green.png'/>";
+        document.getElementById("timeloc").innerHTML = "<img src='../resources/images/check_sign_icon_green.png' alt=''/>";
         counter_fields++;
 
     }
     if (departure_date === null || departure_date === "") {
-        document.getElementById("dateloc").innerHTML = "<img src='../resources/images/Close-2-icon.png'>Pick date";
+        document.getElementById("dateloc").innerHTML = "<img src='../resources/images/Close-2-icon.png' alt=''>Pick date";
     } else {
-        document.getElementById("dateloc").innerHTML = "<img src='../resources/images/check_sign_icon_green.png'/>";
+        document.getElementById("dateloc").innerHTML = "<img src='../resources/images/check_sign_icon_green.png' alt=''/>";
         counter_fields++;
     }
 
     return counter_fields === fields_variables;
 
+}
+
+function ticket_validation() {
+    var date_now = new Date;
+
+    var options_for_date = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+    };
+    var options_for_time = {
+        hour: 'numeric',
+        minute: 'numeric',
+    };
+//todo: савнить дату и время на фронте для возможности покупки билета
+    var parsed_date = date_now.toLocaleString("ru", options_for_date);
+
+    var parsed_time = date_now.toLocaleString("en", options_for_time);
+
+    var departure_date = document.buyTicket.departureDate.value;
+    var departure_time = document.buyTicket.departureTime.value;
+    var train_number = document.buyTicket.trainNumber.value;
+    var name = document.buyTicket.name.value;
+    var surname = document.buyTicket.surName.value;
+    var birthday = document.buyTicket.birthDay.value;
+    var counter_fields = 0;
+    var fields_variables = 6;
+
+    if (departure_time === null || departure_time === "") {
+        document.getElementById("timeloc").innerHTML =
+            "<img src='../resources/images/Close-2-icon.png' alt=''>enter the time";
+    } else {
+        document.getElementById("timeloc").innerHTML = "<img src='../resources/images/check_sign_icon_green.png'alt=''/>";
+        counter_fields++;
+    }
+
+    if (departure_date === null || departure_date === "") {
+        document.getElementById("dateloc").innerHTML = "<img src='../resources/images/Close-2-icon.png' alt=''>pick date";
+    } else {
+        document.getElementById("dateloc").innerHTML = "<img src='../resources/images/check_sign_icon_green.png' alt=''/>";
+        counter_fields++;
+    }
+
+    if (train_number === null || train_number === "") {
+        document.getElementById("trainloc").innerHTML =
+            " <img src='../resources/images/Close-2-icon.png' alt=''>  choose train";
+    }
+    else {
+        document.getElementById("trainloc").innerHTML = "<img src='../resources/images/check_sign_icon_green.png' alt=''/>";
+        counter_fields++;
+    }
+
+    if (name.length < 2) {
+        document.getElementById("nameloc").innerHTML =
+            " <img src='../resources/images/Close-2-icon.png' alt=''> enter name";
+    } else {
+        document.getElementById("nameloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png'/ alt=''>";
+        counter_fields++;
+    }
+
+    if (surname.length < 2) {
+        document.getElementById("surnameloc").innerHTML =
+            " <img src='../resources/images/Close-2-icon.png' alt=''> enter surname";
+    } else {
+        document.getElementById("surnameloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png'/ alt=''>";
+        counter_fields++;
+    }
+
+    if (birthday == null || birthday === "") {
+        document.getElementById("birthdayloc").innerHTML =
+            " <img src='../resources/images/Close-2-icon.png' alt=''> select birth date";
+    } else {
+        document.getElementById("birthdayloc").innerHTML = " <img src='../resources/images/check_sign_icon_green.png'/ alt=''>";
+        counter_fields++;
+    }
+
+    return counter_fields === fields_variables;
 }

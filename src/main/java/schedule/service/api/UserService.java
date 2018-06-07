@@ -19,4 +19,8 @@ public interface UserService {
     List<User> findPassengersOfTrain(int routeDailyId, LocalDateTime startTime);
 
     List<User> findByLoginOrSurname(String loginOrSurname);
+
+    boolean simpleUserValidation(String name, String surName, String birthDay);
+
+    User findUserByNameSurnameBirthDay(String name, String surName, String birthDay);
 }
