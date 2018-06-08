@@ -29,11 +29,28 @@ public class TrainRestController extends BaseController {
         String selectedToStation = stations.getStationTo();
 
         List<TrainAndDepTime> trainsNumberAndDepTimeList = new ArrayList<>();
-        List<Route> routes = routeService.findByStationNames(selectedFromStation, selectedToStation);
+        List<Schedule> sortedSchedule = new ArrayList<>();
 
+        List<Route> routes = routeService.findByStationNames(selectedFromStation, selectedToStation);
+        //todo: look at scheduleMainSearch and добавь исключение обратных маршрутов
         List<Schedule> schedules = scheduleService.findScheduleByStations(routes, selectedToStation, selectedFromStation);
+
+        for (Schedule scheduleOne : schedules) {
+            String stationOneName = scheduleOne.getStationName().getStationName();
+            if (stationOneName.equals(selectedToStation)) {
+                continue;
+            }
+            for (Schedule scheduleTwo : schedules) {
+                if (scheduleOne.getRouteDailyId() != scheduleTwo.getRouteDailyId() ||
+                        scheduleOne.getRouteStationIndex() >= scheduleTwo.getRouteStationIndex()) {
+                } else {
+                    sortedSchedule.add(scheduleOne);
+                }
+            }
+        }
+
         Set<Schedule> treeSchedules = new TreeSet(new RouteDailyIdComparator());
-        treeSchedules.addAll(schedules);
+        treeSchedules.addAll(sortedSchedule);
         for (Schedule element : treeSchedules) {
             String depTimeString = element.getDepartureTime().toString();
             TrainAndDepTime trainAndDepTime = new TrainAndDepTime();

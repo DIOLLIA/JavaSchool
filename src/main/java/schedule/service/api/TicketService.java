@@ -6,7 +6,7 @@ import schedule.model.User;
 
 public interface TicketService {
 
-    void addUserTicket(Ticket ticket);
+//    void addUserTicket(Ticket ticket);
 
     Ticket createGuestTicket(TicketItem ticket);
 
@@ -17,4 +17,6 @@ public interface TicketService {
     Ticket createTicketForUser(String departureDate, String departureTime, int trainNumber, String stationFrom, String stationTo, User user);
 
     boolean weHaveTenMinutes(String departureDate, String departureTime);
+
+    boolean isVacantSeatsOnTrain(String departureDate, String departureTime, String stationFrom, String stationTo,int trainNumber);
 }

@@ -8,4 +8,5 @@ public interface TicketDao extends GeneralCrudDao<TicketEntity> {
 
     boolean findTicket(TicketEntity ticketEntity);
 
+    boolean remainedElseVacantSeats(int seats, TicketEntity ticketEntity);
 }

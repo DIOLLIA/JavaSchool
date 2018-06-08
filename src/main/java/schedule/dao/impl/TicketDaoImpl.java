@@ -31,7 +31,22 @@ public class TicketDaoImpl extends GeneralCrudDaoImpl<TicketEntity> implements T
         queryDate.setParameter("train", train);
         queryDate.setParameter("depSch", depSch);
         queryDate.setParameter("user", user);
-        if (queryDate.list().size() != 0 /*|| queryTrain.list().size() == 0 || querySchedule.list().isEmpty()|| queryUser.uniqueResult() == null*/) {
+        if (queryDate.list().size() != 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean remainedElseVacantSeats(int seats, TicketEntity ticketEntity) {
+        LocalDateTime ldt = ticketEntity.getDepartureDateTime();
+        ScheduleEntity depSch = ticketEntity.getDepartureSchedule();
+        TrainEntity train = ticketEntity.getTrainEntity();
+        Query queryDate = getCurrentSession().createQuery("FROM TicketEntity te WHERE te.departureDateTime =:ldt AND te.trainEntity =:train AND te.departureSchedule =:depSch");
+        queryDate.setParameter("ldt", ldt);
+        queryDate.setParameter("train", train);
+        queryDate.setParameter("depSch", depSch);
+
+        if (queryDate.list().size() < seats) {
             return true;
         }
         return false;

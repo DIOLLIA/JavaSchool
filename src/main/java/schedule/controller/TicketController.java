@@ -44,10 +44,15 @@ public class TicketController extends BaseController {
         boolean routeNotEmpty = ticketService.simpleRouteValidation(stationFrom, stationTo, departureDate, departureTime, trainNumber);
         boolean userNotEmpty = userService.simpleUserValidation(name, surName, birthDay);
         boolean isTimeEnough = ticketService.weHaveTenMinutes(departureDate, departureTime);
+        boolean isVacantSeatsOnTrain = ticketService.isVacantSeatsOnTrain(departureDate, departureTime, stationFrom, stationTo, trainNumber);
 
         if (!isTimeEnough) {
             modelAndView = new ModelAndView("buy-ticket");
             modelAndView.addObject("message", getMessage("message.ticket.past.date.or.not.enough.time", DEFAULT_LOCALE));
+            return modelAndView;
+        } else if (!isVacantSeatsOnTrain) {
+            modelAndView = new ModelAndView("buy-ticket");
+            modelAndView.addObject("message", getMessage("message.ticket.no.vacant.seats", DEFAULT_LOCALE));
             return modelAndView;
         } else {
             if (userNotEmpty && routeNotEmpty) {

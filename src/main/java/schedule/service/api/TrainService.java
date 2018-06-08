@@ -23,5 +23,7 @@ public interface TrainService {
     List<Schedule> getScheduleByTrainId(int id);
 
     List<ScheduleItem> createTrainRoutesList(List<Schedule> schedules);
+
+
 }
 

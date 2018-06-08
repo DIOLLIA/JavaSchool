@@ -37,13 +37,15 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     RouteService routeService;
 
+/*
     @Override
     public void addUserTicket(Ticket ticket) {
-//        TicketEntity ticketEntity = modelMapper.map(ticket, TicketEntity.class);
+        TicketEntity ticketEntity = modelMapper.map(ticket, TicketEntity.class);
         ticketDao.addTicket(modelMapper.map(ticket, TicketEntity.class));
-//        ticketDao.addTicket(ticketEntity);
-//        return modelMapper.map(ticketEntity, Ticket.class);
+        ticketDao.addTicket(ticketEntity);
+        return modelMapper.map(ticketEntity, Ticket.class);
     }
+*/
 
     @Override
     public Ticket createGuestTicket(TicketItem ticketItem) {
@@ -143,12 +145,45 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket createTicketForUser(String departureDate, String departureTime, int trainNumber, String stationFrom, String stationTo, User user) {
-
-        DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
-        LocalDate departureDateFormatted = LocalDate.parse(departureDate, dateFormatter);
+    public boolean isVacantSeatsOnTrain(String departureDate, String departureTime, String stationFrom, String stationTo, int trainNumber) {
+        LocalDateTime departureDateTime = dateTimeBuilder(departureDate, departureTime);
+        Train departureTrain = trainService.findByNumber(trainNumber);
         LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
-        LocalDateTime departureDateTime = departureDateFormatted.toLocalDateTime(departureTimeFormatted);
+
+        List<Route> routes = routeService.findByStationNames(stationFrom, stationTo);
+        List<Schedule> schedules = scheduleService.findScheduleByStations(routes, stationTo, stationFrom);
+        int departureScheduleId = 0;
+        Schedule departureSchedule = null;
+        for (Schedule item : schedules) {
+            if (item.getDepartureTime().equals(departureTimeFormatted)) {
+                departureScheduleId = item.getId();
+                departureSchedule = item;
+                break;///todo bad
+            }
+        }
+        if (departureScheduleId == 0) {
+            //throw exc
+        }
+
+        Ticket ticket = new Ticket();
+        ticket.setDepartureDateTime(departureDateTime);
+        ticket.setTrain(departureTrain);
+        ticket.setDepartureSchedule(departureSchedule);
+
+        TicketEntity ticketEntity = modelMapper.map(ticket, TicketEntity.class);
+        ticketEntity.setTrainEntity(modelMapper.map(ticket.getTrain(), TrainEntity.class));
+
+        if (ticketDao.remainedElseVacantSeats(departureTrain.getSeats(), ticketEntity)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public Ticket createTicketForUser(String departureDate, String departureTime, int trainNumber, String stationFrom, String stationTo, User user) {
+        LocalDateTime departureDateTime = dateTimeBuilder(departureDate, departureTime);
+        LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
 
         Train departureTrain = trainService.findByNumber(trainNumber);
 
@@ -205,8 +240,17 @@ public class TicketServiceImpl implements TicketService {
         LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
         if (departureDateFormatted.isAfter(LocalDate.now()) || departureDateFormatted.isEqual(LocalDate.now())) {
 
-            return departureTimeFormatted.isAfter(LocalTime.now().plusMinutes(10));
+            return departureTimeFormatted.isBefore(LocalTime.now().plusMinutes(10));
         }
         return false;
+    }
+
+
+    LocalDateTime dateTimeBuilder(String departureDate, String departureTime) {
+        DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+        LocalDate departureDateFormatted = LocalDate.parse(departureDate, dateFormatter);
+        LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
+        LocalDateTime localDateTime = departureDateFormatted.toLocalDateTime(departureTimeFormatted);
+        return localDateTime;
     }
 }
