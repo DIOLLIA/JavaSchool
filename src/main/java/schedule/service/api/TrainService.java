@@ -1,5 +1,6 @@
 package schedule.service.api;
 
+import schedule.controller.model.ScheduleItem;
 import schedule.model.Schedule;
 import schedule.model.Train;
 
@@ -21,6 +22,6 @@ public interface TrainService {
 
     List<Schedule> getScheduleByTrainId(int id);
 
-    List<String> trainsList();
+    List<ScheduleItem> createTrainRoutesList(List<Schedule> schedules);
 }
 

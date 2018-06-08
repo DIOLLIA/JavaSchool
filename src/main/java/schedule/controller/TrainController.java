@@ -16,7 +16,7 @@ import schedule.model.User;
 import schedule.service.api.TrainService;
 import schedule.service.api.UserService;
 
-import java.util.*;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/train")
@@ -38,7 +38,7 @@ public class TrainController extends BaseController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addTrainPage() {
-        ModelAndView modelAndView = new ModelAndView("addTicket");
+        ModelAndView modelAndView = new ModelAndView("add-train");
         modelAndView.addObject("train", new Train());
         modelAndView.addObject("pageTitle", getMessage("page.title.add-train", DEFAULT_LOCALE));
 
@@ -80,9 +80,7 @@ public class TrainController extends BaseController {
     }
 
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public ModelAndView editTrainSave(@ModelAttribute("train") Train train /*,
-            @PathVariable ("id") int trainId*/
-            /* @RequestParam ("id") int trainId*/) {
+    public ModelAndView editTrainSave(@ModelAttribute("train") Train train) {
         trainService.editTrain(train);
         List<Train> trains = trainService.getTrains();
 
@@ -97,40 +95,14 @@ public class TrainController extends BaseController {
     public ModelAndView trainSchedule(@PathVariable(value = "train.id") int trainId) {
         List<Schedule> schedules = trainService.getScheduleByTrainId(trainId);
 
-        Map<Integer, List<Schedule>> scheduleMap = new HashMap<>();
-        for (Schedule element : schedules) {
-            int dayliRouteId = element.getRouteDailyId();
-            if (!scheduleMap.containsKey(dayliRouteId)) {
-                scheduleMap.put(dayliRouteId, new ArrayList<>());
-            }
-            scheduleMap.get(dayliRouteId).add(element);
-        }
-        List<ScheduleItem> resultScheduleList = new ArrayList<>();
-
-        for (List<Schedule> scheduleList : scheduleMap.values()) {
-
-            scheduleList.sort(new RouteStationIdComparator());
-
-            Schedule firstStationInSchedule = scheduleList.get(0);
-            Schedule lastStationInSchedule = scheduleList.get(scheduleList.size() - 1);
-
-            ScheduleItem scheduleItem = new ScheduleItem();
-            scheduleItem.setTrainNumber(firstStationInSchedule.getTrainNumber().getNumberOfTrain());
-            scheduleItem.setStationOfDeparture(firstStationInSchedule.getStationName().getStationName());
-            scheduleItem.setStationOfArrival(lastStationInSchedule.getStationName().getStationName());
-            scheduleItem.setDepartureTime(firstStationInSchedule.getDepartureTime());
-            scheduleItem.setArrivalTime(lastStationInSchedule.getArrivalTime());
-            scheduleItem.setScheduleDailyRouteId(firstStationInSchedule.getRouteDailyId());
-            resultScheduleList.add(scheduleItem);
-        }
-
+        List<ScheduleItem> trainRoutes = trainService.createTrainRoutesList(schedules);
         Train train = trainService.get(trainId);
         int trainNumber = train.getNumberOfTrain();
 
         ModelAndView modelAndView = new ModelAndView("train-routes-list");
         modelAndView.addObject("pageTitle", getMessage("page.title.train-routes", DEFAULT_LOCALE));
         modelAndView.addObject("train", train);
-        modelAndView.addObject("scheduleByTrainId", resultScheduleList);
+        modelAndView.addObject("scheduleByTrainId", trainRoutes);
         modelAndView.addObject("msg", getMessage("message.train.routes-for-train",
                 DEFAULT_LOCALE, String.valueOf(trainNumber)));
 
@@ -170,18 +142,5 @@ public class TrainController extends BaseController {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
-
-    private class RouteStationIdComparator implements Comparator<Schedule> {
-        @Override
-        public int compare(Schedule o1, Schedule o2) {
-            if (o1.getRouteStationIndex() == o2.getRouteStationIndex()) {
-                return 0;
-            } else if (o1.getRouteStationIndex() > o2.getRouteStationIndex()) {
-                return 1;
-            } else {
-                return -1;
-            }
-        }
     }
 }

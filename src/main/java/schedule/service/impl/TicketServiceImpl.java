@@ -46,7 +46,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public void addGuestTicket(TicketItem ticketItem) {
+    public Ticket createGuestTicket(TicketItem ticketItem) {
 
         User user = new User();
         user.setName(ticketItem.getName());
@@ -82,7 +82,10 @@ public class TicketServiceImpl implements TicketService {
         TicketEntity ticketEntity = modelMapper.map(ticket, TicketEntity.class);
         ticketEntity.setTrainEntity(modelMapper.map(ticket.getTrain(), TrainEntity.class));
         ticketEntity.setUserEntity(modelMapper.map(ticket.getUser(), UserEntity.class));
+
+
         ticketDao.addTicket(ticketEntity);
+        return ticket;
     }
 
     /**
@@ -140,7 +143,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket createTicket(String departureDate, String departureTime, int trainNumber, String stationFrom, String stationTo, User user) {
+    public Ticket createTicketForUser(String departureDate, String departureTime, int trainNumber, String stationFrom, String stationTo, User user) {
 
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
         LocalDate departureDateFormatted = LocalDate.parse(departureDate, dateFormatter);
@@ -173,8 +176,15 @@ public class TicketServiceImpl implements TicketService {
         TicketEntity ticketEntity = modelMapper.map(ticket, TicketEntity.class);
         ticketEntity.setTrainEntity(modelMapper.map(ticket.getTrain(), TrainEntity.class));
         ticketEntity.setUserEntity(modelMapper.map(ticket.getUser(), UserEntity.class));
-        ticketDao.addTicket(ticketEntity);
-        return ticket;
+
+        boolean sameTicketExist = ticketDao.findTicket(ticketEntity);
+
+        if (sameTicketExist) {
+            return null;
+        } else {
+            ticketDao.addTicket(ticketEntity);
+            return ticket;
+        }
     }
 
     /**
@@ -182,9 +192,9 @@ public class TicketServiceImpl implements TicketService {
      *
      * @param departureDate departure date of train in ticket
      * @param departureTime departure time of train in ticket
-     *           and compares it with current date and time, to check that:
-     *           date is today or Farther;
-     *           user have 10 minutes before train depart.
+     *                      and compares it with current date and time, to check that:
+     *                      date is today or Farther;
+     *                      user have 10 minutes before train depart.
      * @return {@code boolean true} if departure date and time more than 10 minutes of today and Farther
      */
     @Override

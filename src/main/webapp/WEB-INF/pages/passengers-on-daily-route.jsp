@@ -14,7 +14,7 @@
                 <br>
                 <div class="row">
                     <div class="col-auto">
-                        <input type="submit" value="Show trains on station" class="btn btn-primary btn-block"
+                        <input type="submit" value="Back to train routes" class="btn btn-primary btn-block"
                                onclick="location='../';"/>
                     </div>
                 </div>

@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping(value = "/mainSearch")
 @RestController
 public class ScheduleRestController extends BaseController {
-    @Autowired
+
     StationService stationService;
 
     @GetMapping(value = "/get-stations/")
@@ -29,5 +29,10 @@ public class ScheduleRestController extends BaseController {
         List<String> stationsNames = stationService.getStationsNames();
         stationsNames.remove(selectedFromStation);
         return new Gson().toJson(stationsNames);
+    }
+
+    @Autowired
+    public void setStationService(StationService stationService) {
+        this.stationService = stationService;
     }
 }

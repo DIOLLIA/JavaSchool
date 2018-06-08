@@ -19,9 +19,8 @@ import java.util.*;
 @RestController
 @RequestMapping(value = "/searchForUser")
 public class TrainRestController extends BaseController {
-    @Autowired
+
     RouteService routeService;
-    @Autowired
     ScheduleService scheduleService;
 
     @RequestMapping(value = "/get-train-and-time/", method = RequestMethod.POST)
@@ -57,6 +56,16 @@ public class TrainRestController extends BaseController {
                 return -1;
             }
         }
+    }
+
+    @Autowired
+    public void setRouteService(RouteService routeService) {
+        this.routeService = routeService;
+    }
+
+    @Autowired
+    public void setScheduleService(ScheduleService scheduleService) {
+        this.scheduleService = scheduleService;
     }
 }
 

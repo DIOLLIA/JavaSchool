@@ -72,15 +72,15 @@
                                 <select id="role" name="role"
                                         required class="js-example-basic-single js-states form-control"
                                         style="width: 100%;">
-                                    <option value="Admin">Admin</option>
                                     <option value="User">User</option>
+                                    <option value="Admin">Admin</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="birthDay" style="width: 100%;font-size: 120%"> &nbsp;</label>
-                                <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Sign Up">
+                                <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Create">
                             </div>
                         </div>
                     </div>

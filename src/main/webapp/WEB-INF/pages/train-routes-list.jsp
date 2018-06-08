@@ -1,6 +1,6 @@
 <%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 <%@ include file="header-admin.jsp" %>
-<%@ page pageEncoding="UTF-8"%>
+<%@ page pageEncoding="UTF-8" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 
 <section class="probootstrap-cover overflow-hidden relative"
@@ -13,13 +13,27 @@
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
                 <p class="lead mb-4 probootstrap-animate">Pick <span style="color:#32CD32;">date </span> and press
                     <span style="color:#32CD32;">Show </span> button to see passengers list </p>
-                <div class="col-md-2"><h5><span style="color:white;">Departure date: </span></h5></div>
-                <div class="col-md-2">
-                    <div class="probootstrap-date-wrap">
-                        <input type="text" id="probootstrap-date-departure" class="form-control"
-                               placeholder="click and pick" style="background-color: white; color: black" autocomplete="off">
+                <div class="row mb-3">
+
+                    <div class="col-md-3"><h5><span style="color:white;">Departure date: </span></h5>
+                        <br>
+                        <div class="probootstrap-date-wrap">
+                            <input type="text" id="probootstrap-date-departure" class="form-control"
+                                   placeholder="click and pick" style="background-color: white; color: black"
+                                   autocomplete="off">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="col-auto">
+                            <input type="submit" value="Back to trais list" class="btn btn-primary btn-block"
+                                   onclick="location='${pageContext.request.contextPath}/train/list';"/>
+                        </div>
                     </div>
                 </div>
+
+
                 <h3 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
                         style="color:#e0e139;">${msg}</span></h3>
 

@@ -18,11 +18,9 @@ import schedule.model.User;
 import schedule.service.api.UserService;
 
 @Controller
-//todo rename
-public class MainController extends BaseController {
+public class homePageController extends BaseController {
 
     private UserService userService;
-
     private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = {"/", "/index"})
@@ -72,8 +70,7 @@ public class MainController extends BaseController {
 
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     public ModelAndView signUp() {
-        ModelAndView modelAndView = new ModelAndView("sign-up");
-        return modelAndView;
+        return new ModelAndView("sign-up");
     }
 
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)

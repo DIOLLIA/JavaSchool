@@ -20,9 +20,7 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserDao userDao;
-    @Autowired
     private ModelMapper modelMapper;
 
     @Override
@@ -45,8 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean userExist(String name, String pswd) {
-        boolean validUser = userDao.findUser(name, pswd);
-        return validUser;
+        return userDao.findUser(name, pswd);
     }
 
     @Override
@@ -79,7 +76,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean simpleUserValidation(String name, String surName, String birthDay) {
-        if (/*null == name || null == surName || null == birthDay ||*/ name.equals("") || surName.equals("") || birthDay.equals("")) {
+        if (name.equals("") || surName.equals("") || birthDay.equals("")) {
             return false;
         } else
             return true;
@@ -93,8 +90,7 @@ public class UserServiceImpl implements UserService {
         if (userEntity == null) {
             return null;
         } else {
-            User user = modelMapper.map(userEntity, User.class);
-            return user;
+            return modelMapper.map(userEntity, User.class);
         }
     }
 
@@ -108,5 +104,13 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(User user) {
         UserEntity userEntity = modelMapper.map(user, UserEntity.class);
         userDao.deleteUser(userEntity);
+    }
+    @Autowired
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+    @Autowired
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
     }
 }

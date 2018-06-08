@@ -25,8 +25,12 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <input type="submit" value="Search" class="btn btn-primary btn-block"
-                                       style="width: 40%;">
+                                       style="width: 50%;">
                             </div>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="submit" class="btn btn-primary" value="add new user"
+                                   onclick="location='add';"/>
                         </div>
                     </div>
                 </form:form>
@@ -55,10 +59,6 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <br>
-                <input type="submit" class="btn btn-primary" value="add new user"
-                       onclick="location='add';"/>
-
             </div>
         </div>
     </div>

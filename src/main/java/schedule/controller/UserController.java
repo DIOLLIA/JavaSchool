@@ -21,7 +21,6 @@ import java.util.List;
 public class UserController extends BaseController {
 
     private UserService userService;
-
     private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/list")
@@ -38,9 +37,7 @@ public class UserController extends BaseController {
     public ModelAndView addUserPage() {
         ModelAndView modelAndView = new ModelAndView("add-user");
         //todo why do you need it? think and rename if it's used.
-        User user = new User();
-        user.setName("hello");
-        modelAndView.addObject("user", user);
+        modelAndView.addObject("user", new User());
 
         return modelAndView;
     }

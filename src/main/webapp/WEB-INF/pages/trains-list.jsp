@@ -36,10 +36,12 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <br>
-                <input type="submit" class="btn btn-primary" value="add train"
-                       onclick="location='add';"/>
-            </div>
+                <div class="col-md probootstrap-animate"style="position: absolute; bottom:91%; left:70%">
+                    <div>
+                        <input type="submit" class="btn btn-primary"  value="add train"
+                               onclick="location='add';" />
+                    </div>
+                </div>
         </div>
     </div>
 

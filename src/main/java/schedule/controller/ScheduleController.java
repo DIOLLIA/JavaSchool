@@ -25,9 +25,7 @@ import java.util.List;
 public class ScheduleController extends BaseController {
 
     private ScheduleService scheduleService;
-
     private StationService stationService;
-
     private RouteService routeService;
 
 

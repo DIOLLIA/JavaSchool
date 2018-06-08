@@ -6,5 +6,6 @@ public interface TicketDao extends GeneralCrudDao<TicketEntity> {
 
     void addTicket(TicketEntity ticketEntity);
 
-/*    void addModelTicket(Ticket ticket);*/
+    boolean findTicket(TicketEntity ticketEntity);
+
 }

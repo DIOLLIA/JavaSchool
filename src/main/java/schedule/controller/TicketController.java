@@ -10,7 +10,6 @@ import schedule.controller.model.TicketItem;
 import schedule.model.Ticket;
 import schedule.model.User;
 import schedule.service.api.TicketService;
-import schedule.service.api.TrainService;
 import schedule.service.api.UserService;
 
 @Controller
@@ -19,71 +18,65 @@ public class TicketController extends BaseController {
 
     private TicketService ticketService;
     private UserService userService;
-    private TrainService trainService;
 
     @RequestMapping(value = "/buy", method = RequestMethod.GET)
     public ModelAndView buyTicket() {
         ModelAndView modelAndView = new ModelAndView("buy-ticket");
-        modelAndView.addObject("ticket", new User());
+//        modelAndView.addObject("ticket", new User());
         modelAndView.addObject("pageTitle", getMessage("page.title.buy-ticket", DEFAULT_LOCALE));
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView saveTicket(@RequestParam("stationFrom") String stationFrom, @RequestParam("stationTo") String stationTo, @RequestParam("departureDate") String departureDate, @RequestParam("departureTime") String departureTime, @RequestParam("trainNumber") int trainNumber, @RequestParam("name") String name, @RequestParam("surName") String surName, @RequestParam("birthDay") String birthDay) {
+    public ModelAndView saveTicket(@RequestParam("stationFrom") String stationFrom,
+                                   @RequestParam("stationTo") String stationTo,
+                                   @RequestParam("departureDate") String departureDate,
+                                   @RequestParam("departureTime") String departureTime,
+                                   @RequestParam("trainNumber") int trainNumber,
+                                   @RequestParam("name") String name,
+                                   @RequestParam("surName") String surName,
+                                   @RequestParam("birthDay") String birthDay) {
+
+        Ticket ticket = null;
+        ModelAndView modelAndView;
 
         boolean routeNotEmpty = ticketService.simpleRouteValidation(stationFrom, stationTo, departureDate, departureTime, trainNumber);
         boolean userNotEmpty = userService.simpleUserValidation(name, surName, birthDay);
+        boolean isTimeEnough = ticketService.weHaveTenMinutes(departureDate, departureTime);
 
-        boolean timeEnough = ticketService.weHaveTenMinutes(departureDate, departureTime);
-
-        if (userNotEmpty) {
-            User ticketHolder = userService.findUserByNameSurnameBirthDay(name, surName, birthDay);
-
-            if (null == ticketHolder && routeNotEmpty) {
-                TicketItem ticketItem = ticketService.createTicketItem(departureDate, departureTime, birthDay, name, surName, trainNumber, stationFrom, stationTo);
-                ticketService.addGuestTicket(ticketItem);
-            } else {
-                Ticket ticket = ticketService.createTicket(departureDate, departureTime, trainNumber, stationFrom, stationTo, ticketHolder);
-//                ticketService.addUserTicket(ticket);
-            }
+        if (!isTimeEnough) {
+            modelAndView = new ModelAndView("buy-ticket");
+            modelAndView.addObject("message", getMessage("message.ticket.past.date.or.not.enough.time", DEFAULT_LOCALE));
+            return modelAndView;
         } else {
-            //throw exception
+            if (userNotEmpty && routeNotEmpty) {
+                User existingTicketHolder = userService.findUserByNameSurnameBirthDay(name, surName, birthDay);
+
+                if (existingTicketHolder == null) {
+                    TicketItem ticketItem = ticketService.createTicketItem(departureDate, departureTime, birthDay, name, surName, trainNumber, stationFrom, stationTo);
+                    ticket = ticketService.createGuestTicket(ticketItem);
+                } else {
+                    ticket = ticketService.createTicketForUser(departureDate, departureTime, trainNumber, stationFrom, stationTo, existingTicketHolder);
+                }
+            } else {
+                modelAndView = new ModelAndView("buy-ticket");
+                modelAndView.addObject("message", getMessage("message.ticket.empty.fields", DEFAULT_LOCALE));
+            }
         }
-     /*   DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
-        LocalDate departureDateFormatted = LocalDate.parse(departureDate, dateFormatter);
-        LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
-        DateTimeFormatter birthDayDateFormatter = DateTimeFormat.forPattern("yyyy-MM-dd");
-        LocalDate birthDayFormatted = LocalDate.parse(birthDay, birthDayDateFormatter);
-
-        TicketItem ticketItem = new TicketItem();
-        ticketItem.setBirthDay(birthDayFormatted);
-        ticketItem.setDepartureDate(departureDateFormatted);
-        ticketItem.setDepartureTime(departureTimeFormatted);
-        ticketItem.setName(name);
-        ticketItem.setSurName(surName);
-        ticketItem.setTrainNumber(trainNumber);
-        ticketItem.setStationFrom(stationFrom);
-        ticketItem.setStationTo(stationTo);
-
-        ticketService.addGuestTicket(ticketItem);*/
-
-        ModelAndView modelAndView = new ModelAndView("buy-ticket");
+        modelAndView = new ModelAndView("buy-ticket");
         modelAndView.addObject("pageTitle", getMessage("page.title.buy-ticket", DEFAULT_LOCALE));
-        modelAndView.addObject("message", getMessage("message.ticket.buy", DEFAULT_LOCALE));
-
+        if (ticket == null) {
+            modelAndView.addObject("message", getMessage("message.ticket.already.have", DEFAULT_LOCALE));
+        } else {
+            modelAndView.addObject("message", getMessage("message.ticket.buy", DEFAULT_LOCALE));
+        }
         return modelAndView;
     }
 
     @Autowired
     public void setTicketService(TicketService ticketService) {
         this.ticketService = ticketService;
-    }
-
-    @Autowired
-    public void setTrainService(TrainService trainService) {
-        this.trainService = trainService;
     }
 
     @Autowired

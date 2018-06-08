@@ -25,7 +25,13 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <input type="submit" value="Search" class="btn btn-primary btn-block"
-                                       style="width: 40%;">
+                                       style="width: 50%;">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="submit" value="Return to user list" class="btn btn-primary btn-block"
+                                       style="width: 100%;" onclick="location='list';">
                             </div>
                         </div>
                     </div>
@@ -56,10 +62,7 @@
                     </tbody>
                 </table>
                 <br>
-                <div class="form-group">
-                    <input type="submit" value="Return to user list" class="btn btn-primary btn-block"
-                           style="width: 20%;" onclick="location='list';" >
-                </div>
+
             </div>
         </div>
     </div>

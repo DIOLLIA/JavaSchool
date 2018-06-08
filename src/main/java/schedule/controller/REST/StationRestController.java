@@ -11,7 +11,6 @@ import schedule.service.api.StationService;
 @RestController
 public class StationRestController extends BaseController {
 
-    @Autowired
     private StationService stationService;
 
     @GetMapping(value = "/add-station**")
@@ -21,6 +20,11 @@ public class StationRestController extends BaseController {
         stationService.addStation(stationName, lat, lng);
 
         return ResponseEntity.ok(true);
+    }
+
+    @Autowired
+    public void setStationService(StationService stationService) {
+        this.stationService = stationService;
     }
 }
 
