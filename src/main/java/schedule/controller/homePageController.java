@@ -109,7 +109,7 @@ public class homePageController extends BaseController {
         Object authorities = auth.getAuthorities();
 
         if (principal.toString().contains("anonymousUser") && authorities.toString().equals("[ROLE_ANONYMOUS]")) {
-            return new ModelAndView("home").addObject("msg", getMessage("message.anunymous.profile", DEFAULT_LOCALE));
+            return new ModelAndView("home").addObject("msg", getMessage("message.anonymous.profile", DEFAULT_LOCALE));
         }
         User user = userService.findByLoginOrSurname(((UserDetails) principal).getUsername()).get(0);
         ModelAndView modelAndView;

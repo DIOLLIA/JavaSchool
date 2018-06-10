@@ -19,6 +19,13 @@ public class RouteEntity {
     @Column(name = "station_name")
     private List<StationEntity> stationsList;
 
+   public RouteEntity() {
+    }
+
+   public RouteEntity(String routeName) {
+        this.routeName = routeName;
+    }
+
     public int getId() {
         return id;
     }

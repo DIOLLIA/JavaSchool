@@ -2,7 +2,10 @@ package schedule.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -26,7 +29,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan("schedule")
 @EnableWebMvc
-@Import({SecurityConfig.class})// todo чекнуть полезность этого импорта
+//@Import({SecurityConfig.class})// todo чекнуть полезность этого импорта
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 public class WebAppConfig extends WebMvcConfigurerAdapter {

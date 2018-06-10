@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.ScheduleItem;
+import schedule.entity.RouteEntity;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.service.api.RouteService;
@@ -115,6 +116,27 @@ public class ScheduleController extends BaseController {
         ModelAndView modelAndView = new ModelAndView("schedule-editor");
         modelAndView.addObject("schedule", schedule);
         modelAndView.addObject("pageTitle", getMessage("page.title.schedule.editor", DEFAULT_LOCALE));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/scheduleList/addRoute", method = RequestMethod.GET)
+    public ModelAndView addRoutePage() {
+        ModelAndView modelAndView = new ModelAndView("add-route");
+        modelAndView.addObject("route", new RouteEntity());
+        modelAndView.addObject("pageTitle", getMessage("page.title.add-station", DEFAULT_LOCALE));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/scheduleList/addRoute", method = RequestMethod.POST)
+    public ModelAndView addRoute(@RequestParam (name = "stationFrom") String stationFrom,
+                                 @RequestParam (name = "stationTo") String stationTo) {
+
+        String routeName = stationFrom + "-" + stationTo;
+        routeService.addRoute(routeName);
+        ModelAndView modelAndView = new ModelAndView("add-route");
+        modelAndView.addObject("message", getMessage("message.route.create.success", DEFAULT_LOCALE));
 
         return modelAndView;
     }
