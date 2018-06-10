@@ -1,6 +1,5 @@
 package schedule.service.api;
 
-import org.joda.time.LocalTime;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Station;
@@ -12,7 +11,8 @@ public interface ScheduleService {
 
     List<Schedule> findScheduleByStation(Station station);
 
-    void addSchedule(Schedule schedule);
+//    void addSchedule(Schedule schedule);
 
-    Schedule findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime);
+    //    Schedule findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime);
+    List<Schedule> getSchedule();
 }

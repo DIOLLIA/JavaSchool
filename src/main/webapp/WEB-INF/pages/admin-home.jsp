@@ -18,7 +18,7 @@
                         <li> view routes for station</li>
                         <br>
                         <br>
-                        <input style="font-size: 100%" type="button" value="Go to stations"
+                        <input style="font-size: 100%" type="button" value="To stations"
                                class="btn btn-primary btn-block" onclick="location='/station/list'">
                     </div>
                 </form:form>
@@ -32,7 +32,7 @@
                         <li> View schedule and route for train</li>
                         <li> View registered passengers on train by date</li>
                         <br>
-                        <input style="font-size: 100%" type="button" value="Go to trains"
+                        <input style="font-size: 100%" type="button" value="To trains"
                                class="btn btn-primary btn-block" onclick="location='/train/list'">
                     </div>
                 </form:form>
@@ -47,7 +47,7 @@
                         <li> Add new station or enable/disable exist user</li>
                         <li> Create user</li>
                         <br>
-                        <input style="font-size: 100%" type="button" value="Go to users"
+                        <input style="font-size: 100%" type="button" value="To users"
                                class="btn btn-primary btn-block" onclick="location='/user/list'">
                     </div>
                 </form:form>
@@ -55,13 +55,13 @@
             <div class="col-md">
                 <form:form class="probootstrap-form" cssStyle=" background-color:transparent">
                     <div class="form-group " style="font-size: 130%; color:white">
-                        <h4 style="color:red"> Schedule editor SOON</h4>
+                        <h4 style="color:#32CD32"> Schedule editor</h4>
                         <li> Allows to see existing schedules</li>
                         <li> Add new schedule or edit existing</li>
                         <br>
                         <br>
-                        <input style="font-size: 100%" type="button" value="Nowhere to go"
-                               class="btn btn-primary btn-block" <%--onclick="location='/station/list'"--%>>
+                        <input style="font-size: 100%" type="button" value="To schedule"
+                               class="btn btn-primary btn-block" onclick="location='/schedule/scheduleList'">
                     </div>
                 </form:form>
             </div>

@@ -46,9 +46,8 @@
                     </form>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
                         <li class="nav-item"><a class="nav-link" href="/ticket/buy">Buy ticket</a></li>
-                        <li class="nav-item "><a class="nav-link"
-                                                 href="/userInfo"> ${pageContext.request.userPrincipal.name}
-                            profile</a></li>
+                        <li class="nav-item "><a class="nav-link" style="color: #e0e139;"
+                                                 href="/userInfo"> ${pageContext.request.userPrincipal.name}</a></li>
                         <li class="nav-item"><a class="nav-link" style="color: #00CA4C;" href="javascript:formSubmit()">logout</a>
                         </li>
                     </c:if>

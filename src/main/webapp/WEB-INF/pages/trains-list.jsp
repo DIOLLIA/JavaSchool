@@ -11,7 +11,8 @@
                 <div>
                     <h2 class="display-8 probootstrap-section-heading">${message}</h2>
                 </div>
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Trains</h2>
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Trains &#8195; <input type="submit" class="btn btn-primary" value="Add train" onclick="location='add';"/>
+                </h2>
                 <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="60%">
                     <thead>
                     <tr>
@@ -36,14 +37,8 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <div class="col-md probootstrap-animate"style="position: absolute; bottom:91%; left:70%">
-                    <div>
-                        <input type="submit" class="btn btn-primary"  value="add train"
-                               onclick="location='add';" />
-                    </div>
-                </div>
+            </div>
         </div>
-    </div>
 
 </section>
 

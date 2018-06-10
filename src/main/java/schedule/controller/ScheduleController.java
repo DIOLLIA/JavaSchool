@@ -108,6 +108,17 @@ public class ScheduleController extends BaseController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/scheduleList")
+    public ModelAndView listOfSchedule() {
+        List<Schedule> schedule = scheduleService.getSchedule();
+
+        ModelAndView modelAndView = new ModelAndView("schedule-editor");
+        modelAndView.addObject("schedule", schedule);
+        modelAndView.addObject("pageTitle", getMessage("page.title.schedule.editor", DEFAULT_LOCALE));
+
+        return modelAndView;
+    }
+
     @Autowired
     public void setScheduleService(ScheduleService scheduleService) {
         this.scheduleService = scheduleService;

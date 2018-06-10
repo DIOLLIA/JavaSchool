@@ -2,7 +2,6 @@ package schedule.service.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.joda.time.LocalTime;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,6 @@ import schedule.entity.StationEntity;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Station;
-import schedule.model.Train;
 import schedule.service.api.ScheduleService;
 
 import javax.transaction.Transactional;
@@ -61,6 +59,16 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public List<Schedule> getSchedule() {
+        List<ScheduleEntity> scheduleEntityList = scheduleDao.getAll();
+        List<Schedule> scheduleList = new ArrayList<>();
+        for (ScheduleEntity item : scheduleEntityList) {
+            scheduleList.add(modelMapper.map(item, Schedule.class));
+        }
+        return scheduleList;
+    }
+
+/*    @Override
     public void addSchedule(Schedule schedule) {
         Schedule schedule2 = new Schedule();
         schedule2.setRouteName(new Route());
@@ -72,13 +80,13 @@ public class ScheduleServiceImpl implements ScheduleService {
         ScheduleEntity map = mp.map(schedule2, ScheduleEntity.class);
         getCurrentSession().save(map);
 
-    }
+    }*/
 
-    @Override
+/*    @Override
     public Schedule findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime) {
         ScheduleEntity scheduleEntity = scheduleDao.findScheduleByStationsAndDepartureTime(stationFrom, stationTo, departureTime);
 
         Schedule schedule = modelMapper.map(scheduleEntity, Schedule.class);
         return schedule;
-    }
+    }*/
 }

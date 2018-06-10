@@ -112,7 +112,12 @@ public class homePageController extends BaseController {
             return new ModelAndView("home").addObject("msg", getMessage("message.anunymous.profile", DEFAULT_LOCALE));
         }
         User user = userService.findByLoginOrSurname(((UserDetails) principal).getUsername()).get(0);
-        ModelAndView modelAndView = new ModelAndView("personal-data");
+        ModelAndView modelAndView;
+        if (authorities.toString().equals("[ROLE_ADMIN]")) {
+            modelAndView = new ModelAndView("admin-profile");
+        } else {
+            modelAndView = new ModelAndView("personal-data");
+        }
         modelAndView.addObject("user", user);
 
         return modelAndView;

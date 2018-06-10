@@ -31,7 +31,7 @@
         </div>
     </div>
     <div id="pac-container">
-        <input id="pac-input" type="text" placeholder="Enter a location">
+        <input id="pac-input" type="text" style="color: black" placeholder="Enter a location">
     </div>
     <div>
         <button class="" id="add-station-btn" data-role="button">Add</button>
@@ -45,7 +45,6 @@
     <span id="place-address"></span>
 </div>
 
-</div>
 
 
 -
