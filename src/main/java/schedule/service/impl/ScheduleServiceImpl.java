@@ -68,6 +68,31 @@ public class ScheduleServiceImpl implements ScheduleService {
         return scheduleList;
     }
 
+    @Override
+    public List<Schedule> formatShcedule(List<Schedule> schedule) {
+        List<Schedule> formatedSchedule = new ArrayList<>();
+        int routeDailyId = 0;
+        for (Schedule item : schedule) {
+            if (item.getRouteDailyId() != routeDailyId) {
+                formatedSchedule.add(item);
+                routeDailyId = item.getRouteDailyId();
+            }
+        }
+        return formatedSchedule;
+    }
+
+
+    public List<Schedule> showRouteDetails(List<Schedule> schedule, int scheduleId) {
+        List<Schedule> formatedSchedule = new ArrayList<>();
+        int routeStationIndex = schedule.get(scheduleId).getRouteDailyId();
+        for (Schedule item : schedule) {
+            if (item.getRouteDailyId() == routeStationIndex) {
+                formatedSchedule.add(item);
+            }
+        }
+        return formatedSchedule;
+    }
+
 /*    @Override
     public void addSchedule(Schedule schedule) {
         Schedule schedule2 = new Schedule();

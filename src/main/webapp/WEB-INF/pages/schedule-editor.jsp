@@ -17,31 +17,63 @@
                                                                                                           class="btn btn-primary"
                                                                                                           value="New schedule"
                                                                                                           onclick="location='';"/>&#8195;
-                    <input type="submit" class="btn btn-primary" value="New route" onclick="location='';"/>
+                    <input type="submit" class="btn btn-primary" value="New route" onclick="location='';"/> &#8195;
+                    <input type="submit" class="btn btn-primary" value="Route list"
+                           onclick="location='/schedule/scheduleList/routeList';"/>
                 </h2>
 
-                <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th width="10%">Train №</th>
-                        <th width="20%">Station</th>
-                        <th width="10%">Arrival time</th>
-                        <th width="10%">Departure time</th>
-                        <th width="20%">Route</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="schedule" items="${schedule}">
-                        <tr>
-                            <td>${schedule.trainNumber.numberOfTrain}</td>
-                            <td>${schedule.stationName.stationName}</td>
-                            <td><joda:format pattern="HH:mm" value="${schedule.arrivalTime}"/></td>
-                            <td><joda:format pattern="HH:mm" value="${schedule.departureTime}"/></td>
-                            <td>${schedule.routeName.routeName}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                <div class="row align-items-center">
+
+                    <div class="col-md probootstrap-animate">
+
+                        <table class="table_price">
+                            <thead>
+                            <tr>
+                                <th>Train №</th>
+                                <th>Route</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="schedule" items="${schedule}">
+                                <tr>
+                                    <td>${schedule.trainNumber.numberOfTrain}</td>
+                                    <td>${schedule.routeName.routeName}</td>
+                                    <td>
+                                        <a href="${pageContext.request.contextPath}/schedule/scheduleList/${schedule.id}
+                            ">Show
+                                            details</a>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md probootstrap-animate">
+                        <c:if test="${details != null}">
+                        <h4 class="display-8 probootstrap-section-heading" style="color:#32CD32 ">Train
+                            №${details.get(0).getTrainNumber().getNumberOfTrain()}
+                            on ${details.get(0).getRouteName().getRouteName()} route:</h4>
+                        <table class="table_price">
+                            <thead>
+                            <tr>
+                                <th>Arrival time</th>
+                                <th>Station</th>
+                                <th>Departure time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="schedule" items="${details}">
+                                <tr>
+                                    <td><joda:format pattern="HH:mm" value="${schedule.arrivalTime}"/></td>
+                                    <td>${schedule.stationName.stationName}</td>
+                                    <td><joda:format pattern="HH:mm" value="${schedule.departureTime}"/></td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                    </c:if>
+                </div>
             </div>
         </div>
     </div>

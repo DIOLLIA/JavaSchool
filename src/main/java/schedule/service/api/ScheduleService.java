@@ -15,4 +15,9 @@ public interface ScheduleService {
 
     //    Schedule findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime);
     List<Schedule> getSchedule();
+
+    List<Schedule> formatShcedule(List<Schedule> schedule);
+
+    List<Schedule> showRouteDetails(List<Schedule> schedule, int scheduleId);
+
 }

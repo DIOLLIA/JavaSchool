@@ -112,9 +112,10 @@ public class ScheduleController extends BaseController {
     @RequestMapping(value = "/scheduleList")
     public ModelAndView listOfSchedule() {
         List<Schedule> schedule = scheduleService.getSchedule();
+        List<Schedule> formatedSchedule = scheduleService.formatShcedule(schedule);
 
         ModelAndView modelAndView = new ModelAndView("schedule-editor");
-        modelAndView.addObject("schedule", schedule);
+        modelAndView.addObject("schedule", formatedSchedule);
         modelAndView.addObject("pageTitle", getMessage("page.title.schedule.editor", DEFAULT_LOCALE));
 
         return modelAndView;
@@ -141,7 +142,7 @@ public class ScheduleController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "scheduleList/routeList")
+    @RequestMapping(value = "/scheduleList/routeList")
     public ModelAndView listOfStationsOnRoute() {
         ModelAndView modelAndView = new ModelAndView("routes-list");
 
@@ -158,6 +159,20 @@ public class ScheduleController extends BaseController {
 
         ModelAndView modelAndView = new ModelAndView("stations-of-route");
         modelAndView.addObject("stations", routeStationsList);
+        modelAndView.addObject("message", getMessage("message.train.delete.success", DEFAULT_LOCALE));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/scheduleList/{schedule.id}")
+    public ModelAndView scheduleDetails(@PathVariable(value = "schedule.id") int scheduleId) {
+        List<Schedule> schedule = scheduleService.getSchedule();
+        List<Schedule> routeAndTrains = scheduleService.formatShcedule(schedule);
+        List<Schedule> formatedSchedule = scheduleService.showRouteDetails(schedule,scheduleId);
+
+        ModelAndView modelAndView = new ModelAndView("schedule-editor");
+        modelAndView.addObject("details",formatedSchedule );
+        modelAndView.addObject("schedule", routeAndTrains);
         modelAndView.addObject("message", getMessage("message.train.delete.success", DEFAULT_LOCALE));
 
         return modelAndView;
