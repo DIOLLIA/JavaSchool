@@ -141,6 +141,16 @@ public class ScheduleController extends BaseController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "scheduleList/routeList")
+    public ModelAndView listOfStationsOnRoute() {
+        ModelAndView modelAndView = new ModelAndView("routes-list");
+
+        List<Route> routes = routeService.routesList();
+        modelAndView.addObject("routes", routes);
+        modelAndView.addObject("pageTitle", getMessage("page.title.stations-list", DEFAULT_LOCALE));
+
+        return modelAndView;
+    }
     @Autowired
     public void setScheduleService(ScheduleService scheduleService) {
         this.scheduleService = scheduleService;
