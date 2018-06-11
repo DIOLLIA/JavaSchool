@@ -4,6 +4,7 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import schedule.dao.api.RouteDao;
 import schedule.entity.RouteEntity;
+import schedule.model.Station;
 
 import java.util.List;
 
@@ -27,6 +28,15 @@ public class RouteDaoImpl extends GeneralCrudDaoImpl<RouteEntity> implements Rou
         List<RouteEntity> routes = query.list();
 
         return routes;
+    }
+
+    @Override
+    public List<Station> stationsOnRoute(int routeId) {
+        Query query = getCurrentSession().createQuery("SELECT stationsList FROM RouteEntity re WHERE re.id =:routeId ");
+        query.setParameter("routeId", routeId);
+        return  (List<Station>)query.list();
+
+
     }
 
 }

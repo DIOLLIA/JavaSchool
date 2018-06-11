@@ -8,6 +8,7 @@ import schedule.dao.api.RouteDao;
 import schedule.entity.RouteEntity;
 import schedule.entity.StationEntity;
 import schedule.model.Route;
+import schedule.model.Station;
 import schedule.service.api.RouteService;
 
 import java.util.ArrayList;
@@ -48,6 +49,11 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public void addRoute(String routeName) {
         routeDao.create(new RouteEntity(routeName));
+    }
+
+    @Override
+    public List<Station> stationsList(int routeId) {
+        return routeDao.stationsOnRoute(routeId);
     }
 
     private List<RouteEntity> filterList(List<RouteEntity> routesEntityList, String[] stationNames) {

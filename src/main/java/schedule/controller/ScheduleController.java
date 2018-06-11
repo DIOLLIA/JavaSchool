@@ -6,6 +6,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import schedule.controller.model.ScheduleItem;
 import schedule.entity.RouteEntity;
 import schedule.model.Route;
 import schedule.model.Schedule;
+import schedule.model.Station;
 import schedule.service.api.RouteService;
 import schedule.service.api.ScheduleService;
 import schedule.service.api.StationService;
@@ -31,8 +33,7 @@ public class ScheduleController extends BaseController {
 
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ModelAndView findSchedule(@RequestParam(name = "stationFrom") String stationFrom, @RequestParam(name = "stationTo") String stationTo, @RequestParam(name = "searchDate") String searchDate, @RequestParam(name = "searchTime") String searchTime)
-    {
+    public ModelAndView findSchedule(@RequestParam(name = "stationFrom") String stationFrom, @RequestParam(name = "stationTo") String stationTo, @RequestParam(name = "searchDate") String searchDate, @RequestParam(name = "searchTime") String searchTime) {
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
         LocalDate date = LocalDate.parse(searchDate, dateFormatter);
 
@@ -69,10 +70,9 @@ public class ScheduleController extends BaseController {
                 }
             }
         }
-        if (scheduleItems.isEmpty()){
-         message = "No trains found from " + searchTime + " on " + searchDate+".";
-        }
-        else {
+        if (scheduleItems.isEmpty()) {
+            message = "No trains found from " + searchTime + " on " + searchDate + ".";
+        } else {
             message = "Search result for departure date " + date;
         }
         modelAndView.addObject("message", message);
@@ -130,8 +130,8 @@ public class ScheduleController extends BaseController {
     }
 
     @RequestMapping(value = "/scheduleList/addRoute", method = RequestMethod.POST)
-    public ModelAndView addRoute(@RequestParam (name = "stationFrom") String stationFrom,
-                                 @RequestParam (name = "stationTo") String stationTo) {
+    public ModelAndView addRoute(@RequestParam(name = "stationFrom") String stationFrom,
+                                 @RequestParam(name = "stationTo") String stationTo) {
 
         String routeName = stationFrom + "-" + stationTo;
         routeService.addRoute(routeName);
@@ -151,6 +151,18 @@ public class ScheduleController extends BaseController {
 
         return modelAndView;
     }
+
+    @RequestMapping(value = "/scheduleList/routeList/{route.id}")
+    public ModelAndView viewRoute(@PathVariable(value = "route.id") int routeId) {
+        List<Station> routeStationsList = routeService.stationsList(routeId);
+
+        ModelAndView modelAndView = new ModelAndView("stations-of-route");
+        modelAndView.addObject("stations", routeStationsList);
+        modelAndView.addObject("message", getMessage("message.train.delete.success", DEFAULT_LOCALE));
+
+        return modelAndView;
+    }
+
     @Autowired
     public void setScheduleService(ScheduleService scheduleService) {
         this.scheduleService = scheduleService;
