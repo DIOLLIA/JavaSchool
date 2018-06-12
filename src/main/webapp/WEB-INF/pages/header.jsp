@@ -1,7 +1,8 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,16 +28,18 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
     <div class="container">
-        <a class="navbar-brand" href="/index">KudKuda Home</a>
+        <a class="navbar-brand" href="/index">KudKuda</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu"
                 aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span><i class="ion-navicon"></i></span>
         </button>
         <div class="collapse navbar-collapse" id="probootstrap-menu">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link" href="/schedule/searchTrainOnStation">Station
-                    schedule</a></li>
-
+                <li class="nav-item active">
+                    <a class="nav-link" href="/schedule/searchTrainOnStation">
+                        <spring:message code="header.station-schedule"/>
+                    </a>
+                </li>
 
                 <sec:authorize access="isAuthenticated()">
                     <c:url value="/logout" var="logoutUrl"/>
@@ -45,17 +48,35 @@
                                value="${_csrf.token}"/>
                     </form>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
-                        <li class="nav-item"><a class="nav-link" href="/ticket/buy">Buy ticket</a></li>
-                        <li class="nav-item "><a class="nav-link" style="color: #e0e139;"
-                                                 href="/userInfo"> ${pageContext.request.userPrincipal.name}</a></li>
-                        <li class="nav-item"><a class="nav-link" style="color: #00CA4C;" href="javascript:formSubmit()">logout</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ticket/buy"><spring:message code="header.buy-ticket"/></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" style="color: #e0e139;"
+                               href="/userInfo"> ${pageContext.request.userPrincipal.name}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: #00CA4C;" href="javascript:formSubmit()">
+                                <spring:message code="header.log-out"/> </a>
                         </li>
                     </c:if>
                 </sec:authorize>
 
                 <sec:authorize access="isAnonymous()">
-                    <li class="nav-item"><a class="nav-link" href="/signIn">Sign in</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signIn"><spring:message code="header.sign-in"/> </a>
+                    </li>
                 </sec:authorize>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<%=request.getContextPath()%>?mylocale=en">
+                        <img src="../../resources/images/flag-en.png">
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<%=request.getContextPath()%>?mylocale=de">
+                        <img src="../../resources/images/flag-de.png">
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
