@@ -10,7 +10,9 @@
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
-                <p class="lead mb-4 probootstrap-animate"><span style="color:#32CD32; font-size: 120%">Passengers </span>list are on the train
+                <p class="lead mb-4 probootstrap-animate"><span
+                        style="color:#32CD32; font-size: 120%">Passengers </span>list are on the train
+                </p>
                 <br>
                 <div class="row">
                     <div class="col-auto">

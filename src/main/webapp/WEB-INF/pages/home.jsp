@@ -11,7 +11,7 @@
             <div class="col-md">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
                 <p class="lead mb-4 probootstrap-animate">
-                    <span style="color:#32CD32;font-size: 140%">are you going?</span>
+                    <span style="color:#32CD32;font-size: 140%"><spring:message code="subheader.are-you-going"/></span>
             </div>
             <div class="col-md probootstrap-animate">
                 <form:form name='mainSearch' method="POST" modelAttribute="stationSearch"
@@ -21,7 +21,9 @@
                         <div class="row mb-3">
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="station_from" style="width: 100%;font-size: 120%">From</label>
+                                    <label for="station_from" style="width: 100%;font-size: 120%">
+                                        <spring:message code="common.label.from"/>
+                                    </label>
                                     <select class="js-example-basic-single js-states form-control"
                                             onchange="getToStations()"
                                             id="station_from" name="stationFrom"
@@ -31,7 +33,9 @@
                             </div>
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="station_to" style="width: 100%;font-size: 120%">To</label>
+                                    <label for="station_to" style="width: 100%;font-size: 120%">
+                                        <spring:message code="common.label.to"/>
+                                    </label>
                                     <div class="probootstrap_select-wrap">
                                         <select class="js-example-basic-single js-states form-control"
                                                 id="station_to" style="width: 100%;" name="stationTo">
@@ -44,11 +48,13 @@
                         <div class="row mb-5">
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="probootstrap-date-departure" style="font-size: 120%">Departure
-                                        date</label>
+                                    <label for="probootstrap-date-departure" style="font-size: 120%">
+                                        <spring:message code="common.label.departure-date"/>
+                                    </label>
                                     <div class="probootstrap-date-wrap">
                                         <input type="text" id="probootstrap-date-departure" class="form-control"
-                                               placeholder="click and pick" name="searchDate" style="color: black"
+                                               placeholder="<spring:message code="home.placeholder.click-and-pick"/>"
+                                               name="searchDate" style="color: black"
                                                autocomplete="off">
                                         <span id="dateloc" style="color: red"></span>
                                     </div>
@@ -56,7 +62,9 @@
                             </div>
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="departure-time" style="font-size: 120%">Departure time</label>
+                                    <label for="departure-time" style="font-size: 120%">
+                                        <spring:message code="common.label.departure-time"/>
+                                    </label>
                                     <div class="probootstrap-date-wrap">
                                         <input type="time" id="departure-time" value="now" class="form-control"
                                                name="searchTime">
@@ -68,7 +76,8 @@
 
                         <div class="row">
                             <div class="col-auto">
-                                <input type="submit" value="Search" class="btn btn-primary btn-block">
+                                <input type="submit" value="<spring:message code="common.btn.search"/>"
+                                       class="btn btn-primary btn-block">
                             </div>
                         </div>
                     </div>
@@ -80,12 +89,12 @@
                     <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th width="15%">From</th>
-                            <th width="15%">Where</th>
-                            <th width="10%">Train number</th>
-                            <th width="10%">Departure Time</th>
-                            <th width="10%">Arrival Time</th>
-                            <th width="10%">Action</th>
+                            <th width="15%"><spring:message code="common.label.from"/></th>
+                            <th width="15%"><spring:message code="common.label.to"/></th>
+                            <th width="10%"><spring:message code="home.btn.train-number"/></th>
+                            <th width="10%"><spring:message code="common.label.departure-time"/></th>
+                            <th width="10%"><spring:message code="common.label.arrival-time"/></th>
+                            <th width="10%"><spring:message code="common.label.arrival-action"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -96,7 +105,8 @@
                                 <td>${scheduleItem.trainNumber}</td>
                                 <td><joda:format pattern="HH:mm" value="${scheduleItem.departureTime}"/></td>
                                 <td><joda:format pattern="HH:mm" value="${scheduleItem.arrivalTime}"/></td>
-                                <td><a href="${pageContext.request.contextPath}/ticket/buy/">buy ticket</a><br/>
+                                <td><a href="${pageContext.request.contextPath}/ticket/buy/">
+                                    <spring:message code="common.btn.buy-ticket"/></a>
                             </tr>
                         </c:forEach>
                         </tbody>

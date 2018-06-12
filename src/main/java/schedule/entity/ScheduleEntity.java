@@ -1,7 +1,5 @@
 package schedule.entity;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalTime;
 
@@ -28,17 +26,17 @@ public class ScheduleEntity {
     private LocalTime departureTime;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
    // @OnDelete(action = OnDeleteAction.CASCADE) //todo не работает так как данная сущность есть в нескольких табах
     private StationEntity stationName;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(cascade = CascadeType.MERGE)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     private TrainEntity trainNumber;
 
     private Integer timeInterval;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     // @JoinColumn(name = "route_id")
     private RouteEntity routeName;
 

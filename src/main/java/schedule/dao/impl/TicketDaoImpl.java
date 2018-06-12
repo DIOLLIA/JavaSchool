@@ -16,6 +16,7 @@ public class TicketDaoImpl extends GeneralCrudDaoImpl<TicketEntity> implements T
     @Override
     public void addTicket(TicketEntity ticketEntity) {
         getCurrentSession().save(ticketEntity);
+
     }
 
     @Override

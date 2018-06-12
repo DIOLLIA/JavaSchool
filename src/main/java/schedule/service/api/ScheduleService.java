@@ -20,4 +20,5 @@ public interface ScheduleService {
 
     List<Schedule> showRouteDetails(List<Schedule> schedule, int scheduleId);
 
+    void addSchedule(String routeName, String arrivalTime, String departureTime, String station, int dailyRoute, int numberInOrder, int trainNumber);
 }

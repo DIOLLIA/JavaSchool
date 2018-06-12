@@ -12,6 +12,8 @@ import schedule.model.User;
 import schedule.service.api.TicketService;
 import schedule.service.api.UserService;
 
+import java.util.Locale;
+
 @Controller
 @RequestMapping(value = "/ticket")
 public class TicketController extends BaseController {
@@ -20,10 +22,10 @@ public class TicketController extends BaseController {
     private UserService userService;
 
     @RequestMapping(value = "/buy", method = RequestMethod.GET)
-    public ModelAndView buyTicket() {
+    public ModelAndView buyTicket(Locale locale) {
         ModelAndView modelAndView = new ModelAndView("buy-ticket");
 //        modelAndView.addObject("ticket", new User());
-        modelAndView.addObject("pageTitle", getMessage("page.title.buy-ticket", DEFAULT_LOCALE));
+        modelAndView.addObject("pageTitle", getMessage("page.title.buy-ticket", locale));
 
         return modelAndView;
     }
@@ -36,7 +38,8 @@ public class TicketController extends BaseController {
                                    @RequestParam("trainNumber") int trainNumber,
                                    @RequestParam("name") String name,
                                    @RequestParam("surName") String surName,
-                                   @RequestParam("birthDay") String birthDay) {
+                                   @RequestParam("birthDay") String birthDay,
+                                   Locale locale) {
 
         Ticket ticket = null;
         ModelAndView modelAndView;
@@ -48,11 +51,11 @@ public class TicketController extends BaseController {
 
         if (!isTimeEnough) {
             modelAndView = new ModelAndView("buy-ticket");
-            modelAndView.addObject("message", getMessage("message.ticket.past.date.or.not.enough.time", DEFAULT_LOCALE));
+            modelAndView.addObject("message", getMessage("message.ticket.past.date.or.not.enough.time", locale));
             return modelAndView;
         } else if (!isVacantSeatsOnTrain) {
             modelAndView = new ModelAndView("buy-ticket");
-            modelAndView.addObject("message", getMessage("message.ticket.no.vacant.seats", DEFAULT_LOCALE));
+            modelAndView.addObject("message", getMessage("message.ticket.no.vacant.seats", locale));
             return modelAndView;
         } else {
             if (userNotEmpty && routeNotEmpty) {
@@ -66,15 +69,15 @@ public class TicketController extends BaseController {
                 }
             } else {
                 modelAndView = new ModelAndView("buy-ticket");
-                modelAndView.addObject("message", getMessage("message.ticket.empty.fields", DEFAULT_LOCALE));
+                modelAndView.addObject("message", getMessage("message.ticket.empty.fields", locale));
             }
         }
         modelAndView = new ModelAndView("buy-ticket");
-        modelAndView.addObject("pageTitle", getMessage("page.title.buy-ticket", DEFAULT_LOCALE));
+        modelAndView.addObject("pageTitle", getMessage("page.title.buy-ticket", locale));
         if (ticket == null) {
-            modelAndView.addObject("message", getMessage("message.ticket.already.have", DEFAULT_LOCALE));
+            modelAndView.addObject("message", getMessage("message.ticket.already.have", locale));
         } else {
-            modelAndView.addObject("message", getMessage("message.ticket.buy", DEFAULT_LOCALE));
+            modelAndView.addObject("message", getMessage("message.ticket.buy", locale));
         }
         return modelAndView;
     }

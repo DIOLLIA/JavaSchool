@@ -30,7 +30,7 @@
 <br/>
 <h2>${message}</h2>
 <br>
-<input type="submit" value="add station"
+<input type="submit" value="<spring:message code="add-station-button"/>"
        onclick="location='add';"/>
 <p><a href="${pageContext.request.contextPath}/index.html">Home page</a></p>
 

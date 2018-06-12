@@ -13,4 +13,8 @@ public interface RouteService {
     void addRoute(String routeName);
 
     List<Station> stationsList(int routeId);
+
+    List<String> findStationsByRouteName(int routeId);
+
+    int findByName(String routeName);
 }

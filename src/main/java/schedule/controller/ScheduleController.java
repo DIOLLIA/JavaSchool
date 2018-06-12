@@ -22,6 +22,8 @@ import schedule.service.api.StationService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
 
 @Controller
 @RequestMapping(value = "/schedule")
@@ -81,21 +83,22 @@ public class ScheduleController extends BaseController {
     }
 
     @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.GET)
-    public ModelAndView searchOnStation() {
+    public ModelAndView searchOnStation(Locale locale) {
 
         ModelAndView modelAndView = new ModelAndView("train-list-by-station");
         modelAndView.addObject("pageTitle",
-                getMessage("page.title.search-by-station", DEFAULT_LOCALE));
+                getMessage("page.title.search-by-station", locale));
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.POST)
-    public ModelAndView searchOnStationResult(@RequestParam(name = "stationFrom") String station) {
+    public ModelAndView searchOnStationResult(@RequestParam(name = "stationFrom") String station,
+                                              Locale locale) {
 
         ModelAndView modelAndView = new ModelAndView("train-list-by-station");
         modelAndView.addObject("pageTitle",
-                getMessage("page.title.search-by-station", DEFAULT_LOCALE));
+                getMessage("page.title.search-by-station", locale));
 
         List<Schedule> listOfTrainsByStation = scheduleService.findScheduleByStation(
                 stationService.findByName(station));
@@ -110,70 +113,109 @@ public class ScheduleController extends BaseController {
     }
 
     @RequestMapping(value = "/scheduleList")
-    public ModelAndView listOfSchedule() {
+    public ModelAndView listOfSchedule(Locale locale) {
         List<Schedule> schedule = scheduleService.getSchedule();
         List<Schedule> formatedSchedule = scheduleService.formatShcedule(schedule);
 
-        ModelAndView modelAndView = new ModelAndView("schedule-editor");
+        ModelAndView modelAndView = new ModelAndView("schedule-viewer");
         modelAndView.addObject("schedule", formatedSchedule);
-        modelAndView.addObject("pageTitle", getMessage("page.title.schedule.editor", DEFAULT_LOCALE));
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/scheduleList/addRoute", method = RequestMethod.GET)
-    public ModelAndView addRoutePage() {
-        ModelAndView modelAndView = new ModelAndView("add-route");
-        modelAndView.addObject("route", new RouteEntity());
-        modelAndView.addObject("pageTitle", getMessage("page.title.add-station", DEFAULT_LOCALE));
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/scheduleList/addRoute", method = RequestMethod.POST)
-    public ModelAndView addRoute(@RequestParam(name = "stationFrom") String stationFrom,
-                                 @RequestParam(name = "stationTo") String stationTo) {
-
-        String routeName = stationFrom + "-" + stationTo;
-        routeService.addRoute(routeName);
-        ModelAndView modelAndView = new ModelAndView("add-route");
-        modelAndView.addObject("message", getMessage("message.route.create.success", DEFAULT_LOCALE));
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/scheduleList/routeList")
-    public ModelAndView listOfStationsOnRoute() {
-        ModelAndView modelAndView = new ModelAndView("routes-list");
-
-        List<Route> routes = routeService.routesList();
-        modelAndView.addObject("routes", routes);
-        modelAndView.addObject("pageTitle", getMessage("page.title.stations-list", DEFAULT_LOCALE));
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/scheduleList/routeList/{route.id}")
-    public ModelAndView viewRoute(@PathVariable(value = "route.id") int routeId) {
-        List<Station> routeStationsList = routeService.stationsList(routeId);
-
-        ModelAndView modelAndView = new ModelAndView("stations-of-route");
-        modelAndView.addObject("stations", routeStationsList);
-        modelAndView.addObject("message", getMessage("message.train.delete.success", DEFAULT_LOCALE));
+        modelAndView.addObject("pageTitle", getMessage("page.title.schedule.editor", locale));
+        modelAndView.addObject("pageTitle", getMessage("page.title.schedule.viewer", locale));
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/scheduleList/{schedule.id}")
-    public ModelAndView scheduleDetails(@PathVariable(value = "schedule.id") int scheduleId) {
+    public ModelAndView scheduleDetails(Locale locale, @PathVariable(value = "schedule.id") int scheduleId) {
         List<Schedule> schedule = scheduleService.getSchedule();
         List<Schedule> routeAndTrains = scheduleService.formatShcedule(schedule);
-        List<Schedule> formatedSchedule = scheduleService.showRouteDetails(schedule,scheduleId);
+        List<Schedule> formatedSchedule = scheduleService.showRouteDetails(schedule, scheduleId);
+
+        ModelAndView modelAndView = new ModelAndView("schedule-viewer");
+        modelAndView.addObject("details", formatedSchedule);
+        modelAndView.addObject("schedule", routeAndTrains);
+        modelAndView.addObject("message", getMessage("message.train.delete.success", locale));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/scheduleList/add")
+    public ModelAndView addNewSchedule(Locale locale) {
+
+        ModelAndView modelAndView = new ModelAndView("schedule-constructor");
+        modelAndView.addObject("pageTitle", getMessage("page.title.schedule.viewer", locale));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/scheduleList/addRoute", method = RequestMethod.GET)
+    public ModelAndView addRoutePage(Locale locale) {
+        ModelAndView modelAndView = new ModelAndView("add-route");
+        modelAndView.addObject("route", new RouteEntity());
+        modelAndView.addObject("pageTitle", getMessage("page.title.add-station", locale));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/scheduleList/addRoute", method = RequestMethod.POST)
+    public ModelAndView addRoute(Locale locale, @RequestParam(name = "stationFrom") String stationFrom,
+                                 @RequestParam(name = "stationTo") String stationTo) {
+
+        String routeName = stationFrom + "-" + stationTo;
+        routeService.addRoute(routeName);
+        ModelAndView modelAndView = new ModelAndView("add-route");
+        modelAndView.addObject("message", getMessage("message.route.create.success", locale));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/scheduleList/routeList")
+    public ModelAndView listOfStationsOnRoute(Locale locale) {
+        ModelAndView modelAndView = new ModelAndView("routes-list");
+
+        List<Route> routes = routeService.routesList();
+        modelAndView.addObject("routes", routes);
+        modelAndView.addObject("pageTitle", getMessage("page.title.stations-list", locale));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/scheduleList/routeList/{route.id}")
+    public ModelAndView viewRoute(Locale locale, @PathVariable(value = "route.id") int routeId) {
+        List<Station> routeStationsList = routeService.stationsList(routeId);
+
+        ModelAndView modelAndView = new ModelAndView("stations-of-route");
+        modelAndView.addObject("stations", routeStationsList);
+        modelAndView.addObject("message", getMessage("message.train.delete.success", locale));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/constructor")
+    public ModelAndView scheduleConstructor(Locale locale) {
+        List<Schedule> schedule = scheduleService.getSchedule();
 
         ModelAndView modelAndView = new ModelAndView("schedule-editor");
-        modelAndView.addObject("details",formatedSchedule );
-        modelAndView.addObject("schedule", routeAndTrains);
-        modelAndView.addObject("message", getMessage("message.train.delete.success", DEFAULT_LOCALE));
+        modelAndView.addObject("schedule", schedule);
+        modelAndView.addObject("pageTitle", getMessage("page.title.schedule.viewer", locale));
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/constructor", method = RequestMethod.POST)
+    public ModelAndView scheduleItemSave(Locale locale,
+                                         @RequestParam(name = "route_picker") String routeName,
+                                         @RequestParam(name = "arrival_time") String arrivalTime,
+                                         @RequestParam(name = "departure_time") String departureTime,
+                                         @RequestParam(name = "stations_list") String station,
+                                         @RequestParam(name = "number_in_order") int numberInOrder,
+                                         @RequestParam(name = "daily_route") int dailyRoute,
+                                         @RequestParam(name = "train_picker") int trainNumber) {
+        scheduleService.addSchedule(routeName, arrivalTime, departureTime, station, dailyRoute, numberInOrder, trainNumber);
+        List<Schedule> schedule = scheduleService.getSchedule();
+        ModelAndView modelAndView = new ModelAndView("schedule-editor");
+        modelAndView.addObject("schedule", schedule);
+        modelAndView.addObject("pageTitle", getMessage("page.title.schedule.viewer", locale));
 
         return modelAndView;
     }

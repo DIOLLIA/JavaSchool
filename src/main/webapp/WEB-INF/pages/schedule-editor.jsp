@@ -13,66 +13,69 @@
                 <div>
                     <h2 class="display-8 probootstrap-section-heading">${message}</h2>
                 </div>
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Schedule &#8195;<input type="submit"
-                                                                                                          class="btn btn-primary"
-                                                                                                          value="New schedule"
-                                                                                                          onclick="location='';"/>&#8195;
-                    <input type="submit" class="btn btn-primary" value="New route" onclick="location='';"/> &#8195;
-                    <input type="submit" class="btn btn-primary" value="Route list"
-                           onclick="location='/schedule/scheduleList/routeList';"/>
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Schedule &#8195;
+                    <form:form method="POST" modelAttribute="schedule"
+                               action="${pageContext.request.contextPath}">
+                    <input type="submit" class="btn btn-primary" value="+"/>
                 </h2>
-
                 <div class="row align-items-center">
+                    <table class="table_user_info" style="width: 100%;">
 
-                    <div class="col-md probootstrap-animate">
 
-                        <table class="table_price">
-                            <thead>
+                        <th style="width: 15%"><select class="js-example-basic-single js-states form-control"
+                                                       id="route_picker" name="route_picker" style="width: 100%"
+                                                       onchange="stationsOnRoute()">
+                        </select></th>
+
+                        <th style="width: 5%"><input type="time" class="form-control" id="arrival_time"
+                                                     name="arrival_time">
+                        </th>
+                        <th style="width: 20%"><select class="js-example-basic-single js-states form-control"
+                                                       id="stations_list" name="stations_list" style="width: 100%">
+                        </select></th>
+                        <th style="width: 5%"><input type="time" class="form-control" id="departure_time"
+                                                     name="departure_time">
+                        </th>
+                        <th style="width: 5%"><input type="text" class="form-control" id="number_in_order"
+                                                     name="number_in_order" style="background: white;color:black">
+                        </th>
+                        <th style="width: 5%"><input type="text" class="form-control" id="daily_route"
+                                                     name="daily_route" style="background: white;color:black">
+                        </th>
+                        <th style="width: 10%"><select class="js-example-basic-single js-states form-control"
+                                                       id="train_picker" name="train_picker" style="width: 100%">
+                        </select></th>
+                    </table>
+                </div>
+                </form:form>
+                <br>
+                <div class="row align-items-center">
+                    <table class="table_price">
+                        <thead>
+                        <tr>
+                            <th style="width: 15%;">Route</th>
+                            <th style="width: 7%;">Arrival time</th>
+                            <th style="width: 15%;">Station</th>
+                            <th style="width: 7%;">Departure time</th>
+                            <th style="width: 5%;">NIO</th>
+                            <th style="width: 5%;">DailyId</th>
+                            <th style="width: 5%;">Train №</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="schedule" items="${schedule}">
                             <tr>
-                                <th>Train №</th>
-                                <th>Route</th>
-                                <th>Action</th>
+                                <td>${schedule.routeName.routeName}</td>
+                                <td><joda:format pattern="HH:mm" value="${schedule.arrivalTime}"/></td>
+                                <td>${schedule.stationName.stationName}</td>
+                                <td><joda:format pattern="HH:mm" value="${schedule.departureTime}"/></td>
+                                <td>${schedule.routeStationIndex}</td>
+                                <td>${schedule.routeDailyId}</td>
+                                <td>${schedule.trainNumber.numberOfTrain}</td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="schedule" items="${schedule}">
-                                <tr>
-                                    <td>${schedule.trainNumber.numberOfTrain}</td>
-                                    <td>${schedule.routeName.routeName}</td>
-                                    <td>
-                                        <a href="${pageContext.request.contextPath}/schedule/scheduleList/${schedule.id}
-                            ">Show
-                                            details</a>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-md probootstrap-animate">
-                        <c:if test="${details != null}">
-                        <h4 class="display-8 probootstrap-section-heading" style="color:#32CD32 ">Train
-                            №${details.get(0).getTrainNumber().getNumberOfTrain()}
-                            on ${details.get(0).getRouteName().getRouteName()} route:</h4>
-                        <table class="table_price">
-                            <thead>
-                            <tr>
-                                <th>Arrival time</th>
-                                <th>Station</th>
-                                <th>Departure time</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="schedule" items="${details}">
-                                <tr>
-                                    <td><joda:format pattern="HH:mm" value="${schedule.arrivalTime}"/></td>
-                                    <td>${schedule.stationName.stationName}</td>
-                                    <td><joda:format pattern="HH:mm" value="${schedule.departureTime}"/></td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                    </c:if>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

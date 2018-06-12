@@ -15,6 +15,7 @@ import schedule.service.api.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -48,12 +49,12 @@ public class UserController extends BaseController {
                                    @RequestParam("surname") String surname,
                                    @RequestParam("password") String password,
                                    @RequestParam("birthDay") String birthDayString,
-                                   @RequestParam("role") String role) {
-        String message;
+                                   @RequestParam("role") String role,
+                                   Locale locale) {
         if (!userService.findByLoginOrSurname(email).isEmpty()) {
             return new ModelAndView("add-user")
                     .addObject("msg",
-                            getMessage("message.user.create.error.username-exist", DEFAULT_LOCALE, email));
+                            getMessage("message.user.create.error.username-exist", locale, email));
         } else {
             //todo rename with appropriate name? What exactly the role? You created this var to store what role?
             Role role1 = new Role();
@@ -75,26 +76,28 @@ public class UserController extends BaseController {
 
             ModelAndView modelAndView = new ModelAndView("add-user");
             modelAndView.addObject("message",
-                    getMessage("message.admin.create-user.success", DEFAULT_LOCALE, role));
+                    getMessage("message.admin.create-user.success", locale, role));
 
             return modelAndView;
         }
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ModelAndView deleteUserPage(@ModelAttribute User id) {
+    public ModelAndView deleteUserPage(@ModelAttribute User id,
+                                       Locale locale) {
         userService.addUser(id);
         List<User> users = userService.getUsers();
 
         ModelAndView modelAndView = new ModelAndView("users-list");
         modelAndView.addObject("users", users);
-        modelAndView.addObject("message", getMessage("message.admin.delete-user.success", DEFAULT_LOCALE));
+        modelAndView.addObject("message", getMessage("message.admin.delete-user.success", locale));
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/findUser", method = RequestMethod.POST)
-    public ModelAndView findByLoginOrSurname(@RequestParam("loginOrSurname") String loginOrSurname) {
+    public ModelAndView findByLoginOrSurname(@RequestParam("loginOrSurname") String loginOrSurname,
+                                             Locale locale) {
         List<User> list = userService.findByLoginOrSurname(loginOrSurname);
         ArrayList<User> searchResult = new ArrayList<>(list);
         String elementForSearch;
@@ -106,12 +109,12 @@ public class UserController extends BaseController {
         }
         if (searchResult.size() == 0) {
             modelAndView.addObject("message",
-                    getMessage("message.admin.search-user-by-login.no-result", DEFAULT_LOCALE,
+                    getMessage("message.admin.search-user-by-login.no-result", locale,
                             elementForSearch, loginOrSurname));
         } else {
             //todo redundant message. Don't delete search request from search input
             modelAndView.addObject("message",
-                    getMessage("message.admin.search-user-by-login.result", DEFAULT_LOCALE, elementForSearch, loginOrSurname));
+                    getMessage("message.admin.search-user-by-login.result", locale, elementForSearch, loginOrSurname));
         }
         modelAndView.addObject("user", searchResult);
 

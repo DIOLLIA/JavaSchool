@@ -4,14 +4,14 @@
             <div class="col-md-3">
                 <h3 class="probootstrap_font-18 mb-3"></h3>
                 <ul class="list-unstyled">
-                    <li><a href="/index">Home</a></li>
+                    <li><a href="/index"><spring:message code="link.home"/></a></li>
                 </ul>
             </div>
 
             <div class="col-md-3">
                 <h3 class="probootstrap_font-18 mb-3"></h3>
                 <ul class="list-unstyled">
-                    <li><a href="/about">About</a></li>
+                    <li><a href="/about"><spring:message code="link.about"/></a></li>
                 </ul>
             </div>
         </div>

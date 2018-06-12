@@ -35,4 +35,5 @@ public class ScheduleRestController extends BaseController {
     public void setStationService(StationService stationService) {
         this.stationService = stationService;
     }
-}
+    }
+

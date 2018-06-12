@@ -9,9 +9,8 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md">
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda </h2>
                 <h3 class="heading mb-2 display-4 font-light probootstrap-animate"><br> <span
-                        style="color:#32CD32;">Authentication</span></h3>
+                        style="color:#32CD32;"><spring:message code="header.authentication"/></span></h3>
             </div>
             <div class="col-md-6  probootstrap-animate">
 
@@ -33,17 +32,15 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="username" style="width: 100%;">Login (your E-mail)</label>
                                 <input type="text" class="form-control" id="username" name="username"
-                                       placeholder="Login (e-mail)">
+                                       placeholder="<spring:message code="label.login"/>">
                                 <span id="nameloc" style="color: red"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="password" style="width: 100%;">Password</label>
                                 <input type="password" class="form-control" id="password" name="password"
-                                       placeholder="Password">
+                                       placeholder="<spring:message code="label.password"/>">
                                 <span id="passwordloc" style="color: red"></span>
                             </div>
                         </div>
@@ -53,13 +50,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" id="submit" name="submit"
-                                       value="LogIn">
+                                       value="<spring:message code="btn.log-in"/>">
                             </div>
                         </div>
                         <div class="col-md-6" style="margin: auto; padding: auto;"
                              onmouseover="this.style.backgroundColor='#00CA4C';"
                              onmouseout="this.style.backgroundColor='#fff';">
-                            <a href="/signUp">Click to create new account</a>
+                            <a href="/signUp"><spring:message code="register-new-user"/></a>
                         </div>
                     </div>
                     <input type="hidden" name="${_csrf.parameterName}"

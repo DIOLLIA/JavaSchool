@@ -2,16 +2,21 @@ package schedule.service.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.joda.time.LocalTime;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import schedule.dao.api.RouteDao;
 import schedule.dao.api.ScheduleDao;
+import schedule.dao.api.StationDao;
+import schedule.dao.api.TrainDao;
 import schedule.entity.RouteEntity;
 import schedule.entity.ScheduleEntity;
 import schedule.entity.StationEntity;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Station;
+import schedule.model.Train;
 import schedule.service.api.ScheduleService;
 
 import javax.transaction.Transactional;
@@ -22,11 +27,12 @@ import java.util.List;
 @Transactional
 public class ScheduleServiceImpl implements ScheduleService {
 
-    @Autowired
+
     ScheduleDao scheduleDao;
-    @Autowired
     ModelMapper modelMapper;
-    @Autowired
+    TrainDao trainDao;
+    StationDao stationDao;
+    RouteDao routeDao;
     private SessionFactory sessionFactory;
 
     private Session getCurrentSession() {
@@ -93,6 +99,27 @@ public class ScheduleServiceImpl implements ScheduleService {
         return formatedSchedule;
     }
 
+    @Override
+    public void addSchedule(String routeName, String arrivalTime, String departureTime, String station, int dailyRoute, int numberInOrder, int trainNumber) {
+        LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
+        LocalTime arrivalTimeFormatted = LocalTime.parse(arrivalTime);
+        Train train = modelMapper.map(trainDao.findByNumber(trainNumber), Train.class);
+        int routeId = routeDao.findByName(routeName);
+        Route route = modelMapper.map(routeDao.routeById(routeId), Route.class);
+        Station stationModel = modelMapper.map(stationDao.findByName(station), Station.class);
+
+        Schedule schedule = new Schedule();
+        schedule.setTrainNumber(train);
+        schedule.setRouteName(route);
+        schedule.setStationName(stationModel);
+        schedule.setArrivalTime(arrivalTimeFormatted);
+        schedule.setDepartureTime(departureTimeFormatted);
+        schedule.setRouteDailyId(dailyRoute);
+        schedule.setRouteStationIndex(numberInOrder);
+        ScheduleEntity scheduleEntity = modelMapper.map(schedule,ScheduleEntity.class);
+        scheduleDao.create(scheduleEntity);
+    }
+
 /*    @Override
     public void addSchedule(Schedule schedule) {
         Schedule schedule2 = new Schedule();
@@ -107,11 +134,45 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     }*/
 
-/*    @Override
-    public Schedule findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime) {
-        ScheduleEntity scheduleEntity = scheduleDao.findScheduleByStationsAndDepartureTime(stationFrom, stationTo, departureTime);
+    /*    @Override
+        public Schedule findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime) {
+            ScheduleEntity scheduleEntity = scheduleDao.findScheduleByStationsAndDepartureTime(stationFrom, stationTo, departureTime);
 
-        Schedule schedule = modelMapper.map(scheduleEntity, Schedule.class);
-        return schedule;
-    }*/
+            Schedule schedule = modelMapper.map(scheduleEntity, Schedule.class);
+            return schedule;
+        }*/
+    @Autowired
+    public void setScheduleDao(ScheduleDao scheduleDao) {
+        this.scheduleDao = scheduleDao;
+    }
+
+    @Autowired
+
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
+
+    @Autowired
+
+    public void setTrainDao(TrainDao trainDao) {
+        this.trainDao = trainDao;
+    }
+
+    @Autowired
+
+    public void setStationDao(StationDao stationDao) {
+        this.stationDao = stationDao;
+    }
+
+    @Autowired
+
+    public void setRouteDao(RouteDao routeDao) {
+        this.routeDao = routeDao;
+    }
+
+    @Autowired
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 }

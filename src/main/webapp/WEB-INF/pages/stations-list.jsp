@@ -8,10 +8,12 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Stations &#8195; <input type="submit"
-                                                                                                           class="btn btn-primary"
-                                                                                                           value="Add station"
-                                                                                                           onclick="location='add';"/>
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">
+                    <spring:message code="admin.header.stations"/> &#8195;
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="<spring:message code="add-station-button"/>"
+                           onclick="location='add';"/>
                 </h2>
                 <h2>${message}</h2>
                 <table class="table_price" border="0px" cellpadding="" cellspacing="0">

@@ -37,6 +37,90 @@ function trainsAndDateSelector() {
     });
 }
 
+/*  schedule editor elements*/
+routesPicker();
+function routesPicker() {
+    var routes = $("#route_picker");
+    routes.empty();
+
+    $.ajax({
+        type: 'GET',
+        url: '/routes/get-routes/',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (stations) {
+            stations.forEach(function (item, i) {
+                routes.append(
+                    '<option value=\"' + item + '\">' + item + '</option>'
+                )
+            });
+            stationsOnRoute();
+        },
+      /*  error: function (response) {
+            alert("Something is wrong!")
+        }*/
+    })
+}
+function stationsOnRoute() {
+    var route = $("#route_picker").val();
+    var stationList = $("#stations_list");
+    $.ajax({
+        type: 'GET',
+        url: '/routes/get-stations/' + route,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (stations) {
+            stationList.empty();
+            stations.forEach(function (item, i) {
+                stationList.append(
+                    '<option value=\"' + item + '\">' + item + '</option>'
+                )
+            });
+        },
+     /*   error: function () {
+            alert("Something is wrong!")
+        }*/
+    })
+
+}
+trainPicker();
+
+function trainPicker() {
+    var trains = $("#train_picker");
+    trains.empty();
+
+    $.ajax({
+        type: 'GET',
+        url: '/routes/get-trains',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (train) {
+            train.forEach(function (item, i) {
+                trains.append(
+                    '<option value=\"' + item + '\">' + item + '</option>'
+                )
+            });
+        },
+        /*  error: function (response) {
+              alert("Something is wrong!")
+          }*/
+    })
+}
+/*var p = document.getElementById("scedule_item") ;
+var length = 1 ;
+function add_schedule() {
+    var new_input = document.createElement("input") ;
+    new_input.name = "my_input" ;
+    var div = document.createElement('div') ;
+    div.innerHTML = '<br>div элемент №' + length + '<br>' ;
+    div.appendChild(new_input) ;
+    p.appendChild(div) ;
+    length++ ;
+
+}*/
+
+
+
 function showRoutePassengersByDate(trainId, dailyRouteId, startTime) {
     var departureDate = $("#probootstrap-date-departure").val();
 

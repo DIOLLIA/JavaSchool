@@ -27,7 +27,7 @@
 
                     <div class="col-md-4">
                         <div class="col-auto">
-                            <input type="submit" value="Back to trais list" class="btn btn-primary btn-block"
+                            <input type="submit" value="Back to trains list" class="btn btn-primary btn-block"
                                    onclick="location='${pageContext.request.contextPath}/train/list';"/>
                         </div>
                     </div>

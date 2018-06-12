@@ -11,7 +11,11 @@
                 <div>
                     <h2 class="display-8 probootstrap-section-heading">${message}</h2>
                 </div>
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Trains &#8195; <input type="submit" class="btn btn-primary" value="Add train" onclick="location='add';"/>
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">
+                    <spring:message code="admin.header.trains"/> &#8195;
+                    <input type="submit" class="btn btn-primary"
+                           value="<spring:message code="add-train-button"/>"
+                           onclick="location='add';"/>
                 </h2>
                 <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="60%">
                     <thead>

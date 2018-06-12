@@ -24,7 +24,8 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <input type="submit" value="Search" class="btn btn-primary btn-block"
+                                <input type="submit" value="<spring:message code="common.btn.search"/>"
+                                       class="btn btn-primary btn-block"
                                        style="width: 50%;">
                             </div>
                         </div>

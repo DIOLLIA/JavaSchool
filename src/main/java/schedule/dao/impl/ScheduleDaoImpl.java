@@ -40,8 +40,8 @@ public class ScheduleDaoImpl extends GeneralCrudDaoImpl<ScheduleEntity> implemen
         Query query = getCurrentSession().createQuery("FROM ScheduleEntity sch JOIN sch.stationName st WHERE st.stationName LIKE :stationFrom");
         //query.setParameter("stationFrom", stationFrom);
         query.setParameter("stationTo", stationTo);
-       // query.setParameter("departureTime", departureTime);
-        ScheduleEntity scheduleEntity = (ScheduleEntity) query.uniqueResult();
-        return scheduleEntity;
+        // query.setParameter("departureTime", departureTime);
+        return (ScheduleEntity) query.uniqueResult();
     }
 }
+

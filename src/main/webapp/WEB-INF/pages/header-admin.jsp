@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,12 +42,19 @@
                                value="${_csrf.token}"/>
                     </form>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
-                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/station/list">Stations</a></li>
-                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/train/list">Trains</a></li>
-                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/list">Users</a></li>
-                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/schedule/scheduleList">Schedule</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/station/list">
+                            <spring:message code="admin.header.stations"/></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/train/list">
+                            <spring:message code="admin.header.trains"/></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/list">Users</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link"
+                                                href="${pageContext.request.contextPath}/schedule/scheduleList">Schedule</a>
+                        </li>
                         <li class="nav-item "><a class="nav-link" style="color: #e0e139;"
-                                                                         href="/userInfo"> ${pageContext.request.userPrincipal.name}</a>
+                                                 href="/userInfo"> ${pageContext.request.userPrincipal.name}</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" style="color: #00CA4C;" href="javascript:formSubmit()">logout</a>
                         </li>

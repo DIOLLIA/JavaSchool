@@ -20,7 +20,7 @@
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="email" style="width: 100%;font-size: 120%">Login (your E-mail)</label>
+                                <label for="email" style="width: 100%;font-size: 120%"><spring:message code="label.login"/></label>
                                 <input type="text" class="form-control" id="email" name="email"
                                        placeholder="Your email">
                                 <span id="emailloc" style="color: red"></span>

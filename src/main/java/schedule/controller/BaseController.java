@@ -11,8 +11,6 @@ import java.util.Locale;
 public class BaseController {
     private MessageSource messageSource;
 
-    protected static final Locale DEFAULT_LOCALE = new Locale("en", "us");
-
     protected String getMessage(String key, Locale locale, String... args) {
         Object[] objects = new Object[args.length];
         System.arraycopy(args, 0, objects, 0, objects.length);

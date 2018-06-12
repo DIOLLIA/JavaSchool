@@ -53,7 +53,29 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public List<Station> stationsList(int routeId) {
-        return routeDao.stationsOnRoute(routeId);
+       List<StationEntity> stationEntity = routeDao.stationsOnRoute(routeId);
+       List<Station> stations = new ArrayList<>();
+        for (StationEntity station : stationEntity) {
+            stations.add(modelMapper.map(station,Station.class));
+        }
+        return stations;
+    }
+
+    @Override
+    public List<String> findStationsByRouteName(int routeId) {
+        List<StationEntity> stationsList = routeDao.stationsOnRoute(routeId);
+
+        List<String> stationsNamesList = new ArrayList<>();
+        for (StationEntity station : stationsList) {
+            stationsNamesList.add(modelMapper.map(station,Station.class).getStationName());
+        }
+        return stationsNamesList;
+    }
+
+    @Override
+    public int findByName(String routeName) {
+
+        return routeDao.findByName(routeName);
     }
 
     private List<RouteEntity> filterList(List<RouteEntity> routesEntityList, String[] stationNames) {

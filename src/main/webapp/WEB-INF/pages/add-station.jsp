@@ -7,27 +7,30 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Add Station</h2>
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">
+                    <spring:message code="page.title.add-station"/>
+                </h2>
                 <form:form method="POST" modelAttribute="station"
                            action="${pageContext.request.contextPath}/station/add">
                     <table class="table_add" border="0px" cellpadding="" cellspacing="0">
                         <tbody>
                         <tr>
-                            <td>Name:</td>
+                            <td><spring:message code="station-name"/> </td>
                             <td><form:input path="stationName"/></td>
                         </tr>
                         <tr>
-                            <td>Latitude</td>
+                            <td><spring:message code="station-latitude"/> </td>
                             <td><form:input path="latitude"/></td>
                         </tr>
                         <tr>
-                            <td>Longitude</td>
+                            <td><spring:message code="station-longitude"/></td>
                             <td><form:input path="longitude"/></td>
                         </tr>
                         </tbody>
                     </table>
                     <br>
-                    <input type="submit" class="btn btn-primary" value="add station"
+                    <input type="submit" class="btn btn-primary"
+                           value="<spring:message code="add-station-button"/>"
                            onclick="location='list';"/>
                 </form:form>
             </div>
