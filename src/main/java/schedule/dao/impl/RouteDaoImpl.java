@@ -25,9 +25,8 @@ public class RouteDaoImpl extends GeneralCrudDaoImpl<RouteEntity> implements Rou
         query.setParameter("name1", stationNames[0]);
         query.setParameter("name2", stationNames[1]);
 
-        List<RouteEntity> routes = query.list();
-
-        return routes;
+        return (List<RouteEntity>) query.list();
+        /*   List<RouteEntity> routes = query.list();        return routes;*/
     }
 
     @Override

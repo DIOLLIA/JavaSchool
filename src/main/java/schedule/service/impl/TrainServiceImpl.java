@@ -18,9 +18,7 @@ import java.util.*;
 @Transactional
 public class TrainServiceImpl implements TrainService {
 
-    @Autowired
     private TrainDao trainDao;
-    @Autowired
     private ModelMapper modelMapper;
 
     public Train addTrain(Train trainDto) {
@@ -127,5 +125,15 @@ public class TrainServiceImpl implements TrainService {
                 return -1;
             }
         }
+    }
+
+    @Autowired
+    public void setTrainDao(TrainDao trainDao) {
+        this.trainDao = trainDao;
+    }
+
+    @Autowired
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
     }
 }

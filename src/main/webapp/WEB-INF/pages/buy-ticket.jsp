@@ -67,7 +67,7 @@
                                         <spring:message code="common.label.departure-time"/>
                                     </label>
                                     <select class="js-example-basic-single js-states form-control"
-                                            id="departure_time" name="departureTime" style="width: 100%">
+                                            id="departure_time" name="departureTime" style="width: 100%"  onchange="trainOnTimeSelector()">
                                         <td><joda:format pattern="HH:mm" value="${scheduleItem.departureTime}"/></td>
                                     </select>
                                     <span id="timeloc" style="color: red"></span>
@@ -87,7 +87,8 @@
                                         <spring:message code="common.label.train-number"/>
                                     </label>
                                     <select class="js-example-basic-single js-states form-control"
-                                            id="train" name="trainNumber" style="width: 100%">
+                                            id="train" name="trainNumber" style="width: 100%" disabled>
+
                                     </select>
                                     <span id="trainloc" style="color: red"></span>
                                 </div>

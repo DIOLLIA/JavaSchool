@@ -26,16 +26,12 @@ import java.util.List;
 @Transactional
 public class TicketServiceImpl implements TicketService {
 
-    @Autowired
-    ModelMapper modelMapper;
-    @Autowired
-    TicketDaoImpl ticketDao;
-    @Autowired
-    TrainService trainService;
-    @Autowired
-    ScheduleService scheduleService;
-    @Autowired
-    RouteService routeService;
+
+    private ModelMapper modelMapper;
+    private TicketDaoImpl ticketDao;
+    private TrainService trainService;
+    private ScheduleService scheduleService;
+    private RouteService routeService;
 
 /*
     @Override
@@ -245,12 +241,36 @@ public class TicketServiceImpl implements TicketService {
         return false;
     }
 
-
     LocalDateTime dateTimeBuilder(String departureDate, String departureTime) {
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
         LocalDate departureDateFormatted = LocalDate.parse(departureDate, dateFormatter);
         LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
         LocalDateTime localDateTime = departureDateFormatted.toLocalDateTime(departureTimeFormatted);
         return localDateTime;
+    }
+
+    @Autowired
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
+
+    @Autowired
+    public void setTicketDao(TicketDaoImpl ticketDao) {
+        this.ticketDao = ticketDao;
+    }
+
+    @Autowired
+    public void setTrainService(TrainService trainService) {
+        this.trainService = trainService;
+    }
+
+    @Autowired
+    public void setScheduleService(ScheduleService scheduleService) {
+        this.scheduleService = scheduleService;
+    }
+
+    @Autowired
+    public void setRouteService(RouteService routeService) {
+        this.routeService = routeService;
     }
 }

@@ -7,6 +7,14 @@ import schedule.model.Station;
 import java.util.List;
 
 public interface ScheduleService {
+    /**
+     * Return Schedule list that contains both of stations @param which in turn contains in route @param
+     *
+     * @param route              from {@link schedule.service.impl.RouteServiceImpl#findByStationNames(String...)} )
+     * @param stationOfDeparture
+     * @param stationOfArrival
+     * @return
+     */
     List<Schedule> findScheduleByStations(List<Route> route, String stationOfDeparture, String stationOfArrival);
 
     List<Schedule> findScheduleByStation(Station station);

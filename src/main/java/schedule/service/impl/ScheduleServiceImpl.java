@@ -28,11 +28,11 @@ import java.util.List;
 public class ScheduleServiceImpl implements ScheduleService {
 
 
-    ScheduleDao scheduleDao;
-    ModelMapper modelMapper;
-    TrainDao trainDao;
-    StationDao stationDao;
-    RouteDao routeDao;
+    private ScheduleDao scheduleDao;
+    private ModelMapper modelMapper;
+    private TrainDao trainDao;
+    private StationDao stationDao;
+    private RouteDao routeDao;
     private SessionFactory sessionFactory;
 
     private Session getCurrentSession() {
@@ -147,7 +147,6 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Autowired
-
     public void setModelMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
@@ -159,19 +158,16 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Autowired
-
     public void setStationDao(StationDao stationDao) {
         this.stationDao = stationDao;
     }
 
     @Autowired
-
     public void setRouteDao(RouteDao routeDao) {
         this.routeDao = routeDao;
     }
 
     @Autowired
-
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

@@ -17,10 +17,8 @@ import java.util.List;
 @Transactional
 public class StationServiceImpl implements StationService {
 
-    @Autowired
     private StationDao stationDao;
-    @Autowired
-    ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     @Override
     public Station addStation(Station stationDto) {
@@ -77,5 +75,15 @@ public class StationServiceImpl implements StationService {
             stationNames.add(station.getStationName());
         }
         return stationNames;
+    }
+
+    @Autowired
+    public void setStationDao(StationDao stationDao) {
+        this.stationDao = stationDao;
+    }
+
+    @Autowired
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
     }
 }

@@ -2,7 +2,25 @@ function formSubmit() {
     document.getElementById("logoutForm").submit();
 }
 
+var arrTrain = [];
+var arrTime = [];
+function trainOnTimeSelector(){
+/*    arrTrain.empty();
+    arrTime.empty();*/
+    var train = $("#train");
+    var departure_time = $("#departure_time").val();
+    var index;
+   index = arrTime.indexOf(departure_time);
+   train.empty();
+    train.append(
+        '<option value=\"' + arrTrain[index] + '\">' + arrTrain[index] + '</option>'
+    );
+   // train= arrTrain.get(index);
+}
+
+
 function trainsAndDateSelector() {
+
     var stationsFrom = $("#station_from").val();
     var stationsTo = $("#station_to").val();
     var train = $("#train");
@@ -23,6 +41,8 @@ function trainsAndDateSelector() {
         data: JSON.stringify(stations),
         success: function (trainsAndTime) {
             trainsAndTime.forEach(function (item) {
+                arrTrain.push(item['trainNumber']);
+                arrTime.push(item['departureTime']);
                 train.append(
                     '<option value=\"' + item['trainNumber'] + '\">' + item['trainNumber'] + '</option>'
                 );
@@ -37,8 +57,10 @@ function trainsAndDateSelector() {
     });
 }
 
+
 /*  schedule editor elements*/
 routesPicker();
+
 function routesPicker() {
     var routes = $("#route_picker");
     routes.empty();
@@ -56,11 +78,12 @@ function routesPicker() {
             });
             stationsOnRoute();
         },
-      /*  error: function (response) {
-            alert("Something is wrong!")
-        }*/
+        /*  error: function (response) {
+              alert("Something is wrong!")
+          }*/
     })
 }
+
 function stationsOnRoute() {
     var route = $("#route_picker").val();
     var stationList = $("#stations_list");
@@ -77,12 +100,13 @@ function stationsOnRoute() {
                 )
             });
         },
-     /*   error: function () {
-            alert("Something is wrong!")
-        }*/
+        /*   error: function () {
+               alert("Something is wrong!")
+           }*/
     })
 
 }
+
 trainPicker();
 
 function trainPicker() {
@@ -106,6 +130,7 @@ function trainPicker() {
           }*/
     })
 }
+
 /*var p = document.getElementById("scedule_item") ;
 var length = 1 ;
 function add_schedule() {
@@ -118,7 +143,6 @@ function add_schedule() {
     length++ ;
 
 }*/
-
 
 
 function showRoutePassengersByDate(trainId, dailyRouteId, startTime) {

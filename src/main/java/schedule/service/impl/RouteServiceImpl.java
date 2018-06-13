@@ -19,10 +19,8 @@ import java.util.List;
 @Transactional
 public class RouteServiceImpl implements RouteService {
 
-    @Autowired
     private RouteDao routeDao;
-    @Autowired
-    ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     @Override
     public List<Route> routesList() {
@@ -53,10 +51,10 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public List<Station> stationsList(int routeId) {
-       List<StationEntity> stationEntity = routeDao.stationsOnRoute(routeId);
-       List<Station> stations = new ArrayList<>();
+        List<StationEntity> stationEntity = routeDao.stationsOnRoute(routeId);
+        List<Station> stations = new ArrayList<>();
         for (StationEntity station : stationEntity) {
-            stations.add(modelMapper.map(station,Station.class));
+            stations.add(modelMapper.map(station, Station.class));
         }
         return stations;
     }
@@ -67,7 +65,7 @@ public class RouteServiceImpl implements RouteService {
 
         List<String> stationsNamesList = new ArrayList<>();
         for (StationEntity station : stationsList) {
-            stationsNamesList.add(modelMapper.map(station,Station.class).getStationName());
+            stationsNamesList.add(modelMapper.map(station, Station.class).getStationName());
         }
         return stationsNamesList;
     }
@@ -91,5 +89,15 @@ public class RouteServiceImpl implements RouteService {
             }
         }
         return resultList;
+    }
+
+    @Autowired
+    public void setRouteDao(RouteDao routeDao) {
+        this.routeDao = routeDao;
+    }
+
+    @Autowired
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
     }
 }
