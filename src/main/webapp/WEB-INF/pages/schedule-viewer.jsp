@@ -17,7 +17,7 @@
                                                                                                           class="btn btn-primary"
                                                                                                           value="New schedule"
                                                                                                           onclick="location='scheduleList/add';"/>&#8195;
-                    <input type="submit" class="btn btn-primary" value="New route" onclick="location='';"/> &#8195;
+                    <input type="submit" class="btn btn-primary" value="Send schedule" onclick="location='/schedule/sendMsg';"/> &#8195;
                     <input type="submit" class="btn btn-primary" value="Route list"
                            onclick="location='/schedule/scheduleList/routeList';"/>
                     <input type="submit" class="btn btn-primary" value="Constructor" onclick="location='/schedule/constructor';"/> &#8195;

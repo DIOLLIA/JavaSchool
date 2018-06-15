@@ -13,6 +13,7 @@ import schedule.dao.api.TrainDao;
 import schedule.entity.RouteEntity;
 import schedule.entity.ScheduleEntity;
 import schedule.entity.StationEntity;
+import schedule.messenger.SimpleMessageSender;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Station;
@@ -34,6 +35,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     private StationDao stationDao;
     private RouteDao routeDao;
     private SessionFactory sessionFactory;
+    private SimpleMessageSender simpleMessageSender;
 
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
@@ -120,6 +122,12 @@ public class ScheduleServiceImpl implements ScheduleService {
         scheduleDao.create(scheduleEntity);
     }
 
+    @Override
+    public void send(String msg) {
+
+        simpleMessageSender.send(msg);
+    }
+
 /*    @Override
     public void addSchedule(Schedule schedule) {
         Schedule schedule2 = new Schedule();
@@ -170,5 +178,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    @Autowired
+    public void setSimpleMessageSender(SimpleMessageSender simpleMessageSender) {
+        this.simpleMessageSender = simpleMessageSender;
     }
 }

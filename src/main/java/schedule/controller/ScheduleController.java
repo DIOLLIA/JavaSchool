@@ -219,6 +219,15 @@ public class ScheduleController extends BaseController {
 
         return modelAndView;
     }
+    @RequestMapping(value = "/sendMsg")
+    public ModelAndView messageToQueue() {
+        String message = "message from schedule";
+    scheduleService.send(message);
+        ModelAndView modelAndView = new ModelAndView("schedule-viewer");
+
+        return modelAndView;
+    }
+
 
     @Autowired
     public void setScheduleService(ScheduleService scheduleService) {
