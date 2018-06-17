@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import schedule.entity.StationEntity;
 import schedule.model.Station;
 import schedule.service.api.StationService;
 
@@ -27,15 +26,6 @@ public class StationController extends BaseController {
         List<Station> stations = stationService.getStations();
         modelAndView.addObject("stations", stations);
         modelAndView.addObject("pageTitle", getMessage("page.title.stations-list", locale));
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView addStationPage(Locale locale) {
-        ModelAndView modelAndView = new ModelAndView("add-station");
-        modelAndView.addObject("station", new StationEntity());
-        modelAndView.addObject("pageTitle", getMessage("page.title.add-station", locale));
 
         return modelAndView;
     }

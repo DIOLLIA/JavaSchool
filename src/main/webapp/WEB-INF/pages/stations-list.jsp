@@ -1,5 +1,13 @@
 <%@ include file="header-admin.jsp" %>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/map.css">
+
+<!-- Replace the value of the key parameter with your own API key. -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs1aa0zAhhVFSu6u9iROPYC0zABdX64b4&language=en&libraries=places&callback=initialize"
+        async defer></script>
+
+<script src="${pageContext.request.contextPath}/resources/js/stations.js"></script>
 
 <section class="probootstrap-cover overflow-hidden relative"
          style="background-image: url('/resources/images/img_5.jpg');" data-stellar-background-ratio="0.5"
@@ -10,10 +18,9 @@
             <div class="col-md probootstrap-animate">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">
                     <spring:message code="admin.header.stations"/> &#8195;
-                    <input type="submit"
+                    <input id="add-station" type="submit"
                            class="btn btn-primary"
-                           value="<spring:message code="add-station-button"/>"
-                           onclick="location='add';"/>
+                           value="<spring:message code="add-station-button"/>"/>
                 </h2>
                 <h2>${message}</h2>
                 <table class="table_price" border="0px" cellpadding="" cellspacing="0">
@@ -41,9 +48,32 @@
             </div>
         </div>
     </div>
-
-</section>
-
+    <div id="modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add new station</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="pac-card" id="pac-card">
+                        <div id="pac-container">
+                            <input id="pac-input" type="text" placeholder="Enter a location">
+                        </div>
+                        <div>
+                            <button id="add-station-btn" data-role="button">Add</button>
+                        </div>
+                    </div>
+                    <div id="map-canvas"></div>
+                    <div id="infowindow-content">
+                        <img src="" width="16" height="16" id="place-icon">
+                        <span id="place-name" class="title"></span><br>
+                        <span id="place-address"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <%@ include file="footer.jsp" %>
-
-

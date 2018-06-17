@@ -25,12 +25,6 @@
     </div>
 </footer>
 
-<script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
-
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.waypoints.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.easing.1.3.js"></script>
