@@ -1,14 +1,12 @@
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
+function initialize() {
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
         center: {
-            lat: 59.903507,
-            lng: 30.511574
+            lat: 59.93428,
+            lng: 30.33509
         },
-        zoom: 12
+        zoom: 13
     });
+
     var card = document.getElementById('pac-card');
     var input = document.getElementById('pac-input');
     var options = {
@@ -51,7 +49,7 @@ function initMap() {
             map.fitBounds(place.geometry.viewport);
         } else {
             map.setCenter(place.geometry.location);
-            map.setZoom(8); // Why 17? Because it looks good.
+            map.setZoom(17); // Why 17? Because it looks good.
         }
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
@@ -70,33 +68,46 @@ function initMap() {
         infowindowContent.children['place-address'].textContent = address;
         infowindow.open(map, marker);
     });
-    window.onload = function () {
-        document.getElementById("add-station-btn").addEventListener("click", function () {
+
+    document.getElementById("add-station-btn")
+        .addEventListener("click", function () {
             addStation(autocomplete);
         });
-    };
 }
 
+window.onload = function () {
+    $('#add-station').on('click', function () {
+        $("#modal").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    });
+};
+
 function addStation(autocomplete) {
-    var place = autocomplete.getPlace(),
-        lat = place.geometry.location.lat(),
-        lng = place.geometry.location.lng(),
-        stationName = place.name;
+    var place = autocomplete.getPlace();
 
-    $.ajax({
-        type: 'GET',
-        url: '/add-station/',
-        data: {
-            placeName: stationName,
-            lat: lat,
-            lng: lng
-        },
-        success: function () {
-            alert("Station was successfully created.")
-        },
-        error: function (e) {
-            //todo add message try again later or contact technical support
-        }
-    })
+    if (place) {
+        var lat = place.geometry.location.lat(),
+            lng = place.geometry.location.lng(),
+            placeName = place.name;
 
+        $.ajax({
+            type: 'GET',
+            url: '/add-station/',
+            data: {
+                placeName: placeName,
+                lat: lat,
+                lng: lng
+            },
+            success: function () {
+                alert("Station was successfully created.")
+            },
+            error: function (e) {
+                //todo add message try again later or contact technical support
+            }
+        })
+    } else{
+        alert("Type station name");
+    }
 }
