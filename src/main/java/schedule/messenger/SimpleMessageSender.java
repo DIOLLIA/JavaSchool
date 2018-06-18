@@ -28,7 +28,7 @@ public class SimpleMessageSender implements MessageSender {
         jmsTemplate.send(new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
                 MapMessage mapMessage = session.createMapMessage();
-                mapMessage.setString("Station","devyatkino");
+                mapMessage.setString("station","devyatkino");
                 mapMessage.setInt("train",2);
                 mapMessage.setInt("dailyId",1);
                 mapMessage.setString("depTime","19:00");
