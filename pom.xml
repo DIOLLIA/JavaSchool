@@ -17,6 +17,7 @@
         <javax.servlet-api-version>4.0.0</javax.servlet-api-version>
         <mysql.connector.version>5.1.21</mysql.connector.version>
         <jackson-core.version>2.9.5</jackson-core.version>
+        <aspectjweaver.version>1.5.4</aspectjweaver.version>
         <activemq-spring.version>5.15.4</activemq-spring.version>
         <maven-war-plugin.version>3.2.0</maven-war-plugin.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
@@ -172,6 +173,20 @@
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-spring</artifactId>
             <version>${activemq-spring.version}</version>
+        </dependency>
+
+        <!-- ASPECT -->
+        <!--AspectJ dependencies-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.6</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.6</version>
         </dependency>
     </dependencies>
 
