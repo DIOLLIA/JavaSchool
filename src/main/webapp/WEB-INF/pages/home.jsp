@@ -2,6 +2,9 @@
 
 <%@ include file="header.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
+
+<script src="${pageContext.request.contextPath}/resources/js/stations.js"></script>
+
 <section class="probootstrap-cover overflow-hidden relative"
          style="background-image: url('/resources/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
          id="section-home">
@@ -94,7 +97,7 @@
                             <th width="10%"><spring:message code="home.btn.train-number"/></th>
                             <th width="10%"><spring:message code="common.label.departure-time"/></th>
                             <th width="10%"><spring:message code="common.label.arrival-time"/></th>
-                            <th width="10%"><spring:message code="common.label.arrival-action"/></th>
+                            <th width="15%"><spring:message code="common.label.arrival-action"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -107,14 +110,47 @@
                                 <td><joda:format pattern="HH:mm" value="${scheduleItem.arrivalTime}"/></td>
                                 <td><a href="${pageContext.request.contextPath}/ticket/buy/">
                                     <spring:message code="common.btn.buy-ticket"/></a>
+                                  <%--  <input id="add-station" type="submit"
+                                                  class="btn btn-primary"
+                                                  value="<spring:message code="common.label.route"/>"/>--%>
+                                          <a id="add-station">
+                                                          <spring:message code="common.label.route"/></a>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </c:if>
+        </div>
+    </div>
 
 
+    <div id="modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add new station</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="pac-card" id="pac-card">
+                        <div id="pac-container">
+                            <input id="pac-input" type="text" placeholder="Enter a location">
+                        </div>
+                        <div>
+                            <button id="add-station-btn" data-role="button">Add</button>
+                        </div>
+                    </div>
+                    <div id="map-canvas"></div>
+                    <div id="infowindow-content">
+                        <img src="" width="16" height="16" id="place-icon">
+                        <span id="place-name" class="title"></span><br>
+                        <span id="place-address"></span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
