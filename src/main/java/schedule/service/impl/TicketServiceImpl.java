@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import schedule.controller.model.TicketItem;
-import schedule.dao.impl.TicketDaoImpl;
+import schedule.dao.api.TicketDao;
 import schedule.entity.TicketEntity;
 import schedule.entity.TrainEntity;
 import schedule.entity.UserEntity;
@@ -28,7 +28,7 @@ public class TicketServiceImpl implements TicketService {
 
 
     private ModelMapper modelMapper;
-    private TicketDaoImpl ticketDao;
+    private TicketDao ticketDao;
     private TrainService trainService;
     private ScheduleService scheduleService;
     private RouteService routeService;
@@ -255,7 +255,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Autowired
-    public void setTicketDao(TicketDaoImpl ticketDao) {
+    public void setTicketDao(TicketDao ticketDao) {
         this.ticketDao = ticketDao;
     }
 

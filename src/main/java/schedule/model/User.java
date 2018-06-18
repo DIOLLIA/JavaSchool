@@ -5,21 +5,15 @@ import org.joda.time.LocalDate;
 public class User {
 
     private int id;
-
     // @Size(min = 2, max = 20, message = "Name should not be less than 2 symbols")
     private String name;
-
     //@Size(min = 2, max = 50, message = "Surname should not be less than 2 symbols")
     private String surname;
-
     //@DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDay;
-
     private Role role;
-
     // @Size(min = 6, max = 30, message = "Password should not be less than 6 symbols")
     private String password;
-
     // @Email(message = "Email should be valid")
     private String email;
 
@@ -77,5 +71,18 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", birthDay=" + birthDay +
+                ", role=" + role +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Route {
+
     private int id;
     private String routeName;
     private List<Station> stationsList;
-
 
     public int getId() {
         return id;
@@ -31,5 +31,14 @@ public class Route {
 
     public void setStationsList(ArrayList<Station> stationsList) {
         this.stationsList = stationsList;
+    }
+
+    @Override
+    public String toString() {
+        return "Route{" +
+                "id=" + id +
+                ", routeName='" + routeName + '\'' +
+                ", stationsList=" + stationsList +
+                '}';
     }
 }

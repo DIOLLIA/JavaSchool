@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "schedule")
 public class ScheduleEntity {
+
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -24,7 +25,6 @@ public class ScheduleEntity {
     @Column(name = "departure_time")
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
     private LocalTime departureTime;
-
 
     @ManyToOne(cascade = CascadeType.MERGE)
    // @OnDelete(action = OnDeleteAction.CASCADE) //todo не работает так как данная сущность есть в нескольких табах
@@ -110,5 +110,20 @@ public class ScheduleEntity {
 
     public void setRouteStationIndex(int routeStationIndex) {
         this.routeStationIndex = routeStationIndex;
+    }
+
+    @Override
+    public String toString() {
+        return "ScheduleEntity{" +
+                "id=" + id +
+                ", routeDailyId=" + routeDailyId +
+                ", routeStationIndex=" + routeStationIndex +
+                ", arrivalTime=" + arrivalTime +
+                ", departureTime=" + departureTime +
+                ", stationName=" + stationName +
+                ", trainNumber=" + trainNumber +
+                ", timeInterval=" + timeInterval +
+                ", routeName=" + routeName +
+                '}';
     }
 }

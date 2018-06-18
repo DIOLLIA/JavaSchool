@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "trains")
 public class TrainEntity {
+
     @Id
     @Column(name = "id")
     @GeneratedValue
@@ -41,4 +42,12 @@ public class TrainEntity {
         this.seats = seats;
     }
 
+    @Override
+    public String toString() {
+        return "TrainEntity{" +
+                "id=" + id +
+                ", numberOfTrain=" + numberOfTrain +
+                ", seats=" + seats +
+                '}';
+    }
 }

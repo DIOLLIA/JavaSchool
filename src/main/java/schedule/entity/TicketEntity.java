@@ -66,4 +66,15 @@ public class TicketEntity {
     public void setDepartureSchedule(ScheduleEntity departureSchedule) {
         this.departureSchedule = departureSchedule;
     }
+
+    @Override
+    public String toString() {
+        return "TicketEntity{" +
+                "id=" + id +
+                ", departureDateTime=" + departureDateTime +
+                ", trainEntity=" + trainEntity +
+                ", userEntity=" + userEntity +
+                ", departureSchedule=" + departureSchedule +
+                '}';
+    }
 }

@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "stations")
 public class StationEntity {
+
     @Id
     @Column(name = "id")
     @GeneratedValue
@@ -49,5 +50,15 @@ public class StationEntity {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return "StationEntity{" +
+                "id=" + id +
+                ", stationName='" + stationName + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
     }
 }

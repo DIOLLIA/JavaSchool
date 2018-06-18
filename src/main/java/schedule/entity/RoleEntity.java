@@ -14,7 +14,6 @@ public class RoleEntity {
     @Column(name = "role")
     private String role;
 
-
     public int getId() {
         return id;
     }
@@ -31,7 +30,13 @@ public class RoleEntity {
         this.role = roleAdmin;
     }
 
-
+    @Override
+    public String toString() {
+        return "RoleEntity{" +
+                "id=" + id +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }
 
 

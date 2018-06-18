@@ -5,13 +5,9 @@ import org.joda.time.LocalDateTime;
 public class Ticket {
 
     private int id;
-
     private User user;
-
     private Train train;
-
     private LocalDateTime departureDateTime;
-
     private Schedule departureSchedule;
 
     public int getId() {
@@ -52,5 +48,16 @@ public class Ticket {
 
     public void setDepartureSchedule(Schedule departureSchedule) {
         this.departureSchedule = departureSchedule;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", user=" + user +
+                ", train=" + train +
+                ", departureDateTime=" + departureDateTime +
+                ", departureSchedule=" + departureSchedule +
+                '}';
     }
 }

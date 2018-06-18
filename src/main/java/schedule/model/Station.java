@@ -1,12 +1,10 @@
 package schedule.model;
 
 public class Station {
+
     private int id;
-
     private String stationName;
-
     private long latitude;
-
     private long longitude;
 
     public int getId() {
@@ -39,5 +37,15 @@ public class Station {
 
     public void setLongitude(long longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return "Station{" +
+                "id=" + id +
+                ", stationName='" + stationName + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
     }
 }

@@ -4,9 +4,7 @@ package schedule.model;
 public class Train {
 
     private int id;
-
     private int numberOfTrain;
-
     private int seats;
 
     public int getId() {
@@ -31,5 +29,14 @@ public class Train {
 
     public void setSeats(int seats) {
         this.seats = seats;
+    }
+
+    @Override
+    public String toString() {
+        return "Train{" +
+                "id=" + id +
+                ", numberOfTrain=" + numberOfTrain +
+                ", seats=" + seats +
+                '}';
     }
 }

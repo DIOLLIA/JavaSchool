@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users"/*, uniqueConstraints = {@UniqueConstraint(columnNames = "email")}*/)
 public class UserEntity {
+
     @Id
     @GeneratedValue
     private int id;

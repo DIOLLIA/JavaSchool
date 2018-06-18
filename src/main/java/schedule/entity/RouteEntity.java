@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "routes")
 public class RouteEntity {
+
     @Id
     @Column(name = "id")
     @GeneratedValue
@@ -48,5 +49,14 @@ public class RouteEntity {
 
     public void setStationsList(ArrayList<StationEntity> stationsList) {
         this.stationsList = stationsList;
+    }
+
+    @Override
+    public String toString() {
+        return "RouteEntity{" +
+                "id=" + id +
+                ", routeName='" + routeName + '\'' +
+                ", stationsList=" + stationsList +
+                '}';
     }
 }

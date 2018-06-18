@@ -4,20 +4,15 @@ package schedule.model;
 import org.joda.time.LocalTime;
 
 public class Schedule {
-    private int id;
 
+    private int id;
     private int routeDailyId;
     private int routeStationIndex;
     private LocalTime arrivalTime;
-
     private LocalTime departureTime;
-
     private Station stationName;
-
     private Train trainNumber;
-
     private Integer timeInterval;
-
     private Route routeName;
 
     public int getId() {
@@ -90,5 +85,20 @@ public class Schedule {
 
     public void setRouteDailyId(int routeDailyId) {
         this.routeDailyId = routeDailyId;
+    }
+
+    @Override
+    public String toString() {
+        return "Schedule{" +
+                "id=" + id +
+                ", routeDailyId=" + routeDailyId +
+                ", routeStationIndex=" + routeStationIndex +
+                ", arrivalTime=" + arrivalTime +
+                ", departureTime=" + departureTime +
+                ", stationName=" + stationName +
+                ", trainNumber=" + trainNumber +
+                ", timeInterval=" + timeInterval +
+                ", routeName=" + routeName +
+                '}';
     }
 }
