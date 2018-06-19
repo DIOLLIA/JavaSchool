@@ -43,5 +43,22 @@ public class ScheduleDaoImpl extends GeneralCrudDaoImpl<ScheduleEntity> implemen
         // query.setParameter("departureTime", departureTime);
         return (ScheduleEntity) query.uniqueResult();
     }
+
+    @Override
+    public List<ScheduleEntity> getScheduleByDidAfterOrderNumber(int orderNumber, int routeDailyId) {
+        Query query = getCurrentSession().createQuery("FROM ScheduleEntity sch WHERE sch.routeStationIndex >=:orderNumber AND sch.routeDailyId =:routeDailyId");
+
+        query.setParameter("orderNumber", orderNumber);
+        query.setParameter("routeDailyId", routeDailyId);
+
+        return query.list();
+    }
+
+    @Override
+    public List<ScheduleEntity> getAll() {
+        Query query = getCurrentSession().createQuery("FROM ScheduleEntity sch ORDER BY routeDailyId ASC, routeStationIndex ASC");
+
+        return query.list();
+    }
 }
 

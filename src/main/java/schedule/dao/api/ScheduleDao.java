@@ -15,4 +15,5 @@ public interface ScheduleDao extends GeneralCrudDao<ScheduleEntity> {
 
     ScheduleEntity findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime);
 
+    List<ScheduleEntity> getScheduleByDidAfterOrderNumber(int numberInOrder, int dailyRoute);
 }

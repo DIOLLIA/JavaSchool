@@ -180,13 +180,25 @@ public class ScheduleController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/scheduleList/routeList/{route.id}")
+    @RequestMapping(value = "/scheduleList/routeList/{route.id}", method = RequestMethod.GET)
     public ModelAndView viewRoute(Locale locale, @PathVariable(value = "route.id") int routeId) {
         List<Station> routeStationsList = routeService.stationsList(routeId);
 
         ModelAndView modelAndView = new ModelAndView("stations-of-route");
         modelAndView.addObject("stations", routeStationsList);
-        modelAndView.addObject("message", getMessage("message.train.delete.success", locale));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/scheduleList/routeList/{route.id}", method = RequestMethod.POST)
+    public ModelAndView addStationOnRoute(Locale locale, @PathVariable(value = "route.id") int routeId,
+                                          @RequestParam(name = "station") String station) {
+        routeService.addStationToRoute(routeId, stationService.findByName(station));
+
+        List<Station> routeStationsList = routeService.stationsList(routeId);
+
+        ModelAndView modelAndView = new ModelAndView("stations-of-route");
+        modelAndView.addObject("stations", routeStationsList);
+        modelAndView.addObject("message", getMessage("message.stations.create.success", locale));
 
         return modelAndView;
     }
@@ -194,7 +206,6 @@ public class ScheduleController extends BaseController {
     @RequestMapping(value = "/constructor")
     public ModelAndView scheduleConstructor(Locale locale) {
         List<Schedule> schedule = scheduleService.getSchedule();
-
         ModelAndView modelAndView = new ModelAndView("schedule-editor");
         modelAndView.addObject("schedule", schedule);
         modelAndView.addObject("pageTitle", getMessage("page.title.schedule.viewer", locale));
@@ -219,15 +230,15 @@ public class ScheduleController extends BaseController {
 
         return modelAndView;
     }
+
     @RequestMapping(value = "/sendMsg")
     public ModelAndView messageToQueue() {
         String message = "message from schedule";
-    scheduleService.send(message);
+        scheduleService.send(message);
         ModelAndView modelAndView = new ModelAndView("schedule-viewer");
 
         return modelAndView;
     }
-
 
     @Autowired
     public void setScheduleService(ScheduleService scheduleService) {
