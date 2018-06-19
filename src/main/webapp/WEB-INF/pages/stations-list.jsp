@@ -16,7 +16,9 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate"> <input class="btn btn-primary"
+                                                                                           type="submit" value="<<"
+                                                                                           onclick="location='/index';"/>
                     <spring:message code="admin.header.stations"/> &#8195;
                     <input id="add-station" type="submit"
                            class="btn btn-primary"

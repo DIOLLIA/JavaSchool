@@ -110,9 +110,6 @@
                                 <td><joda:format pattern="HH:mm" value="${scheduleItem.arrivalTime}"/></td>
                                 <td><a href="${pageContext.request.contextPath}/ticket/buy/">
                                     <spring:message code="common.btn.buy-ticket"/></a>
-                                  <%--  <input id="add-station" type="submit"
-                                                  class="btn btn-primary"
-                                                  value="<spring:message code="common.label.route"/>"/>--%>
                                           <a id="add-station">
                                                           <spring:message code="common.label.route"/></a>
                             </tr>

@@ -9,11 +9,10 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-
                 <h5 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
                         style="color:#32CD32;">Find user by e-mail or Surname</span></h5>
                 <form:form method="POST" modelAttribute="userSearch"
-                           action="${pageContext.request.contextPath}/user/findUser">
+                           action="${pageContext.request.contextPath}list">
 
                     <div class="row mb-3">
                         <div class="col-md-3">
@@ -28,6 +27,10 @@
                                        class="btn btn-primary btn-block"
                                        style="width: 50%;">
                             </div>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="submit" class="btn btn-primary" value="Show all"
+                                   onclick="location='list';"/>
                         </div>
                         <div class="col-md-3">
                             <input type="submit" class="btn btn-primary" value="Add new user"
@@ -48,7 +51,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="user" items="${users}">
+                    <c:forEach var="user" items="${user}">
                         <tr>
                             <td>${user.name}</td>
                             <td>${user.surname}</td>

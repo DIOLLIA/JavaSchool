@@ -1,8 +1,8 @@
 <%@ include file="header.jsp" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/tables.css">
 
 <section class="probootstrap-cover overflow-hidden relative"
-         style="background-image: url('/resources/images/img_5.jpg');" data-stellar-background-ratio="0.5"
+         style="background-image: url('/images/img_5.jpg');" data-stellar-background-ratio="0.5"
          id="section-home">
     <div class="overlay"></div>
     <div class="container">

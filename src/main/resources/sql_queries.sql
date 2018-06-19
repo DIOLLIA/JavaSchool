@@ -1,36 +1,34 @@
-INSERT INTO railways.stations (id, station_name, latitude, longitude) VALUES (1, 'devyatkino', 1, 2);
-INSERT INTO railways.stations (id, station_name, latitude, longitude) VALUES (2, 'lesnaya', 1, 2);
-INSERT INTO railways.stations (id, station_name, latitude, longitude) VALUES (3, 'pushkinskaya', 1, 2);
-INSERT INTO railways.stations (id, station_name, latitude, longitude) VALUES (4, 'veteranov', 1, 2);
-INSERT INTO railways.stations (id, station_name, latitude, longitude) VALUES (5, 'komenda', 1, 2);
-INSERT INTO railways.stations (id, station_name, latitude, longitude) VALUES (6, 'central station', 1, 2);
-INSERT INTO railways.stations (id, station_name, latitude, longitude) VALUES (7, 'mejdunarodnaya', 1, 2);
-INSERT INTO railways.stations (id, station_name, latitude, longitude) VALUES (8, 'kupchino', 1, 2);
-INSERT INTO railways.stations (id, station_name, latitude, longitude) VALUES (9, 'dibenko', 1, 2);
-INSERT INTO railways.stations (id, station_name, latitude, longitude) VALUES (10, 'ribatskoe', 1, 2);
-INSERT INTO railways.stations (id, station_name, latitude, longitude) VALUES (11, 'primorskaya', 1, 2);
+INSERT INTO railways.stations (id, latitude, longitude, station_name) VALUES (1, 60.0479667, 30.44874089999996, 'Murino');
+INSERT INTO railways.stations (id, latitude, longitude, station_name) VALUES (2, 60.15537080000001, 30.530654099999992, 'Toksovo');
+INSERT INTO railways.stations (id, latitude, longitude, station_name) VALUES (3, 59.9342802, 30.335098600000038, 'Saint Petersburg');
+INSERT INTO railways.stations (id, latitude, longitude, station_name) VALUES (4, 59.8065675, 30.396003199999996, 'Shushary');
+INSERT INTO railways.stations (id, latitude, longitude, station_name) VALUES (5, 60.10831379999999, 30.28637249999997, 'Yukki');
+INSERT INTO railways.stations (id, latitude, longitude, station_name) VALUES (6, 59.99183900000001, 30.158335699999952, 'Lakhta');
+INSERT INTO railways.stations (id, latitude, longitude, station_name) VALUES (7, 59.8490261, 30.03430860000003, 'Strelna');
+INSERT INTO railways.stations (id, latitude, longitude, station_name) VALUES (8, 59.9042085, 30.51012579999997, 'Kudrovo');
+INSERT INTO railways.stations (id, latitude, longitude, station_name) VALUES (9, 60.0098612, 30.660640100000023, 'Vsevolozhsk');
 
-INSERT INTO railways.routes (id, route_name) VALUES (1, 'devyatkino-veteranov');
-INSERT INTO railways.routes (id, route_name) VALUES (2, 'dibenko-central station');
-INSERT INTO railways.routes (id, route_name) VALUES (3, 'primorskaya-ribatskoe');
-INSERT INTO railways.routes (id, route_name) VALUES (4, 'kupchino-central station');
-INSERT INTO railways.routes (id, route_name) VALUES (5, 'komenda-mejdunarodnaya');
-INSERT INTO railways.routes (id, route_name) VALUES (6, 'veteranov-devyatkino');
-INSERT INTO railways.routes (id, route_name) VALUES (7, 'central station-dibenko');
-INSERT INTO railways.routes (id, route_name) VALUES (8, 'ribatskoe-primorskaya');
-INSERT INTO railways.routes (id, route_name) VALUES (9, 'central station-kupchino');
-INSERT INTO railways.routes (id, route_name) VALUES (10, 'komenda-mejdunarodnaya');
+INSERT INTO railways.routes (id, route_name) VALUES (1, 'Toksovo-Saint Petersburg');
+INSERT INTO railways.routes (id, route_name) VALUES (2, 'Yukki-Saint Petersburg');
+INSERT INTO railways.routes (id, route_name) VALUES (3, 'Strelna-Saint Petersburg');
+INSERT INTO railways.routes (id, route_name) VALUES (4, 'Vsevolozhsk-Saint Petersburg');
+INSERT INTO railways.routes (id, route_name) VALUES (5, 'Murino-Strelna');
+INSERT INTO railways.routes (id, route_name) VALUES (6, 'Toksovo-Vsevolozhsk');
+INSERT INTO railways.routes (id, route_name) VALUES (7, 'Shushary-Yukki');
+INSERT INTO railways.routes (id, route_name) VALUES (8, 'Vsevolozhsk-Yukki');
 
-INSERT INTO railways.trains (id, train_number, seats) VALUES (1, 0, 100);
-INSERT INTO railways.trains (id, train_number, seats) VALUES (2, 111, 100);
-INSERT INTO railways.trains (id, train_number, seats) VALUES (3, 222, 100);
-INSERT INTO railways.trains (id, train_number, seats) VALUES (4, 333, 100);
-INSERT INTO railways.trains (id, train_number, seats) VALUES (5, 444, 100);
-INSERT INTO railways.trains (id, train_number, seats) VALUES (6, 555, 100);
-INSERT INTO railways.trains (id, train_number, seats) VALUES (7, 666, 100);
-INSERT INTO railways.trains (id, train_number, seats) VALUES (8, 777, 100);
-INSERT INTO railways.trains (id, train_number, seats) VALUES (9, 888, 100);
-INSERT INTO railways.trains (id, train_number, seats) VALUES (10, 999, 100);
+
+
+INSERT INTO railways.trains (id, train_number, seats) VALUES (1, 1, 100);
+INSERT INTO railways.trains (id, train_number, seats) VALUES (2, 2, 100);
+INSERT INTO railways.trains (id, train_number, seats) VALUES (3, 2, 100);
+INSERT INTO railways.trains (id, train_number, seats) VALUES (4, 3, 100);
+INSERT INTO railways.trains (id, train_number, seats) VALUES (5, 4, 100);
+INSERT INTO railways.trains (id, train_number, seats) VALUES (6, 5, 100);
+INSERT INTO railways.trains (id, train_number, seats) VALUES (7, 6, 100);
+INSERT INTO railways.trains (id, train_number, seats) VALUES (8, 7, 100);
+INSERT INTO railways.trains (id, train_number, seats) VALUES (9, 8, 100);
+INSERT INTO railways.trains (id, train_number, seats) VALUES (10,9, 100);
 
 INSERT INTO railways.routes_stations (routes_id, stationsList_id) VALUES (1, 1);
 INSERT INTO railways.routes_stations (routes_id, stationsList_id) VALUES (1, 2);

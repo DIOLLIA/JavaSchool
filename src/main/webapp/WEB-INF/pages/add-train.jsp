@@ -7,7 +7,9 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate"><spring:message code="page.title.add-train"/></h2>
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate"> <input class="btn btn-primary"
+                                                                                           type="submit" value="<<"
+                                                                                           onclick="location='list';"/> <spring:message code="page.title.add-train"/></h2>
                 <form:form method="POST" modelAttribute="train" action="${pageContext.request.contextPath}/train/add">
                     <table class="table_add" border="0px" cellpadding="" cellspacing="0">
                         <tbody>

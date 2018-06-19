@@ -8,11 +8,22 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Stations &#8195; <input type="submit"
+
+
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">  <input class="btn btn-primary"
+                                                                                            type="submit" value="<<"
+                                                                                            onclick="location='./';"/> Stations &#8195; <input type="submit"
                                                                                                            class="btn btn-primary"
-                                                                                                           value="Add station"
+                                                                                                           value="+"
                                                                                                            onclick="location='add';"/>
+                    <form:form method="POST" modelAttribute="route"
+                               action="${pageContext.request.contextPath}">
+                    <select class="js-example-basic-single js-states form-control"
+                            id="station_from" name="station"
+                            style="width: 20%;">
+                    </select>
                 </h2>
+                </form:form>
                 <h2>${message}</h2>
                 <table class="table_price" border="0px" cellpadding="" cellspacing="0">
                     <thead>

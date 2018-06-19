@@ -92,6 +92,9 @@
                             <div class="form-group">
                                 <label for="birthDay" style="width: 100%;font-size: 120%"> &nbsp;</label>
                                 <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Create">
+                                <input class="btn btn-primary"
+                                       type="submit" value="<<"
+                                       onclick="location='list';"/>
                             </div>
                         </div>
                     </div>
