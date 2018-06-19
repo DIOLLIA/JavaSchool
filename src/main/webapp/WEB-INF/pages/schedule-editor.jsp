@@ -13,9 +13,12 @@
                 <div>
                     <h2 class="display-8 probootstrap-section-heading">${message}</h2>
                 </div>
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Schedule &#8195;
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">      <input type="submit"
+                                                                                                class="btn btn-primary"
+                                                                                                value="<<"
+                                                                                                onclick="location='./scheduleList';"/> Schedule &#8195;
                     <form:form method="POST" modelAttribute="schedule"
-                               action="${pageContext.request.contextPath}">
+                               action="/schedule/constructor">
                     <input type="submit" class="btn btn-primary" value="+"/>
                 </h2>
                 <div class="row align-items-center">

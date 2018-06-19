@@ -12,12 +12,13 @@
 
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">  <input class="btn btn-primary"
                                                                                             type="submit" value="<<"
-                                                                                            onclick="location='./';"/> Stations &#8195; <input type="submit"
-                                                                                                           class="btn btn-primary"
-                                                                                                           value="+"
-                                                                                                           onclick="location='add';"/>
+                                                                                            onclick="location='./';"/> Stations &#8195;
                     <form:form method="POST" modelAttribute="route"
                                action="${pageContext.request.contextPath}">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="+"
+                           onclick="location='add';"/>
                     <select class="js-example-basic-single js-states form-control"
                             id="station_from" name="station"
                             style="width: 20%;">

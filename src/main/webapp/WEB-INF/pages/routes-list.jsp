@@ -10,7 +10,7 @@
             <div class="col-md probootstrap-animate">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate"><input class="btn btn-primary"
                                                                                           type="submit" value="<<"
-                                                                                          onclick="location='./';"/>
+                                                                                          onclick="location='/schedule/scheduleList';"/>
                     Routes &#8195; <input type="submit" class="btn btn-primary" value="Add route"
                                                   onclick="location='addRoute';"/>
                 </h2>
