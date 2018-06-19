@@ -32,6 +32,8 @@ public class UserEntity {
     @ManyToOne
     private RoleEntity role;
 
+    private boolean isEnabled = true;
+
     public int getId() {
         return id;
     }
@@ -88,16 +90,25 @@ public class UserEntity {
         this.role = role;
     }
 
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", birthDaY='" + birthDay + '\'' +
+                ", birthDay=" + birthDay +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
+                ", role=" + role +
+                ", isEnabled=" + isEnabled +
                 '}';
     }
 }

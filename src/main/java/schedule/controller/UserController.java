@@ -24,12 +24,12 @@ public class UserController extends BaseController {
     private UserService userService;
     private PasswordEncoder passwordEncoder;
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView listOfUsers() {
         ModelAndView modelAndView = new ModelAndView("users-list");
 
         List<User> users = userService.getUsers();
-        modelAndView.addObject("users", users);
+        modelAndView.addObject("user", users);
 
         return modelAndView;
     }
@@ -95,13 +95,13 @@ public class UserController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/findUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
     public ModelAndView findByLoginOrSurname(@RequestParam("loginOrSurname") String loginOrSurname,
                                              Locale locale) {
         List<User> list = userService.findByLoginOrSurname(loginOrSurname);
         ArrayList<User> searchResult = new ArrayList<>(list);
         String elementForSearch;
-        ModelAndView modelAndView = new ModelAndView("users-search-result");
+        ModelAndView modelAndView = new ModelAndView("users-list");
         if (loginOrSurname.contains("@")) {
             elementForSearch = "login";
         } else {
