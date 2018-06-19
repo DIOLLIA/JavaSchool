@@ -12,7 +12,7 @@ public class Schedule {
     private LocalTime departureTime;
     private Station stationName;
     private Train trainNumber;
-    private Integer timeInterval;
+    private Boolean isEnable = true;
     private Route routeName;
 
     public int getId() {
@@ -71,12 +71,12 @@ public class Schedule {
         this.routeName = routeName;
     }
 
-    public Integer getTimeInterval() {
-        return timeInterval;
+    public Boolean getEnable() {
+        return isEnable;
     }
 
-    public void setTimeInterval(Integer timeInterval) {
-        this.timeInterval = timeInterval;
+    public void setEnable(Boolean enable) {
+        isEnable = enable;
     }
 
     public int getRouteDailyId() {
@@ -97,7 +97,7 @@ public class Schedule {
                 ", departureTime=" + departureTime +
                 ", stationName=" + stationName +
                 ", trainNumber=" + trainNumber +
-                ", timeInterval=" + timeInterval +
+                ", isEnable=" + isEnable +
                 ", routeName=" + routeName +
                 '}';
     }

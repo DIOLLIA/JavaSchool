@@ -27,14 +27,14 @@ public class ScheduleEntity {
     private LocalTime departureTime;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-   // @OnDelete(action = OnDeleteAction.CASCADE) //todo не работает так как данная сущность есть в нескольких табах
+    // @OnDelete(action = OnDeleteAction.CASCADE) //todo не работает так как данная сущность есть в нескольких табах
     private StationEntity stationName;
 
     @ManyToOne(cascade = CascadeType.MERGE)
 //    @OnDelete(action = OnDeleteAction.CASCADE)
     private TrainEntity trainNumber;
 
-    private Integer timeInterval;
+    private Boolean isEnable = true;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     // @JoinColumn(name = "route_id")
@@ -88,12 +88,12 @@ public class ScheduleEntity {
         this.routeName = routeName;
     }
 
-    public Integer getTimeInterval() {
-        return timeInterval;
+    public boolean isEnable() {
+        return isEnable;
     }
 
-    public void setTimeInterval(Integer timeInterval) {
-        this.timeInterval = timeInterval;
+    public void setEnable(boolean enable) {
+        isEnable = enable;
     }
 
     public int getRouteDailyId() {
@@ -122,7 +122,7 @@ public class ScheduleEntity {
                 ", departureTime=" + departureTime +
                 ", stationName=" + stationName +
                 ", trainNumber=" + trainNumber +
-                ", timeInterval=" + timeInterval +
+                ", isEnable=" + isEnable +
                 ", routeName=" + routeName +
                 '}';
     }
