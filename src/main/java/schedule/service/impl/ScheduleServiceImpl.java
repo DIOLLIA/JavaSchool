@@ -103,6 +103,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public void addSchedule(String routeName, String arrivalTime, String departureTime, String station, int dailyRoute, int numberInOrder, int trainNumber) {
+        List<ScheduleEntity> scheduleEntityList = scheduleDao.getScheduleByDidAfterOrderNumber(numberInOrder, dailyRoute);
+
+        incrementOrderNumbers(scheduleEntityList);
+
         LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
         LocalTime arrivalTimeFormatted = LocalTime.parse(arrivalTime);
         Train train = modelMapper.map(trainDao.findByNumber(trainNumber), Train.class);
@@ -118,7 +122,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         schedule.setDepartureTime(departureTimeFormatted);
         schedule.setRouteDailyId(dailyRoute);
         schedule.setRouteStationIndex(numberInOrder);
-        ScheduleEntity scheduleEntity = modelMapper.map(schedule,ScheduleEntity.class);
+        ScheduleEntity scheduleEntity = modelMapper.map(schedule, ScheduleEntity.class);
         scheduleDao.create(scheduleEntity);
     }
 
@@ -127,6 +131,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         simpleMessageSender.send(msg);
     }
+
 
 /*    @Override
     public void addSchedule(Schedule schedule) {
@@ -141,7 +146,6 @@ public class ScheduleServiceImpl implements ScheduleService {
         getCurrentSession().save(map);
 
     }*/
-
     /*    @Override
         public Schedule findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime) {
             ScheduleEntity scheduleEntity = scheduleDao.findScheduleByStationsAndDepartureTime(stationFrom, stationTo, departureTime);
@@ -149,6 +153,16 @@ public class ScheduleServiceImpl implements ScheduleService {
             Schedule schedule = modelMapper.map(scheduleEntity, Schedule.class);
             return schedule;
         }*/
+
+    private void incrementOrderNumbers(List<ScheduleEntity> scheduleEntityList) {
+        for (ScheduleEntity scheduleEntity : scheduleEntityList) {
+            int stationIdInc = scheduleEntity.getRouteStationIndex() + 1;
+            scheduleEntity.setRouteStationIndex(stationIdInc);
+
+            scheduleDao.update(scheduleEntity);
+        }
+    }
+
     @Autowired
     public void setScheduleDao(ScheduleDao scheduleDao) {
         this.scheduleDao = scheduleDao;

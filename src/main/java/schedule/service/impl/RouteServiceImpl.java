@@ -76,6 +76,14 @@ public class RouteServiceImpl implements RouteService {
         return routeDao.findByName(routeName);
     }
 
+    @Override
+    public void addStationToRoute(int routeId, Station stationName) {
+        RouteEntity route = routeDao.routeById(routeId);
+        route.getStationsList().add(modelMapper.map(stationName, StationEntity.class));
+        routeDao.update(route);
+
+    }
+
     private List<RouteEntity> filterList(List<RouteEntity> routesEntityList, String[] stationNames) {
         List<RouteEntity> resultList = new ArrayList<>();
         for (RouteEntity routeEntity : routesEntityList) {

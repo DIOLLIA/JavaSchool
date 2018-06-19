@@ -30,6 +30,7 @@ public interface RouteService {
      * @see Route
      */
     void addRoute(String routeName);
+
     /**
      * Return list of Stations from database that found by @param
      *
@@ -56,7 +57,8 @@ public interface RouteService {
      * @param routeName selects must contain routeName of existed station in database
      * @return Route id
      * @see Route
-     *
      */
     int findByName(String routeName);
+
+    void addStationToRoute(int routeId, Station stationName);
 }
