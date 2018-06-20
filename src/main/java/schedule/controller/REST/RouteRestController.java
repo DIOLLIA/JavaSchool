@@ -47,8 +47,8 @@ public class RouteRestController {
     public String getStationsOnRoute(@PathVariable(value = "selectedRoute") String selectedRoute) {
         int selectedRouteId = routeService.findByName(selectedRoute);
         List<String> stations = routeService.findStationsByRouteName(selectedRouteId);
-        return new Gson().toJson(stations);
 
+        return new Gson().toJson(stations);
     }
 
     /**

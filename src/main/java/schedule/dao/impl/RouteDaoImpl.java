@@ -40,9 +40,9 @@ public class RouteDaoImpl extends GeneralCrudDaoImpl<RouteEntity> implements Rou
 
     @Override
     public int findByName(String routeName) {
-
         Query query = getCurrentSession().createQuery("SELECT id FROM RouteEntity re WHERE re.routeName =:routeName");
         query.setParameter("routeName",routeName);
+
         return (int)query.uniqueResult();
     }
 

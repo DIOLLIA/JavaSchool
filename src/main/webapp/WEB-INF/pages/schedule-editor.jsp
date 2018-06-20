@@ -1,7 +1,10 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 <%@ include file="header-admin.jsp" %>
+
 <link rel="stylesheet" href="../../resources/css/tables.css">
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="${pageContext.request.contextPath}/resources/js/schedule-constructor.js"></script>
 
 <section class="probootstrap-cover overflow-hidden relative"
          style="background-image: url('/resources/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
@@ -13,10 +16,12 @@
                 <div>
                     <h2 class="display-8 probootstrap-section-heading">${message}</h2>
                 </div>
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">      <input type="submit"
-                                                                                                class="btn btn-primary"
-                                                                                                value="<<"
-                                                                                                onclick="location='./scheduleList';"/> Schedule &#8195;
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">
+                    <input type="submit"
+                           class="btn btn-primary"
+                           value="<<"
+                           onclick="location='./scheduleList';"/>
+                    Schedule &#8195;
                     <form:form method="POST" modelAttribute="schedule"
                                action="/schedule/constructor">
                     <input type="submit" class="btn btn-primary" value="+"/>

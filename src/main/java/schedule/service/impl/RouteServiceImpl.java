@@ -72,7 +72,6 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public int findByName(String routeName) {
-
         return routeDao.findByName(routeName);
     }
 
