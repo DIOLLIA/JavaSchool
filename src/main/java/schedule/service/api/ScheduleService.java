@@ -1,5 +1,6 @@
 package schedule.service.api;
 
+import schedule.controller.model.ScheduleToSend;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Station;
@@ -31,4 +32,8 @@ public interface ScheduleService {
     void addSchedule(String routeName, String arrivalTime, String departureTime, String station, int dailyRoute, int numberInOrder, int trainNumber);
 
     void send(String msg);
-}
+
+    void sendAll(List<ScheduleToSend> scheduleToSends);
+
+    List<ScheduleToSend> transform (List<Schedule> schedules);
+};

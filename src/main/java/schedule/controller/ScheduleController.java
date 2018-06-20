@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.ScheduleItem;
+import schedule.controller.model.ScheduleToSend;
 import schedule.entity.RouteEntity;
 import schedule.model.Route;
 import schedule.model.Schedule;
@@ -231,10 +232,11 @@ public class ScheduleController extends BaseController {
         return modelAndView;
     }
 
+    //todo переделать чтоб не перезагружить страницу
     @RequestMapping(value = "/sendMsg")
     public ModelAndView messageToQueue() {
-        String message = "message from schedule";
-        scheduleService.send(message);
+        List<ScheduleToSend> scheduleToSends = scheduleService.transform(scheduleService.getSchedule());
+        scheduleService.sendAll(scheduleToSends);
         ModelAndView modelAndView = new ModelAndView("schedule-viewer");
 
         return modelAndView;

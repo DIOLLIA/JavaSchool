@@ -6,6 +6,7 @@ import org.joda.time.LocalTime;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import schedule.controller.model.ScheduleToSend;
 import schedule.dao.api.RouteDao;
 import schedule.dao.api.ScheduleDao;
 import schedule.dao.api.StationDao;
@@ -28,7 +29,6 @@ import java.util.List;
 @Transactional
 public class ScheduleServiceImpl implements ScheduleService {
 
-
     private ScheduleDao scheduleDao;
     private ModelMapper modelMapper;
     private TrainDao trainDao;
@@ -36,7 +36,6 @@ public class ScheduleServiceImpl implements ScheduleService {
     private RouteDao routeDao;
     private SessionFactory sessionFactory;
     private SimpleMessageSender simpleMessageSender;
-
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
@@ -130,6 +129,28 @@ public class ScheduleServiceImpl implements ScheduleService {
     public void send(String msg) {
 
         simpleMessageSender.send(msg);
+    }
+
+    @Override
+    public void sendAll(List<ScheduleToSend> scheduleToSends ) {
+        simpleMessageSender.sendAll(scheduleToSends);
+    }
+
+    @Override
+    public List<ScheduleToSend> transform(List<Schedule> schedules) {
+        List<ScheduleToSend> scheduleToSends = new ArrayList<>();
+
+        for (Schedule item :schedules) {
+            ScheduleToSend scheduleToSend = new ScheduleToSend();
+            scheduleToSend.setArrTime(item.getArrivalTime().toString());
+            scheduleToSend.setDepTime(item.getDepartureTime().toString());
+            scheduleToSend.setStation(item.getStationName().getStationName());
+            scheduleToSend.setRouteDailyId(item.getRouteDailyId());
+            scheduleToSend.setStationOrder(item.getRouteStationIndex());
+            scheduleToSend.setTrain(item.getTrainNumber().getNumberOfTrain());
+            scheduleToSends.add(scheduleToSend);
+        }
+        return scheduleToSends;
     }
 
 
