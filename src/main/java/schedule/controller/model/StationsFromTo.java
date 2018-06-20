@@ -1,5 +1,12 @@
 package schedule.controller.model;
 
+/**
+ * @author Rudkov Andrey
+ * class {@link StationsFromTo} helps for
+ * search stations without real object {@link schedule.model.Station} name. Class use similar
+ * fields, which can be easily obtained from
+ * jsp ModelAttribute
+ */
 public class StationsFromTo {
     private String stationFrom;
     private String stationTo;

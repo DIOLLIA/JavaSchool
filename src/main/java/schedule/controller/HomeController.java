@@ -39,13 +39,6 @@ public class HomeController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/map")
-    public ModelAndView mapPage(Locale locale) {
-        ModelAndView modelAndView = new ModelAndView("map");
-        modelAndView.addObject("pageTitle", getMessage("page.title.user", locale));
-        return modelAndView;
-    }
-
     @RequestMapping(value = "/about")
     public ModelAndView aboutPage(Locale locale) {
         ModelAndView modelAndView = new ModelAndView("about");

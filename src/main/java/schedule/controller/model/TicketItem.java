@@ -3,6 +3,14 @@ package schedule.controller.model;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
+/**
+ * @author Rudkov Andrey
+ * class {@link TicketItem} helps for
+ * create and search tickets without use of real object {@link schedule.model.Ticket}. Class use similar
+ * fields, which can be easily obtained from
+ * jsp model @RequestParam values taken
+ */
+
 public class TicketItem {
     private String stationFrom;
     private String stationTo;

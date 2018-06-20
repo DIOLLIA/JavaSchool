@@ -2,6 +2,13 @@ package schedule.controller.model;
 
 import org.joda.time.LocalTime;
 
+/**
+ * @author Rudkov Andrey
+ * class {@link ScheduleItem} helps for
+ * search,create Schedule object using real {@link schedule.model.Schedule} fields. Class use similar
+ * fields, which can be easily obtained from
+ * jsp Models for further parsing it and create real Schedule object
+ */
 public class ScheduleItem {
     private LocalTime departureTime;
     private LocalTime arrivalTime;

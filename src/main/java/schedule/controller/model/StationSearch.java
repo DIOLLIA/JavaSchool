@@ -1,5 +1,11 @@
 package schedule.controller.model;
 
+/**
+ * @author Rudkov Andrey
+ * class {@link StationSearch} extend two String fields for
+ * search realisation without creating and using {@link schedule.model.Station} object
+ */
+
 public class StationSearch {
     private String arrivalStation;
     private String departureStation;

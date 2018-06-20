@@ -1,5 +1,12 @@
 package schedule.controller.model;
 
+/**
+ * @author Rudkov Andrey
+ * class {@link TrainAndDepTime} helps for search
+ * <b>trainNumber</b> <b>departureTime</b> values for request ticket
+ * without use of real object.
+ */
+
 public class TrainAndDepTime {
     private int trainNumber;
     private String departureTime;
