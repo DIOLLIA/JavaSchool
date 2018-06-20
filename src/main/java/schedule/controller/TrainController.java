@@ -13,6 +13,7 @@ import schedule.controller.model.ScheduleItem;
 import schedule.model.Schedule;
 import schedule.model.Train;
 import schedule.model.User;
+import schedule.service.api.ScheduleService;
 import schedule.service.api.TrainService;
 import schedule.service.api.UserService;
 
@@ -25,6 +26,7 @@ public class TrainController extends BaseController {
 
     private TrainService trainService;
     private UserService userService;
+    private ScheduleService scheduleService;
 
     @RequestMapping(value = "/list")
     public ModelAndView listOfTrains(Locale locale) {
@@ -66,12 +68,17 @@ public class TrainController extends BaseController {
 
     @RequestMapping(value = "/delete/{train.id}")
     public ModelAndView deleteTrain(@PathVariable(value = "train.id") int trainId, Locale locale) {
-        trainService.deleteTrain(trainId);
-        List<Train> trains = trainService.getTrains();
-
         ModelAndView modelAndView = new ModelAndView("trains-list");
+
+        if (scheduleService.findTrainById(trainId) != null) {
+            modelAndView.addObject("message", getMessage("message.train.delete.fail", locale));
+        } else {
+            trainService.deleteTrain(trainId);
+            modelAndView.addObject("message", getMessage("message.train.delete.success", locale));
+        }
+        List<Train> trains = trainService.getTrains();
         modelAndView.addObject("trains", trains);
-        modelAndView.addObject("message", getMessage("message.train.delete.success", locale));
+
 
         return modelAndView;
     }
@@ -150,5 +157,10 @@ public class TrainController extends BaseController {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setScheduleService(ScheduleService scheduleService) {
+        this.scheduleService = scheduleService;
     }
 }

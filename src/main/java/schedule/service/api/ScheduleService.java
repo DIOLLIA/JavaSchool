@@ -31,4 +31,6 @@ public interface ScheduleService {
     void sendAll(List<ScheduleToSend> scheduleToSends);
 
     List<ScheduleToSend> transform(List<Schedule> schedules);
+
+    List<Schedule> findTrainById(int trainId);
 };

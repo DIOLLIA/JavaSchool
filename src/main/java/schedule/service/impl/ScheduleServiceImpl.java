@@ -36,6 +36,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     private RouteDao routeDao;
     private SessionFactory sessionFactory;
     private SimpleMessageSender simpleMessageSender;
+
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
@@ -126,7 +127,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public void sendAll(List<ScheduleToSend> scheduleToSends ) {
+    public void sendAll(List<ScheduleToSend> scheduleToSends) {
         simpleMessageSender.sendAll(scheduleToSends);
     }
 
@@ -134,7 +135,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     public List<ScheduleToSend> transform(List<Schedule> schedules) {
         List<ScheduleToSend> scheduleToSends = new ArrayList<>();
 
-        for (Schedule item :schedules) {
+        for (Schedule item : schedules) {
             ScheduleToSend scheduleToSend = new ScheduleToSend();
             scheduleToSend.setArrTime(item.getArrivalTime().toString());
             scheduleToSend.setDepTime(item.getDepartureTime().toString());
@@ -145,6 +146,17 @@ public class ScheduleServiceImpl implements ScheduleService {
             scheduleToSends.add(scheduleToSend);
         }
         return scheduleToSends;
+    }
+
+    @Override
+    public List<Schedule> findTrainById(int trainId) {
+        List<ScheduleEntity> scheduleEntity = scheduleDao.findTrainById(trainId);
+        List<Schedule> schedules = new ArrayList<>();
+        for (ScheduleEntity item : scheduleEntity) {
+            schedules.add(modelMapper.map(item, Schedule.class));
+        }
+        return schedules;
+
     }
 
 

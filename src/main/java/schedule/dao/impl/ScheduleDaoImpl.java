@@ -55,6 +55,14 @@ public class ScheduleDaoImpl extends GeneralCrudDaoImpl<ScheduleEntity> implemen
     }
 
     @Override
+    public List<ScheduleEntity> findTrainById(int trainId) {
+
+        Query query = getCurrentSession().createQuery("FROM ScheduleEntity sch WHERE sch.trainNumber.id =:trainId");
+        query.setParameter("trainId", trainId);
+        return query.list();
+    }
+
+    @Override
     public List<ScheduleEntity> getAll() {
         Query query = getCurrentSession().createQuery("FROM ScheduleEntity sch ORDER BY routeDailyId ASC, routeStationIndex ASC");
 

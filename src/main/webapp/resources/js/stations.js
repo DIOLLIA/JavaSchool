@@ -108,6 +108,6 @@ function addStation(autocomplete) {
             }
         })
     } else{
-        alert("Type station name");
+        alert("Type station name. It must be exist on map!");
     }
 }
