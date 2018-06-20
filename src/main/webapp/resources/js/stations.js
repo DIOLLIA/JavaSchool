@@ -100,14 +100,18 @@ function addStation(autocomplete) {
                 lat: lat,
                 lng: lng
             },
-            success: function () {
-                alert("Station was successfully created.")
+            success: function (response) {
+                if (response) {
+                    alert("Station was successfully created.")
+                } else {
+                    alert("Station already exist.")
+                }
             },
             error: function (e) {
                 //todo add message try again later or contact technical support
             }
         })
-    } else{
+    } else {
         alert("Type station name. It must be exist on map!");
     }
 }
