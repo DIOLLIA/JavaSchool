@@ -57,8 +57,11 @@ public class TrainServiceImpl implements TrainService {
     @Override
     public Train findByNumber(int number) {
         TrainEntity trainEntity = trainDao.findByNumber(number);
-        Train train = modelMapper.map(trainEntity, Train.class);
-        return train;
+        if (!(trainEntity == null)) {
+            Train train = modelMapper.map(trainEntity, Train.class);
+            return train;
+        }
+       else return null;
     }
 
     @Override

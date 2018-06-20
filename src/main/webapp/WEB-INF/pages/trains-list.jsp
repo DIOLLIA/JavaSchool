@@ -14,7 +14,7 @@
                     <spring:message code="admin.header.trains"/> &#8195;
                     <input type="submit" class="btn btn-primary"
                            value="<spring:message code="add-train-button"/>"
-                           onclick="location='add';"/>
+                           onclick="location='/train/add';"/>
                 </h2>
                 <h2 class="display-8 probootstrap-section-heading" style="color: yellow">${message}</h2>
                 <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="60%">

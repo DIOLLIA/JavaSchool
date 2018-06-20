@@ -13,6 +13,7 @@
                     <spring:message code="page.title.add-train"/></h2>
                 <form:form name='addTrain' method="POST" modelAttribute="train"
                            action="${pageContext.request.contextPath}/train/add" onsubmit="return train_validation()">
+                    <h2 class="display-8 probootstrap-section-heading" style="color: yellow">${message}</h2>
                     <table class="table_add" border="0px" cellpadding="" cellspacing="0">
                         <tbody>
                         <tr>

@@ -50,15 +50,16 @@ public class TrainController extends BaseController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addTrain(@ModelAttribute Train train, Locale locale) {
-        ModelAndView modelAndView = new ModelAndView("trains-list");
+        ModelAndView modelAndView;
 
         if (trainService.findByNumber(train.getNumberOfTrain()) == null) {
-
+            modelAndView = new ModelAndView("trains-list");
             trainService.addTrain(train);
 
 
             modelAndView.addObject("message", getMessage("message.train.create.success", locale));
         } else {
+            modelAndView = new ModelAndView("add-train");
             modelAndView.addObject("message", getMessage("message.train.create.abort", locale));
         }
         List<Train> trains = trainService.getTrains();
@@ -70,7 +71,7 @@ public class TrainController extends BaseController {
     public ModelAndView deleteTrain(@PathVariable(value = "train.id") int trainId, Locale locale) {
         ModelAndView modelAndView = new ModelAndView("trains-list");
 
-        if (scheduleService.findTrainById(trainId) != null) {
+        if (!scheduleService.findTrainById(trainId).isEmpty()) {
             modelAndView.addObject("message", getMessage("message.train.delete.fail", locale));
         } else {
             trainService.deleteTrain(trainId);
