@@ -19,10 +19,10 @@ public class StationRestController extends BaseController {
 
     /**
      * method takes params
-     *
      * @param stationName
      * @param lat
-     * @param lng         from ajax, and create station with it in database
+     * @param lng
+     * from ajax, and create station with it in database
      * @return boolean
      */
     @GetMapping(value = "/add-station**")

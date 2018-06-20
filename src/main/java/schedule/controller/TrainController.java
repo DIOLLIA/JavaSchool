@@ -20,6 +20,9 @@ import schedule.service.api.UserService;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * controller class
+ */
 @Controller
 @RequestMapping(value = "/train")
 public class TrainController extends BaseController {
@@ -28,6 +31,10 @@ public class TrainController extends BaseController {
     private UserService userService;
     private ScheduleService scheduleService;
 
+    /**
+     * @param locale
+     * @return full trains list of {@link Train}
+     */
     @RequestMapping(value = "/list")
     public ModelAndView listOfTrains(Locale locale) {
         List<Train> trains = trainService.getTrains();
@@ -39,6 +46,12 @@ public class TrainController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     * view page for adding Train
+     *
+     * @param locale
+     * @return
+     */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addTrainPage(Locale locale) {
         ModelAndView modelAndView = new ModelAndView("add-train");
@@ -48,6 +61,13 @@ public class TrainController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     * method create new {@link Train} if train with that number not exist in DataBase
+     *
+     * @param train
+     * @param locale
+     * @return
+     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addTrain(@ModelAttribute Train train, Locale locale) {
         ModelAndView modelAndView;
@@ -55,7 +75,6 @@ public class TrainController extends BaseController {
         if (trainService.findByNumber(train.getNumberOfTrain()) == null) {
             modelAndView = new ModelAndView("trains-list");
             trainService.addTrain(train);
-
 
             modelAndView.addObject("message", getMessage("message.train.create.success", locale));
         } else {
@@ -67,6 +86,13 @@ public class TrainController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     * method delete train by id from DataBase if it not include in existing schedule
+     *
+     * @param trainId
+     * @param locale
+     * @return modelAnd
+     */
     @RequestMapping(value = "/delete/{train.id}")
     public ModelAndView deleteTrain(@PathVariable(value = "train.id") int trainId, Locale locale) {
         ModelAndView modelAndView = new ModelAndView("trains-list");
@@ -80,10 +106,16 @@ public class TrainController extends BaseController {
         List<Train> trains = trainService.getTrains();
         modelAndView.addObject("trains", trains);
 
-
         return modelAndView;
     }
 
+    /**
+     * method show view.jsp for edit train with existed values on it
+     *
+     * @param trainId
+     * @param locale
+     * @return
+     */
     @RequestMapping(value = "/edit/{train.id}", method = RequestMethod.GET)
     public ModelAndView editTrain(@PathVariable(value = "train.id") int trainId, Locale locale) {
 
@@ -94,14 +126,24 @@ public class TrainController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     * method edit and update train by id from DataBase if it not include in existing schedule
+     *
+     * @param train
+     * @param locale
+     * @return
+     */
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
     public ModelAndView editTrainSave(@ModelAttribute("train") Train train, Locale locale) {
-        trainService.editTrain(train);
-        List<Train> trains = trainService.getTrains();
-
         ModelAndView modelAndView = new ModelAndView("trains-list");
+        if (!scheduleService.findTrainById(train.getId()).isEmpty()) {
+            modelAndView.addObject("message", getMessage("message.train.modify.fail", locale));
+        } else {
+            trainService.editTrain(train);
+            modelAndView.addObject("message", getMessage("message.train.modify.success", locale));
+        }
+        List<Train> trains = trainService.getTrains();
         modelAndView.addObject("trains", trains);
-        modelAndView.addObject("message", getMessage("message.train.modify.success", locale));
 
         return modelAndView;
     }

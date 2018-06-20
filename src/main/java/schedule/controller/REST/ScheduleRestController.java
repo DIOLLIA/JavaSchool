@@ -11,12 +11,20 @@ import schedule.service.api.StationService;
 
 import java.util.List;
 
+/**
+ * @author Rudkov Andrey
+ */
 @RequestMapping(value = "/mainSearch")
 @RestController
 public class ScheduleRestController extends BaseController {
 
-    StationService stationService;
+    private StationService stationService;
 
+    /**
+     * method get all stations from database and represent it as Json
+     *
+     * @return all stations from database
+     */
     @GetMapping(value = "/get-stations/")
     public String getStationsNames() {
         List<String> stationsNames = stationService.getStationsNames();
@@ -24,6 +32,11 @@ public class ScheduleRestController extends BaseController {
         return new Gson().toJson(stationsNames);
     }
 
+    /**
+     * method get all stations from database except station, that @param selectedFromStation taken and represent it as Json
+     *
+     * @return all stations from database
+     */
     @GetMapping(value = "/get-stations/{selectedFromStation}")
     public String getStationsNamesTest(@PathVariable(value = "selectedFromStation") String selectedFromStation) {
         List<String> stationsNames = stationService.getStationsNames();
@@ -35,5 +48,5 @@ public class ScheduleRestController extends BaseController {
     public void setStationService(StationService stationService) {
         this.stationService = stationService;
     }
-    }
+}
 

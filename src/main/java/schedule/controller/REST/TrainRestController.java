@@ -16,13 +16,26 @@ import schedule.service.api.ScheduleService;
 
 import java.util.*;
 
+/**
+ * @author Rudkov Andrey
+ * <p>
+ * controller work with Google map
+ */
 @RestController
 @RequestMapping(value = "/searchForUser")
 public class TrainRestController extends BaseController {
 
-    RouteService routeService;
-    ScheduleService scheduleService;
+    private RouteService routeService;
+    private ScheduleService scheduleService;
 
+    /**
+     * method take two
+     *
+     * @param stations and search routes which extend both stations in presented order
+     *                 and return trains and times values with <k> "id" and <v> "train number", "departure time"
+     *                 like hashMap Json object
+     * @return hashMap Json object with <k> "id" and <v> "train number", "departure time"
+     */
     @RequestMapping(value = "/get-train-and-time/", method = RequestMethod.POST)
     String getTrainsListForDepartureStation(@RequestBody StationsFromTo stations) {
         String selectedFromStation = stations.getStationFrom();
@@ -32,7 +45,6 @@ public class TrainRestController extends BaseController {
         List<Schedule> sortedSchedule = new ArrayList<>();
 
         List<Route> routes = routeService.findByStationNames(selectedFromStation, selectedToStation);
-        //todo: look at scheduleMainSearch and добавь исключение обратных маршрутов
         List<Schedule> schedules = scheduleService.findScheduleByStations(routes, selectedToStation, selectedFromStation);
 
         for (Schedule scheduleOne : schedules) {
