@@ -48,12 +48,11 @@ public class TrainController extends BaseController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addTrain(@ModelAttribute Train train, Locale locale) {
-//        trainService.addTrain(train);
-//        List<Train> trains = trainService.getTrains();
+        trainService.addTrain(train);
+        List<Train> trains = trainService.getTrains();
 
-        ModelAndView modelAndView = new ModelAndView("add-train");
-//        ModelAndView modelAndView = new ModelAndView("trains-list");
-//        modelAndView.addObject("trains", trains);
+        ModelAndView modelAndView = new ModelAndView("trains-list");
+        modelAndView.addObject("trains", trains);
         modelAndView.addObject("message", getMessage("message.train.create.success", locale));
 
         return modelAndView;
