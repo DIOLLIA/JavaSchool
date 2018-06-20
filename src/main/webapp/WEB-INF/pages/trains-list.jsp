@@ -8,9 +8,6 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                <div>
-                    <h2 class="display-8 probootstrap-section-heading">${message}</h2>
-                </div>
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">  <input class="btn btn-primary"
                                                                                             type="submit" value="<<"
                                                                                             onclick="location='/index';"/>
@@ -19,6 +16,7 @@
                            value="<spring:message code="add-train-button"/>"
                            onclick="location='add';"/>
                 </h2>
+                <h2 class="display-8 probootstrap-section-heading" style="color: yellow">${message}</h2>
                 <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="60%">
                     <thead>
                     <tr>
