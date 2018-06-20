@@ -1,8 +1,6 @@
 package schedule.controller.model;
 
-import java.io.Serializable;
-
-public class ScheduleToSend implements Serializable {
+public class ScheduleToSend {
     private String station;
     private String depTime;
     private String arrTime;

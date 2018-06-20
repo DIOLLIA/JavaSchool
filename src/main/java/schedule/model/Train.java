@@ -1,10 +1,14 @@
 package schedule.model;
 
 
+import javax.validation.constraints.NotNull;
+
 public class Train {
 
     private int id;
+    @NotNull
     private int numberOfTrain;
+    @NotNull
     private int seats;
 
     public int getId() {

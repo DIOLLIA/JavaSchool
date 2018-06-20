@@ -4,18 +4,19 @@ function formSubmit() {
 
 var arrTrain = [];
 var arrTime = [];
-function trainOnTimeSelector(){
-/*    arrTrain.empty();
-    arrTime.empty();*/
+
+function trainOnTimeSelector() {
+    /*    arrTrain.empty();
+        arrTime.empty();*/
     var train = $("#train");
     var departure_time = $("#departure_time").val();
     var index;
-   index = arrTime.indexOf(departure_time);
-   train.empty();
+    index = arrTime.indexOf(departure_time);
+    train.empty();
     train.append(
         '<option value=\"' + arrTrain[index] + '\">' + arrTrain[index] + '</option>'
     );
-   // train= arrTrain.get(index);
+    // train= arrTrain.get(index);
 }
 
 
@@ -570,5 +571,39 @@ function ticket_validation() {
         counter_fields++;
     }
 
+    return counter_fields === fields_variables;
+}
+
+function train_validation() {
+    var res = /^-{0,1}\d*\.{0,1}\d+$/;
+    var train_number = document.addTrain.numberOfTrain.value;
+    var train_seats = document.addTrain.seats.value;
+    var counter_fields = 0;
+    var fields_variables = 2;
+
+    if (train_number === null || train_number === "") {
+        document.getElementById("trainNumberLoc").innerHTML =
+            "  Enter the number";
+    } else if (!res.test(train_number) || train_number === "0") {
+        document.getElementById("trainNumberLoc").innerHTML =
+            "  Only numbers and not a zero!!";
+    }
+    else {
+        document.getElementById("trainNumberLoc").innerHTML = "";
+        counter_fields++;
+    }
+
+    if (train_seats === null || train_seats === "") {
+        document.getElementById("seatsLoc").innerHTML =
+            " Enter the number";
+    } else if (!res.test(train_seats) || train_seats === "0") {
+        document.getElementById("seatsLoc").innerHTML =
+            "  Only numbers and not a zero!";
+    }
+    else {
+        document.getElementById("seatsLoc").innerHTML = "";
+        counter_fields++;
+
+    }
     return counter_fields === fields_variables;
 }

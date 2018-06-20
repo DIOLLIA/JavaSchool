@@ -126,12 +126,6 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public void send(String msg) {
-
-        simpleMessageSender.send(msg);
-    }
-
-    @Override
     public void sendAll(List<ScheduleToSend> scheduleToSends ) {
         simpleMessageSender.sendAll(scheduleToSends);
     }

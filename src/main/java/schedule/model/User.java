@@ -5,7 +5,7 @@ import org.joda.time.LocalDate;
 public class User {
 
     private int id;
-    // @Size(min = 2, max = 20, message = "Name should not be less than 2 symbols")
+//     @Size(min = 2, max = 20, message = "Name should not be less than 2 symbols")
     private String name;
     //@Size(min = 2, max = 50, message = "Surname should not be less than 2 symbols")
     private String surname;

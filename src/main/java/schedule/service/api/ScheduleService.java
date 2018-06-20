@@ -20,9 +20,6 @@ public interface ScheduleService {
 
     List<Schedule> findScheduleByStation(Station station);
 
-//    void addSchedule(Schedule schedule);
-
-    //    Schedule findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime);
     List<Schedule> getSchedule();
 
     List<Schedule> formatShcedule(List<Schedule> schedule);
@@ -31,9 +28,7 @@ public interface ScheduleService {
 
     void addSchedule(String routeName, String arrivalTime, String departureTime, String station, int dailyRoute, int numberInOrder, int trainNumber);
 
-    void send(String msg);
-
     void sendAll(List<ScheduleToSend> scheduleToSends);
 
-    List<ScheduleToSend> transform (List<Schedule> schedules);
+    List<ScheduleToSend> transform(List<Schedule> schedules);
 };

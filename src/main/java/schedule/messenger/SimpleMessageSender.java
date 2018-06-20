@@ -5,7 +5,6 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 import schedule.controller.model.ScheduleToSend;
-import schedule.service.api.ScheduleService;
 
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
@@ -17,17 +16,7 @@ import java.util.List;
 public class SimpleMessageSender implements MessageSender {
     @Autowired
     private JmsTemplate jmsTemplate;
-    @Autowired
-    private ScheduleService scheduleService;
 
-    /*    @Override
-        public void send(String message) {
-            jmsTemplate.send(new MessageCreator() {
-                public Message createMessage(Session session) throws JMSException {
-                    return session.createTextMessage(message);
-                }
-            });
-        }*/
     @Override
     public void send(String message) {
         jmsTemplate.send(new MessageCreator() {
@@ -38,23 +27,6 @@ public class SimpleMessageSender implements MessageSender {
             }
         });
     }
-
-/*    MessageCreator messageCreator = new MessageCreator() {
-        @Override
-        public Message createMessage(Session session) throws JMSException {
-            List<Schedule> scheduleItem = scheduleService.getSchedule();
-            for (Schedule schedule :scheduleItem) {
-            MapMessage mapMessage = session.createMapMessage();
-            mapMessage.setString("station", schedule.getStationName().getStationName());
-            mapMessage.setInt("train", schedule.getTrainNumber().getNumberOfTrain());
-            mapMessage.setInt("dailyId", schedule.getRouteDailyId());
-            mapMessage.setInt("orderNumber", schedule.getRouteStationIndex());
-            mapMessage.setString("arrTime", schedule.getArrivalTime().toString());
-            mapMessage.setString("depTime", schedule.getDepartureTime().toString());
-            return mapMessage;
-            }
-        }
-    };*/
 
     @Override
     public void sendAll(List<ScheduleToSend> scheduleToSends) {
@@ -74,7 +46,3 @@ public class SimpleMessageSender implements MessageSender {
         }
     }
 }
-
-/*    ObjectMessage objectMessage = session.createObjectMessage();
-                objectMessage.setObject((Serializable) scheduleToSends);
-                return objectMessage;*/
