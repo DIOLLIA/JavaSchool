@@ -137,8 +137,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         for (Schedule item : schedules) {
             ScheduleToSend scheduleToSend = new ScheduleToSend();
-            scheduleToSend.setArrTime(item.getArrivalTime().toString());
-            scheduleToSend.setDepTime(item.getDepartureTime().toString());
+            scheduleToSend.setArrTime(item.getArrivalTime().toString().substring(0, 5));
+            scheduleToSend.setDepTime(item.getDepartureTime().toString().substring(0, 5));
             scheduleToSend.setStation(item.getStationName().getStationName());
             scheduleToSend.setRouteDailyId(item.getRouteDailyId());
             scheduleToSend.setStationOrder(item.getRouteStationIndex());
@@ -158,28 +158,6 @@ public class ScheduleServiceImpl implements ScheduleService {
         return schedules;
 
     }
-
-
-/*    @Override
-    public void addSchedule(Schedule schedule) {
-        Schedule schedule2 = new Schedule();
-        schedule2.setRouteName(new Route());
-        schedule2.setTrainNumber(new Train());
-        schedule2.setStationName(new Station());
-
-        //todo autowire model mapper
-        ModelMapper mp = new ModelMapper();
-        ScheduleEntity map = mp.map(schedule2, ScheduleEntity.class);
-        getCurrentSession().save(map);
-
-    }*/
-    /*    @Override
-        public Schedule findScheduleByStationsAndDepartureTime(String stationFrom, String stationTo, LocalTime departureTime) {
-            ScheduleEntity scheduleEntity = scheduleDao.findScheduleByStationsAndDepartureTime(stationFrom, stationTo, departureTime);
-
-            Schedule schedule = modelMapper.map(scheduleEntity, Schedule.class);
-            return schedule;
-        }*/
 
     private void incrementOrderNumbers(List<ScheduleEntity> scheduleEntityList) {
         for (ScheduleEntity scheduleEntity : scheduleEntityList) {
