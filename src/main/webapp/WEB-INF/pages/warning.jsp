@@ -44,7 +44,7 @@
 
 
 <section class="probootstrap-cover overflow-hidden relative"
-         style="background-image: url('/resources/images/err2.jpg');">
+         style="background-image: url('/resources/images/err.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row align-items-center">

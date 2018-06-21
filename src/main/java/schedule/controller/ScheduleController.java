@@ -214,6 +214,20 @@ public class ScheduleController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     * method get from user (jsp page) values
+     * @param locale
+     * @param routeName
+     * @param arrivalTime
+     * @param departureTime
+     * @param station
+     * @param numberInOrder
+     * @param dailyRoute
+     * @param trainNumber
+     * and sendt it to {@link ScheduleService}, also create new instance of
+     * {@link ScheduleToSend}, add it to list and transfer it to JMS.
+     * @return list of schedule with new item
+     */
     @RequestMapping(value = "/constructor", method = RequestMethod.POST)
     public ModelAndView scheduleItemSave(Locale locale,
                                          @RequestParam(name = "route_picker") String routeName,
@@ -224,6 +238,9 @@ public class ScheduleController extends BaseController {
                                          @RequestParam(name = "daily_route") int dailyRoute,
                                          @RequestParam(name = "train_picker") int trainNumber) {
         scheduleService.addSchedule(routeName, arrivalTime, departureTime, station, dailyRoute, numberInOrder, trainNumber);
+        List<ScheduleToSend> list = new ArrayList<>();
+        list.add(new ScheduleToSend(station, arrivalTime, departureTime, trainNumber, dailyRoute, numberInOrder));
+        scheduleService.sendAll(list);
         List<Schedule> schedule = scheduleService.getSchedule();
         ModelAndView modelAndView = new ModelAndView("schedule-editor");
         modelAndView.addObject("schedule", schedule);

@@ -8,6 +8,19 @@ public class ScheduleToSend {
     private int routeDailyId;
     private int stationOrder;
 
+    public ScheduleToSend() {
+
+    }
+
+    public ScheduleToSend(String station, String depTime, String arrTime, int train, int routeDailyId, int stationInOrder) {
+        this.station = station;
+        this.depTime = depTime;
+        this.arrTime = arrTime;
+        this.train = train;
+        this.routeDailyId = routeDailyId;
+        this.stationOrder = stationInOrder;
+    }
+
     public String getStation() {
         return station;
     }
