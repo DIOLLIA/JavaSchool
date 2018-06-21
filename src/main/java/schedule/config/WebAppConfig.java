@@ -25,6 +25,9 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -149,9 +152,10 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         interceptor.setParamName("mylocale");
         registry.addInterceptor(interceptor);
     }
+
     @Bean(name = "simpleMappingExceptionResolver")
     public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
-        SimpleMappingExceptionResolver resolver= new SimpleMappingExceptionResolver();
+        SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
 
         Properties mappings = new Properties();
         resolver.setExceptionMappings(mappings); // None by default
@@ -159,4 +163,11 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         resolver.setDefaultErrorView("warning");
         return resolver;
     }
+
+    @Bean
+    public Validator validator() {
+        ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
+        return vf.getValidator();
+    }
+
 }

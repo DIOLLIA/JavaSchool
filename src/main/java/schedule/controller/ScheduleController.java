@@ -135,7 +135,6 @@ public class ScheduleController extends BaseController {
         ModelAndView modelAndView = new ModelAndView("schedule-viewer");
         modelAndView.addObject("details", formatedSchedule);
         modelAndView.addObject("schedule", routeAndTrains);
-        modelAndView.addObject("message", getMessage("message.train.delete.success", locale));
 
         return modelAndView;
     }

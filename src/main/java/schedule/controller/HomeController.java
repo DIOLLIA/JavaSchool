@@ -16,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import schedule.model.Role;
 import schedule.model.User;
 import schedule.service.api.UserService;
+import schedule.util.MyValidator;
 
+import javax.validation.Validator;
 import java.util.Locale;
 
 @Controller
@@ -24,6 +26,9 @@ public class HomeController extends BaseController {
 
     private UserService userService;
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private Validator validator;
 
     @RequestMapping(value = {"/", "/index"})
     public ModelAndView mainPage(Locale locale) {
@@ -90,7 +95,8 @@ public class HomeController extends BaseController {
             newUser.setPassword(passwordEncoder.encode(password));
             newUser.setRole(role);
             newUser.setBirthDay(LocalDate.parse(birthDayString));
-
+            MyValidator myValidator = new MyValidator();
+            myValidator.validate(newUser, validator);
             userService.addUser(newUser);
             ModelAndView modelAndView = new ModelAndView("sign-in");
             modelAndView.addObject("msg", getMessage("message.user.create.success", locale));
