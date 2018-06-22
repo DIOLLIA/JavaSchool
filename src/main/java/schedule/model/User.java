@@ -1,22 +1,36 @@
 package schedule.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class User {
 
     private int id;
-    @Size(min = 6, max = 20, message = "Name should not be less than 2 symbols")
+
+    @Size(min = 2, max = 30, message = "Name should not be less than 2 symbols")
+    @Pattern(regexp = "[A-Za-z]", message = "Only latin symbols accept in name")
     private String name;
-    //@Size(min = 2, max = 50, message = "Surname should not be less than 2 symbols")
+
+    @Size(min = 2, max = 50, message = "Surname should not be less than 2 symbols")
+    @Pattern(regexp = "[A-Za-z]", message = "Only latin symbols accept in surname")
     private String surname;
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDay;
+
     private Role role;
-    // @Size(min = 6, max = 30, message = "Password should not be less than 6 symbols")
+
+    @Size(min = 6, max = 30, message = "Password should not be less than 6 symbols")
+    @NotBlank
     private String password;
-    // @Email(message = "Email should be valid")
+
+    @Email(message = "Email should be valid")
     private String email;
 
     public int getId() {

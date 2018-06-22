@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class MyValidator {
 
-    public void validate(Object object, javax.validation.Validator validator) {
+    public Set<ConstraintViolation<Object>> validate(Object object, javax.validation.Validator validator) {
         Set<ConstraintViolation<Object>> constraintViolations = validator
                 .validate(object);
 
@@ -17,5 +17,6 @@ public class MyValidator {
             System.out.println(String.format(
                     "Warning, error! property: [%s], value: [%s], message: [%s]",
                     cv.getPropertyPath(), cv.getInvalidValue(), cv.getMessage()));
+        return constraintViolations;
     }
 }

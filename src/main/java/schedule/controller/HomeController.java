@@ -27,10 +27,12 @@ import schedule.service.api.StationService;
 import schedule.service.api.UserService;
 import schedule.util.MyValidator;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 @Controller
 public class HomeController extends BaseController {
@@ -124,6 +126,7 @@ public class HomeController extends BaseController {
                                  @RequestParam("password") String password,
                                  @RequestParam("birthDay") String birthDayString,
                                  Locale locale) {
+        ModelAndView modelAndView;
         if (!userService.findByLoginOrSurname(email).isEmpty()) {
             return new ModelAndView("sign-up").addObject("msg",
                     getMessage("message.user.create.error.username-exist", locale, email));
@@ -138,13 +141,24 @@ public class HomeController extends BaseController {
             newUser.setPassword(passwordEncoder.encode(password));
             newUser.setRole(role);
             newUser.setBirthDay(LocalDate.parse(birthDayString));
-            MyValidator myValidator = new MyValidator();
-            myValidator.validate(newUser, validator);
-            userService.addUser(newUser);
-            ModelAndView modelAndView = new ModelAndView("sign-in");
-            modelAndView.addObject("msg", getMessage("message.user.create.success", locale));
 
+            MyValidator myValidator = new MyValidator();
+            Set<ConstraintViolation<Object>> validationSet = myValidator.validate(newUser, validator);
+            if (validationSet.isEmpty()) {
+                userService.addUser(newUser);
+                modelAndView = new ModelAndView("sign-in");
+                modelAndView.addObject("msg", getMessage("message.user.create.success", locale));
+            } else {
+                StringBuilder msg= new StringBuilder();
+                for (ConstraintViolation<Object> cv : validationSet) {
+                    msg.append(cv.getMessage()).append("<br>");
+                }
+                modelAndView = new ModelAndView("sign-up");
+                modelAndView.addObject("msg", msg.toString());
+            }
             return modelAndView;
+
+
         }
     }
 
@@ -192,8 +206,17 @@ public class HomeController extends BaseController {
         return model;
     }
 
+    /**
+     * method search schedule by present params
+     *
+     * @param stationFrom
+     * @param stationTo
+     * @param searchDate
+     * @param searchTime
+     * @return view with search results satisfying request
+     */
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ModelAndView findSchedule(@RequestParam(name = "stationFrom") String stationFrom, @RequestParam(name = "stationTo") String stationTo, @RequestParam(name = "searchDate") String searchDate, @RequestParam(name = "searchTime") String searchTime) {
+    public ModelAndView findScheduleResult(@RequestParam(name = "stationFrom") String stationFrom, @RequestParam(name = "stationTo") String stationTo, @RequestParam(name = "searchDate") String searchDate, @RequestParam(name = "searchTime") String searchTime) {
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
         LocalDate date = LocalDate.parse(searchDate, dateFormatter);
 
@@ -240,6 +263,10 @@ public class HomeController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     * @param locale
+     * @return view with trains list of request station
+     */
     @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.GET)
     public ModelAndView searchOnStation(Locale locale) {
 
@@ -250,6 +277,11 @@ public class HomeController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     * @param station
+     * @param locale
+     * @return view with trains list of request @param station
+     */
     @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.POST)
     public ModelAndView searchOnStationResult(@RequestParam(name = "stationFrom") String station,
                                               Locale locale) {
