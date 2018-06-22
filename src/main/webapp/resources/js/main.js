@@ -6,17 +6,20 @@ var arrTrain = [];
 var arrTime = [];
 
 function trainOnTimeSelector() {
-    /*    arrTrain.empty();
-        arrTime.empty();*/
+
     var train = $("#train");
+    var trainHidden = $("#trainHidden");
     var departure_time = $("#departure_time").val();
     var index;
     index = arrTime.indexOf(departure_time);
     train.empty();
+    trainHidden.empty();
     train.append(
         '<option value=\"' + arrTrain[index] + '\">' + arrTrain[index] + '</option>'
     );
-    // train= arrTrain.get(index);
+    trainHidden.append(
+        '<option value=\"' + arrTrain[index] + '\">' + arrTrain[index] + '</option>'
+    );
 }
 
 
@@ -33,6 +36,7 @@ function trainsAndDateSelector() {
     stations["stationFrom"] = stationsFrom;
     stations["stationTo"] = stationsTo;
 
+    var trainHidden = $("#trainHidden");
     $.ajax({
         headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
         type: 'POST',
@@ -45,6 +49,9 @@ function trainsAndDateSelector() {
                 arrTrain.push(item['trainNumber']);
                 arrTime.push(item['departureTime']);
                 train.append(
+                    '<option value=\"' + item['trainNumber'] + '\">' + item['trainNumber'] + '</option>'
+                );
+                trainHidden.append(
                     '<option value=\"' + item['trainNumber'] + '\">' + item['trainNumber'] + '</option>'
                 );
                 departure_time.append(

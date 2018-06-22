@@ -33,16 +33,6 @@ public class TicketServiceImpl implements TicketService {
     private ScheduleService scheduleService;
     private RouteService routeService;
 
-/*
-    @Override
-    public void addUserTicket(Ticket ticket) {
-        TicketEntity ticketEntity = modelMapper.map(ticket, TicketEntity.class);
-        ticketDao.addTicket(modelMapper.map(ticket, TicketEntity.class));
-        ticketDao.addTicket(ticketEntity);
-        return modelMapper.map(ticketEntity, Ticket.class);
-    }
-*/
-
     @Override
     public Ticket createGuestTicket(TicketItem ticketItem) {
 
@@ -63,7 +53,7 @@ public class TicketServiceImpl implements TicketService {
             if (item.getDepartureTime().equals(departureTime)) {
                 departureScheduleId = item.getId();
                 departureSchedule = item;
-                break;///todo bad
+                break;
             }
         }
         if (departureScheduleId == 0) {
@@ -86,37 +76,36 @@ public class TicketServiceImpl implements TicketService {
         return ticket;
     }
 
-    /**
-     * Method make simple validation of ticket for not empty fields and for elements existing in database
-     *
-     * @param stationFrom
-     * @param stationTo
-     * @param departureDate
-     * @param departureTime
-     * @param trainNumber
-     * @return true, if ticket fields is not empty and stations and train was found in dataBase
-     */
-    @Override
-    public boolean simpleRouteValidation(String stationFrom, String stationTo, String departureDate, String departureTime, int trainNumber) {
-        if (null == stationFrom || stationFrom.equals("") || null == stationTo || stationTo.equals("") || null == departureDate || departureDate.equals("") || null == trainService.findByNumber(trainNumber) || trainService.findByNumber(trainNumber).equals("")) {
-            return false;
-        } else {
-            return true;
+    public String ticketSimpleValidation(String stationTo, String stationFrom, String depTime, String depDate, String name, String surname, String birthDate, String trainNumber) {
+        StringBuilder validationInfo = new StringBuilder();
+        if (stationTo.equals("") || stationTo == null || stationFrom.equals("") || null == stationFrom) {
+            validationInfo.append("Wrong station.").append("<br>");
         }
+        if (null == trainService.findByNumber(Integer.parseInt(trainNumber)) || trainNumber.equals("")) {
+            validationInfo.append("Wrong train.").append("<br>");
+        }
+        if (depDate.equals("") || depDate == null || depTime.equals("") || depTime == null) {
+            validationInfo.append("Wrong date/time.").append("<br>");
+        }
+        if (name.equals("") || surname.equals("") || birthDate.equals("")) {
+            validationInfo.append("Wrong user data.").append("<br>");
+        }
+        return validationInfo.toString();
     }
 
     /**
-     * Method create TicketItem from values, received from Front as ticket data
+     * Method create {@link TicketItem} from values, received from Front as ticket data
+     * formating date and time first from String to joda.time format
      *
-     * @param departureDate date of train departure as String
-     * @param departureTime time of train departure as String
-     * @param birthDay      of User - ticketholder
-     * @param name          of User - ticketholder
-     * @param surName       of User - ticketholder
-     * @param trainNumber   for train
+     * @param departureDate
+     * @param departureTime
+     * @param birthDay
+     * @param name
+     * @param surName
+     * @param trainNumber
      * @param stationFrom
-     * @param stationTo     and
-     * @return it.
+     * @param stationTo
+     * @return new instance of TicketItem
      */
     @Override
     public TicketItem createTicketItem(String departureDate, String departureTime, String birthDay, String name, String surName, int trainNumber, String stationFrom, String stationTo) {
@@ -140,6 +129,17 @@ public class TicketServiceImpl implements TicketService {
         return ticketItem;
     }
 
+    /**
+     * Method check number of vacant seats on train. Format data/time first, search {@link Route}'s
+     * and {@link Schedule}'s, create {@link Ticket} from @params
+     *
+     * @param departureDate
+     * @param departureTime
+     * @param stationFrom
+     * @param stationTo
+     * @param trainNumber   and then search train with ticket on it.
+     * @return boolean (true if empty seats) by compare purchased tickets and seats on this train
+     */
     @Override
     public boolean isVacantSeatsOnTrain(String departureDate, String departureTime, String stationFrom, String stationTo, int trainNumber) {
         LocalDateTime departureDateTime = dateTimeBuilder(departureDate, departureTime);
@@ -154,7 +154,7 @@ public class TicketServiceImpl implements TicketService {
             if (item.getDepartureTime().equals(departureTimeFormatted)) {
                 departureScheduleId = item.getId();
                 departureSchedule = item;
-                break;///todo bad
+                break;
             }
         }
         if (departureScheduleId == 0) {
@@ -175,7 +175,18 @@ public class TicketServiceImpl implements TicketService {
         return false;
     }
 
-
+    /**
+     * Method create ticket for existing {@link User}, take data from Front-end.
+     *
+     * @param departureDate
+     * @param departureTime
+     * @param trainNumber
+     * @param stationFrom
+     * @param stationTo
+     * @param user          Format data/time first, search {@link Route}'s
+     *                      and {@link Schedule}'s, create {@link Ticket} if it already not existed in database
+     * @return null if ticket with preset @params already exist, return {@link Ticket} if not
+     */
     @Override
     public Ticket createTicketForUser(String departureDate, String departureTime, int trainNumber, String stationFrom, String stationTo, User user) {
         LocalDateTime departureDateTime = dateTimeBuilder(departureDate, departureTime);
@@ -191,7 +202,7 @@ public class TicketServiceImpl implements TicketService {
             if (item.getDepartureTime().equals(departureTimeFormatted)) {
                 departureScheduleId = item.getId();
                 departureSchedule = item;
-                break;///todo bad
+                break;
             }
         }
         if (departureScheduleId == 0) {
@@ -245,8 +256,7 @@ public class TicketServiceImpl implements TicketService {
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
         LocalDate departureDateFormatted = LocalDate.parse(departureDate, dateFormatter);
         LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
-        LocalDateTime localDateTime = departureDateFormatted.toLocalDateTime(departureTimeFormatted);
-        return localDateTime;
+        return departureDateFormatted.toLocalDateTime(departureTimeFormatted);
     }
 
     @Autowired

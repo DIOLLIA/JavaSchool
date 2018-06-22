@@ -16,8 +16,7 @@
                         style="color:#e0e139;">${message}</span></h3>
                 <div class="col-md probootstrap-animate">
                     <form:form name='buyTicket' method="POST" modelAttribute="ticket"
-                               action="${pageContext.request.contextPath}/ticket/save" class="probootstrap-form"
-                               onsubmit="return ticket_validation();">
+                               action="${pageContext.request.contextPath}/ticket/save" class="probootstrap-form">
                     <div class="form-group">
                         <h4 style="text-align: center"><spring:message code="buy-ticket.header.route"/></h4>
                         <div class="row mb-3">
@@ -67,7 +66,8 @@
                                         <spring:message code="common.label.departure-time"/>
                                     </label>
                                     <select class="js-example-basic-single js-states form-control"
-                                            id="departure_time" name="departureTime" style="width: 100%"  onchange="trainOnTimeSelector()">
+                                            id="departure_time" name="departureTime" style="width: 100%"
+                                            onchange="trainOnTimeSelector()">
                                         <td><joda:format pattern="HH:mm" value="${scheduleItem.departureTime}"/></td>
                                     </select>
                                     <span id="timeloc" style="color: red"></span>
@@ -87,9 +87,9 @@
                                         <spring:message code="common.label.train-number"/>
                                     </label>
                                     <select class="js-example-basic-single js-states form-control"
-                                            id="train" name="trainNumber" style="width: 100%" disabled>
-
-                                    </select>
+                                            id="train" name="trainNumberHidden" style="width: 100%"
+                                            disabled="disabled"></select>
+                                    <select name="trainNumber" id="trainHidden" hidden="hidden"></select>
                                     <span id="trainloc" style="color: red"></span>
                                 </div>
                             </div>

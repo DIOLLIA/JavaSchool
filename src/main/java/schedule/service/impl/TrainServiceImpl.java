@@ -14,6 +14,13 @@ import schedule.service.api.TrainService;
 
 import java.util.*;
 
+/**
+ * @author Rudkov Andrey
+ * <p>
+ * used next reduction of:
+ * <l> Model Mapper - MM
+ * <l> {@link TrainEntity} - TE
+ */
 @Service
 @Transactional
 public class TrainServiceImpl implements TrainService {
@@ -21,21 +28,43 @@ public class TrainServiceImpl implements TrainService {
     private TrainDao trainDao;
     private ModelMapper modelMapper;
 
+    /**
+     * Method take
+     *
+     * @param trainDto mapping it to TE
+     * @return added new Train
+     */
     public Train addTrain(Train trainDto) {
         TrainEntity trainEntity = modelMapper.map(trainDto, TrainEntity.class);
         trainDao.addTrain(trainEntity);
         return modelMapper.map(trainEntity, Train.class);
     }
 
+    /**
+     * Method take
+     *
+     * @param trainDto mapping it to TE
+     * @return update Train
+     */
     public void editTrain(Train trainDto) {
         TrainEntity trainEntity = modelMapper.map(trainDto, TrainEntity.class);
         trainDao.editTrain(trainEntity);
     }
 
+    /**
+     * Method delete train by
+     *
+     * @param id
+     */
     public void deleteTrain(int id) {
         trainDao.deleteTrain(id);
     }
 
+    /**
+     * Method return all TE from database as List
+     *
+     * @return all TE from database
+     */
     public List<Train> getTrains() {
 
         List<TrainEntity> all = trainDao.getTrains();
@@ -47,6 +76,12 @@ public class TrainServiceImpl implements TrainService {
         return trains;
     }
 
+    /**
+     * Method find Train from database by
+     *
+     * @param id
+     * @return Train founded by id
+     */
     @Override
     public Train get(int id) {
         TrainEntity trainEntity = trainDao.getTrain(id);
@@ -54,16 +89,27 @@ public class TrainServiceImpl implements TrainService {
         return train;
     }
 
+    /**
+     * Method search Train in database by
+     *
+     * @param number
+     * @return Train if founded otherwise null
+     */
     @Override
     public Train findByNumber(int number) {
         TrainEntity trainEntity = trainDao.findByNumber(number);
         if (!(trainEntity == null)) {
             Train train = modelMapper.map(trainEntity, Train.class);
             return train;
-        }
-       else return null;
+        } else return null;
     }
 
+    /**
+     * Method search all {@link Schedule} by Train
+     *
+     * @param id
+     * @return List of schedule items with train.id from @param
+     */
     @Override
     public List<Schedule> getScheduleByTrainId(int id) {
         List<Schedule> schedules = new ArrayList<>();
@@ -73,18 +119,15 @@ public class TrainServiceImpl implements TrainService {
         }
         return schedules;
     }
-//todo check usages
-  /*  @Override
-    public List<String> trainsList() {
-        List<TrainEntity> trainEntityList = trainDao.getTrains();
-        List<String> trainsList = new ArrayList<>();
-        for (TrainEntity trainNumber : trainEntityList) {
-            String trainNumberString = String.valueOf(trainNumber.getNumberOfTrain());
-            trainsList.add(trainNumberString);
-        }
-        return trainsList;
-    }*/
 
+    /**
+     * Method search schedules with @Param RouteDailyId
+     * and request train number. It takes unique routes by RouteDailyId
+     * and fill result List of ScheduleIten
+     *
+     * @param schedules
+     * @return List of ScheduleIten with unique routes of requested train
+     */
     @Override
     public List<ScheduleItem> createTrainRoutesList(List<Schedule> schedules) {
 

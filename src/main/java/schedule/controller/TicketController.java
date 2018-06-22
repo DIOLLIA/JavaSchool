@@ -30,48 +30,67 @@ public class TicketController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     * first controller simply validate received data for null and empty values with <m>validation</m> and return message on page if it's true.
+     *
+     * @param stationFrom
+     * @param stationTo
+     * @param departureDate
+     * @param departureTime
+     * @param train
+     * @param name
+     * @param surName
+     * @param birthDay
+     * @param locale        Than check for enough time (more than 10 min) and vacant seats have. Search future ticketholder in database. if false - create guest profile and ticket for him. Check that user already have ticket with request parameters or not. If it pass through all the checks, {@link schedule.model.Ticket} will be created
+     * @return view with message
+     */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView saveTicket(@RequestParam("stationFrom") String stationFrom,
                                    @RequestParam("stationTo") String stationTo,
                                    @RequestParam("departureDate") String departureDate,
                                    @RequestParam("departureTime") String departureTime,
-                                   @RequestParam("trainNumber") int trainNumber,
+                                   @RequestParam("trainNumber") String train,
                                    @RequestParam("name") String name,
                                    @RequestParam("surName") String surName,
                                    @RequestParam("birthDay") String birthDay,
                                    Locale locale) {
-
-        Ticket ticket = null;
         ModelAndView modelAndView;
+        String validation = ticketService.ticketSimpleValidation(stationTo, stationFrom, departureTime, departureDate, name, surName, birthDay, train);
+        if (validation.length() != 0) {
+            modelAndView = new ModelAndView("buy-ticket");
+//            modelAndView.addObject("message", getMessage("message.ticket.past.date.or.not.enough.time", locale));
+            return modelAndView.addObject("message", validation);
+        }
 
-        boolean routeNotEmpty = ticketService.simpleRouteValidation(stationFrom, stationTo, departureDate, departureTime, trainNumber);
-        boolean userNotEmpty = userService.simpleUserValidation(name, surName, birthDay);
+        int trainNumber = Integer.parseInt(train);
+        Ticket ticket;
+
         boolean isTimeEnough = ticketService.weHaveTenMinutes(departureDate, departureTime);
         boolean isVacantSeatsOnTrain = ticketService.isVacantSeatsOnTrain(departureDate, departureTime, stationFrom, stationTo, trainNumber);
-
+        //check for time left before departure
         if (!isTimeEnough) {
             modelAndView = new ModelAndView("buy-ticket");
             modelAndView.addObject("message", getMessage("message.ticket.past.date.or.not.enough.time", locale));
             return modelAndView;
+            //check for vacant seats on train
         } else if (!isVacantSeatsOnTrain) {
             modelAndView = new ModelAndView("buy-ticket");
             modelAndView.addObject("message", getMessage("message.ticket.no.vacant.seats", locale));
             return modelAndView;
         } else {
-            if (userNotEmpty && routeNotEmpty) {
-                User existingTicketHolder = userService.findUserByNameSurnameBirthDay(name, surName, birthDay);
+            //search future ticketholder in database. if false - we create guest profile and ticket for him
+            User existingTicketHolder = userService.findUserByNameSurnameBirthDay(name, surName, birthDay);
 
-                if (existingTicketHolder == null) {
-                    TicketItem ticketItem = ticketService.createTicketItem(departureDate, departureTime, birthDay, name, surName, trainNumber, stationFrom, stationTo);
-                    ticket = ticketService.createGuestTicket(ticketItem);
-                } else {
-                    ticket = ticketService.createTicketForUser(departureDate, departureTime, trainNumber, stationFrom, stationTo, existingTicketHolder);
-                }
+            if (existingTicketHolder == null) {
+                // always create new guest profile and ticket for him
+                TicketItem ticketItem = ticketService.createTicketItem(departureDate, departureTime, birthDay, name, surName, trainNumber, stationFrom, stationTo);
+                ticket = ticketService.createGuestTicket(ticketItem);
             } else {
-                modelAndView = new ModelAndView("buy-ticket");
-                modelAndView.addObject("message", getMessage("message.ticket.empty.fields", locale));
+                //if user already have ticket with request parameters, method returns null
+                ticket = ticketService.createTicketForUser(departureDate, departureTime, trainNumber, stationFrom, stationTo, existingTicketHolder);
             }
         }
+
         modelAndView = new ModelAndView("buy-ticket");
         modelAndView.addObject("pageTitle", getMessage("page.title.buy-ticket", locale));
         if (ticket == null) {
@@ -91,4 +110,5 @@ public class TicketController extends BaseController {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
+
 }
