@@ -7,7 +7,10 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md probootstrap-animate">
-                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Add route</h2>
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate"> <input class="btn btn-primary"
+                                                                                           type="submit" value="<<"
+                                                                                           onclick="location='./';"/> Add route</h2>
+                <h2 class="display-8 probootstrap-section-heading" style="color: yellow">${message}</h2>
                 <p class="lead mb-4 probootstrap-animate">New <span style="color:#32CD32;">route name </span> will be
                     concatinated from two station names: </p>
                 <form:form method="POST" modelAttribute="route"

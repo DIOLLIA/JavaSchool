@@ -17,7 +17,7 @@
 
                 <c:if test="${not empty error}">
                     <h5 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
-                            style="color: #E20074;">${error}</span></h5>
+                            style="color: yellow;">${error}</span></h5>
                 </c:if>
 
                 <c:if test="${not empty msg}">

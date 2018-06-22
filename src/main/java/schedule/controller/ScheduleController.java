@@ -1,9 +1,5 @@
 package schedule.controller;
 
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import schedule.controller.model.ScheduleItem;
 import schedule.controller.model.ScheduleToSend;
 import schedule.entity.RouteEntity;
 import schedule.model.Route;
@@ -34,84 +29,6 @@ public class ScheduleController extends BaseController {
     private StationService stationService;
     private RouteService routeService;
 
-
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ModelAndView findSchedule(@RequestParam(name = "stationFrom") String stationFrom, @RequestParam(name = "stationTo") String stationTo, @RequestParam(name = "searchDate") String searchDate, @RequestParam(name = "searchTime") String searchTime) {
-        DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
-        LocalDate date = LocalDate.parse(searchDate, dateFormatter);
-
-        LocalTime requestTime = LocalTime.parse(searchTime);
-        String message;
-        List<Route> routes = routeService.findByStationNames(stationFrom, stationTo);
-
-        ModelAndView modelAndView = new ModelAndView("home");
-        List<Schedule> schedules = scheduleService.findScheduleByStations(routes, stationTo, stationFrom);
-
-        List<ScheduleItem> scheduleItems = new ArrayList<>();
-        for (Schedule scheduleOne : schedules) {
-            String stationOneName = scheduleOne.getStationName().getStationName();
-            if (stationOneName.equals(stationTo)) {
-                continue;
-            }
-            for (Schedule scheduleTwo : schedules) {
-                String stationTwoName = scheduleTwo.getStationName().getStationName();
-                if (scheduleOne.getRouteDailyId() != scheduleTwo.getRouteDailyId() ||
-                        scheduleOne.getRouteStationIndex() >= scheduleTwo.getRouteStationIndex()) {
-                    continue;
-                }
-                if (!requestTime.isBefore(scheduleOne.getDepartureTime())) {
-                    break;
-                } else {
-                    ScheduleItem scheduleItem = new ScheduleItem();
-                    scheduleItem.setDepartureTime(scheduleOne.getDepartureTime());
-                    scheduleItem.setArrivalTime(scheduleTwo.getArrivalTime());
-
-                    scheduleItem.setStationOfDeparture(stationOneName);
-                    scheduleItem.setStationOfArrival(stationTwoName);
-                    scheduleItem.setTrainNumber(scheduleOne.getTrainNumber().getNumberOfTrain());
-                    scheduleItems.add(scheduleItem);
-                }
-            }
-        }
-        if (scheduleItems.isEmpty()) {
-            message = "No trains found from " + searchTime + " on " + searchDate + ".";
-        } else {
-            message = "Search result for departure date " + date;
-        }
-        modelAndView.addObject("message", message);
-        modelAndView.addObject("searchResult", scheduleItems);
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.GET)
-    public ModelAndView searchOnStation(Locale locale) {
-
-        ModelAndView modelAndView = new ModelAndView("train-list-by-station");
-        modelAndView.addObject("pageTitle",
-                getMessage("page.title.search-by-station", locale));
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/searchTrainOnStation", method = RequestMethod.POST)
-    public ModelAndView searchOnStationResult(@RequestParam(name = "stationFrom") String station,
-                                              Locale locale) {
-
-        ModelAndView modelAndView = new ModelAndView("train-list-by-station");
-        modelAndView.addObject("pageTitle",
-                getMessage("page.title.search-by-station", locale));
-
-        List<Schedule> listOfTrainsByStation = scheduleService.findScheduleByStation(
-                stationService.findByName(station));
-
-        List<Schedule> scheduleItems = new ArrayList<>(listOfTrainsByStation);
-        String msg = "Results for " + station + " :";
-
-        modelAndView.addObject("scheduleItems", scheduleItems);
-        modelAndView.addObject("msg", msg);
-
-        return modelAndView;
-    }
 
     @RequestMapping(value = "/scheduleList")
     public ModelAndView listOfSchedule(Locale locale) {
@@ -138,7 +55,7 @@ public class ScheduleController extends BaseController {
 
         return modelAndView;
     }
-
+//TODO проверить юзабилити метода
     @RequestMapping(value = "/scheduleList/add")
     public ModelAndView addNewSchedule(Locale locale) {
 
@@ -162,11 +79,17 @@ public class ScheduleController extends BaseController {
                                  @RequestParam(name = "stationTo") String stationTo) {
 
         String routeName = stationFrom + "-" + stationTo;
-        routeService.addRoute(routeName);
-        ModelAndView modelAndView = new ModelAndView("add-route");
-        modelAndView.addObject("message", getMessage("message.route.create.success", locale));
+        if (routeService.findByName(routeName) != 0) {
+            ModelAndView modelAndView = new ModelAndView("add-route");
+            modelAndView.addObject("message", getMessage("message.route.create.fail", locale));
+            return modelAndView;
+        } else {
+            ModelAndView modelAndView = new ModelAndView("route-list");
+            routeService.addRoute(routeName);
+            modelAndView.addObject("message", getMessage("message.route.create.success", locale));
 
-        return modelAndView;
+            return modelAndView;
+        }
     }
 
     @RequestMapping(value = "/scheduleList/routeList")
@@ -206,7 +129,7 @@ public class ScheduleController extends BaseController {
     @RequestMapping(value = "/constructor")
     public ModelAndView scheduleConstructor(Locale locale) {
         List<Schedule> schedule = scheduleService.getSchedule();
-        ModelAndView modelAndView = new ModelAndView("schedule-editor");
+        ModelAndView modelAndView = new ModelAndView("schedule-constructor");
         modelAndView.addObject("schedule", schedule);
         modelAndView.addObject("pageTitle", getMessage("page.title.schedule.viewer", locale));
 
@@ -215,6 +138,7 @@ public class ScheduleController extends BaseController {
 
     /**
      * method get from user (jsp page) values
+     *
      * @param locale
      * @param routeName
      * @param arrivalTime
@@ -222,9 +146,8 @@ public class ScheduleController extends BaseController {
      * @param station
      * @param numberInOrder
      * @param dailyRoute
-     * @param trainNumber
-     * and sendt it to {@link ScheduleService}, also create new instance of
-     * {@link ScheduleToSend}, add it to list and transfer it to JMS.
+     * @param trainNumber   and sendt it to {@link ScheduleService}, also create new instance of
+     *                      {@link ScheduleToSend}, add it to list and transfer it to JMS.
      * @return list of schedule with new item
      */
     @RequestMapping(value = "/constructor", method = RequestMethod.POST)
@@ -241,7 +164,7 @@ public class ScheduleController extends BaseController {
         list.add(new ScheduleToSend(station, arrivalTime, departureTime, trainNumber, dailyRoute, numberInOrder));
         scheduleService.sendAll(list);
         List<Schedule> schedule = scheduleService.getSchedule();
-        ModelAndView modelAndView = new ModelAndView("schedule-editor");
+        ModelAndView modelAndView = new ModelAndView("schedule-constructor");
         modelAndView.addObject("schedule", schedule);
         modelAndView.addObject("pageTitle", getMessage("page.title.schedule.viewer", locale));
 

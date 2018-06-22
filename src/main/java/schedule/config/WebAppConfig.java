@@ -158,8 +158,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
 
         Properties mappings = new Properties();
-        resolver.setExceptionMappings(mappings); // None by default
-        resolver.setExceptionAttribute("ErrorOccurred"); // Default is "exception"
+        resolver.setExceptionMappings(mappings);
+        resolver.setExceptionAttribute("ErrorOccurred");
         resolver.setDefaultErrorView("warning");
         return resolver;
     }

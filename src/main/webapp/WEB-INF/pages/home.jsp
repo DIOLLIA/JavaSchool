@@ -16,7 +16,7 @@
             </div>
             <div class="col-md probootstrap-animate">
                 <form:form name='mainSearch' method="POST" modelAttribute="stationSearch"
-                           action="${pageContext.request.contextPath}/schedule/search" class="probootstrap-form"
+                           action="${pageContext.request.contextPath}/search" class="probootstrap-form"
                            onsubmit="return main_search_validation();">
                     <div class="form-group">
                         <div class="row mb-3">
@@ -106,6 +106,9 @@
                                 <td>${scheduleItem.trainNumber}</td>
                                 <td><joda:format pattern="HH:mm" value="${scheduleItem.departureTime}"/></td>
                                 <td><joda:format pattern="HH:mm" value="${scheduleItem.arrivalTime}"/></td>
+                                <td><a href="${pageContext.request.contextPath}/schedule/scheduleList/${schedule.id}
+                            ">Show
+                                    details</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>

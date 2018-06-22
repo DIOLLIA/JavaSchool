@@ -40,7 +40,7 @@
         <div class="collapse navbar-collapse" id="probootstrap-menu">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/schedule/searchTrainOnStation">
+                    <a class="nav-link" href="/searchTrainOnStation">
                         <spring:message code="header.station-schedule"/>
                     </a>
                 </li>

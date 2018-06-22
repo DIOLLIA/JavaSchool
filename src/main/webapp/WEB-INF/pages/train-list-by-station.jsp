@@ -15,7 +15,7 @@
                     <spring:message code="train-by-station.label.select-station"/>
                 </p>
                 <form:form method="POST" modelAttribute="stationSearch"
-                           action="${pageContext.request.contextPath}/schedule/searchTrainOnStation">
+                           action="${pageContext.request.contextPath}/searchTrainOnStation">
                     <label for="station_from" style="width: 60%;">
                         <select class="js-example-basic-single js-states form-control"
                                 id="station_from" name="stationFrom" style="width: 35%;">
