@@ -12,15 +12,20 @@ import org.springframework.web.servlet.ModelAndView;
 import schedule.model.Role;
 import schedule.model.User;
 import schedule.service.api.UserService;
+import schedule.util.MyValidator;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/user")
 public class UserController extends BaseController {
 
+    private Validator validator;
     private UserService userService;
     private PasswordEncoder passwordEncoder;
 
@@ -38,7 +43,7 @@ public class UserController extends BaseController {
     public ModelAndView addUserPage() {
         ModelAndView modelAndView = new ModelAndView("add-user");
         //todo why do you need it? think and rename if it's used.
-        modelAndView.addObject("user", new User());
+//        modelAndView.addObject("user", new User());
 
         return modelAndView;
     }
@@ -51,12 +56,14 @@ public class UserController extends BaseController {
                                    @RequestParam("birthDay") String birthDayString,
                                    @RequestParam("role") String role,
                                    Locale locale) {
+        ModelAndView modelAndView;
         if (!userService.findByLoginOrSurname(email).isEmpty()) {
             return new ModelAndView("add-user")
                     .addObject("msg",
                             getMessage("message.user.create.error.username-exist", locale, email));
         } else {
             //todo rename with appropriate name? What exactly the role? You created this var to store what role?
+
             Role role1 = new Role();
 
             if (role.equals("Admin")) {
@@ -72,14 +79,24 @@ public class UserController extends BaseController {
             newUser.setRole(role1);
             newUser.setBirthDay(LocalDate.parse(birthDayString));
 
-            userService.addUser(newUser);
-
-            ModelAndView modelAndView = new ModelAndView("add-user");
-            modelAndView.addObject("message",
-                    getMessage("message.admin.create-user.success", locale, role));
-
-            return modelAndView;
+            MyValidator myValidator = new MyValidator();
+            Set<ConstraintViolation<Object>> validationSet = myValidator.validate(newUser, validator);
+            if (validationSet.isEmpty()) {
+                userService.addUser(newUser);
+                modelAndView = new ModelAndView("users-list");
+                modelAndView.addObject("message",
+                        getMessage("message.admin.create-user.success", locale, role));
+                return modelAndView;
+            } else {
+                StringBuilder msg = new StringBuilder();
+                for (ConstraintViolation<Object> cv : validationSet) {
+                    msg.append(cv.getMessage()).append("<br>");
+                }
+                modelAndView = new ModelAndView("add-user");
+                modelAndView.addObject("message", msg.toString());
+            }
         }
+        return modelAndView;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -131,4 +148,8 @@ public class UserController extends BaseController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Autowired
+    public void setValidator(Validator validator) {
+        this.validator = validator;
+    }
 }

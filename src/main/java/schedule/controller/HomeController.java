@@ -42,9 +42,6 @@ public class HomeController extends BaseController {
     private ScheduleService scheduleService;
     private RouteService routeService;
     private StationService stationService;
-
-
-    @Autowired
     private Validator validator;
 
     /**
@@ -149,7 +146,7 @@ public class HomeController extends BaseController {
                 modelAndView = new ModelAndView("sign-in");
                 modelAndView.addObject("msg", getMessage("message.user.create.success", locale));
             } else {
-                StringBuilder msg= new StringBuilder();
+                StringBuilder msg = new StringBuilder();
                 for (ConstraintViolation<Object> cv : validationSet) {
                     msg.append(cv.getMessage()).append("<br>");
                 }
@@ -325,5 +322,10 @@ public class HomeController extends BaseController {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setValidator(Validator validator) {
+        this.validator = validator;
     }
 }

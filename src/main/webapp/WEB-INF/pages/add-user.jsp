@@ -7,8 +7,8 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-9  probootstrap-animate">
-                <h3 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
-                        style="color:#e0e139;">${message}</span></h3>
+                <h4 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
+                        style="color:#e0e139;">${message}</span></h4>
                 <form:form name='signUpForm' onsubmit="return registration_validation()" method="POST"
                            modelAttribute="user"
                            action="${pageContext.request.contextPath}/user/add"
