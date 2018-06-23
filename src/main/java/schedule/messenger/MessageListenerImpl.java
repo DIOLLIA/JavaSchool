@@ -15,7 +15,6 @@ public class MessageListenerImpl implements MessageListener {
 
     @Override
     public void onMessage(Message message) {
-        System.out.println("Remote app stated! Sending schedule...");
         scheduleService.sendAll(scheduleService.transform(scheduleService.getSchedule()));
     }
 }
