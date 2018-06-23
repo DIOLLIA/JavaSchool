@@ -1,23 +1,26 @@
-package schedule.config;
+package schedule;
 
 import org.apache.activemq.ActiveMQConnection;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.WebApplicationInitializer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import schedule.messenger.MessageListenerImpl;
+import schedule.service.api.ScheduleService;
 
+import javax.annotation.PostConstruct;
 import javax.jms.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import java.util.Hashtable;
 
-@Configuration
-public class MyWebAppInitializer implements WebApplicationInitializer {
+@Component
+public class StartupListener {
 
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
+    @Autowired
+    private ScheduleService scheduleService;
+
+    @PostConstruct
+    void init() {
         Hashtable<String, String> props = new Hashtable<String, String>();
         props.put("java.naming.factory.initial", "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
         props.put("java.naming.provider.url", ActiveMQConnection.DEFAULT_BROKER_URL);
@@ -35,7 +38,7 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
 
             QueueReceiver receiver = session.createReceiver(queue);
 
-            receiver.setMessageListener(new MessageListenerImpl());
+            receiver.setMessageListener(new MessageListenerImpl(scheduleService));
         } catch (NamingException | JMSException e) {
             e.printStackTrace();
         }
