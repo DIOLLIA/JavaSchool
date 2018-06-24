@@ -15,7 +15,7 @@ public class LoggerAspect {
     private static final Logger logger = LoggerFactory.getLogger(LoggerAspect.class);
 
     // logs any method in any class in the given package
-    @Pointcut("execution(* schedule.service.impl.*.*(..)) || execution(* schedule.dao.impl.*.*(..))")
+    @Pointcut("execution(* schedule.service.impl.*.*(..)) || execution(* schedule.dao.impl.*.*(..)) ")
     public void servicePointCut() {
         // Pointcut for advice execution.
     }
@@ -28,8 +28,8 @@ public class LoggerAspect {
     // calls servicePointCut() where package is determined
     @Before("servicePointCut()")
     public void logBefore(JoinPoint joinPoint) {
-        logger.info(String.format("#### A method: {%s} is called", joinPoint));
-        logger.info(String.format("#### Arguments: %s ", Arrays.toString(joinPoint.getArgs())));
+        logger.trace("#### A method: {} is called", joinPoint);
+        logger.trace("#### Arguments: {} ", Arrays.toString(joinPoint.getArgs()));
     }
 
     /**
@@ -40,7 +40,7 @@ public class LoggerAspect {
     // calls servicePointCut() where package is determined
     @AfterReturning("servicePointCut()")
     public void logAfter(JoinPoint joinPoint) {
-        logger.info("#### Success execution of method :{"+ joinPoint.getSignature().getName()+"}");
+        logger.trace("#### Success execution of method :{}", joinPoint.getSignature().getName());
     }
 
     /**
@@ -54,9 +54,6 @@ public class LoggerAspect {
     public void logExceptions(JoinPoint joinPoint, Exception e) {
         logger.error(String.format("#### Exception thrown in the method: {%s}, the message is {%s}",
                 joinPoint, e.getMessage()));
-        logger.error(" #### The stack trace is below");
-        for (StackTraceElement b : e.getStackTrace()) {
-            logger.error("#### " + b);
-        }
+        logger.error("#### The stack trace is below", e);
     }
 }

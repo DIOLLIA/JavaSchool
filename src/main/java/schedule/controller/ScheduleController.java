@@ -1,5 +1,7 @@
 package schedule.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +26,8 @@ import java.util.Locale;
 @Controller
 @RequestMapping(value = "/schedule")
 public class ScheduleController extends BaseController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ScheduleController.class);
 
     private ScheduleService scheduleService;
     private StationService stationService;
@@ -55,7 +59,8 @@ public class ScheduleController extends BaseController {
 
         return modelAndView;
     }
-//TODO проверить юзабилити метода
+
+    //TODO проверить юзабилити метода
     @RequestMapping(value = "/scheduleList/add")
     public ModelAndView addNewSchedule(Locale locale) {
 
@@ -77,13 +82,15 @@ public class ScheduleController extends BaseController {
     @RequestMapping(value = "/scheduleList/addRoute", method = RequestMethod.POST)
     public ModelAndView addRoute(Locale locale, @RequestParam(name = "stationFrom") String stationFrom,
                                  @RequestParam(name = "stationTo") String stationTo) {
-
         String routeName = stationFrom + "-" + stationTo;
-        if (routeService.findByName(routeName) != 0) {
+        Integer routeId = routeService.findByName(routeName);
+        if (routeId!=null) {
+            logger.debug("Route with id {} and route name {} found ", routeId, routeName);
             ModelAndView modelAndView = new ModelAndView("add-route");
             modelAndView.addObject("message", getMessage("message.route.create.fail", locale));
             return modelAndView;
         } else {
+            logger.debug("Route with id {} and route name {} NOT found ", routeId, routeName);
             ModelAndView modelAndView = new ModelAndView("route-list");
             routeService.addRoute(routeName);
             modelAndView.addObject("message", getMessage("message.route.create.success", locale));
@@ -161,7 +168,7 @@ public class ScheduleController extends BaseController {
                                          @RequestParam(name = "train_picker") int trainNumber) {
         scheduleService.addSchedule(routeName, arrivalTime, departureTime, station, dailyRoute, numberInOrder, trainNumber);
         List<ScheduleToSend> list = new ArrayList<>();
-        list.add(new ScheduleToSend(station, arrivalTime, departureTime, trainNumber, dailyRoute, numberInOrder));
+        list.add(new ScheduleToSend(station, departureTime, arrivalTime, trainNumber, dailyRoute, numberInOrder));
         scheduleService.sendAll(list);
         List<Schedule> schedule = scheduleService.getSchedule();
         ModelAndView modelAndView = new ModelAndView("schedule-constructor");

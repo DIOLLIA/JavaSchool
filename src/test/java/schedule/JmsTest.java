@@ -1,3 +1,5 @@
+package schedule;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import schedule.config.JmsCfg;
@@ -9,7 +11,6 @@ public class JmsTest {
             ApplicationContext context = new AnnotationConfigApplicationContext(JmsCfg.class);
             MessageSender sender = context.getBean(MessageSender.class);
             sender.send("Hello!!!3");
-            while (true){}
         }
     }
 

@@ -1,6 +1,8 @@
 package schedule.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,8 @@ import java.util.List;
 @Service
 @Transactional
 public class RouteServiceImpl implements RouteService {
+
+    private static final Logger logger = LoggerFactory.getLogger(RouteServiceImpl.class);
 
     private RouteDao routeDao;
     private ModelMapper modelMapper;
@@ -46,6 +50,7 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public void addRoute(String routeName) {
+        logger.info("Create new route with {} name", routeName);
         routeDao.create(new RouteEntity(routeName));
     }
 
@@ -71,7 +76,7 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public int findByName(String routeName) {
+    public Integer findByName(String routeName) {
         return routeDao.findByName(routeName);
     }
 

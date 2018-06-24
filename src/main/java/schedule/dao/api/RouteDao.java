@@ -12,7 +12,7 @@ public interface RouteDao extends GeneralCrudDao<RouteEntity> {
 
     List<StationEntity> stationsOnRoute(int routeId);
 
-    int findByName(String routeName);
+    Integer findByName(String routeName);
 
     RouteEntity routeById (int id);
 }

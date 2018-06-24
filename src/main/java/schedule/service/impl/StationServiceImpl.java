@@ -63,7 +63,7 @@ public class StationServiceImpl implements StationService {
     @Override
     public Station findByName(String name) {
         StationEntity station = stationDao.findByName(name);
-        if (station==null){
+        if (station == null) {
             return null;
         }
         return modelMapper.map(station, Station.class);

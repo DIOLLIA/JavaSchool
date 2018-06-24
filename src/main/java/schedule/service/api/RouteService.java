@@ -58,7 +58,7 @@ public interface RouteService {
      * @return Route id
      * @see Route
      */
-    int findByName(String routeName);
+    Integer findByName(String routeName);
 
     void addStationToRoute(int routeId, Station stationName);
 }
