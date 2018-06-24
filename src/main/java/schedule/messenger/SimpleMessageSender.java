@@ -21,8 +21,7 @@ public class SimpleMessageSender implements MessageSender {
     public void send(String message) {
         jmsTemplate.send(new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
-                MapMessage mapMessage = session.createMapMessage();
-                return mapMessage;
+                return session.createMapMessage();
 
             }
         });

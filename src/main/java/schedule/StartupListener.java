@@ -29,7 +29,7 @@ public class StartupListener {
         Context context = null;
         try {
             context = new InitialContext(props);
-            QueueConnectionFactory queueFactory = (QueueConnectionFactory) context.lookup("timetable-queue");
+            QueueConnectionFactory queueFactory = (QueueConnectionFactory) context.lookup("timetable");
             Queue queueClient = (Queue) context.lookup("client-queue");
             QueueConnection connection = queueFactory.createQueueConnection();
             connection.start();

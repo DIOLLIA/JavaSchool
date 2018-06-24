@@ -35,7 +35,6 @@ import java.util.Properties;
 @Configuration
 @ComponentScan("schedule")
 @EnableWebMvc
-//@Import({SecurityConfig.class})// todo чекнуть полезность этого импорта
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 public class WebAppConfig extends WebMvcConfigurerAdapter {
@@ -117,15 +116,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
-
-        //todo see lesha)
-/*        modelMapper.addMappings(new PropertyMap<Ticket, TicketEntity>() {
-            @Override
-            protected void configure() {
-                map().setUserEntity(modelMapper.map(source.getUser(), UserEntity.class));
-                map().setTrainEntity(modelMapper.map(source.getTrain(), TrainEntity.class));
-            }
-        });*/
         return modelMapper;
     }
 
