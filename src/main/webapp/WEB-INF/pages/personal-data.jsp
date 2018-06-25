@@ -57,8 +57,9 @@
                     TICKET#${ticket.departureDateTime}(&@${ticket.user.surname})
                     <p><joda:format pattern="d MMMM yyyy ,HH:mm" value="${ticket.departureDateTime}"/></p>
                     <p><spring:message code="home.btn.train-number"/>: ${ticket.train.numberOfTrain}</p>
-                    <p><spring:message code="common.label.station"/>: ${ticket.departureSchedule.stationName.stationName}</p>
-                    -----------------------------------------------------------------------------
+                    <p><spring:message
+                            code="common.label.station"/>: ${ticket.departureSchedule.stationName.stationName}</p>
+                    -----------------------------------------------------------------------------<br>
 
                 </c:forEach>
             </div>

@@ -129,7 +129,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="submit" style="width: 100%;font-size: 120%"> &nbsp;</label>
-                            <input type="submit" id="submit" value="Get IT! FREE" class="btn btn-primary btn-block">
+                            <input type="submit" id="submit" value="<spring:message code="common.btn.get-ticket"/>" class="btn btn-primary btn-block">
                         </div>
                     </div>
                 </div>

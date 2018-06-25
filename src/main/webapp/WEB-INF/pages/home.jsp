@@ -2,7 +2,10 @@
 
 <%@ include file="header.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
-<script src="${pageContext.request.contextPath}/resources/js/main-search-modal.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/route-list.css">
+
+<script src="${pageContext.request.contextPath}/resources/js/route-list.js"></script>
+
 <section class="probootstrap-cover overflow-hidden relative"
          style="background-image: url('/resources/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
          id="section-home">
@@ -90,10 +93,10 @@
                     <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th width="15%"><spring:message code="common.label.from"/></th>
-                            <th width="15%"><spring:message code="common.label.to"/></th>
                             <th width="10%"><spring:message code="home.btn.train-number"/></th>
                             <th width="10%"><spring:message code="common.label.departure-time"/></th>
+                            <th width="15%"><spring:message code="common.label.from"/></th>
+                            <th width="15%"><spring:message code="common.label.to"/></th>
                             <th width="10%"><spring:message code="common.label.arrival-time"/></th>
                             <th width="10%"></th>
                         </tr>
@@ -101,10 +104,10 @@
                         <tbody>
                         <c:forEach var="scheduleItem" items="${searchResult}">
                             <tr>
-                                <td>${scheduleItem.stationOfDeparture}</td>
-                                <td>${scheduleItem.stationOfArrival}</td>
                                 <td class="train_number">${scheduleItem.trainNumber}</td>
                                 <td><joda:format pattern="HH:mm" value="${scheduleItem.departureTime}"/></td>
+                                <td>${scheduleItem.stationOfDeparture}</td>
+                                <td>${scheduleItem.stationOfArrival}</td>
                                 <td><joda:format pattern="HH:mm" value="${scheduleItem.arrivalTime}"/></td>
                                 <td><a class="route-info_class" id="route-info">Show details</a></td>
                             </tr>
@@ -127,31 +130,9 @@
                         </button>
                     </h5>
                     <br>
-                    <table class="table_price">
-                        <thead>
-                        <tr>
-                            <th>Arrival time</th>
-                            <th>Station</th>
-                            <th>Departure time</th>
-                        </tr>
-                        </thead>
-                        <tbody id="routeItem">
-                        <tr>
-                            <td id="td_table1"></td>
-                        </tr>
-                        <tr>
-                            <td id="td_table2"></td>
-                        </tr>
-                        <tr>
-                            <td id="td_table3"></td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-
                 </div>
                 <div class="modal-body">
-
+                    <div id="route-list"></div>
                 </div>
             </div>
         </div>

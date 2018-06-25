@@ -9,7 +9,8 @@
             <div class="col-md-4">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">KudKuda</h2>
                 <h3 class="heading mb-2 display-4 font-light probootstrap-animate"><br><span
-                        style="color:#32CD32;">Registration</span></h3>
+                        style="color:#32CD32;"><spring:message
+                        code="register-new-user"/></span></h3>
             </div>
             <div class="col-md-8  probootstrap-animate">
                 <h5 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
@@ -23,24 +24,24 @@
                             <div class="form-group">
                                 <label for="email" style="width: 100%;font-size: 120%"><spring:message
                                         code="label.login"/></label>
-                                <input type="text" class="form-control" id="email" name="email"
-                                       placeholder="Your email">
+                                <input type="text" class="form-control" id="email" name="email">
                                 <span id="emailloc" style="color: red"></span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="password" style="width: 100%;font-size: 120%">Password</label>
-                                <input type="password" class="form-control" id="password" name="password"
-                                       placeholder="Password">
+                                <label for="password" style="width: 100%;font-size: 120%"><spring:message
+                                        code="user-password"/></label>
+
+                                <input type="password" class="form-control" id="password" name="password">
                                 <span id="passwordloc" style="color: red"></span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="passwordConf" style="width: 100%;font-size: 120%">Confirm password</label>
-                                <input type="password" class="form-control" id="passwordConf" name="passwordConf"
-                                       placeholder="Confirm password">
+                                <label for="passwordConf" style="width: 100%;font-size: 120%"> <spring:message
+                                        code="registration.label.confirm"/></label>
+                                <input type="password" class="form-control" id="passwordConf" name="passwordConf">
                                 <span id="passwordConfloc" style="color: red"></span>
                             </div>
                         </div>
@@ -48,18 +49,18 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name" style="width: 100%;font-size: 120%">First name</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                       placeholder="Name">
+                                <label for="name" style="width: 100%;font-size: 120%"><spring:message
+                                        code="common.user-first-name"/></label>
+                                <input type="text" class="form-control" id="name" name="name">
                                 <span id="nameloc" style="color: red"></span>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="surname" style="width: 100%;font-size: 120%">Surname</label>
-                                <input type="text" class="form-control" id="surname" name="surname"
-                                       placeholder="Surname">
+                                <label for="surname" style="width: 100%;font-size: 120%"><spring:message
+                                        code="common.user-surname"/></label>
+                                <input type="text" class="form-control" id="surname" name="surname">
                                 <span id="surnameloc" style="color: red"></span>
                             </div>
                         </div>
@@ -67,16 +68,17 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="birthDay" style="width: 100%;font-size: 120%">Birth day</label>
-                                <input type="date" class="form-control" id="birthDay" name="birthDay"
-                                       placeholder="Date of Birth">
+                                <label for="birthDay" style="width: 100%;font-size: 120%"> <spring:message
+                                        code="common.user-birthday"/></label>
+                                <input type="date" class="form-control" id="birthDay" name="birthDay">
                                 <span id="birthdayloc" style="color: red"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="submit" style="width: 100%;font-size: 120%"> &nbsp;</label>
-                                <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Sign Up">
+                                <input type="submit" class="btn btn-primary" id="submit" name="submit"
+                                       value="<spring:message code ="common.label.registration"/>">
                             </div>
                         </div>
                     </div>
