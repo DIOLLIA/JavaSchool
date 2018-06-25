@@ -16,7 +16,7 @@
                         style="color:#e0e139;">${message}</span></h3>
                 <div class="col-md probootstrap-animate">
                     <form:form name='buyTicket' method="POST" modelAttribute="ticket"
-                               action="${pageContext.request.contextPath}/ticket/save" class="probootstrap-form">
+                               action="${pageContext.request.contextPath}/ticket/save" class="probootstrap-form" onsubmit="return ticket_validation();">
                     <div class="form-group">
                         <h4 style="text-align: center"><spring:message code="buy-ticket.header.route"/></h4>
                         <div class="row mb-3">

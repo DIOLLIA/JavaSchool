@@ -16,12 +16,7 @@
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate"><input class="btn btn-primary"
                                                                                           type="submit" value="<<"
                                                                                           onclick="location='/index';"/>
-                    Schedule<br><input type="submit"
-                                           class="btn btn-primary"
-                                           value="New schedule"
-                                           onclick="location='scheduleList/add';"/>&#8195;
-                    <input type="submit" class="btn btn-primary" value="Send schedule"
-                           onclick="location='/schedule/sendMsg';"/> &#8195;
+                    Schedule<br>
                     <input type="submit" class="btn btn-primary" value="Route list"
                            onclick="location='/schedule/scheduleList/routeList';"/>&#8195;
                     <input type="submit" class="btn btn-primary" value="Constructor"

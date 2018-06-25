@@ -20,6 +20,7 @@ import schedule.service.api.ScheduleService;
 import schedule.service.api.TicketService;
 import schedule.service.api.TrainService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -91,6 +92,17 @@ public class TicketServiceImpl implements TicketService {
             validationInfo.append("Wrong user data.").append("<br>");
         }
         return validationInfo.toString();
+    }
+
+    @Override
+    public List<Ticket> findByUserName(String username) {
+
+        List<TicketEntity> ticketEntity = ticketDao.findByUserName(username);
+        List<Ticket> ticketList = new ArrayList<>();
+        for (TicketEntity item : ticketEntity) {
+            ticketList.add(modelMapper.map(item, Ticket.class));
+        }
+        return ticketList;
     }
 
     /**
@@ -169,10 +181,7 @@ public class TicketServiceImpl implements TicketService {
         TicketEntity ticketEntity = modelMapper.map(ticket, TicketEntity.class);
         ticketEntity.setTrainEntity(modelMapper.map(ticket.getTrain(), TrainEntity.class));
 
-        if (ticketDao.remainedElseVacantSeats(departureTrain.getSeats(), ticketEntity)) {
-            return true;
-        }
-        return false;
+        return ticketDao.remainedElseVacantSeats(departureTrain.getSeats(), ticketEntity);
     }
 
     /**

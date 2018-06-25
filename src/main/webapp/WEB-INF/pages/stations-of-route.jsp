@@ -12,6 +12,7 @@
 
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">  <input class="btn btn-primary"
                                                                                             type="submit" value="<<"
+
                                                                                             onclick="location='./';"/> Stations &#8195;
                     <form:form method="POST" modelAttribute="route"
                                action="${pageContext.request.contextPath}">
@@ -25,6 +26,8 @@
                     </select>
                 </h2>
                 </form:form>
+
+
                 <h2>${message}</h2>
                 <table class="table_price" border="0px" cellpadding="" cellspacing="0">
                     <thead>

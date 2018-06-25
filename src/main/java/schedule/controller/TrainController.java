@@ -91,7 +91,7 @@ public class TrainController extends BaseController {
      *
      * @param trainId
      * @param locale
-     * @return modelAnd
+     * @return trains-list.jsp with deleted train if check success
      */
     @RequestMapping(value = "/delete/{train.id}")
     public ModelAndView deleteTrain(@PathVariable(value = "train.id") int trainId, Locale locale) {

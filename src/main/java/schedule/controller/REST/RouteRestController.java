@@ -2,13 +2,13 @@ package schedule.controller.REST;
 
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import schedule.controller.model.ScheduleItem;
 import schedule.model.Route;
+import schedule.model.Schedule;
 import schedule.model.Train;
 import schedule.service.api.RouteService;
+import schedule.service.api.ScheduleService;
 import schedule.service.api.TrainService;
 
 import java.util.ArrayList;
@@ -23,9 +23,11 @@ public class RouteRestController {
 
     private RouteService routeService;
     private TrainService trainService;
+    private ScheduleService scheduleService;
 
     /**
      * Method return list of routes from DataBase as Json
+     *
      * @return list of routes from DataBase
      */
     @GetMapping(value = "/get-routes/")
@@ -40,6 +42,7 @@ public class RouteRestController {
 
     /**
      * method find stations belonging to route from DataBase as Json
+     *
      * @param selectedRoute
      * @return list of stations belonging to route from DataBase
      */
@@ -53,6 +56,7 @@ public class RouteRestController {
 
     /**
      * method return all trains from DataBase as Json
+     *
      * @return return list of trains from DataBase
      */
     @GetMapping(value = "/get-trains")
@@ -65,6 +69,33 @@ public class RouteRestController {
         return new Gson().toJson(trainsList);
     }
 
+    /**
+     * method return all routes for request train
+     *
+     * @return return routes for train request  from DataBase
+     */
+    @GetMapping(value = "/findRoute")
+    public List<ScheduleItem> getRoutesByTrainNumber(@RequestParam("trainNumber") int trainNumber) {
+        int trainId = trainService.findByNumber(trainNumber).getId();
+        List<Schedule> scheduleList = scheduleService.findTrainById(trainId);
+        List<Schedule> formatedSchedule;
+        if (!scheduleList.isEmpty()) {
+            int scheduleId = scheduleList.get(0).getId();
+            formatedSchedule = scheduleService.showRouteDetails(scheduleList, scheduleId);
+
+            List<ScheduleItem> scheduleItems = new ArrayList<>();
+            for (Schedule item : formatedSchedule) {
+                ScheduleItem scheduleItem = new ScheduleItem();
+                scheduleItem.setArrivalTime(item.getArrivalTime());
+                scheduleItem.setDepartureTime(item.getDepartureTime());
+                scheduleItem.setStationOfDeparture(item.getStationName().getStationName());
+                scheduleItems.add(scheduleItem);
+            }
+            return scheduleItems;
+        }
+        return new ArrayList<>();
+    }
+
     @Autowired
     public void setTrainService(TrainService trainService) {
         this.trainService = trainService;
@@ -73,5 +104,10 @@ public class RouteRestController {
     @Autowired
     public void setRouteService(RouteService routeService) {
         this.routeService = routeService;
+    }
+
+    @Autowired
+    public void setScheduleService(ScheduleService scheduleService) {
+        this.scheduleService = scheduleService;
     }
 }

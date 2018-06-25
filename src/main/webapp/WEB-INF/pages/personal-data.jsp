@@ -1,8 +1,9 @@
+<%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 <%@ include file="header.jsp" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/tables.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}resources/css/tables.css">
 
 <section class="probootstrap-cover overflow-hidden relative"
-         style="background-image: url('/images/img_5.jpg');" data-stellar-background-ratio="0.5"
+         style="background-image: url('/resources/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
          id="section-home">
     <div class="overlay"></div>
     <div class="container">
@@ -30,19 +31,20 @@
                         <th><spring:message code="common.user-email"/></th>
                         <td><c:out value="${user.email}"/></td>
                     </tr>
-                    <tr>
-                        <th><a href="${pageContext.request.contextPath}/user/changePassword/${user.id}">
-                            <spring:message code="personal-data.btn.change-password"/></a>
-                            <br>
-                            <br>
-                            <a href="${pageContext.request.contextPath}/user/edit/${user.id}">
-                                <spring:message code="personal-data.btn.edit"/></a>
-                        </th>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/user/edit/${user.id}">
-                                <spring:message code="personal-data.btn.delete"/></a>
-                        </td>
-                    </tr>
+                    <%--TODO This realization are planned--%>
+                    <%--      <tr>
+                              <th><a href="${pageContext.request.contextPath}/user/changePassword/${user.id}">
+                                  <spring:message code="personal-data.btn.change-password"/></a>
+                                  <br>
+                                  <br>
+                                  <a href="${pageContext.request.contextPath}/user/edit/${user.id}">
+                                      <spring:message code="personal-data.btn.edit"/></a>
+                              </th>
+                              <td>
+                                  <a href="${pageContext.request.contextPath}/user/edit/${user.id}">
+                                      <spring:message code="personal-data.btn.delete"/></a>
+                              </td>
+                          </tr>--%>
                     </thead>
                 </table>
                 <br>
@@ -51,11 +53,18 @@
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">
                     <spring:message code="personal-data.header.your-tickets"/>
                 </h2>
+                <c:forEach var="ticket" items="${ticket}">
+                    TICKET#${ticket.departureDateTime}(&@${ticket.user.surname})
+                    <p><joda:format pattern="d MMMM yyyy ,HH:mm" value="${ticket.departureDateTime}"/></p>
+                    <p><spring:message code="home.btn.train-number"/>: ${ticket.train.numberOfTrain}</p>
+                    <p><spring:message code="common.label.station"/>: ${ticket.departureSchedule.stationName.stationName}</p>
+                    -----------------------------------------------------------------------------
 
+                </c:forEach>
             </div>
         </div>
     </div>
-
+    </div>
 </section>
 
 <%@ include file="footer.jsp" %>

@@ -17,14 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.ScheduleItem;
-import schedule.model.Role;
-import schedule.model.Route;
-import schedule.model.Schedule;
-import schedule.model.User;
-import schedule.service.api.RouteService;
-import schedule.service.api.ScheduleService;
-import schedule.service.api.StationService;
-import schedule.service.api.UserService;
+import schedule.model.*;
+import schedule.service.api.*;
 import schedule.util.MyValidator;
 
 import javax.validation.ConstraintViolation;
@@ -43,6 +37,7 @@ public class HomeController extends BaseController {
     private RouteService routeService;
     private StationService stationService;
     private Validator validator;
+    private TicketService ticketService;
 
     /**
      * @param locale
@@ -154,8 +149,6 @@ public class HomeController extends BaseController {
                 modelAndView.addObject("msg", msg.toString());
             }
             return modelAndView;
-
-
         }
     }
 
@@ -174,6 +167,7 @@ public class HomeController extends BaseController {
                     .addObject("msg", getMessage("message.anonymous.profile", locale));
         }
         User user = userService.findByLoginOrSurname(((UserDetails) principal).getUsername()).get(0);
+        List<Ticket> ticket = ticketService.findByUserName(user.getEmail());
         ModelAndView modelAndView;
         if (authorities.toString().equals("[ROLE_ADMIN]")) {
             modelAndView = new ModelAndView("admin-profile");
@@ -181,6 +175,7 @@ public class HomeController extends BaseController {
             modelAndView = new ModelAndView("personal-data");
         }
         modelAndView.addObject("user", user);
+        modelAndView.addObject("ticket", ticket);
 
         return modelAndView;
     }
@@ -257,8 +252,24 @@ public class HomeController extends BaseController {
         }
         modelAndView.addObject("message", message);
         modelAndView.addObject("searchResult", scheduleItems);
+        modelAndView.addObject("routeDetais", schedules);
         return modelAndView;
     }
+
+   /* //todo доделай или удали
+    @RequestMapping(value = "/{scheduleItem.arrivalTime}/{scheduleItem.trainNumber}")
+    public ModelAndView routeDetails(Locale locale, @PathVariable(value = "scheduleItem.arrivalTime") String time,
+                                     @PathVariable(value = "scheduleItem.trainNumber") String train) {
+        List<Schedule> schedule = scheduleService.getSchedule();
+
+//        List<Schedule> formatedSchedule = scheduleService.showRouteDetails(schedule, scheduleId);
+
+        ModelAndView modelAndView = new ModelAndView("schedule-viewer");
+//        modelAndView.addObject("details", formatedSchedule);
+
+        return modelAndView;
+    }*/
+
 
     /**
      * @param locale
@@ -327,5 +338,11 @@ public class HomeController extends BaseController {
     @Autowired
     public void setValidator(Validator validator) {
         this.validator = validator;
+    }
+
+    @Autowired
+
+    public void setTicketService(TicketService ticketService) {
+        this.ticketService = ticketService;
     }
 }

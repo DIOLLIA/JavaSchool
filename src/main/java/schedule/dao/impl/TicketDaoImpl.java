@@ -9,6 +9,9 @@ import schedule.entity.TicketEntity;
 import schedule.entity.TrainEntity;
 import schedule.entity.UserEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Repository
 public class TicketDaoImpl extends GeneralCrudDaoImpl<TicketEntity> implements TicketDao {
@@ -32,10 +35,7 @@ public class TicketDaoImpl extends GeneralCrudDaoImpl<TicketEntity> implements T
         queryDate.setParameter("train", train);
         queryDate.setParameter("depSch", depSch);
         queryDate.setParameter("user", user);
-        if (queryDate.list().size() != 0) {
-            return true;
-        }
-        return false;
+        return queryDate.list().size() != 0;
     }
 
     public boolean remainedElseVacantSeats(int seats, TicketEntity ticketEntity) {
@@ -47,9 +47,16 @@ public class TicketDaoImpl extends GeneralCrudDaoImpl<TicketEntity> implements T
         queryDate.setParameter("train", train);
         queryDate.setParameter("depSch", depSch);
 
-        if (queryDate.list().size() < seats) {
-            return true;
+        return queryDate.list().size() < seats;
+    }
+
+    @Override
+    public List<TicketEntity> findByUserName(String username) {
+        Query query = getCurrentSession().createQuery("FROM TicketEntity te WHERE te.userEntity.email =:user");
+        query.setParameter("user", username);
+        if ( !query.list().isEmpty()){
+            return (List<TicketEntity>)query.list();
         }
-        return false;
+        return new ArrayList<>();
     }
 }

@@ -65,19 +65,6 @@ function trainsAndDateSelector() {
     });
 }
 
-/*var p = document.getElementById("scedule_item") ;
-var length = 1 ;
-function add_schedule() {
-    var new_input = document.createElement("input") ;
-    new_input.name = "my_input" ;
-    var div = document.createElement('div') ;
-    div.innerHTML = '<br>div элемент №' + length + '<br>' ;
-    div.appendChild(new_input) ;
-    p.appendChild(div) ;
-    length++ ;
-
-}*/
-
 
 function showRoutePassengersByDate(trainId, dailyRouteId, startTime) {
     var departureDate = $("#probootstrap-date-departure").val();
@@ -197,7 +184,7 @@ $(document).ready(function ($) {
 
         var select2 = function () {
             $('.js-dropdown-multiple, .js-example-basic-single').select2();
-        }
+        };
         select2();
 
 
@@ -294,7 +281,7 @@ $(document).ready(function ($) {
                 var $this = $(this);
                 t.removeClass('sleep');
             });
-        }
+        };
         ThumbnailOpacity();
 
         var datePicker = function () {

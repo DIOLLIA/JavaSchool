@@ -22,7 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-
+/**
+ * @author Rudkov Andrey
+ * <p>
+ * used next reduction of:
+ * <l> Front-end - FE
+ *
+ */
 @Controller
 @RequestMapping(value = "/schedule")
 public class ScheduleController extends BaseController {
@@ -32,7 +38,6 @@ public class ScheduleController extends BaseController {
     private ScheduleService scheduleService;
     private StationService stationService;
     private RouteService routeService;
-
 
     @RequestMapping(value = "/scheduleList")
     public ModelAndView listOfSchedule(Locale locale) {
@@ -60,7 +65,7 @@ public class ScheduleController extends BaseController {
         return modelAndView;
     }
 
-    //TODO проверить юзабилити метода
+/*    //TODO проверить юзабилити метода
     @RequestMapping(value = "/scheduleList/add")
     public ModelAndView addNewSchedule(Locale locale) {
 
@@ -68,7 +73,7 @@ public class ScheduleController extends BaseController {
         modelAndView.addObject("pageTitle", getMessage("page.title.schedule.viewer", locale));
 
         return modelAndView;
-    }
+    }*/
 
     @RequestMapping(value = "/scheduleList/addRoute", method = RequestMethod.GET)
     public ModelAndView addRoutePage(Locale locale) {
@@ -110,15 +115,6 @@ public class ScheduleController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/scheduleList/routeList/{route.id}", method = RequestMethod.GET)
-    public ModelAndView viewRoute(Locale locale, @PathVariable(value = "route.id") int routeId) {
-        List<Station> routeStationsList = routeService.stationsList(routeId);
-
-        ModelAndView modelAndView = new ModelAndView("stations-of-route");
-        modelAndView.addObject("stations", routeStationsList);
-        return modelAndView;
-    }
-
     @RequestMapping(value = "/scheduleList/routeList/{route.id}", method = RequestMethod.POST)
     public ModelAndView addStationOnRoute(Locale locale, @PathVariable(value = "route.id") int routeId,
                                           @RequestParam(name = "station") String station) {
@@ -144,7 +140,7 @@ public class ScheduleController extends BaseController {
     }
 
     /**
-     * method get from user (jsp page) values
+     * method get values from FE create new {@link Schedule}.Also method
      *
      * @param locale
      * @param routeName
@@ -153,7 +149,7 @@ public class ScheduleController extends BaseController {
      * @param station
      * @param numberInOrder
      * @param dailyRoute
-     * @param trainNumber   and sendt it to {@link ScheduleService}, also create new instance of
+     * @param trainNumber   sendt it to {@link ScheduleService}, also create new instance of
      *                      {@link ScheduleToSend}, add it to list and transfer it to JMS.
      * @return list of schedule with new item
      */
@@ -174,16 +170,6 @@ public class ScheduleController extends BaseController {
         ModelAndView modelAndView = new ModelAndView("schedule-constructor");
         modelAndView.addObject("schedule", schedule);
         modelAndView.addObject("pageTitle", getMessage("page.title.schedule.viewer", locale));
-
-        return modelAndView;
-    }
-
-    //todo переделать чтоб не перезагружить страницу
-    @RequestMapping(value = "/sendMsg")
-    public ModelAndView messageToQueue() {
-        List<ScheduleToSend> scheduleToSends = scheduleService.transform(scheduleService.getSchedule());
-        scheduleService.sendAll(scheduleToSends);
-        ModelAndView modelAndView = new ModelAndView("schedule-viewer");
 
         return modelAndView;
     }
