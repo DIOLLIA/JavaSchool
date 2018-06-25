@@ -60,7 +60,7 @@ function trainsAndDateSelector() {
             });
         },
         error: function (response) {
-            alert("Something is wrong!")
+
         }
     });
 }
@@ -90,7 +90,6 @@ function initFromStations() {
             getToStations();
         },
         error: function (response) {
-            alert("Something is wrong!")
         }
     })
 }
@@ -112,7 +111,6 @@ function getToStations() {
             });
         },
         error: function () {
-            alert("Something is wrong!")
         }
     })
 
@@ -329,7 +327,7 @@ function registration_validation() {
     var fields_variables = 6;
     var counter_fields = 0;
 
-    if (email.length === "" || email === null || reg.test(email) === false) {
+    if (email.length === "" || email == null || reg.test(email) === false) {
         document.getElementById("emailloc").innerHTML =
             " <img src='../resources/images/Close-2-icon.png' alt=''> Please enter valid email";
     }
@@ -418,21 +416,6 @@ function main_search_validation() {
 }
 
 function ticket_validation() {
-    var date_now = new Date;
-
-    var options_for_date = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-    };
-    var options_for_time = {
-        hour: 'numeric',
-        minute: 'numeric',
-    };
-//todo: савнить дату и время на фронте для возможности покупки билета
-    var parsed_date = date_now.toLocaleString("ru", options_for_date);
-
-    var parsed_time = date_now.toLocaleString("en", options_for_time);
 
     var departure_date = document.buyTicket.departureDate.value;
     var departure_time = document.buyTicket.departureTime.value;

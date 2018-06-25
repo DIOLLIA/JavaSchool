@@ -1,6 +1,8 @@
 package schedule;
 
 import org.apache.activemq.ActiveMQConnection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import schedule.messenger.MessageListenerImpl;
@@ -19,9 +21,11 @@ public class StartupListener {
     @Autowired
     private ScheduleService scheduleService;
 
+    private static final Logger logger = LoggerFactory.getLogger(StartupListener.class);
+
     @PostConstruct
     void init() {
-        Hashtable<String, String> props = new Hashtable<String, String>();
+        Hashtable<String, String> props = new Hashtable<>();
         props.put("java.naming.factory.initial", "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
         props.put("java.naming.provider.url", ActiveMQConnection.DEFAULT_BROKER_URL);
         props.put("queue.client-queue", "client-queue");
@@ -40,7 +44,7 @@ public class StartupListener {
 
             receiver.setMessageListener(new MessageListenerImpl(scheduleService));
         } catch (NamingException | JMSException e) {
-            e.printStackTrace();
+            logger.debug("JMS Listener WARNING {}",e);
         }
     }
 }

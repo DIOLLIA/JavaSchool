@@ -25,7 +25,6 @@ function stationsOnRoute() {
             });
         },
         error: function () {
-            alert("Something is wrong!")
         }
     })
 }
@@ -47,7 +46,6 @@ function trainPicker() {
             });
         },
           error: function (response) {
-              alert("Something is wrong!")
           }
     })
 }
@@ -70,7 +68,6 @@ function routesPicker() {
             stationsOnRoute();
         },
         error: function (response) {
-            alert("Something is wrong!")
         }
     })
 }

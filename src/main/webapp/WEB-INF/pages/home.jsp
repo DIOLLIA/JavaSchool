@@ -2,7 +2,7 @@
 
 <%@ include file="header.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
-
+<script src="${pageContext.request.contextPath}/resources/js/main-search-modal.js"></script>
 <section class="probootstrap-cover overflow-hidden relative"
          style="background-image: url('/resources/images/bg_1.jpg');" data-stellar-background-ratio="0.5"
          id="section-home">
@@ -95,7 +95,7 @@
                             <th width="10%"><spring:message code="home.btn.train-number"/></th>
                             <th width="10%"><spring:message code="common.label.departure-time"/></th>
                             <th width="10%"><spring:message code="common.label.arrival-time"/></th>
-                            <th width="15%"><spring:message code="common.label.arrival-action"/></th>
+                            <th width="10%"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -103,12 +103,10 @@
                             <tr>
                                 <td>${scheduleItem.stationOfDeparture}</td>
                                 <td>${scheduleItem.stationOfArrival}</td>
-                                <td>${scheduleItem.trainNumber}</td>
+                                <td class="train_number">${scheduleItem.trainNumber}</td>
                                 <td><joda:format pattern="HH:mm" value="${scheduleItem.departureTime}"/></td>
                                 <td><joda:format pattern="HH:mm" value="${scheduleItem.arrivalTime}"/></td>
-                                <td><a href="${pageContext.request.contextPath}/schedule/scheduleList/${schedule.id}
-                            ">Show
-                                    details</a></td>
+                                <td><a class="route-info_class" id="route-info">Show details</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -118,6 +116,47 @@
         </div>
     </div>
 
+    <div id="modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Route info</h5>
+                    <h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h5>
+                    <br>
+                    <table class="table_price">
+                        <thead>
+                        <tr>
+                            <th>Arrival time</th>
+                            <th>Station</th>
+                            <th>Departure time</th>
+                        </tr>
+                        </thead>
+                        <tbody id="routeItem">
+                        <tr>
+                            <td id="td_table1"></td>
+                        </tr>
+                        <tr>
+                            <td id="td_table2"></td>
+                        </tr>
+                        <tr>
+                            <td id="td_table3"></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
 
 <%@ include file="footer.jsp" %>
