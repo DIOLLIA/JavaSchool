@@ -11,7 +11,10 @@ window.onload = function () {
             if (scheduleList.length > 0) {
                 var routeList = $('#route-list');
                 routeList.empty();
-
+                var depTimeH;
+                var depTimeM;
+                var arrTimeH;
+                var arrTimeM;
                 routeList.append(
                     "<table id='routes-table'>" +
                     "<tr>" +
@@ -21,11 +24,27 @@ window.onload = function () {
                     "</tr>" +
                     "<tbody></tbody></table>");
                 for (var i = 0; i < scheduleList.length; i++) {
+                    arrTimeH = scheduleList[i].arrivalTime.hourOfDay;
+                    if (arrTimeH < 10) {
+                        arrTimeH = "0" + arrTimeH
+                    }
+                    arrTimeM = scheduleList[i].arrivalTime.minuteOfHour;
+                    if (arrTimeM < 10) {
+                        arrTimeM = "0" + arrTimeM
+                    }
+                    depTimeH = scheduleList[i].departureTime.hourOfDay;
+                    if (depTimeH < 10) {
+                        depTimeH = "0" + depTimeH
+                    }
+                    depTimeM = scheduleList[i].departureTime.minuteOfHour;
+                    if (depTimeM < 10) {
+                        depTimeM = "0" + depTimeM
+                    }
                     $("#routes-table").append(
                         "<tr>" +
-                        "<td>" + scheduleList[i].arrivalTime.hourOfDay + ":" + scheduleList[i].arrivalTime.minuteOfHour + "</td>" +
+                        "<td>" + depTimeH + ":" + arrTimeM + "</td>" +
                         "<td>" + scheduleList[i].stationOfDeparture + "</td>" +
-                        "<td>" + scheduleList[i].departureTime.hourOfDay + ":" + scheduleList[i].departureTime.minuteOfHour + "</td>" +
+                        "<td>" + depTimeH + ":" + depTimeM + "</td>" +
                         "</tr>"
                     );
                 }

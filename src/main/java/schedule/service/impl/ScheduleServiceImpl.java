@@ -92,7 +92,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     public List<Schedule> showRouteDetails(List<Schedule> schedule, int scheduleId) {
         List<Schedule> formatedSchedule = new ArrayList<>();
-        int routeStationIndex = schedule.get(scheduleId).getRouteDailyId();
+        int routeStationIndex = schedule.get(0).getRouteDailyId();
         for (Schedule item : schedule) {
             if (item.getRouteDailyId() == routeStationIndex) {
                 formatedSchedule.add(item);

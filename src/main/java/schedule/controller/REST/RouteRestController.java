@@ -80,7 +80,7 @@ public class RouteRestController {
         List<Schedule> scheduleList = scheduleService.findTrainById(trainId);
         List<Schedule> formatedSchedule;
         if (!scheduleList.isEmpty()) {
-            int scheduleId = scheduleList.get(0).getId();
+            int scheduleId = scheduleList.get(0).getRouteDailyId();
             formatedSchedule = scheduleService.showRouteDetails(scheduleList, scheduleId);
 
             List<ScheduleItem> scheduleItems = new ArrayList<>();
