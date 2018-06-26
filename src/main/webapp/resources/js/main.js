@@ -391,6 +391,11 @@ function registration_validation() {
 
 function main_search_validation() {
 
+    var request_date = $("#probootstrap-date-departure");
+    var current_date = new Date();
+
+    var parsed_request_date = Date.parse(request_date.datepicker({dateFormat: 'dd,MM,yyyy'}).val());
+
     var departure_date = document.mainSearch.searchDate.value;
     var departure_time = document.mainSearch.searchTime.value;
     var counter_fields = 0;
@@ -406,9 +411,15 @@ function main_search_validation() {
     }
     if (departure_date === null || departure_date === "") {
         document.getElementById("dateloc").innerHTML = "<img src='../resources/images/Close-2-icon.png' alt=''>Pick date";
-    } else {
-        document.getElementById("dateloc").innerHTML = "<img src='../resources/images/check_sign_icon_green.png' alt=''/>";
-        counter_fields++;
+    }
+
+    else {
+        if (current_date > parsed_request_date + 43200000) {
+            document.getElementById("dateloc").innerHTML = "<img src='../resources/images/Close-2-icon.png' alt=''/> Past date";
+        } else {
+            document.getElementById("dateloc").innerHTML = "<img src='../resources/images/check_sign_icon_green.png' alt=''/>";
+            counter_fields++;
+        }
     }
 
     return counter_fields === fields_variables;

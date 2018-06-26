@@ -109,7 +109,7 @@
                                 <td>${scheduleItem.stationOfDeparture}</td>
                                 <td>${scheduleItem.stationOfArrival}</td>
                                 <td><joda:format pattern="HH:mm" value="${scheduleItem.arrivalTime}"/></td>
-                                <td><a class="route-info_class" id="route-info">Show details</a></td>
+                                <td><a class="route-info_clasroute-info_class" id="route-info">Show details</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>
