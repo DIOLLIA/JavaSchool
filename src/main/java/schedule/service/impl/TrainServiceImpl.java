@@ -8,6 +8,8 @@ import schedule.controller.model.ScheduleItem;
 import schedule.dao.api.TrainDao;
 import schedule.entity.ScheduleEntity;
 import schedule.entity.TrainEntity;
+import schedule.exception.CustomDaoException;
+import schedule.exception.CustomServiceException;
 import schedule.model.Schedule;
 import schedule.model.Train;
 import schedule.service.api.TrainService;
@@ -34,9 +36,15 @@ public class TrainServiceImpl implements TrainService {
      * @param trainDto mapping it to TE
      * @return added new Train
      */
-    public Train addTrain(Train trainDto) {
+    public Train addTrain(Train trainDto) throws CustomServiceException {
         TrainEntity trainEntity = modelMapper.map(trainDto, TrainEntity.class);
-        trainDao.addTrain(trainEntity);
+
+        try {
+            trainDao.addTrain(trainEntity);
+        } catch (CustomDaoException e) {
+            throw new CustomServiceException(e.getMessage(), e.getCause());
+        }
+
         return modelMapper.map(trainEntity, Train.class);
     }
 
@@ -160,6 +168,16 @@ public class TrainServiceImpl implements TrainService {
         return resultScheduleList;
     }
 
+    @Autowired
+    public void setTrainDao(TrainDao trainDao) {
+        this.trainDao = trainDao;
+    }
+
+    @Autowired
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
+
     private class RouteStationIdComparator implements Comparator<Schedule> {
         @Override
         public int compare(Schedule o1, Schedule o2) {
@@ -171,15 +189,5 @@ public class TrainServiceImpl implements TrainService {
                 return -1;
             }
         }
-    }
-
-    @Autowired
-    public void setTrainDao(TrainDao trainDao) {
-        this.trainDao = trainDao;
-    }
-
-    @Autowired
-    public void setModelMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
     }
 }

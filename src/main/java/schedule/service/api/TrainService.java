@@ -1,6 +1,7 @@
 package schedule.service.api;
 
 import schedule.controller.model.ScheduleItem;
+import schedule.exception.CustomServiceException;
 import schedule.model.Schedule;
 import schedule.model.Train;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface TrainService {
 
-    Train addTrain(Train train);
+    Train addTrain(Train train) throws CustomServiceException;
 
     void editTrain(Train train);
 

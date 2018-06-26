@@ -1,18 +1,26 @@
 package schedule.dao.impl;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import schedule.dao.api.TrainDao;
 import schedule.entity.ScheduleEntity;
 import schedule.entity.TrainEntity;
+import schedule.exception.CustomDaoException;
 
 import java.util.List;
 
 @Repository
 public class TrainDaoImpl extends GeneralCrudDaoImpl<TrainEntity> implements TrainDao {
 
-    public void addTrain(TrainEntity train) {
-        getCurrentSession().save(train);
+    public void addTrain(TrainEntity train) throws CustomDaoException{
+        try {
+            getCurrentSession().save(train);
+            //logger.info("Train {} was successfuly created")
+        } catch (HibernateException e){
+            //logger.warn("Train {} was not created. Exception cause: {e.getCause()}")
+            throw new CustomDaoException("Message", e.getCause());
+        }
     }
 
     public TrainEntity getTrain(int id) {
@@ -41,7 +49,6 @@ public class TrainDaoImpl extends GeneralCrudDaoImpl<TrainEntity> implements Tra
 
     @SuppressWarnings("unchecked")
     public List<TrainEntity> getTrains() {
-
         return getCurrentSession().createQuery("from TrainEntity ").list();
     }
 
@@ -53,6 +60,4 @@ public class TrainDaoImpl extends GeneralCrudDaoImpl<TrainEntity> implements Tra
 
         return query.list();
     }
-
-
 }
