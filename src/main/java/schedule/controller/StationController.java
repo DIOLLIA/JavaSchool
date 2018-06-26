@@ -30,7 +30,7 @@ public class StationController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+/*    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addStation(@ModelAttribute Station station,
                                    Locale locale) {
         stationService.addStation(station);
@@ -42,7 +42,7 @@ public class StationController extends BaseController {
         modelAndView.addObject("message", getMessage("message.stations.create.success", locale));
 
         return modelAndView;
-    }
+    }*/
 
     @RequestMapping(value = "/edit/{station.id}", method = RequestMethod.GET)
     public ModelAndView editStation(@PathVariable(value = "station.id") int stationId,

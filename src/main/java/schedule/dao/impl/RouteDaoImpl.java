@@ -18,7 +18,6 @@ public class RouteDaoImpl extends GeneralCrudDaoImpl<RouteEntity> implements Rou
 
 
     @Override
-    //todo change this query with select in array.
     public List<RouteEntity> findByStationNames(String... stationNames) {
         Query query = getCurrentSession().createQuery(
                 "SELECT DISTINCT u FROM RouteEntity u LEFT JOIN u.stationsList s WHERE s.stationName LIKE :name1 or s.stationName LIKE :name2");
@@ -26,7 +25,6 @@ public class RouteDaoImpl extends GeneralCrudDaoImpl<RouteEntity> implements Rou
         query.setParameter("name2", stationNames[1]);
 
         return (List<RouteEntity>) query.list();
-        /*   List<RouteEntity> routes = query.list();        return routes;*/
     }
 
     @Override

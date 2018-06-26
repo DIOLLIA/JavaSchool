@@ -1,4 +1,4 @@
-package schedule.dao.impl;
+package integration.dao.impl;
 
 import org.junit.Assert;
 import org.junit.Test;

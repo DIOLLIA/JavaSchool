@@ -20,6 +20,11 @@ public class StationServiceImpl implements StationService {
     private StationDao stationDao;
     private ModelMapper modelMapper;
 
+    /**
+     * method add station to database
+     * @param stationDto
+     * @return new {@link Station} if success
+     */
     @Override
     public Station addStation(Station stationDto) {
         StationEntity stationEntity = modelMapper.map(stationDto, StationEntity.class);

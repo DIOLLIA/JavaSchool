@@ -18,6 +18,7 @@ public class StationRestController extends BaseController {
     private StationService stationService;
 
     /**
+     * version 0.1 NOTE Google map used
      * method takes params
      * @param stationName
      * @param lat
