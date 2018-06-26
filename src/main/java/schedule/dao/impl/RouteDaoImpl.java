@@ -19,19 +19,25 @@ public class RouteDaoImpl extends GeneralCrudDaoImpl<RouteEntity> implements Rou
 
     @Override
     public List<RouteEntity> findByStationNames(String... stationNames) {
-        Query query = getCurrentSession().createQuery(
-                "SELECT DISTINCT u FROM RouteEntity u LEFT JOIN u.stationsList s WHERE s.stationName LIKE :name1 or s.stationName LIKE :name2");
-        query.setParameter("name1", stationNames[0]);
-        query.setParameter("name2", stationNames[1]);
+        if (stationNames.length > 1) {
+            Query query = getCurrentSession().createQuery(
+                    "SELECT DISTINCT u FROM RouteEntity u LEFT JOIN u.stationsList s WHERE s.stationName LIKE :name1 or s.stationName LIKE :name2");
+            query.setParameter("name1", stationNames[0]);
+            query.setParameter("name2", stationNames[1]);
 
-        return (List<RouteEntity>) query.list();
+            return (List<RouteEntity>) query.list();
+        } else {
+            Query query = getCurrentSession().createQuery("SELECT DISTINCT u FROM RouteEntity u LEFT JOIN u.stationsList s WHERE s.stationName LIKE :name1");
+            query.setParameter("name1", stationNames[0]);
+            return (List<RouteEntity>) query.list();
+        }
     }
 
     @Override
     public List<StationEntity> stationsOnRoute(int routeId) {
         Query query = getCurrentSession().createQuery("SELECT stationsList FROM RouteEntity re WHERE re.id =:routeId ");
         query.setParameter("routeId", routeId);
-        return  (List<StationEntity>)query.list();
+        return (List<StationEntity>) query.list();
 
 
     }
@@ -39,7 +45,7 @@ public class RouteDaoImpl extends GeneralCrudDaoImpl<RouteEntity> implements Rou
     @Override
     public Integer findByName(String routeName) {
         Query query = getCurrentSession().createQuery("SELECT id FROM RouteEntity re WHERE re.routeName =:routeName");
-        query.setParameter("routeName",routeName);
+        query.setParameter("routeName", routeName);
 
         return (Integer) query.uniqueResult();
     }
@@ -47,8 +53,8 @@ public class RouteDaoImpl extends GeneralCrudDaoImpl<RouteEntity> implements Rou
     @Override
     public RouteEntity routeById(int id) {
         Query query = getCurrentSession().createQuery("FROM RouteEntity re WHERE re.id=:id ");
-        query.setParameter("id",id);
-        return (RouteEntity)query.uniqueResult();
+        query.setParameter("id", id);
+        return (RouteEntity) query.uniqueResult();
     }
 
 }

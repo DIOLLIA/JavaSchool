@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Station;
+import schedule.service.api.RouteService;
 import schedule.service.api.ScheduleService;
 import schedule.service.api.StationService;
 
@@ -21,6 +23,7 @@ public class StationController extends BaseController {
 
     private StationService stationService;
     private ScheduleService scheduleService;
+    private RouteService routeService;
 
     @RequestMapping(value = "/list")
     public ModelAndView listOfStations(Locale locale) {
@@ -62,10 +65,12 @@ public class StationController extends BaseController {
                                       Locale locale) {
         ModelAndView modelAndView = new ModelAndView("stations-list");
         List<Station> stations;
-        List<Schedule> resultList;
+        List<Schedule> resultScheduleList;
+        List<Route> resultRouteList;
 
-        resultList = scheduleService.findScheduleByStation(stationService.getStation(stationId));
-        if (resultList.isEmpty()) {
+        resultScheduleList = scheduleService.findScheduleByStation(stationService.getStation(stationId));
+        resultRouteList= routeService.findByStationNames(stationService.getStation(stationId).getStationName());
+        if (resultScheduleList.isEmpty()&&resultRouteList.isEmpty()) {
             stationService.deleteStation(stationId);
             modelAndView.addObject("message", getMessage("message.stations.delete.success", locale));
             stations = stationService.getStations();
@@ -89,5 +94,10 @@ public class StationController extends BaseController {
     @Autowired
     public void setScheduleService(ScheduleService scheduleService) {
         this.scheduleService = scheduleService;
+    }
+    @Autowired
+
+    public void setRouteService(RouteService routeService) {
+        this.routeService = routeService;
     }
 }

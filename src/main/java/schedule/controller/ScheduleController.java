@@ -115,6 +115,14 @@ public class ScheduleController extends BaseController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/scheduleList/routeList/{route.id}", method = RequestMethod.GET)
+    public ModelAndView viewRoute(Locale locale, @PathVariable(value = "route.id") int routeId) {
+        List<Station> routeStationsList = routeService.stationsList(routeId);
+        ModelAndView modelAndView = new ModelAndView("stations-of-route");
+        modelAndView.addObject("stations", routeStationsList);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/scheduleList/routeList/{route.id}", method = RequestMethod.POST)
     public ModelAndView addStationOnRoute(Locale locale, @PathVariable(value = "route.id") int routeId,
                                           @RequestParam(name = "station") String station) {

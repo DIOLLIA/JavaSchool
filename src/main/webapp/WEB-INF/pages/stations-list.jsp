@@ -24,7 +24,7 @@
                            class="btn btn-primary"
                            value="<spring:message code="add-station-button"/>"/>
                 </h2>
-                <h2>${message}</h2>
+                <h2 style="color: yellow">${message}</h2>
                 <table class="table_price" border="0px" cellpadding="" cellspacing="0">
                     <thead>
                     <tr>

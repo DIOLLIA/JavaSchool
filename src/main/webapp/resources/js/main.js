@@ -414,7 +414,7 @@ function main_search_validation() {
     }
 
     else {
-        if (current_date > parsed_request_date + 43200000) {
+        if (current_date > parsed_request_date + 43200000*2) {
             document.getElementById("dateloc").innerHTML = "<img src='../resources/images/Close-2-icon.png' alt=''/> Past date";
         } else {
             document.getElementById("dateloc").innerHTML = "<img src='../resources/images/check_sign_icon_green.png' alt=''/>";

@@ -15,7 +15,7 @@ f<%@ include file="header-admin.jsp" %>
                                                   onclick="location='addRoute';"/>
                 </h2>
                 <h2 style="color: yellow">${message}</h2>
-                <table class="table_price" border="0px" cellpadding="" cellspacing="0">
+                <table class="table_price">
                     <thead>
                     <tr>
                         <th>Name</th>
