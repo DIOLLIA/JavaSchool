@@ -90,6 +90,7 @@
 
             <c:if test="${searchResult != null}">
                 <div class="row-md probootstrap-animate">
+                    <h3 style="color: yellow">${message}</h3>
                     <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="100%">
                         <thead>
                         <tr>

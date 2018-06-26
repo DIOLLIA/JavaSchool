@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.ScheduleItem;
+import schedule.exception.CustomServiceException;
 import schedule.model.Schedule;
 import schedule.model.Train;
 import schedule.model.User;
@@ -69,7 +70,7 @@ public class TrainController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView addTrain(@ModelAttribute Train train, Locale locale) {
+    public ModelAndView addTrain(@ModelAttribute Train train, Locale locale) throws CustomServiceException {
         ModelAndView modelAndView;
 
         if (trainService.findByNumber(train.getNumberOfTrain()) == null) {
