@@ -1,8 +1,8 @@
 package schedule.config;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -11,15 +11,18 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.Properties;
-
-@EnableTransactionManagement
-@PropertySource("classpath:application.properties")
 @Configuration
-public class DataBaseConfig {
+@ComponentScan(value = {
+        "schedule.dao",
+        "schedule.entity"})
+@PropertySource("classpath:application.properties")
+@EnableTransactionManagement
+public class DataBaseTestConfig {
 
-    @Autowired
+    @Resource
     private Environment environment;
 
     private Properties hibernateTestProperties() {
