@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface StationService {
 
-    Station addStation(Station station);
-
     void addStation(String station, double latitude, double longitude );
 
     Station getStation(int id);

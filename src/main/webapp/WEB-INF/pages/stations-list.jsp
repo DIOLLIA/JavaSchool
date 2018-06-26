@@ -40,8 +40,7 @@
                             <td>${station.stationName}</td>
                             <td>${station.latitude}</td>
                             <td>${station.longitude}</td>
-                            <td><a href="${pageContext.request.contextPath}/station/edit/${station.id}">Edit</a>
-                                <a href="${pageContext.request.contextPath}/station/delete/${station.id}">Delete</a><br/>
+                               <td> <a href="${pageContext.request.contextPath}/station/delete/${station.id}">Delete</a><br/>
                             </td>
                         </tr>
                     </c:forEach>

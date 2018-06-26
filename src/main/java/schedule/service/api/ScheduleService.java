@@ -22,7 +22,7 @@ public interface ScheduleService {
 
     List<Schedule> getSchedule();
 
-    List<Schedule> formatShcedule(List<Schedule> schedule);
+    List<Schedule> formatSchedule(List<Schedule> schedule);
 
     List<Schedule> showRouteDetails(List<Schedule> schedule, int scheduleId);
 
@@ -33,4 +33,4 @@ public interface ScheduleService {
     List<ScheduleToSend> transform(List<Schedule> schedules);
 
     List<Schedule> findTrainById(int trainId);
-};
+}

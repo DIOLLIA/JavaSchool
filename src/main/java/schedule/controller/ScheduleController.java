@@ -42,7 +42,7 @@ public class ScheduleController extends BaseController {
     @RequestMapping(value = "/scheduleList")
     public ModelAndView listOfSchedule(Locale locale) {
         List<Schedule> schedule = scheduleService.getSchedule();
-        List<Schedule> formatedSchedule = scheduleService.formatShcedule(schedule);
+        List<Schedule> formatedSchedule = scheduleService.formatSchedule(schedule);
 
         ModelAndView modelAndView = new ModelAndView("schedule-viewer");
         modelAndView.addObject("schedule", formatedSchedule);
@@ -55,7 +55,7 @@ public class ScheduleController extends BaseController {
     @RequestMapping(value = "/scheduleList/{schedule.id}")
     public ModelAndView scheduleDetails(Locale locale, @PathVariable(value = "schedule.id") int scheduleId) {
         List<Schedule> schedule = scheduleService.getSchedule();
-        List<Schedule> routeAndTrains = scheduleService.formatShcedule(schedule);
+        List<Schedule> routeAndTrains = scheduleService.formatSchedule(schedule);
         List<Schedule> formatedSchedule = scheduleService.showRouteDetails(schedule, scheduleId);
 
         ModelAndView modelAndView = new ModelAndView("schedule-viewer");
@@ -64,16 +64,6 @@ public class ScheduleController extends BaseController {
 
         return modelAndView;
     }
-
-/*    //TODO проверить юзабилити метода
-    @RequestMapping(value = "/scheduleList/add")
-    public ModelAndView addNewSchedule(Locale locale) {
-
-        ModelAndView modelAndView = new ModelAndView("schedule-constructor");
-        modelAndView.addObject("pageTitle", getMessage("page.title.schedule.viewer", locale));
-
-        return modelAndView;
-    }*/
 
     @RequestMapping(value = "/scheduleList/addRoute", method = RequestMethod.GET)
     public ModelAndView addRoutePage(Locale locale) {
@@ -84,6 +74,14 @@ public class ScheduleController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     * method takes param and first check for existing route with request name
+     * create route if it does't exist already
+     * @param locale
+     * @param stationFrom
+     * @param stationTo
+     * @return view and message about operation (us)success
+     */
     @RequestMapping(value = "/scheduleList/addRoute", method = RequestMethod.POST)
     public ModelAndView addRoute(Locale locale, @RequestParam(name = "stationFrom") String stationFrom,
                                  @RequestParam(name = "stationTo") String stationTo) {
@@ -96,8 +94,10 @@ public class ScheduleController extends BaseController {
             return modelAndView;
         } else {
             logger.debug("Route with id {} and route name {} NOT found ", routeId, routeName);
-            ModelAndView modelAndView = new ModelAndView("route-list");
+            ModelAndView modelAndView = new ModelAndView("routes-list");
             routeService.addRoute(routeName);
+            List<Route> routes = routeService.routesList();
+            modelAndView.addObject("routes", routes);
             modelAndView.addObject("message", getMessage("message.route.create.success", locale));
 
             return modelAndView;

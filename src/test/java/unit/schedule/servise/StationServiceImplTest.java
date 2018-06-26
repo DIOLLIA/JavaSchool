@@ -31,7 +31,7 @@ public class StationServiceImplTest {
 
     @Test
     public void testFindByName() {
-        String name = "name";
+        String name = "notExistedName";
         when(stationDao.findByName(name)).thenReturn(null);
         Station result = stationService.findByName(name);
         assertNull(result);
@@ -39,15 +39,7 @@ public class StationServiceImplTest {
 
     @Test
     public void testFindByName2() {
-        String name = "name";
-        when(stationDao.findByName(name)).thenReturn(new StationEntity());
-        Station result = stationService.findByName(name);
-        assertNotNull(result);
-    }
-
-    @Test
-    public void testGetStation() {
-        String name = "name";
+        String name = "existedName";
         when(stationDao.findByName(name)).thenReturn(new StationEntity());
         Station result = stationService.findByName(name);
         assertNotNull(result);

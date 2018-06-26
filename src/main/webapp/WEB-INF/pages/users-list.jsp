@@ -29,10 +29,6 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <input type="submit" class="btn btn-primary" value="Show all"
-                                   onclick="location='list';"/>
-                        </div>
-                        <div class="col-md-3">
                             <input type="submit" class="btn btn-primary" value="Add new user"
                                    onclick="location='add';"/>
                         </div>
@@ -47,7 +43,6 @@
                         <th width="10%">Surname</th>
                         <th width="7%">Birth date</th>
                         <th width="10%">E-mail (login)</th>
-                        <th width="5%">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,7 +52,6 @@
                             <td>${user.surname}</td>
                             <td>${user.birthDay}</td>
                             <td>${user.email}</td>
-                            <td><a href="${pageContext.request.contextPath}/user/edit/${user.id}.html">Block</a><br/>
                             </td>
                         </tr>
                     </c:forEach>

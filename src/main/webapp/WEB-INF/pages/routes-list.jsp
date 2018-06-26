@@ -1,4 +1,4 @@
-<%@ include file="header-admin.jsp" %>
+f<%@ include file="header-admin.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 
 <section class="probootstrap-cover overflow-hidden relative"
@@ -14,7 +14,7 @@
                     Routes &#8195; <input type="submit" class="btn btn-primary" value="Add route"
                                                   onclick="location='addRoute';"/>
                 </h2>
-                <h2>${message}</h2>
+                <h2 style="color: yellow">${message}</h2>
                 <table class="table_price" border="0px" cellpadding="" cellspacing="0">
                     <thead>
                     <tr>

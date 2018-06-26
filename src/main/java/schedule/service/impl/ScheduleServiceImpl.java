@@ -77,7 +77,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> formatShcedule(List<Schedule> schedule) {
+    public List<Schedule> formatSchedule(List<Schedule> schedule) {
         List<Schedule> formatedSchedule = new ArrayList<>();
         int routeDailyId = 0;
         for (Schedule item : schedule) {

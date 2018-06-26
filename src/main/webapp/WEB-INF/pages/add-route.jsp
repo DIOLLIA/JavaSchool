@@ -15,15 +15,16 @@
                     concatinated from two station names: </p>
                 <form:form method="POST" modelAttribute="route"
                            action="${pageContext.request.contextPath}/schedule/scheduleList/addRoute">
-                    <table class="table_add" border="0px" cellpadding="" cellspacing="0">
+                    <table class="table_add">
                         <tbody>
                         <tr>
                             <td><select class="js-example-basic-single js-states form-control"
-                                        id="station_from" style="width: 100%;" name="stationFrom">
+                                        id="station_from" style="width: 200px;" name="stationFrom"
+                                        onchange="getToStations()">
                             </select></td>
                             <td><h1 style="color: white"> - </h1></td>
                             <td><select class="js-example-basic-single js-states form-control"
-                                        id="station_to" style="width: 100%;" name="stationTo">
+                                        id="station_to" style="width: 200px;" name="stationTo">
                             </select></td>
                         </tr>
                         </tbody>

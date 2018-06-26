@@ -21,17 +21,12 @@ public class StationServiceImpl implements StationService {
     private ModelMapper modelMapper;
 
     /**
-     * method add station to database
-     * @param stationDto
+     * method add station to database that takes from Google map:
+     * @param stationName
+     * @param latitude
+     * @param longitude
      * @return new {@link Station} if success
      */
-    @Override
-    public Station addStation(Station stationDto) {
-        StationEntity stationEntity = modelMapper.map(stationDto, StationEntity.class);
-        stationDao.addStation(stationEntity);
-        return modelMapper.map(stationEntity, Station.class);
-    }
-
     @Override
     public void addStation(String stationName, double latitude, double longitude) {
 
