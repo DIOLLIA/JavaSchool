@@ -65,8 +65,8 @@
                             <th style="width: 7%;">Arrival time</th>
                             <th style="width: 15%;">Station</th>
                             <th style="width: 7%;">Departure time</th>
-                            <th style="width: 5%;">NIO</th>
-                            <th style="width: 5%;">DailyId</th>
+                            <th style="width: 5%;">Order</th>
+                            <th style="width: 6%;">DailyId</th>
                             <th style="width: 5%;">Train №</th>
                         </tr>
                         </thead>

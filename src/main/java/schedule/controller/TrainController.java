@@ -37,7 +37,7 @@ public class TrainController extends BaseController {
      * @return full trains list of {@link Train}
      */
     @RequestMapping(value = "/list")
-    public ModelAndView listOfTrains(Locale locale) {
+    public ModelAndView listOfTrains(Locale locale) throws CustomServiceException {
         List<Train> trains = trainService.getTrains();
 
         ModelAndView modelAndView = new ModelAndView("trains-list");
@@ -95,7 +95,7 @@ public class TrainController extends BaseController {
      * @return trains-list.jsp with deleted train if check success
      */
     @RequestMapping(value = "/delete/{train.id}")
-    public ModelAndView deleteTrain(@PathVariable(value = "train.id") int trainId, Locale locale) {
+    public ModelAndView deleteTrain(@PathVariable(value = "train.id") int trainId, Locale locale) throws CustomServiceException {
         ModelAndView modelAndView = new ModelAndView("trains-list");
 
         if (!scheduleService.findTrainById(trainId).isEmpty()) {
@@ -118,7 +118,7 @@ public class TrainController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/edit/{train.id}", method = RequestMethod.GET)
-    public ModelAndView editTrain(@PathVariable(value = "train.id") int trainId, Locale locale) {
+    public ModelAndView editTrain(@PathVariable(value = "train.id") int trainId, Locale locale) throws CustomServiceException {
 
         ModelAndView modelAndView = new ModelAndView("edit-train");
         modelAndView.addObject("train", trainService.get(trainId));
@@ -135,7 +135,7 @@ public class TrainController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public ModelAndView editTrainSave(@ModelAttribute("train") Train train, Locale locale) {
+    public ModelAndView editTrainSave(@ModelAttribute("train") Train train, Locale locale) throws CustomServiceException {
         ModelAndView modelAndView = new ModelAndView("trains-list");
         if (!scheduleService.findTrainById(train.getId()).isEmpty()) {
             modelAndView.addObject("message", getMessage("message.train.modify.fail", locale));
@@ -150,7 +150,7 @@ public class TrainController extends BaseController {
     }
 
     @RequestMapping(value = "/schedule/{train.id}", method = RequestMethod.GET)
-    public ModelAndView trainSchedule(@PathVariable(value = "train.id") int trainId, Locale locale) {
+    public ModelAndView trainSchedule(@PathVariable(value = "train.id") int trainId, Locale locale) throws CustomServiceException {
         List<Schedule> schedules = trainService.getScheduleByTrainId(trainId);
 
         List<ScheduleItem> trainRoutes = trainService.createTrainRoutesList(schedules);
@@ -172,7 +172,7 @@ public class TrainController extends BaseController {
                                               @PathVariable(name = "route.id") String routeIdAsString,
                                               @RequestParam(name = "date") String dateAsString,
                                               @RequestParam(name = "startTime") String startTimeAsString,
-                                              Locale locale) {
+                                              Locale locale) throws CustomServiceException {
 
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
         LocalDate date = LocalDate.parse(dateAsString, dateFormatter);

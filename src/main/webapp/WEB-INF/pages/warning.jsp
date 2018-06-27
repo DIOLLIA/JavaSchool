@@ -55,8 +55,6 @@
                     <span style="color:#32CD32;font-size: 140%">Something wrong, don't you think so...</span>
                     <br>
                     <a  style="color:#c6c600;font-size: 140%" href="/home.jsp"> go home  </a>
-                    or
-                    <a style="color:#c6c600;font-size: 140%" href="./">  go back </a>
 <br>
 <br>
 <br>

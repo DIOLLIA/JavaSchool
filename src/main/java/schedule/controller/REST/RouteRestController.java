@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import schedule.controller.model.ScheduleItem;
+import schedule.exception.CustomServiceException;
 import schedule.model.Route;
 import schedule.model.Schedule;
 import schedule.model.Train;
@@ -60,7 +61,7 @@ public class RouteRestController {
      * @return return list of trains from DataBase
      */
     @GetMapping(value = "/get-trains")
-    public String getTrains() {
+    public String getTrains() throws CustomServiceException {
         List<Train> train = trainService.getTrains();
         List<Integer> trainsList = new ArrayList<>();
         for (Train trainModel : train) {
@@ -75,7 +76,7 @@ public class RouteRestController {
      * @return return routes for train request  from DataBase
      */
     @GetMapping(value = "/findRoute")
-    public List<ScheduleItem> getRoutesByTrainNumber(@RequestParam("trainNumber") int trainNumber) {
+    public List<ScheduleItem> getRoutesByTrainNumber(@RequestParam("trainNumber") int trainNumber) throws CustomServiceException {
         int trainId = trainService.findByNumber(trainNumber).getId();
         List<Schedule> scheduleList = scheduleService.findTrainById(trainId);
         List<Schedule> formatedSchedule;

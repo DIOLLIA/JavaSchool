@@ -68,8 +68,12 @@ function trainsAndDateSelector() {
 
 function showRoutePassengersByDate(trainId, dailyRouteId, startTime) {
     var departureDate = $("#probootstrap-date-departure").val();
-
+if(date_validation()){
     window.location.replace('/train/schedule/' + trainId + '/passengers/' + dailyRouteId + '?date=' + departureDate + '&startTime=' + startTime)
+}
+else {
+
+}
 }
 
 function initFromStations() {
@@ -410,12 +414,12 @@ function main_search_validation() {
 
     }
     if (departure_date === null || departure_date === "") {
-        document.getElementById("dateloc").innerHTML = "<img src='../resources/images/Close-2-icon.png' alt=''>Pick date";
+        document.getElementById("dateloc").innerHTML = "<img src='../resources/images/Close-2-icon.png' alt=''>pick date";
     }
 
     else {
         if (current_date > parsed_request_date + 43200000*2) {
-            document.getElementById("dateloc").innerHTML = "<img src='../resources/images/Close-2-icon.png' alt=''/> Past date";
+            document.getElementById("dateloc").innerHTML = "<img src='../resources/images/Close-2-icon.png' alt=''/> date in the past ";
         } else {
             document.getElementById("dateloc").innerHTML = "<img src='../resources/images/check_sign_icon_green.png' alt=''/>";
             counter_fields++;
@@ -520,4 +524,16 @@ function train_validation() {
 
     }
     return counter_fields === fields_variables;
+}
+function  date_validation() {
+    var search_date =document.getElementById("probootstrap-date-departure").value;
+
+    if (search_date === null || search_date === "") {
+        document.getElementById("dateinv").innerHTML =
+            "<img src='../resources/images/Close-2-icon.png' alt=''>Pick the date";
+    } else {
+        document.getElementById("dateinv").innerHTML = "<img src='../resources/images/check_sign_icon_green.png'alt=''/>";
+       return true;
+    }
+
 }

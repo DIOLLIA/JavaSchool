@@ -1,14 +1,12 @@
 package schedule.dao.api;
 
-import schedule.entity.ScheduleEntity;
 import schedule.entity.TrainEntity;
-import schedule.exception.CustomDaoException;
 
 import java.util.List;
 
 public interface TrainDao extends GeneralCrudDao<TrainEntity> {
 
-    void addTrain(TrainEntity train) throws CustomDaoException;
+    void addTrain(TrainEntity train);
 
     TrainEntity getTrain(int id);
 
@@ -18,8 +16,8 @@ public interface TrainDao extends GeneralCrudDao<TrainEntity> {
 
     void deleteTrain(int id);
 
-    List<TrainEntity> getTrains();
+    List getTrains();
 
-    List<ScheduleEntity> getScheduleByTrainId(int id);
+    List getScheduleByTrainId(int id);
 
 }

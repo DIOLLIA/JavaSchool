@@ -99,7 +99,7 @@
                             <th width="15%"><spring:message code="common.label.from"/></th>
                             <th width="15%"><spring:message code="common.label.to"/></th>
                             <th width="10%"><spring:message code="common.label.arrival-time"/></th>
-                            <th width="10%"></th>
+                            <th width="15%"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -110,7 +110,9 @@
                                 <td>${scheduleItem.stationOfDeparture}</td>
                                 <td>${scheduleItem.stationOfArrival}</td>
                                 <td><joda:format pattern="HH:mm" value="${scheduleItem.arrivalTime}"/></td>
-                                <td><a class="route-info_clasroute-info_class" id="route-info">Show details</a></td>
+                                <td><a class="route-info_class" id="route-info">Show details</a> <a href="${pageContext.request.contextPath}/ticket/buy/">
+                                <spring:message code="common.btn.buy-ticket"/>
+                            </a></td>
                             </tr>
                         </c:forEach>
                         </tbody>

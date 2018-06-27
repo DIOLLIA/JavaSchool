@@ -22,6 +22,7 @@
                                    placeholder="click and pick" style="background-color: white; color: black"
                                    autocomplete="off">
                         </div>
+                        <span id="dateinv" style="color: #ff6d0d; font-size: 120%"></span>
                     </div>
 
 

@@ -14,6 +14,7 @@ import schedule.dao.api.TicketDao;
 import schedule.entity.TicketEntity;
 import schedule.entity.TrainEntity;
 import schedule.entity.UserEntity;
+import schedule.exception.CustomServiceException;
 import schedule.model.*;
 import schedule.service.api.RouteService;
 import schedule.service.api.ScheduleService;
@@ -35,7 +36,7 @@ public class TicketServiceImpl implements TicketService {
     private RouteService routeService;
 
     @Override
-    public Ticket createGuestTicket(TicketItem ticketItem) {
+    public Ticket createGuestTicket(TicketItem ticketItem) throws CustomServiceException {
 
         User user = new User();
         user.setName(ticketItem.getName());
@@ -77,7 +78,7 @@ public class TicketServiceImpl implements TicketService {
         return ticket;
     }
 
-    public String ticketSimpleValidation(String stationTo, String stationFrom, String depTime, String depDate, String name, String surname, String birthDate, String trainNumber) {
+    public String ticketSimpleValidation(String stationTo, String stationFrom, String depTime, String depDate, String name, String surname, String birthDate, String trainNumber) throws CustomServiceException {
         StringBuilder validationInfo = new StringBuilder();
         if (stationTo.equals("") || stationTo == null || stationFrom.equals("") || null == stationFrom) {
             validationInfo.append("Wrong station.").append("<br>");
@@ -153,7 +154,7 @@ public class TicketServiceImpl implements TicketService {
      * @return boolean (true if empty seats) by compare purchased tickets and seats on this train
      */
     @Override
-    public boolean isVacantSeatsOnTrain(String departureDate, String departureTime, String stationFrom, String stationTo, int trainNumber) {
+    public boolean isVacantSeatsOnTrain(String departureDate, String departureTime, String stationFrom, String stationTo, int trainNumber) throws CustomServiceException {
         LocalDateTime departureDateTime = dateTimeBuilder(departureDate, departureTime);
         Train departureTrain = trainService.findByNumber(trainNumber);
         LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
@@ -197,7 +198,7 @@ public class TicketServiceImpl implements TicketService {
      * @return null if ticket with preset @params already exist, return {@link Ticket} if not
      */
     @Override
-    public Ticket createTicketForUser(String departureDate, String departureTime, int trainNumber, String stationFrom, String stationTo, User user) {
+    public Ticket createTicketForUser(String departureDate, String departureTime, int trainNumber, String stationFrom, String stationTo, User user) throws CustomServiceException {
         LocalDateTime departureDateTime = dateTimeBuilder(departureDate, departureTime);
         LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
 
@@ -254,11 +255,10 @@ public class TicketServiceImpl implements TicketService {
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("MM/dd/yyyy");
         LocalDate departureDateFormatted = LocalDate.parse(departureDate, dateFormatter);
         LocalTime departureTimeFormatted = LocalTime.parse(departureTime);
-        if (departureDateFormatted.isAfter(LocalDate.now()) || departureDateFormatted.isEqual(LocalDate.now())) {
-
-            return departureTimeFormatted.isBefore(LocalTime.now().plusMinutes(10));
-        }
-        return false;
+        if (departureDateFormatted.isAfter(LocalDate.now())) {
+            return true;
+        } else return departureDateFormatted.isEqual(LocalDate.now()) &&
+                departureTimeFormatted.isAfter(LocalTime.now().plusMinutes(10));
     }
 
     LocalDateTime dateTimeBuilder(String departureDate, String departureTime) {

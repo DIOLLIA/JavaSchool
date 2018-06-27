@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import schedule.controller.model.TicketItem;
+import schedule.exception.CustomServiceException;
 import schedule.model.Ticket;
 import schedule.model.User;
 import schedule.service.api.TicketService;
@@ -53,12 +54,11 @@ public class TicketController extends BaseController {
                                    @RequestParam("name") String name,
                                    @RequestParam("surName") String surName,
                                    @RequestParam("birthDay") String birthDay,
-                                   Locale locale) {
+                                   Locale locale) throws CustomServiceException {
         ModelAndView modelAndView;
         String validation = ticketService.ticketSimpleValidation(stationTo, stationFrom, departureTime, departureDate, name, surName, birthDay, train);
         if (validation.length() != 0) {
             modelAndView = new ModelAndView("buy-ticket");
-//            modelAndView.addObject("message", getMessage("message.ticket.past.date.or.not.enough.time", locale));
             return modelAndView.addObject("message", validation);
         }
 
