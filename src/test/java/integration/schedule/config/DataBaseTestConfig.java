@@ -18,7 +18,7 @@ import java.util.Properties;
 @ComponentScan(value = {
         "schedule.dao",
         "schedule.entity"})
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:testApplication.properties")
 @EnableTransactionManagement
 public class DataBaseTestConfig {
 

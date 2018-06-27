@@ -8,5 +8,5 @@ import org.springframework.context.annotation.Configuration;
         "schedule.service",
         "schedule.entity"})
 @Configuration
-public class Component {
+public class MyComponent {
 }

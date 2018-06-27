@@ -1,4 +1,4 @@
-f<%@ include file="header-admin.jsp" %>
+<%@ include file="header-admin.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tables.css">
 
 <section class="probootstrap-cover overflow-hidden relative"

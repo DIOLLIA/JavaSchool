@@ -24,13 +24,13 @@
                 <h3 class="heading mb-2 display-8 font-light probootstrap-animate"><br> <span
                         style="color:#e0e139;">${msg}</span></h3>
 
-                <table class="table_price" border="0px" cellpadding="0" cellspacing="0" width="100%">
+                <table class="table_price" width="70%">
                     <thead>
                     <tr>
                         <th width="5%">Surname</th>
                         <th width="15%">Name</th>
                         <th width="10%">Birth Day</th>
-                        <th width="5%">Action</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -39,7 +39,6 @@
                             <td>${passengersOnRoute.getSurname()}</td>
                             <td>${passengersOnRoute.getName()}</td>
                             <td>${passengersOnRoute.getBirthDay()}</td>
-                            <td><a href="${pageContext.request.contextPath}/train/edit/${train}.html">Nothing</a><br/>
                         </tr>
                     </c:forEach>
                     </tbody>
