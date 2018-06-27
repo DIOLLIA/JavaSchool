@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import schedule.dao.api.TrainDao;
 import schedule.entity.TrainEntity;
 
+/**
+ * @author Rudkov Andrey
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
         classes = {DataBaseTestConfig.class})
@@ -21,13 +24,13 @@ public class TrainDaoTest {
     @Autowired
     private TrainDao trainDao;
 
-    public static final TrainEntity TRAIN_ENTITY=new TrainEntity();
+    public static final TrainEntity TRAIN_ENTITY = new TrainEntity();
 
     @Before
     public void setUp() {
-        int trainNumber=100;
-        int seats=111;
-        int id=1;
+        int trainNumber = 100;
+        int seats = 111;
+        int id = 1;
         TrainEntity trainEntityOnSetup = new TrainEntity();
         trainEntityOnSetup.setId(id);
         trainEntityOnSetup.setSeats(seats);

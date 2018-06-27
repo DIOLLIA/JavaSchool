@@ -24,7 +24,7 @@ import java.util.List;
 
 
 /**
- * @author lrudkova <Lyudmila.Rudkova@t-systems.com>
+ * @author Rudkov Andrey
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
