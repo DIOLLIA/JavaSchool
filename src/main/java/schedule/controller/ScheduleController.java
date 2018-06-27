@@ -117,8 +117,10 @@ public class ScheduleController extends BaseController {
 
     @RequestMapping(value = "/scheduleList/routeList/{route.id}", method = RequestMethod.GET)
     public ModelAndView viewRoute(Locale locale, @PathVariable(value = "route.id") int routeId) {
+        String routeName = routeService.findRouteById(routeId);
         List<Station> routeStationsList = routeService.stationsList(routeId);
         ModelAndView modelAndView = new ModelAndView("stations-of-route");
+        modelAndView.addObject("routeName",routeName);
         modelAndView.addObject("stations", routeStationsList);
         return modelAndView;
     }
@@ -127,10 +129,11 @@ public class ScheduleController extends BaseController {
     public ModelAndView addStationOnRoute(Locale locale, @PathVariable(value = "route.id") int routeId,
                                           @RequestParam(name = "station") String station) {
         routeService.addStationToRoute(routeId, stationService.findByName(station));
+        String routeName = routeService.findRouteById(routeId);
 
         List<Station> routeStationsList = routeService.stationsList(routeId);
-
         ModelAndView modelAndView = new ModelAndView("stations-of-route");
+        modelAndView.addObject("routeName",routeName);
         modelAndView.addObject("stations", routeStationsList);
         modelAndView.addObject("message", getMessage("message.stations.create.success", locale));
 

@@ -13,7 +13,7 @@
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">  <input class="btn btn-primary"
                                                                                             type="submit" value="<<"
 
-                                                                                            onclick="location='./';"/> Stations &#8195;
+                                                                                            onclick="location='./';"/> Stations of&#8195;
                     <form:form method="POST" modelAttribute="route"
                                action="${pageContext.request.contextPath}">
                     <input type="submit"
@@ -24,18 +24,18 @@
                             id="station_from" name="station"
                             style="width: 20%;">
                     </select>
+                        ${routeName}
                 </h2>
                 </form:form>
 
 
                 <h2>${message}</h2>
-                <table class="table_price" border="0px" cellpadding="" cellspacing="0">
+                <table class="table_price" style="width: 80%;">
                     <thead>
                     <tr>
                         <th width="30%">Name</th>
                         <th width="10%">Latitude</th>
                         <th width="10%">Longitude</th>
-                        <th width="10%">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,9 +44,6 @@
                             <td>${station.stationName}</td>
                             <td>${station.latitude}</td>
                             <td>${station.longitude}</td>
-                            <td><a href="${pageContext.request.contextPath}/station/edit/${station.id}">Edit</a>
-                                <a href="${pageContext.request.contextPath}/station/delete/${station.id}">Delete</a><br/>
-                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

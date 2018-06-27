@@ -22,35 +22,35 @@
                            value="<<"
                            onclick="location='./scheduleList';"/>
                     Schedule &#8195;
-                    <form:form method="POST" modelAttribute="schedule"
-                               action="/schedule/constructor">
+                    <form:form name="schedule_constructor" method="POST" modelAttribute="schedule"
+                               action="/schedule/constructor" onsubmit="return constructor_validator();">
                     <input type="submit" class="btn btn-primary" value="+"/>
                 </h2>
                 <div class="row align-items-center">
                     <table class="table_user_info" style="width: 100%;">
 
 
-                        <th style="width: 15%"><select class="js-example-basic-single js-states form-control"
+                        <th style="width: 15%"><span id="emptyTest"></span> <select class="js-example-basic-single js-states form-control"
                                                        id="route_picker" name="route_picker" style="width: 100%"
                                                        onchange="stationsOnRoute()">
                         </select></th>
 
-                        <th style="width: 5%"><input type="time" class="form-control" id="arrival_time"
+                        <th style="width: 5%"> <span id="arrivalCheck" style="color: white"></span><input type="time" class="form-control" id="arrival_time"
                                                      name="arrival_time">
                         </th>
-                        <th style="width: 20%"><select class="js-example-basic-single js-states form-control"
+                        <th style="width: 15%"><span id="emptyTest2"></span> <select class="js-example-basic-single js-states form-control"
                                                        id="stations_list" name="stations_list" style="width: 100%">
                         </select></th>
-                        <th style="width: 5%"><input type="time" class="form-control" id="departure_time"
+                        <th style="width: 5%"><span id="departureCheck" style="color: white"></span><input type="time" class="form-control" id="departure_time"
                                                      name="departure_time">
                         </th>
-                        <th style="width: 5%"><input type="text" class="form-control" id="number_in_order"
+                        <th style="width: 7%"><span id="orderNumberCheck" style="color: white"></span><input type="text" class="form-control" id="number_in_order"
                                                      name="number_in_order" style="background: white;color:black">
                         </th>
-                        <th style="width: 5%"><input type="text" class="form-control" id="daily_route"
+                        <th style="width: 7%"><span id="dailyIdCheck" style="color: white"></span><input type="text" class="form-control" id="daily_route"
                                                      name="daily_route" style="background: white;color:black">
                         </th>
-                        <th style="width: 10%"><select class="js-example-basic-single js-states form-control"
+                        <th style="width: 10%"><span id="emptyTest3"></span> <select class="js-example-basic-single js-states form-control"
                                                        id="train_picker" name="train_picker" style="width: 100%">
                         </select></th>
                     </table>

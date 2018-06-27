@@ -89,6 +89,12 @@ public class RouteServiceImpl implements RouteService {
 
     }
 
+    @Override
+    public String findRouteById(int routeId) {
+        String routeName= routeDao.routeById(routeId).getRouteName();
+        return routeName ;
+    }
+
     private List<RouteEntity> filterList(List<RouteEntity> routesEntityList, String[] stationNames) {
         List<RouteEntity> resultList = new ArrayList<>();
         for (RouteEntity routeEntity : routesEntityList) {

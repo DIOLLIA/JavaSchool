@@ -57,8 +57,21 @@ public interface RouteService {
      * @param routeName selects must contain routeName of existed station in database
      * @return Route id
      * @see Route
+     * NOTE! Return Integer type becauze method from DAO can return null
      */
     Integer findByName(String routeName);
 
+    /**
+     * Method adding station <p>stationName</p> to existing route with id <p>routeId</p>
+     * @param routeId
+     * @param stationName
+     */
     void addStationToRoute(int routeId, Station stationName);
+
+    /**
+     * method search route name by param
+     * @param routeId
+     * @return route name
+     */
+    String findRouteById(int routeId);
 }
