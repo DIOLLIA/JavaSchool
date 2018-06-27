@@ -189,8 +189,6 @@ public class TrainServiceImpl implements TrainService {
         List<ScheduleItem> resultScheduleList = new ArrayList<>();
 
         for (List<Schedule> scheduleList : scheduleMap.values()) {
-            logger.info("createTrainRoutesList method, " +
-                    "on scheduleList {}", scheduleList);
             try {
                 scheduleList.sort(new RouteStationIdComparator());
             } catch (Exception e) {

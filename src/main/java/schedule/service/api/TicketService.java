@@ -7,13 +7,16 @@ import schedule.model.User;
 
 import java.util.List;
 
+/**
+ * @author Rudkov Andrey
+ * <p>
+ * TicketService class basically interacts with {@link Ticket} objects.
+ * Class methods can: create tickets by incoming parameters,
+ * check incoming parameters and makes simple validation for time and vacant seats
+ */
 public interface TicketService {
 
-//    void addUserTicket(Ticket ticket);
-
     Ticket createGuestTicket(TicketItem ticket) throws CustomServiceException;
-
-    /*  boolean simpleRouteValidation(String stationFrom, String stationTo, String departureDate, String departureTime, int trainNumber);*/
 
     TicketItem createTicketItem(String departureDate, String departureTime, String birthDay, String name, String surName, int trainNumber, String stationFrom, String stationTo);
 

@@ -10,7 +10,7 @@
             <div class="col-md probootstrap-animate">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Profile</h2>
                 <h2>${message}</h2>
-                <table class="table_user_info"style="width: 100%">
+                <table class="table_user_info" style="width: 100%">
                     <thead>
                     <tr>
                         <th>Name</th>
@@ -28,21 +28,12 @@
                         <th>e-mail</th>
                         <td><c:out value="${user.email}"/></td>
                     </tr>
-
-
-                    <th><a href="${pageContext.request.contextPath}/user/changePassword/${user.id}">Change password</a>
-                        <a href="${pageContext.request.contextPath}/user/edit/${user.id}">Edit personal data</a></th>
-                    <td>
-
-                        <a href="${pageContext.request.contextPath}/user/edit/${user.id}">Delete account</a>
-                    </td>
-                    </tr>
                     </thead>
                 </table>
             </div>
             <div class="col-md">
-               <p> <input type="submit" class="btn btn-primary" value="Create user"
-                                                                                            onclick="location='user/add';"/></p>
+                <p><input type="submit" class="btn btn-primary" value="Create user"
+                          onclick="location='user/add';"/></p>
 
             </div>
         </div>

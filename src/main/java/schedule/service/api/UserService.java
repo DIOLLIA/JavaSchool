@@ -5,6 +5,15 @@ import schedule.model.User;
 
 import java.util.List;
 
+/**
+ * @author Rudkov Andrey
+ * <p>
+ * UserService class basically interacts with {@link User} objects.
+ * Class methods can: create, get user,
+ * search passengers on train with requested params,
+ * search users by login or surname (birth day optionally)
+ */
+
 public interface UserService {
     User addUser(User user);
 

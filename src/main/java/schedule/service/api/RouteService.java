@@ -5,6 +5,16 @@ import schedule.model.Station;
 
 import java.util.List;
 
+/**
+ * @author Rudkov Andrey
+ * <p>
+ * RouteService Class basically interacts with {@link Route} objects.
+ * Class methods can: get routes list with station names,
+ * search route name with stations on it,
+ * add route with given name,
+ * search route by request id or route name,
+ * stations list in specific route.
+ */
 public interface RouteService {
     /**
      * Return list of Route objects from database
@@ -63,6 +73,7 @@ public interface RouteService {
 
     /**
      * Method adding station <p>stationName</p> to existing route with id <p>routeId</p>
+     *
      * @param routeId
      * @param stationName
      */
@@ -70,6 +81,7 @@ public interface RouteService {
 
     /**
      * method search route name by param
+     *
      * @param routeId
      * @return route name
      */

@@ -40,7 +40,7 @@ import java.util.Properties;
 public class WebAppConfig extends WebMvcConfigurerAdapter {
     private static final String DB_DRIVER = "db.driver";
     private static final String DB_URL = "db.url";
-    private static final String DB_PASSWORD = "db.password";
+    private static final String DB_PSWD = "db.password";
     private static final String DB_USERNAME = "db.username";
 
     private static final String HIBERNATE_DIALECT = "hibernate.dialect";
@@ -76,7 +76,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         dataSource.setDriverClassName(environment.getRequiredProperty(DB_DRIVER));
         dataSource.setUrl(environment.getRequiredProperty(DB_URL));
         dataSource.setUsername(environment.getRequiredProperty(DB_USERNAME));
-        dataSource.setPassword(environment.getRequiredProperty(DB_PASSWORD));
+        dataSource.setPassword(environment.getRequiredProperty(DB_PSWD));
 
         return dataSource;
     }
