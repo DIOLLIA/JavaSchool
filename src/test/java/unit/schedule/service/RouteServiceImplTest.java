@@ -1,4 +1,4 @@
-package unit.schedule.servise;
+package unit.schedule.service;
 
 import org.junit.Before;
 import org.junit.Test;

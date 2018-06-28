@@ -302,7 +302,7 @@ public class HomeController extends BaseController {
                 stationService.findByName(station));
 
         List<Schedule> scheduleItems = new ArrayList<>(listOfTrainsByStation);
-        String msg = "Results for " + station + " :";
+        String msg =  station + " :";
 
         modelAndView.addObject("scheduleItems", scheduleItems);
         modelAndView.addObject("msg", msg);

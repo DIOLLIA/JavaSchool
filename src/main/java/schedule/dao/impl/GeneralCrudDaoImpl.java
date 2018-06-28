@@ -47,7 +47,7 @@ public class GeneralCrudDaoImpl<T> implements GeneralCrudDao<T> {
 
     @Override
     public void delete(T entity) {
-        getCurrentSession().beginTransaction();     // эти две строки проверить на надобностть
+        getCurrentSession().beginTransaction();
         if (null != entity) {
             getCurrentSession().delete(entity);
         } else {

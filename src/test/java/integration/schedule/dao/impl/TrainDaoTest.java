@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import schedule.dao.api.TrainDao;
 import schedule.entity.TrainEntity;
 
+import java.util.List;
+
 /**
  * @author Rudkov Andrey
  */
@@ -25,16 +27,16 @@ public class TrainDaoTest {
     private TrainDao trainDao;
 
     public static final TrainEntity TRAIN_ENTITY = new TrainEntity();
+    private static final int TRAIN_NUMBER = 100;
+    private static final int TRAIN_SEATS = 111;
+    private static final int TRAIN_ID = 1;
 
     @Before
     public void setUp() {
-        int trainNumber = 100;
-        int seats = 111;
-        int id = 1;
         TrainEntity trainEntityOnSetup = new TrainEntity();
-        trainEntityOnSetup.setId(id);
-        trainEntityOnSetup.setSeats(seats);
-        trainEntityOnSetup.setNumberOfTrain(trainNumber);
+        trainEntityOnSetup.setId(TRAIN_ID);
+        trainEntityOnSetup.setSeats(TRAIN_SEATS);
+        trainEntityOnSetup.setNumberOfTrain(TRAIN_NUMBER);
 
         trainDao.addTrain(trainEntityOnSetup);
 
@@ -77,16 +79,12 @@ public class TrainDaoTest {
 
     @Test
     public void testDeleteTrain() {
- /*       TrainEntity train = new TrainEntity();
-        int id = 0;
-        train.setId(id);
-        train.setSeats(0);
-        train.setNumberOfTrain(12);
-        trainDao.addTrain(train);*/
-//        Assert.assertNotNull(trainDao.getTrains());
-        trainDao.getTrains();
-        trainDao.delete(TRAIN_ENTITY);
-        trainDao.getTrains();
-        Assert.assertTrue(trainDao.getTrains().isEmpty());
+        List trainsBeforeDeletion = trainDao.getTrains();
+
+        trainDao.deleteTrain(TRAIN_ID);
+
+        List trainsAfterDeletion = trainDao.getTrains();
+        Assert.assertNotEquals(trainsBeforeDeletion.size(), trainsAfterDeletion.size());
+        Assert.assertTrue(trainsBeforeDeletion.size() == trainsAfterDeletion.size() + 1);
     }
 }
